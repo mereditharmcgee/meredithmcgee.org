@@ -1,0 +1,538 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		
+		<!-- Hero Section -->
+		<section class="hero bg-pattern">
+			<div class="container">
+				<div class="hero-content">
+					<div class="hero-text">
+						<h1>Meredith McGee, MPH</h1>
+						<p class="hero-subtitle">Driving change through public health grounded storytelling</p>
+						<p class="hero-body">
+							I write to make public health work better for people. Through writing grounded in community needs and data, I help public health programs, research, and funding meaningfully serve the people they're built for by translating ideas into impact and knowledge into action.
+						</p>
+						<div class="hero-buttons">
+							<a href="/about" class="btn">About Me</a>
+							<a href="/work" class="btn">My Work</a>
+							<a href="/contact" class="btn">Contact</a>
+						</div>
+					</div>
+					<div class="hero-images">
+						<div class="hero-image">
+							<img src="/hero-image.jpg" alt="Meredith McGee presenting research" class="hero-img" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- How I Approach My Work Section -->
+		<section class="approach bg-light">
+			<div class="container">
+				<div class="section-header text-center">
+					<h2>How I approach my work</h2>
+					<p class="section-intro">
+						I use writing to connect community needs and data so public health programs, research, and funding work better for the people they're meant to serve. My work focuses on where writing meets impact: supporting the development, communication, and evaluation of public health efforts that respond to real needs. Below are the core areas where I put that approach into practice.
+					</p>
+				</div>
+				<div class="approach-cards">
+					<div class="approach-card">
+						<div class="card-image">
+							<img src="/grant-writing.png" alt="Writing in notebook" class="approach-img" />
+						</div>
+						<span class="card-category">Non-Profit</span>
+						<h3>Grant Writing And Development</h3>
+						<p>I write to secure funding grounded in community needs and data, helping public health programs grow, adapt, and continue in ways that meaningfully serve the people they're built for.</p>
+						<a href="/work#grants" class="btn btn-small">Read More</a>
+					</div>
+					<div class="approach-card">
+						<div class="card-image">
+							<img src="/community-research.png" alt="Community group meeting" class="approach-img" />
+						</div>
+						<span class="card-category">Community-Based</span>
+						<h3>Research and Learning</h3>
+						<p>I write to connect what communities know with what public health studies, strengthening programs through reflection, research, and lived experience.</p>
+						<a href="/work#research" class="btn btn-small">Read More</a>
+					</div>
+					<div class="approach-card">
+						<div class="card-image">
+							<img src="/design-evaluation.png" alt="Design planning session" class="approach-img" />
+						</div>
+						<span class="card-category">Program</span>
+						<h3>Design and Evaluation</h3>
+						<p>I write to support program planning and evaluation, helping teams define goals, measure outcomes, and understand what works and what needs to change.</p>
+						<a href="/work#evaluation" class="btn btn-small">Read More</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Featured Work Section -->
+		<section class="featured bg-dark bg-pattern">
+			<div class="container">
+				<div class="section-header text-center">
+					<h2>Featured Work</h2>
+					<p class="section-intro">
+						The work below reflects how I use writing to support public health impact across research, evaluation, and fundraising. Each project shows a different way writing can translate needs and data into programs, policy conversations, and sustainable funding.
+					</p>
+				</div>
+				<div class="featured-cards">
+					<div class="featured-card">
+						<div class="featured-icon">
+							<img src="/logo-ysph.png" alt="Yale School of Public Health logo" class="featured-logo" />
+						</div>
+						<h4>Writing that informs Public Health Training and Practice</h4>
+						<p>At Yale School of Public Health, I designed an evaluation and analyzed data to understand how students experienced their internships. My writing turned those insights into recommendations that guided program improvements and supported student preparation for public health work.</p>
+					</div>
+					<div class="featured-card">
+						<div class="featured-icon">
+							<img src="/logo-parabola.png" alt="Parabola Center logo" class="featured-logo" />
+						</div>
+						<h4>Writing that makes cannabis policy legible through lived experience</h4>
+						<p>I am writing and developing a qualitative study at Parabola Center that examines how consumers navigate cannabis in mature recreational markets. Through interviews and research translation, my writing connects lived experience to policy outcomes, informing conversations on access, safety, and equity.</p>
+					</div>
+					<div class="featured-card">
+						<div class="featured-icon">
+							<img src="/logo-bradbury-sullivan.png" alt="Bradbury-Sullivan LGBT Community Center logo" class="featured-logo" />
+						</div>
+						<h4>Writing that turns community needs and data into sustainable funding</h4>
+						<p>At Bradbury-Sullivan LGBT Community Center, I write proposals grounded in real-world needs and evidence to secure funding that helps programs grow, adapt, and continue serving their communities. My writing bridges program goals and funder priorities, translating values, data, and impact into competitive applications that support long-term public health work.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- About Meredith Section -->
+		<section class="about-preview bg-medium">
+			<div class="container">
+				<div class="about-content">
+					<div class="about-text">
+						<h2>About Meredith</h2>
+						<p>
+							I am a public health professional who works at the intersection of writing, research, and community needs. I approach public health with the belief that programs and policies work best when they reflect the people they are meant to serve. Writing is how I translate experience and evidence into programs, research, and funding that support real-world impact. I am motivated by work that treats writing not just as communication, but as a method for change.
+						</p>
+						<a href="/about" class="btn">Read More</a>
+					</div>
+					<div class="about-image">
+						<img src="/meredith-headshot.jpg" alt="Meredith McGee headshot" class="headshot-img" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* Hero Section */
+	.hero {
+		padding-top: 10rem;
+		padding-bottom: 6rem;
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+	}
+
+	.hero .container {
+		max-width: 100%;
+		padding: 0 3rem;
+	}
+
+	.hero-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+		align-items: center;
+	}
+
+	.hero-text h1 {
+		font-size: clamp(10rem, 25vw, 20rem);
+		margin-bottom: 3rem;
+		line-height: 0.95;
+	}
+
+	.hero-subtitle {
+		font-family: 'Playfair Display', Georgia, serif;
+		font-style: italic;
+		font-size: clamp(3.5rem, 7vw, 6rem);
+		color: var(--color-gold);
+		margin-bottom: 3rem;
+		opacity: 0.9;
+		line-height: 1.2;
+	}
+
+	.hero-body {
+		font-size: clamp(2.2rem, 4.5vw, 4rem);
+		line-height: 1.6;
+		margin-bottom: 4rem;
+	}
+
+	.hero-buttons {
+		display: flex;
+		gap: 2rem;
+		flex-wrap: wrap;
+	}
+
+	.hero-buttons .btn {
+		font-size: 2rem;
+		padding: 1.5rem 4rem;
+	}
+
+	.hero-images {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	}
+
+	.hero-image {
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+		border: 4px solid var(--color-medium);
+		width: 100%;
+	}
+
+	.placeholder-image {
+		aspect-ratio: 4/3;
+		background: linear-gradient(135deg, var(--color-medium) 0%, var(--color-light) 100%);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+	}
+
+	.placeholder-image.tropical::after {
+		content: 'Photo';
+		font-size: 2rem;
+		opacity: 0.3;
+		color: var(--color-dark);
+	}
+
+	.placeholder-image.books::after {
+		content: 'Photo';
+		font-size: 1.5rem;
+		opacity: 0.3;
+		color: var(--color-dark);
+	}
+
+	.hero-img {
+		width: 100%;
+		max-width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	/* Approach Section */
+	.approach {
+		padding: 8rem 0;
+	}
+
+	.approach .container {
+		max-width: 100%;
+		padding: 0 4rem;
+	}
+
+	.section-header {
+		max-width: 100%;
+		margin: 0 0 5rem 0;
+	}
+
+	.section-header h2 {
+		margin-bottom: 2rem;
+		font-size: clamp(5rem, 10vw, 10rem);
+	}
+
+	.section-intro {
+		font-size: clamp(2.2rem, 4vw, 3.5rem);
+		line-height: 1.7;
+	}
+
+	.approach-cards {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 3rem;
+	}
+
+	.approach-card {
+		background: var(--color-cream-light);
+		border-radius: 16px;
+		padding: 3rem;
+		text-align: center;
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.approach-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+	}
+
+	.card-image {
+		margin-bottom: 2rem;
+		border-radius: 12px;
+		overflow: hidden;
+	}
+
+	img.approach-img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16/10;
+		object-fit: cover;
+	}
+
+	div.approach-img {
+		aspect-ratio: 16/10;
+	}
+
+	.card-category {
+		display: inline-block;
+		font-size: 1.6rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--color-medium);
+		margin-bottom: 1rem;
+	}
+
+	.approach-card h3 {
+		font-size: clamp(2.5rem, 5vw, 4rem);
+		color: var(--color-dark);
+		margin-bottom: 1.5rem;
+	}
+
+	.approach-card p {
+		font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+		line-height: 1.7;
+		margin-bottom: 2rem;
+		color: var(--color-dark);
+		opacity: 0.85;
+	}
+
+	/* Featured Section */
+	.featured {
+		padding: 8rem 0;
+	}
+
+	.featured .container {
+		max-width: 100%;
+		padding: 0 4rem;
+	}
+
+	.featured-cards {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 3rem;
+	}
+
+	.featured-card {
+		background: rgba(107, 124, 76, 0.2);
+		border-radius: 16px;
+		padding: 3rem;
+		border: 1px solid rgba(212, 201, 142, 0.1);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.featured-icon {
+		width: 100%;
+		max-width: 350px;
+		height: 200px;
+		margin-bottom: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.featured-logo {
+		width: 100%;
+		height: auto;
+		object-fit: contain;
+	}
+
+	.icon-yale {
+		font-family: 'Playfair Display', Georgia, serif;
+		font-size: 2rem;
+		font-weight: 700;
+		color: var(--color-gold);
+		background: linear-gradient(135deg, #00356b 0%, #286dc0 100%);
+		padding: 1.5rem;
+		border-radius: 12px;
+	}
+
+	.icon-swirl {
+		width: 80px;
+		height: 80px;
+		background: conic-gradient(from 0deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #ff6b6b);
+		border-radius: 50%;
+		opacity: 0.8;
+	}
+
+	.icon-hands {
+		width: 80px;
+		height: 80px;
+		background: linear-gradient(to right, #ff6b6b, #ffa500, #ffff00, #00ff00, #00bfff, #8b00ff);
+		border-radius: 16px;
+		opacity: 0.8;
+	}
+
+	.featured-card h4 {
+		font-size: clamp(2.5rem, 4vw, 3.5rem);
+		margin-bottom: 2rem;
+		line-height: 1.3;
+		min-height: 4.5em;
+	}
+
+	.featured-card p {
+		font-size: clamp(2.2rem, 3vw, 3rem);
+		line-height: 1.7;
+		opacity: 0.9;
+	}
+
+	/* About Preview Section */
+	.about-preview {
+		padding: 10rem 0;
+	}
+
+	.about-preview .container {
+		max-width: 100%;
+		padding: 0 4rem;
+	}
+
+	.about-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 6rem;
+		align-items: center;
+	}
+
+	.about-text {
+		background: var(--color-dark);
+		padding: 4rem;
+		border-radius: 20px;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+	}
+
+	.about-text h2 {
+		color: var(--color-gold);
+		margin-bottom: 2rem;
+		font-size: clamp(4rem, 8vw, 8rem);
+	}
+
+	.about-text p {
+		font-size: clamp(1.8rem, 3vw, 2.5rem);
+		line-height: 1.7;
+		margin-bottom: 3rem;
+		color: var(--color-cream);
+	}
+
+	.about-text .btn {
+		font-size: 1.8rem;
+		padding: 1.2rem 3rem;
+	}
+
+	.about-image {
+		display: flex;
+		justify-content: center;
+		align-items: stretch;
+	}
+
+	.about-image .placeholder-image {
+		aspect-ratio: 3/4;
+		border-radius: 20px;
+		max-width: 550px;
+	}
+
+	.headshot-img {
+		width: 100%;
+		max-width: min(95%, 650px);
+		height: auto;
+		border-radius: 20px;
+		object-fit: cover;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+		border: 6px solid var(--color-dark);
+	}
+
+	.placeholder-image.headshot::after {
+		content: 'Photo';
+		font-size: 2rem;
+		opacity: 0.3;
+		color: var(--color-dark);
+	}
+
+	/* Responsive */
+	@media (max-width: 1200px) {
+		.hero-content {
+			grid-template-columns: 1fr;
+			text-align: left;
+		}
+
+		.hero-images {
+			margin-top: 4rem;
+			max-width: 500px;
+		}
+
+		.approach-cards,
+		.featured-cards {
+			grid-template-columns: 1fr;
+		}
+
+		.about-content {
+			grid-template-columns: 1fr;
+		}
+
+		.about-image {
+			display: none;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.hero {
+			padding-top: 8rem;
+		}
+
+		.hero .container,
+		.approach .container,
+		.featured .container,
+		.about-preview .container {
+			padding: 0 2rem;
+		}
+
+		.hero-text h1 {
+			font-size: 5rem;
+		}
+
+		.hero-subtitle {
+			font-size: 2rem;
+		}
+
+		.hero-body {
+			font-size: 1.5rem;
+		}
+
+		.hero-buttons {
+			flex-direction: column;
+		}
+
+		.hero-buttons .btn {
+			font-size: 1.5rem;
+			padding: 1rem 2.5rem;
+		}
+	}
+</style>

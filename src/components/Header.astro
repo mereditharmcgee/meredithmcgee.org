@@ -1,0 +1,212 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+	{ href: '/', label: 'Home' },
+	{ href: '/about', label: 'About' },
+	{ href: '/work', label: 'My Work' },
+	{ href: '/portfolio', label: 'Portfolio' },
+	{ href: '/resume', label: 'Resume' },
+	{ href: '/contact', label: 'Contact' },
+];
+---
+
+<header>
+	<nav class="container">
+		<a href="/" class="logo">
+			<img src="/logo-m.png?v=2" alt="M logo" class="logo-img" />
+		</a>
+		<button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+			<span class="hamburger"></span>
+		</button>
+		<ul class="nav-links">
+			{navLinks.map(link => (
+				<li>
+					<a 
+						href={link.href} 
+						class:list={[{ active: currentPath === link.href }]}
+					>
+						{link.label}
+					</a>
+				</li>
+			))}
+		</ul>
+	</nav>
+</header>
+
+<style>
+	header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1000;
+		background: var(--color-dark-overlay);
+		backdrop-filter: blur(10px);
+		border-bottom: 1px solid rgba(212, 201, 142, 0.1);
+	}
+
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 2rem 4rem;
+		max-width: 100%;
+		margin: 0 auto;
+	}
+
+	.logo {
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+	}
+
+	.logo-img {
+		height: 15rem;
+		width: auto;
+	}
+
+	.logo-letter {
+		font-family: 'Playfair Display', Georgia, serif;
+		font-size: 6rem;
+		font-weight: 600;
+		background: linear-gradient(135deg, var(--color-medium) 0%, #8b6b9c 50%, var(--color-gold) 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.nav-links {
+		display: flex;
+		list-style: none;
+		gap: 3rem;
+		margin: 0;
+		padding: 0;
+	}
+
+	.nav-links a {
+		color: var(--color-cream);
+		text-decoration: none;
+		font-size: 2rem;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+		padding: 0.5rem 0;
+		position: relative;
+		transition: color 0.3s ease;
+	}
+
+	.nav-links a::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0;
+		height: 2px;
+		background: var(--color-gold);
+		transition: width 0.3s ease;
+	}
+
+	.nav-links a:hover,
+	.nav-links a.active {
+		color: var(--color-gold);
+	}
+
+	.nav-links a:hover::after,
+	.nav-links a.active::after {
+		width: 100%;
+	}
+
+	.mobile-menu-toggle {
+		display: none;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0.5rem;
+	}
+
+	.hamburger {
+		display: block;
+		width: 24px;
+		height: 2px;
+		background: var(--color-cream);
+		position: relative;
+		transition: background 0.3s ease;
+	}
+
+	.hamburger::before,
+	.hamburger::after {
+		content: '';
+		position: absolute;
+		width: 24px;
+		height: 2px;
+		background: var(--color-cream);
+		left: 0;
+		transition: transform 0.3s ease;
+	}
+
+	.hamburger::before {
+		top: -8px;
+	}
+
+	.hamburger::after {
+		bottom: -8px;
+	}
+
+	@media (max-width: 768px) {
+		nav {
+			padding: 1rem 1.5rem;
+		}
+
+		.mobile-menu-toggle {
+			display: block;
+			z-index: 1001;
+		}
+
+		.nav-links {
+			position: fixed;
+			top: 0;
+			right: -100%;
+			width: 80%;
+			max-width: 300px;
+			height: 100vh;
+			background: var(--color-dark);
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 3rem;
+			transition: right 0.3s ease;
+			box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+		}
+
+		.nav-links.open {
+			right: 0;
+		}
+
+		.nav-links a {
+			font-size: 1.2rem;
+		}
+
+		.mobile-menu-toggle[aria-expanded="true"] .hamburger {
+			background: transparent;
+		}
+
+		.mobile-menu-toggle[aria-expanded="true"] .hamburger::before {
+			transform: rotate(45deg) translate(6px, 6px);
+		}
+
+		.mobile-menu-toggle[aria-expanded="true"] .hamburger::after {
+			transform: rotate(-45deg) translate(6px, -6px);
+		}
+	}
+</style>
+
+<script>
+	const toggle = document.querySelector('.mobile-menu-toggle');
+	const navLinks = document.querySelector('.nav-links');
+
+	toggle?.addEventListener('click', () => {
+		const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+		toggle.setAttribute('aria-expanded', String(!isOpen));
+		navLinks?.classList.toggle('open');
+	});
+</script>
