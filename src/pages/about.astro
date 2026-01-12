@@ -73,9 +73,7 @@ import { SITE_TITLE } from '../consts';
 				<div class="timeline">
 					<div class="timeline-item">
 						<div class="timeline-image">
-							<div class="timeline-icon rochester">
-								<span>Rochester, NY</span>
-							</div>
+							<img src="/logo-rochester.png" alt="Rochester, NY - Flour City, Flower City" class="timeline-logo rochester-logo" />
 						</div>
 						<div class="timeline-content">
 							<h3>Early Years</h3>
@@ -312,6 +310,11 @@ import { SITE_TITLE } from '../consts';
 		background: white;
 		border-radius: 8px;
 		padding: 0.5rem;
+	}
+
+	.timeline-logo.rochester-logo {
+		background: var(--color-medium);
+		padding: 0.75rem;
 	}
 
 	.timeline-icon {
