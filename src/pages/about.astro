@@ -1,63 +1,328 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`About | ${SITE_TITLE}`} description="Learn about Meredith McGee, MPH - a public health writer, researcher, and evaluator driven by community needs and meaningful impact." />
+	</head>
+	<body>
+		<Header />
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+		<!-- Hero Section -->
+		<section class="about-hero bg-dark bg-pattern">
+			<div class="container">
+				<div class="hero-content">
+					<div class="hero-image">
+						<img src="/meredith-headshot.jpg" alt="Meredith McGee at a conference" class="hero-img" />
+					</div>
+					<div class="hero-text">
+						<h1>Hi, I'm Meredith</h1>
+						<p>
+							I pay attention to how people move through systems; where they're supported, where they get stuck, and what real change requires. Writing is how I make sense of what I notice and how I translate experience into something others can act on. That approach is what brought me into public health, and it's the thread that still shapes my work today.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+		<!-- What Guides My Work Section -->
+		<section class="guides bg-light">
+			<div class="container">
+				<h2>What Guides My Work</h2>
+				<div class="text-content">
+					<p>
+						I am guided by the belief that public health should respond to real needs and be accountable to the people it serves. My path has always been shaped by two threads: understanding where we come from and understanding how we function. Studying history taught me to pay attention to context, power, and the stories people carry; studying biology taught me to recognize patterns, interactions, and the ways systems adapt. Schooling that emphasized dignity and responsibility taught me that caring about people is inseparable from taking action to improve their lives. That early grounding still shapes how I work: with attention to context, care for people, and a commitment to impact that strengthens communities rather than speaking over them.
+					</p>
+					<p>
+						Today, that approach is at the center of how I move through public health. I use writing to pay close attention, to learn from what I hear, and to translate insights into clarity and accountability. Writing is how I balance evidence and experience, and how I connect what matters to the decisions and programs that can carry it forward. I work in public health because it allows me to bring these instincts together: listening to people, learning from context, and using writing to make change feel possible and concrete.
+					</p>
+				</div>
+			</div>
+		</section>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+		<!-- How I Work Section -->
+		<section class="how-i-work bg-medium">
+			<div class="container">
+				<h2>How I Work</h2>
+				<div class="text-content">
+					<p>
+						I approach my work through a public health framework, even when the projects themselves do not immediately read as "public health." For me, public health is not limited to a sector or a set of institutions. It is a way of thinking about how knowledge, systems, and collective action shape the conditions in which people live, work, and stay well. That lens guides how I choose projects and how I move through them, with an underlying focus on the common good and on strengthening the social structures that support health, dignity, and opportunity.
+					</p>
+					<p>
+						Writing is central to how I apply that framework. It is how I slow down long enough to understand what is happening, who is affected, and what context matters before jumping to solutions. Through writing, I listen closely, sort through complexity, and make patterns visible across experience, data, and systems. Whether I am working on evaluation, research, funding, or program development, writing helps me connect individual stories to broader structures and translate insight into action that can be shared, tested, and improved.
+					</p>
+					<p>
+						I am especially drawn to work that sits at the intersection of prevention, access, and education. I care about efforts that help reduce harm before it escalates, expand access to resources and services, and support the social and organizational conditions that make healthier lives possible. That might look like clarifying how a program actually functions in practice, shaping research so it reflects lived experience, or securing funding that allows essential work to continue. In each case, the goal is the same: to support organized efforts that help people live healthier, more secure lives.
+					</p>
+					<p>
+						Clarity guides how I show up in this work. I see clear writing as a form of care and accountability, not simplification. My aim is to make complex issues understandable and usable without flattening nuance, so decisions, programs, and policies can respond more effectively to real needs. This is how I try to practice public health across contexts, by using writing to connect people, systems, and ideas in service of meaningful, collective impact.
+					</p>
+				</div>
+			</div>
+		</section>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+		<!-- What Got Me Here Section -->
+		<section class="background bg-dark bg-pattern">
+			<div class="container">
+				<div class="two-column">
+					<div class="column-header">
+						<h2>What Got Me Here</h2>
+					</div>
+					<div class="column-text">
+						<p>
+							I grew up in Rochester, New York with a wide range of interests that, at the time, did not seem especially connected. I was drawn to history, technical theater, and track and field, and reading and writing were always central to how I understood the world around me. I was shaped early by an emphasis on service and responsibility, and by the idea that paying attention to people and context mattered just as much as achievement. Looking back, those instincts laid the groundwork for how I approach public health today.
+						</p>
+						<p>
+							At Lafayette College in Easton, Pennsylvania, I pursued both biology and history, drawn equally to understanding how bodies function and how social forces shape people's lives. My academic focus spanned genetics and genomics on one hand, and late twentieth-century history on the other, particularly LGBTQ+ history and the broader history of sexuality. Outside the classroom, I competed as a Division I track and field athlete before stepping back for medical reasons. That shift deepened my awareness of how systems, bodies, and support structures intersect, and it pushed me to invest more deeply in community-level work.
+						</p>
+						<p>
+							During college, I became especially committed to strengthening the structural and community contexts that shape health and belonging. I helped establish OUT Lafayette to create more opportunities for connection among LGBTQ+ students, and I worked to launch Lavender Lane, the college's first gender-affirming and gender-neutral housing option. One of the projects I am most proud of was bringing panels of the National AIDS Memorial Quilt to campus for the first time in three decades. These efforts reflected an early understanding of health as something shaped not only by individual behavior, but by relationships, policies, and shared spaces. I graduated with honors, but more importantly, with a clearer sense of how community-level change could support individual well-being.
+						</p>
+						<p>
+							That orientation carried me to the Yale School of Public Health, where I completed my Master of Public Health in Social and Behavioral Sciences. At Yale, I worked on multiple research studies focused on understanding and improving LGBTQ+ mental health, including work on an LGBTQ+ affirmative cognitive behavioral therapy trial. I also conducted evaluation work examining how students experience public health internships, and completed research analyzing cannabis use patterns by sexual identity using multi-state BRFSS data. Across these projects, writing remained central. It was how I translated qualitative experience and quantitative data into findings that could inform practice, policy, and decision-making.
+						</p>
+						<p>
+							Alongside my academic work, I served as a development and funding specialist at Bradbury-Sullivan LGBT Community Center. That role allowed me to stay connected to community-based public health work while applying my writing skills in a different way. I came to see development not simply as fundraising, but as a form of public health practice. Through evidence-based, outcomes-driven proposals, I helped secure resources that sustained programs and expanded access to care, education, and support. Writing became a way to connect community needs to the structures that make long-term impact possible.
+						</p>
+						<p>
+							More recently, my work with Parabola Center has allowed me to bring these threads together through a focus on cannabis policy and public health. I have contributed to projects that examine the social and regulatory consequences of legalization, helped communicate the historical arc of prohibition, and moderated conversations that bring public health and policy communities into dialogue. I am currently developing a qualitative research study focused on consumer experiences in mature recreational cannabis markets. This work reflects a core concern of mine: ensuring that cannabis policy is shaped by evidence, lived experience, and a commitment to health and safety rather than profit alone.
+						</p>
+						<p>
+							Taken together, this path reflects less a straight line than a set of consistent questions. How do systems shape health. Whose experiences are centered. And how can writing help translate what we know into action that strengthens communities. Public health gives me the framework to keep asking those questions, and writing is how I work through the answers.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- What Keeps Me Going Section -->
+		<section class="keeps-going bg-light">
+			<div class="container">
+				<h2>What Keeps Me Going</h2>
+				<div class="text-content">
+					<p>
+						What keeps me going is the work that is still unfolding. I am drawn to questions about how systems function in practice, whose experiences are centered, and how writing can help close the gap between need and response. My current interests sit at the intersection of public health, policy, and lived experience, with a focus on prevention, access, and accountability. Writing allows me to stay grounded in people's stories while working toward impact that is collective, practical, and real.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- What Brings Me Joy Section -->
+		<section class="joy bg-medium">
+			<div class="container">
+				<div class="joy-content">
+					<div class="joy-text">
+						<h2>What Brings Me Joy</h2>
+						<p>
+							Outside of my work, I am still drawn to many of the things that first shaped how I see the world. I love theater and storytelling in all their forms, and I am always reading and learning across disciplines, following curiosity wherever it leads. Spending time with my partner, K, and our dog, Ember, is where I feel most grounded. When we can, we get outside and explore nature, slowing down and paying attention in a different way. Lately, I have also been making space for creativity, especially through painting, as a way to stay curious, present, and connected.
+						</p>
+					</div>
+					<div class="joy-image">
+						<img src="/meredith-headshot.jpg" alt="Meredith with friends and family" class="joy-img" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* About Hero Section */
+	.about-hero {
+		padding-top: 8rem;
+		padding-bottom: 4rem;
+	}
+
+	.about-hero .container {
+		max-width: 1200px;
+	}
+
+	.about-hero .hero-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+		align-items: center;
+	}
+
+	.about-hero .hero-image {
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+		border: 4px solid var(--color-medium);
+	}
+
+	.about-hero .hero-img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.about-hero .hero-text h1 {
+		font-size: clamp(2.5rem, 5vw, 4rem);
+		margin-bottom: 1.5rem;
+		line-height: 1.1;
+	}
+
+	.about-hero .hero-text p {
+		font-size: clamp(1rem, 1.5vw, 1.2rem);
+		line-height: 1.8;
+	}
+
+	/* Standard Section Styles */
+	.guides,
+	.how-i-work,
+	.keeps-going,
+	.joy {
+		padding: 4rem 0;
+	}
+
+	.guides .container,
+	.how-i-work .container,
+	.keeps-going .container,
+	.joy .container {
+		max-width: 900px;
+	}
+
+	.guides h2,
+	.how-i-work h2,
+	.keeps-going h2 {
+		font-size: clamp(2rem, 4vw, 2.5rem);
+		margin-bottom: 1.5rem;
+		text-align: center;
+	}
+
+	.text-content p {
+		font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+		line-height: 1.8;
+		margin-bottom: 1.5rem;
+	}
+
+	.text-content p:last-child {
+		margin-bottom: 0;
+	}
+
+	/* Background Section - Two Column */
+	.background {
+		padding: 4rem 0;
+	}
+
+	.background .container {
+		max-width: 1200px;
+	}
+
+	.two-column {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		gap: 4rem;
+		align-items: start;
+	}
+
+	.column-header h2 {
+		font-size: clamp(2rem, 4vw, 2.5rem);
+		position: sticky;
+		top: 6rem;
+	}
+
+	.column-text p {
+		font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+		line-height: 1.8;
+		margin-bottom: 1.5rem;
+	}
+
+	.column-text p:last-child {
+		margin-bottom: 0;
+	}
+
+	/* Joy Section */
+	.joy h2 {
+		font-size: clamp(2rem, 4vw, 2.5rem);
+		margin-bottom: 1.5rem;
+	}
+
+	.joy .container {
+		max-width: 1200px;
+	}
+
+	.joy-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+		align-items: center;
+	}
+
+	.joy-text p {
+		font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+		line-height: 1.8;
+	}
+
+	.joy-image {
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+		border: 4px solid var(--color-dark);
+	}
+
+	.joy-img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	/* Responsive */
+	@media (max-width: 968px) {
+		.about-hero .hero-content {
+			grid-template-columns: 1fr;
+			text-align: center;
+		}
+
+		.about-hero .hero-image {
+			max-width: 400px;
+			margin: 0 auto;
+		}
+
+		.two-column {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.column-header h2 {
+			position: static;
+			text-align: center;
+		}
+
+		.joy-content {
+			grid-template-columns: 1fr;
+		}
+
+		.joy-text {
+			text-align: center;
+		}
+
+		.joy-image {
+			max-width: 400px;
+			margin: 0 auto;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.about-hero {
+			padding-top: 6rem;
+		}
+
+		.about-hero .container,
+		.guides .container,
+		.how-i-work .container,
+		.background .container,
+		.keeps-going .container,
+		.joy .container {
+			padding: 0 1.5rem;
+		}
+	}
+</style>
