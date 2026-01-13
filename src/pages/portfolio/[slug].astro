@@ -1,0 +1,385 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+
+export async function getStaticPaths() {
+	const portfolioEntries = await getCollection('portfolio');
+	return portfolioEntries.map(entry => ({
+		params: { slug: entry.slug },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { title, category, image, description, tags, challenge, approach, outcome, skills, timeline, organization } = entry.data;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${title} | ${SITE_TITLE}`} description={description} />
+	</head>
+	<body>
+		<Header />
+
+		<!-- Hero Section -->
+		<section class="project-hero bg-dark bg-pattern">
+			<div class="container">
+				<a href="/portfolio" class="back-link">&larr; Back to Portfolio</a>
+				<span class="project-category">{category}</span>
+				<h1>{title}</h1>
+				{organization && <p class="organization">{organization}</p>}
+				{timeline && <p class="timeline">{timeline}</p>}
+			</div>
+		</section>
+
+		<!-- Project Image -->
+		<section class="project-image-section">
+			<div class="container">
+				<div class="project-image" style={`background-image: url('${image}')`}></div>
+			</div>
+		</section>
+
+		<!-- Overview Cards -->
+		<section class="overview-section bg-light">
+			<div class="container">
+				<div class="overview-grid">
+					{challenge && (
+						<div class="overview-card">
+							<h3>The Challenge</h3>
+							<p>{challenge}</p>
+						</div>
+					)}
+					{approach && (
+						<div class="overview-card">
+							<h3>My Approach</h3>
+							<p>{approach}</p>
+						</div>
+					)}
+					{outcome && (
+						<div class="overview-card highlight">
+							<h3>The Outcome</h3>
+							<p>{outcome}</p>
+						</div>
+					)}
+				</div>
+			</div>
+		</section>
+
+		<!-- Main Content -->
+		<section class="project-content bg-medium">
+			<div class="container">
+				<div class="content-wrapper">
+					<Content />
+				</div>
+			</div>
+		</section>
+
+		<!-- Skills & Tags -->
+		<section class="skills-section bg-light">
+			<div class="container">
+				{skills && skills.length > 0 && (
+					<div class="skills-block">
+						<h3>Skills Applied</h3>
+						<div class="skills-list">
+							{skills.map(skill => (
+								<span class="skill-tag">{skill}</span>
+							))}
+						</div>
+					</div>
+				)}
+				<div class="tags-block">
+					<h3>Topics</h3>
+					<div class="tags-list">
+						{tags.map(tag => (
+							<span class="topic-tag">{tag}</span>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Navigation -->
+		<section class="project-nav bg-dark bg-pattern">
+			<div class="container">
+				<a href="/portfolio" class="btn">View All Projects</a>
+				<a href="/contact" class="btn btn-outline">Work With Me</a>
+			</div>
+		</section>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* Hero Section */
+	.project-hero {
+		padding-top: 5rem;
+		padding-bottom: 2rem;
+	}
+
+	.project-hero .container {
+		max-width: 900px;
+		padding: 0 2rem;
+	}
+
+	.back-link {
+		display: inline-block;
+		color: var(--color-gold);
+		text-decoration: none;
+		font-size: 0.85rem;
+		margin-bottom: 1.5rem;
+		transition: opacity 0.3s ease;
+	}
+
+	.back-link:hover {
+		opacity: 0.8;
+	}
+
+	.project-category {
+		display: inline-block;
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--color-gold);
+		background: rgba(212, 201, 142, 0.15);
+		padding: 0.35rem 0.75rem;
+		border-radius: 20px;
+		margin-bottom: 1rem;
+	}
+
+	.project-hero h1 {
+		font-size: clamp(1.75rem, 4vw, 2.5rem);
+		margin-bottom: 0.75rem;
+		line-height: 1.2;
+	}
+
+	.organization {
+		font-size: 1rem;
+		color: var(--color-cream);
+		margin-bottom: 0.25rem;
+	}
+
+	.timeline {
+		font-size: 0.9rem;
+		color: var(--color-cream);
+		opacity: 0.8;
+	}
+
+	/* Project Image */
+	.project-image-section {
+		background: var(--color-dark);
+	}
+
+	.project-image-section .container {
+		max-width: 1000px;
+		padding: 0;
+	}
+
+	.project-image {
+		width: 100%;
+		height: 400px;
+		background-size: cover;
+		background-position: center;
+		background-color: var(--color-medium);
+	}
+
+	/* Overview Section */
+	.overview-section {
+		padding: 2.5rem 0;
+	}
+
+	.overview-section .container {
+		max-width: 1000px;
+		padding: 0 2rem;
+	}
+
+	.overview-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+	}
+
+	.overview-card {
+		background: var(--color-cream);
+		padding: 1.5rem;
+		border-radius: 10px;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+	}
+
+	.overview-card.highlight {
+		background: var(--color-dark);
+		color: var(--color-cream);
+	}
+
+	.overview-card h3 {
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--color-medium);
+		margin-bottom: 0.75rem;
+	}
+
+	.overview-card.highlight h3 {
+		color: var(--color-gold);
+	}
+
+	.overview-card p {
+		font-size: 0.9rem;
+		line-height: 1.7;
+		color: var(--color-dark);
+	}
+
+	.overview-card.highlight p {
+		color: var(--color-cream);
+	}
+
+	/* Content Section */
+	.project-content {
+		padding: 2.5rem 0;
+	}
+
+	.project-content .container {
+		max-width: 800px;
+		padding: 0 2rem;
+	}
+
+	.content-wrapper {
+		background: var(--color-cream);
+		padding: 2rem;
+		border-radius: 12px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	}
+
+	.content-wrapper :global(h2) {
+		font-size: 1.3rem;
+		color: var(--color-dark);
+		margin-top: 1.5rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.content-wrapper :global(h2:first-child) {
+		margin-top: 0;
+	}
+
+	.content-wrapper :global(p) {
+		font-size: 0.95rem;
+		line-height: 1.8;
+		color: var(--color-dark);
+		margin-bottom: 1rem;
+	}
+
+	.content-wrapper :global(ul) {
+		margin: 1rem 0;
+		padding-left: 1.25rem;
+	}
+
+	.content-wrapper :global(li) {
+		font-size: 0.95rem;
+		line-height: 1.7;
+		color: var(--color-dark);
+		margin-bottom: 0.5rem;
+	}
+
+	.content-wrapper :global(strong) {
+		color: var(--color-medium);
+	}
+
+	/* Skills Section */
+	.skills-section {
+		padding: 2rem 0;
+	}
+
+	.skills-section .container {
+		max-width: 800px;
+		padding: 0 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.skills-block h3,
+	.tags-block h3 {
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--color-medium);
+		margin-bottom: 0.75rem;
+	}
+
+	.skills-list,
+	.tags-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.skill-tag {
+		font-size: 0.8rem;
+		padding: 0.4rem 0.8rem;
+		background: var(--color-dark);
+		color: var(--color-cream);
+		border-radius: 20px;
+	}
+
+	.topic-tag {
+		font-size: 0.8rem;
+		padding: 0.4rem 0.8rem;
+		background: var(--color-medium);
+		color: var(--color-cream);
+		border-radius: 20px;
+	}
+
+	/* Navigation Section */
+	.project-nav {
+		padding: 2.5rem 0;
+		text-align: center;
+	}
+
+	.project-nav .container {
+		max-width: 600px;
+		padding: 0 2rem;
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.btn-outline {
+		background: transparent;
+		border-color: var(--color-gold);
+		color: var(--color-gold);
+	}
+
+	.btn-outline:hover {
+		background: var(--color-gold);
+		color: var(--color-dark);
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.project-hero {
+			padding-top: 4rem;
+		}
+
+		.overview-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.project-image {
+			height: 250px;
+		}
+
+		.content-wrapper {
+			padding: 1.5rem;
+		}
+
+		.project-nav .container {
+			flex-direction: column;
+		}
+	}
+</style>

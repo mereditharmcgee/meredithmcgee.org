@@ -1,75 +1,12 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_TITLE } from '../consts';
 
-const portfolioItems = [
-	{
-		title: "Bradbury-Sullivan Grant Portfolio",
-		category: "Grant Writing",
-		image: "/portfolio/grants.jpg",
-		description: "Built and managed a diversified grant portfolio securing over $1M in foundation and corporate support through strategic prospecting and tailored proposal development.",
-		tags: ["Grants", "Fundraising", "Nonprofit"],
-		size: "large"
-	},
-	{
-		title: "Cannabis Use & Sexual Identity Research",
-		category: "Research",
-		image: "/portfolio/research.jpg",
-		description: "MPH thesis analyzing cannabis use patterns by sexual identity using multi-state BRFSS data, examining prevalence, frequency, and modality differences.",
-		tags: ["Quantitative", "LGBTQ+", "Public Health"],
-		size: "medium"
-	},
-	{
-		title: "LGBTQ+ Affirmative CBT Trial",
-		category: "Research",
-		image: "/portfolio/cbt-trial.jpg",
-		description: "Developed multi-channel outreach strategy for NIH-funded research, including a podcast campaign generating 50+ participant inquiries and enrolling 100+ participants.",
-		tags: ["Mental Health", "Recruitment", "NIH"],
-		size: "medium"
-	},
-	{
-		title: "Hemp-Derived THC Policy Analysis",
-		category: "Policy & Writing",
-		image: "/portfolio/hemp-policy.jpg",
-		description: "Presented original research at APHA Annual Meeting analyzing marketing and regulatory oversight of hemp-derived THC products.",
-		tags: ["Cannabis Policy", "APHA", "Regulation"],
-		size: "small"
-	},
-	{
-		title: "Lavender Lane Housing Initiative",
-		category: "Community Impact",
-		image: "/portfolio/lavender-lane.jpg",
-		description: "Launched Lafayette College's first gender-affirming and gender-neutral housing option, creating structural support for LGBTQ+ student wellbeing.",
-		tags: ["LGBTQ+", "Housing", "Institutional Change"],
-		size: "large"
-	},
-	{
-		title: "AIDS Memorial Quilt Exhibition",
-		category: "Community Impact",
-		image: "/portfolio/aids-quilt.jpg",
-		description: "Brought panels of the National AIDS Memorial Quilt to Lafayette College for the first time in three decades, connecting history to present advocacy.",
-		tags: ["HIV/AIDS", "Education", "History"],
-		size: "small"
-	},
-	{
-		title: "Applied Practice Experience Evaluation",
-		category: "Evaluation",
-		image: "/portfolio/evaluation.jpg",
-		description: "Led full-cycle program evaluations including study design, stakeholder interviews, focus groups, data analysis, and actionable reporting for decision-makers.",
-		tags: ["Mixed Methods", "Program Design", "Yale"],
-		size: "medium"
-	},
-	{
-		title: "Parabola Center Content Strategy",
-		category: "Policy & Writing",
-		image: "/portfolio/parabola-content.jpg",
-		description: "Developed educational content translating complex cannabis policy research into accessible reports, webinars, and social media content for diverse audiences.",
-		tags: ["Science Communication", "Cannabis", "Education"],
-		size: "medium"
-	},
-];
+const portfolioItems = await getCollection('portfolio');
+const sortedItems = portfolioItems.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <!doctype html>
@@ -85,7 +22,7 @@ const portfolioItems = [
 			<div class="container">
 				<h1>Portfolio</h1>
 				<p class="hero-intro">
-					A selection of work spanning grant development, public health research, program evaluation, and community impact. Hover over each card to learn more.
+					A selection of work spanning grant development, public health research, program evaluation, and community impact. Hover to preview, click to explore.
 				</p>
 			</div>
 		</section>
@@ -94,31 +31,32 @@ const portfolioItems = [
 		<section class="portfolio-section bg-light">
 			<div class="container">
 				<div class="portfolio-grid">
-					{portfolioItems.map((item, index) => (
-						<div class={`flip-card ${item.size}`} style={`--delay: ${index * 0.1}s`}>
+					{sortedItems.map((item, index) => (
+						<a href={`/portfolio/${item.slug}`} class={`flip-card ${item.data.size}`} style={`--delay: ${index * 0.1}s`}>
 							<div class="flip-card-inner">
 								<div class="flip-card-front">
-									<div class="card-image" style={`background-image: url('${item.image}')`}>
+									<div class="card-image" style={`background-image: url('${item.data.image}')`}>
 										<div class="card-overlay">
-											<span class="card-category">{item.category}</span>
-											<h3 class="card-title">{item.title}</h3>
+											<span class="card-category">{item.data.category}</span>
+											<h3 class="card-title">{item.data.title}</h3>
 										</div>
 									</div>
 								</div>
 								<div class="flip-card-back">
 									<div class="back-content">
-										<span class="card-category">{item.category}</span>
-										<h3>{item.title}</h3>
-										<p>{item.description}</p>
+										<span class="card-category">{item.data.category}</span>
+										<h3>{item.data.title}</h3>
+										<p>{item.data.description}</p>
 										<div class="card-tags">
-											{item.tags.map(tag => (
+											{item.data.tags.map(tag => (
 												<span class="tag">{tag}</span>
 											))}
 										</div>
+										<span class="view-project">View Project &rarr;</span>
 									</div>
 								</div>
 							</div>
-						</div>
+						</a>
 					))}
 				</div>
 			</div>
@@ -186,6 +124,9 @@ const portfolioItems = [
 		animation: fadeInUp 0.6s ease forwards;
 		animation-delay: var(--delay);
 		opacity: 0;
+		text-decoration: none;
+		display: block;
+		cursor: pointer;
 	}
 
 	@keyframes fadeInUp {
@@ -300,6 +241,11 @@ const portfolioItems = [
 	.back-content {
 		padding: 1.5rem;
 		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: 100%;
+		justify-content: center;
 	}
 
 	.flip-card.large .back-content {
@@ -327,7 +273,7 @@ const portfolioItems = [
 		color: var(--color-cream);
 		line-height: 1.7;
 		opacity: 0.9;
-		margin-bottom: 1.25rem;
+		margin-bottom: 1rem;
 	}
 
 	.flip-card.large .back-content p {
@@ -339,6 +285,7 @@ const portfolioItems = [
 		flex-wrap: wrap;
 		gap: 0.5rem;
 		justify-content: center;
+		margin-bottom: 1rem;
 	}
 
 	.tag {
@@ -348,6 +295,19 @@ const portfolioItems = [
 		color: var(--color-gold);
 		border-radius: 20px;
 		border: 1px solid rgba(212, 201, 142, 0.2);
+	}
+
+	.view-project {
+		font-size: 0.8rem;
+		color: var(--color-gold);
+		font-weight: 600;
+		margin-top: auto;
+		padding-top: 0.5rem;
+		transition: transform 0.3s ease;
+	}
+
+	.flip-card:hover .view-project {
+		transform: translateX(4px);
 	}
 
 	/* CTA Section */
@@ -425,11 +385,17 @@ const portfolioItems = [
 </style>
 
 <script>
-	// Touch support for mobile - tap to flip
+	// Touch support for mobile - tap to flip, second tap to navigate
 	if ('ontouchstart' in window) {
 		document.querySelectorAll('.flip-card').forEach(card => {
-			card.addEventListener('click', function() {
-				this.classList.toggle('flipped');
+			let flipped = false;
+			card.addEventListener('click', function(e) {
+				if (!flipped) {
+					e.preventDefault();
+					this.classList.add('flipped');
+					flipped = true;
+				}
+				// Second tap will follow the link naturally
 			});
 		});
 	}
