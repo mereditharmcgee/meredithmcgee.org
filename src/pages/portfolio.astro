@@ -1,0 +1,445 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+const portfolioItems = [
+	{
+		title: "Bradbury-Sullivan Grant Portfolio",
+		category: "Grant Writing",
+		image: "/portfolio/grants.jpg",
+		description: "Built and managed a diversified grant portfolio securing over $1M in foundation and corporate support through strategic prospecting and tailored proposal development.",
+		tags: ["Grants", "Fundraising", "Nonprofit"],
+		size: "large"
+	},
+	{
+		title: "Cannabis Use & Sexual Identity Research",
+		category: "Research",
+		image: "/portfolio/research.jpg",
+		description: "MPH thesis analyzing cannabis use patterns by sexual identity using multi-state BRFSS data, examining prevalence, frequency, and modality differences.",
+		tags: ["Quantitative", "LGBTQ+", "Public Health"],
+		size: "medium"
+	},
+	{
+		title: "LGBTQ+ Affirmative CBT Trial",
+		category: "Research",
+		image: "/portfolio/cbt-trial.jpg",
+		description: "Developed multi-channel outreach strategy for NIH-funded research, including a podcast campaign generating 50+ participant inquiries and enrolling 100+ participants.",
+		tags: ["Mental Health", "Recruitment", "NIH"],
+		size: "medium"
+	},
+	{
+		title: "Hemp-Derived THC Policy Analysis",
+		category: "Policy & Writing",
+		image: "/portfolio/hemp-policy.jpg",
+		description: "Presented original research at APHA Annual Meeting analyzing marketing and regulatory oversight of hemp-derived THC products.",
+		tags: ["Cannabis Policy", "APHA", "Regulation"],
+		size: "small"
+	},
+	{
+		title: "Lavender Lane Housing Initiative",
+		category: "Community Impact",
+		image: "/portfolio/lavender-lane.jpg",
+		description: "Launched Lafayette College's first gender-affirming and gender-neutral housing option, creating structural support for LGBTQ+ student wellbeing.",
+		tags: ["LGBTQ+", "Housing", "Institutional Change"],
+		size: "large"
+	},
+	{
+		title: "AIDS Memorial Quilt Exhibition",
+		category: "Community Impact",
+		image: "/portfolio/aids-quilt.jpg",
+		description: "Brought panels of the National AIDS Memorial Quilt to Lafayette College for the first time in three decades, connecting history to present advocacy.",
+		tags: ["HIV/AIDS", "Education", "History"],
+		size: "small"
+	},
+	{
+		title: "Applied Practice Experience Evaluation",
+		category: "Evaluation",
+		image: "/portfolio/evaluation.jpg",
+		description: "Led full-cycle program evaluations including study design, stakeholder interviews, focus groups, data analysis, and actionable reporting for decision-makers.",
+		tags: ["Mixed Methods", "Program Design", "Yale"],
+		size: "medium"
+	},
+	{
+		title: "Parabola Center Content Strategy",
+		category: "Policy & Writing",
+		image: "/portfolio/parabola-content.jpg",
+		description: "Developed educational content translating complex cannabis policy research into accessible reports, webinars, and social media content for diverse audiences.",
+		tags: ["Science Communication", "Cannabis", "Education"],
+		size: "medium"
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Portfolio | ${SITE_TITLE}`} description="Explore Meredith McGee's portfolio of public health work including grant writing, research, program evaluation, and community impact projects." />
+	</head>
+	<body>
+		<Header />
+
+		<!-- Hero Section -->
+		<section class="portfolio-hero bg-dark bg-pattern">
+			<div class="container">
+				<h1>Portfolio</h1>
+				<p class="hero-intro">
+					A selection of work spanning grant development, public health research, program evaluation, and community impact. Hover over each card to learn more.
+				</p>
+			</div>
+		</section>
+
+		<!-- Portfolio Grid -->
+		<section class="portfolio-section bg-light">
+			<div class="container">
+				<div class="portfolio-grid">
+					{portfolioItems.map((item, index) => (
+						<div class={`flip-card ${item.size}`} style={`--delay: ${index * 0.1}s`}>
+							<div class="flip-card-inner">
+								<div class="flip-card-front">
+									<div class="card-image" style={`background-image: url('${item.image}')`}>
+										<div class="card-overlay">
+											<span class="card-category">{item.category}</span>
+											<h3 class="card-title">{item.title}</h3>
+										</div>
+									</div>
+								</div>
+								<div class="flip-card-back">
+									<div class="back-content">
+										<span class="card-category">{item.category}</span>
+										<h3>{item.title}</h3>
+										<p>{item.description}</p>
+										<div class="card-tags">
+											{item.tags.map(tag => (
+												<span class="tag">{tag}</span>
+											))}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="portfolio-cta bg-dark bg-pattern">
+			<div class="container">
+				<h2>Interested in working together?</h2>
+				<p>I'm always open to discussing new projects and opportunities.</p>
+				<a href="/contact" class="btn">Get in Touch</a>
+			</div>
+		</section>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* Hero Section */
+	.portfolio-hero {
+		padding-top: 5rem;
+		padding-bottom: 2.5rem;
+		text-align: center;
+	}
+
+	.portfolio-hero .container {
+		max-width: 800px;
+		padding: 0 2rem;
+	}
+
+	.portfolio-hero h1 {
+		font-size: clamp(2rem, 4vw, 3rem);
+		margin-bottom: 1rem;
+	}
+
+	.hero-intro {
+		font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+		line-height: 1.8;
+		opacity: 0.95;
+	}
+
+	/* Portfolio Section */
+	.portfolio-section {
+		padding: 3rem 0;
+	}
+
+	.portfolio-section .container {
+		max-width: 1200px;
+		padding: 0 2rem;
+	}
+
+	/* Portfolio Grid - Dynamic Masonry-like Layout */
+	.portfolio-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 1.5rem;
+		grid-auto-flow: dense;
+	}
+
+	/* Flip Card Base */
+	.flip-card {
+		perspective: 1000px;
+		height: 280px;
+		animation: fadeInUp 0.6s ease forwards;
+		animation-delay: var(--delay);
+		opacity: 0;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Card Sizes for Visual Interest */
+	.flip-card.large {
+		grid-column: span 2;
+		grid-row: span 2;
+		height: 100%;
+		min-height: 580px;
+	}
+
+	.flip-card.medium {
+		grid-column: span 2;
+		height: 280px;
+	}
+
+	.flip-card.small {
+		grid-column: span 1;
+		height: 280px;
+	}
+
+	/* Flip Card Inner */
+	.flip-card-inner {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+		transform-style: preserve-3d;
+	}
+
+	.flip-card:hover .flip-card-inner {
+		transform: rotateY(180deg);
+	}
+
+	/* Card Faces */
+	.flip-card-front,
+	.flip-card-back {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		backface-visibility: hidden;
+		border-radius: 12px;
+		overflow: hidden;
+	}
+
+	/* Front of Card */
+	.flip-card-front {
+		background: var(--color-dark);
+	}
+
+	.card-image {
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: center;
+		background-color: var(--color-medium);
+		position: relative;
+	}
+
+	.card-overlay {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding: 1.5rem;
+		background: linear-gradient(to top, rgba(61, 74, 42, 0.95) 0%, rgba(61, 74, 42, 0.7) 50%, transparent 100%);
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		min-height: 50%;
+	}
+
+	.card-category {
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--color-gold);
+		margin-bottom: 0.5rem;
+		font-weight: 600;
+	}
+
+	.card-title {
+		font-size: clamp(1rem, 1.3vw, 1.2rem);
+		color: var(--color-cream);
+		line-height: 1.3;
+		margin: 0;
+	}
+
+	.flip-card.large .card-title {
+		font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+	}
+
+	/* Back of Card */
+	.flip-card-back {
+		background: var(--color-dark);
+		transform: rotateY(180deg);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.back-content {
+		padding: 1.5rem;
+		text-align: center;
+	}
+
+	.flip-card.large .back-content {
+		padding: 2.5rem;
+	}
+
+	.back-content .card-category {
+		margin-bottom: 0.75rem;
+	}
+
+	.back-content h3 {
+		font-size: clamp(1rem, 1.2vw, 1.15rem);
+		color: var(--color-cream);
+		margin-bottom: 1rem;
+		line-height: 1.3;
+	}
+
+	.flip-card.large .back-content h3 {
+		font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+		margin-bottom: 1.25rem;
+	}
+
+	.back-content p {
+		font-size: 0.85rem;
+		color: var(--color-cream);
+		line-height: 1.7;
+		opacity: 0.9;
+		margin-bottom: 1.25rem;
+	}
+
+	.flip-card.large .back-content p {
+		font-size: 0.95rem;
+	}
+
+	.card-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		justify-content: center;
+	}
+
+	.tag {
+		font-size: 0.7rem;
+		padding: 0.25rem 0.6rem;
+		background: rgba(107, 124, 76, 0.3);
+		color: var(--color-gold);
+		border-radius: 20px;
+		border: 1px solid rgba(212, 201, 142, 0.2);
+	}
+
+	/* CTA Section */
+	.portfolio-cta {
+		padding: 3rem 0;
+		text-align: center;
+	}
+
+	.portfolio-cta .container {
+		max-width: 600px;
+		padding: 0 2rem;
+	}
+
+	.portfolio-cta h2 {
+		font-size: clamp(1.5rem, 2.5vw, 2rem);
+		margin-bottom: 0.75rem;
+	}
+
+	.portfolio-cta p {
+		font-size: clamp(0.9rem, 1vw, 1rem);
+		margin-bottom: 1.5rem;
+		opacity: 0.9;
+	}
+
+	/* Responsive */
+	@media (max-width: 1024px) {
+		.portfolio-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.flip-card.large {
+			min-height: 500px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.portfolio-hero {
+			padding-top: 4rem;
+		}
+
+		.portfolio-grid {
+			grid-template-columns: 1fr;
+			gap: 1.25rem;
+		}
+
+		.flip-card,
+		.flip-card.large,
+		.flip-card.medium,
+		.flip-card.small {
+			grid-column: span 1;
+			height: 300px;
+			min-height: 300px;
+		}
+
+		.flip-card.large {
+			height: 350px;
+			min-height: 350px;
+		}
+
+		/* Touch-friendly: tap to flip on mobile */
+		.flip-card-inner {
+			transition: transform 0.5s ease;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.back-content {
+			padding: 1.25rem;
+		}
+
+		.back-content p {
+			font-size: 0.8rem;
+		}
+	}
+</style>
+
+<script>
+	// Touch support for mobile - tap to flip
+	if ('ontouchstart' in window) {
+		document.querySelectorAll('.flip-card').forEach(card => {
+			card.addEventListener('click', function() {
+				this.classList.toggle('flipped');
+			});
+		});
+	}
+</script>
+
+<style>
+	/* Mobile tap-to-flip support */
+	@media (max-width: 768px) {
+		.flip-card.flipped .flip-card-inner {
+			transform: rotateY(180deg);
+		}
+	}
+</style>
