@@ -1,0 +1,630 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Resume | ${SITE_TITLE}`} description="Meredith McGee's professional resume - Development and Public Health leader with expertise in grant writing, program evaluation, and LGBTQ+ health research." />
+	</head>
+	<body>
+		<Header />
+
+		<!-- Hero Section -->
+		<section class="resume-hero bg-dark bg-pattern">
+			<div class="container">
+				<h1>Resume</h1>
+				<p class="summary">
+					Development and Public Health leader with a proven record of securing over <strong>$1 million</strong> in competitive grants for health education and community impact. Expert in establishing long-term grants program vision and executing full-cycle grant management, from prospecting to compliance and reporting. Excels at cross-functional collaboration, serving as the strategic bridge between creative teams and philanthropic partners to develop initiatives that advance health equity and expand access to knowledge.
+				</p>
+				<a href="/Meredith-McGee-Resume.pdf" class="btn download-btn" download>Download PDF Resume</a>
+			</div>
+		</section>
+
+		<!-- Education Section -->
+		<section class="education bg-light">
+			<div class="container">
+				<h2>Education</h2>
+				<div class="education-grid">
+					<div class="education-card">
+						<img src="/logo-yale-lgbtq.png" alt="Yale School of Public Health" class="edu-logo yale-logo" />
+						<div class="edu-details">
+							<h3>Yale School of Public Health</h3>
+							<p class="degree">Master of Public Health (MPH)</p>
+							<p class="field">Social and Behavioral Sciences</p>
+							<p class="thesis"><em>Thesis: Joint Realities: Prevalence, Frequency, and Modality of Cannabis Use by Sexual Identity in a Multi-State Sample</em></p>
+						</div>
+					</div>
+					<div class="education-card">
+						<img src="/logo-lafayette.png" alt="Lafayette College" class="edu-logo" />
+						<div class="edu-details">
+							<h3>Lafayette College</h3>
+							<p class="degree">Bachelor of Arts, Honors in History</p>
+							<p class="degree">Bachelor of Science, Biology</p>
+							<p class="thesis"><em>Thesis: Three Worlds Collide: An Exploration into the Development of Lesbian Pornography in the Late 20th Century</em></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Experience Section -->
+		<section class="experience bg-medium">
+			<div class="container">
+				<h2>Experience</h2>
+
+				<div class="experience-item">
+					<div class="exp-header">
+						<img src="/logo-bradbury-sullivan.png" alt="Bradbury-Sullivan LGBT Community Center" class="exp-logo" />
+						<div class="exp-title">
+							<h3>Bradbury-Sullivan LGBT Community Center</h3>
+							<p class="role">Grants and Funding Specialist</p>
+							<p class="location">Allentown, PA</p>
+						</div>
+						<span class="exp-date">Jun 2023 - Present</span>
+					</div>
+					<ul class="exp-details">
+						<li>Built and managed a diversified grant portfolio, securing over $1M in foundation and corporate support through strategic prospecting, relationship cultivation, and tailored proposal development.</li>
+						<li>Developed long-term funder relationships through consistent stewardship communications, impact reporting, and coordinated site visits and engagement events.</li>
+						<li>Collaborated with program teams early in project development to establish fundable initiatives, aligning creative vision with funder priorities and organizational capacity.</li>
+						<li>Led full grant cycle management, including prospect research, proposal writing, budget development, compliance tracking, and outcome reporting.</li>
+					</ul>
+				</div>
+
+				<div class="experience-item">
+					<div class="exp-header">
+						<img src="/logo-parabola.png" alt="Parabola Center" class="exp-logo" />
+						<div class="exp-title">
+							<h3>Parabola Center</h3>
+							<p class="role">Public Health Research Fellow, Parabola Leader</p>
+							<p class="location">Malden, MA</p>
+						</div>
+						<span class="exp-date">Jul 2024 - Present</span>
+					</div>
+					<ul class="exp-details">
+						<li>Developed and executed educational content strategy, translating complex cannabis policy research into accessible reports, webinars, and social media content for diverse public audiences.</li>
+						<li>Collaborated with researchers and subject matter experts to distill scientific concepts into compelling narratives that engage cross-sector stakeholders.</li>
+						<li>Designed and led a community-facing research initiative from concept to execution, including securing IRB approval, coordinating implementation, and communicating findings.</li>
+						<li>Built strategic partnerships with organizations and experts to expand the reach and credibility of educational programming focused on health equity and policy reform.</li>
+					</ul>
+				</div>
+
+				<div class="experience-item">
+					<div class="exp-header">
+						<img src="/logo-yale-lgbtq.png" alt="Yale LGBTQ Mental Health Initiative" class="exp-logo yale-logo" />
+						<div class="exp-title">
+							<h3>Yale LGBTQ Mental Health Initiative</h3>
+							<p class="role">Graduate Research Assistant</p>
+							<p class="location">New Haven, CT</p>
+						</div>
+						<span class="exp-date">Nov 2023 - Aug 2025</span>
+					</div>
+					<ul class="exp-details">
+						<li>Developed and executed multi-channel outreach strategy for NIH-funded research, including a podcast campaign that generated 50+ participant inquiries.</li>
+						<li>Created compelling outreach materials that translated complex research concepts into accessible messaging, successfully enrolling 100+ participants.</li>
+						<li>Managed data systems and conducted analysis to track recruitment progress, evaluate campaign effectiveness, and inform ongoing strategy adjustments.</li>
+					</ul>
+				</div>
+
+				<div class="experience-item">
+					<div class="exp-header">
+						<img src="/logo-ysph.png" alt="Yale School of Public Health" class="exp-logo" />
+						<div class="exp-title">
+							<h3>Yale School of Public Health</h3>
+							<p class="role">Teaching Fellow, LGBTQ+ Population Health</p>
+							<p class="location">New Haven, CT</p>
+						</div>
+						<span class="exp-date">Jan 2025 - May 2025</span>
+					</div>
+					<ul class="exp-details">
+						<li>Supported graduate-level course instruction under leading LGBTQ+ mental health researcher, facilitating discussions on health disparities, structural stigma, and policy solutions.</li>
+						<li>Provided detailed feedback on student work, emphasizing clarity, evidence-based argumentation, and effective communication of complex public health concepts.</li>
+					</ul>
+				</div>
+
+				<div class="experience-item">
+					<div class="exp-header">
+						<img src="/logo-ysph.png" alt="Yale University" class="exp-logo" />
+						<div class="exp-title">
+							<h3>Yale University Office of Public Health Practice</h3>
+							<p class="role">Applied Practice Experience Evaluation Specialist</p>
+							<p class="location">New Haven, CT</p>
+						</div>
+						<span class="exp-date">Nov 2024 - May 2025</span>
+					</div>
+					<ul class="exp-details">
+						<li>Led full-cycle program evaluations for public health initiatives, including study design, stakeholder interviews, focus groups, data analysis, and reporting.</li>
+						<li>Translated evaluation findings into actionable recommendations through comprehensive reports tailored for decision-makers and program leadership.</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- Skills Section -->
+		<section class="skills bg-dark bg-pattern">
+			<div class="container">
+				<h2>Technical Skills</h2>
+				<div class="skills-grid">
+					<div class="skill-card">
+						<h3>Grant & Development</h3>
+						<p>Salesforce, Microsoft Excel (advanced), Asana, Monday.com; prospect research, pipeline management, funder stewardship, cross-functional coordination</p>
+					</div>
+					<div class="skill-card">
+						<h3>Writing & Communication</h3>
+						<p>Grant proposals, letters of inquiry, impact reports, stewardship communications, policy briefs, pitch decks; translating complex goals into compelling narratives</p>
+					</div>
+					<div class="skill-card">
+						<h3>Data Analysis & Evaluation</h3>
+						<p>R (tidyverse, ggplot2), Qualtrics, REDCap; survey design, mixed-methods evaluation, focus group facilitation, grant impact assessment</p>
+					</div>
+					<div class="skill-card">
+						<h3>Funder Stewardship</h3>
+						<p>Strategic communications, customized impact reporting, site visit coordination, recognition strategies for multi-year commitments</p>
+					</div>
+					<div class="skill-card">
+						<h3>Reporting & Visualization</h3>
+						<p>Data reports, visual summaries, stakeholder-facing presentations for fundraising, public health, and policy audiences</p>
+					</div>
+					<div class="skill-card">
+						<h3>Software & Design</h3>
+						<p>Advanced Canva, Microsoft Office Suite, Google Workspace, Zoom; visual design, presentations, team coordination</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Professional Development Section -->
+		<section class="professional-dev bg-light">
+			<div class="container">
+				<h2>Professional Development</h2>
+				<div class="dev-grid">
+					<div class="dev-item">
+						<span class="dev-year">2025</span>
+						<div class="dev-content">
+							<h3>Pennsylvania LGBTQIA Health Summit</h3>
+							<p>Panelist on funding landscape for LGBTQ+ nonprofits, sharing strategies for aligning organizational mission with philanthropic priorities.</p>
+						</div>
+					</div>
+					<div class="dev-item">
+						<span class="dev-year">2024</span>
+						<div class="dev-content">
+							<h3>American Public Health Association (APHA) Annual Meeting</h3>
+							<p>Presented original research analyzing the marketing and regulatory oversight of hemp-derived THC products.</p>
+						</div>
+					</div>
+					<div class="dev-item">
+						<span class="dev-year">2024</span>
+						<div class="dev-content">
+							<h3>Yale Center for Interdisciplinary Research on AIDS</h3>
+							<p>HIV Equity and Social Justice Fellow - Led community capacity needs assessment of LGBTQ+ organizations.</p>
+						</div>
+					</div>
+					<div class="dev-item">
+						<span class="dev-year">2024</span>
+						<div class="dev-content">
+							<h3>Yale Health Center Advocacy Initiative</h3>
+							<p>Led community assessment to identify systemic barriers to healthcare access; presented findings to executive leadership.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Certifications Section -->
+		<section class="certifications bg-medium">
+			<div class="container">
+				<h2>Certifications</h2>
+				<div class="cert-list">
+					<div class="cert-item">
+						<span class="cert-name">Advanced Grant Writing</span>
+						<span class="cert-org">Nonprofit Times</span>
+					</div>
+					<div class="cert-item">
+						<span class="cert-name">Best Practices for Social and Behavioral Clinical Research</span>
+						<span class="cert-org">CITI Program</span>
+					</div>
+					<div class="cert-item">
+						<span class="cert-name">Human Subjects Research Training</span>
+						<span class="cert-org">CITI Program</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* Hero Section */
+	.resume-hero {
+		padding-top: 5rem;
+		padding-bottom: 2.5rem;
+		text-align: center;
+	}
+
+	.resume-hero .container {
+		max-width: 900px;
+		padding: 0 2rem;
+	}
+
+	.resume-hero h1 {
+		font-size: clamp(2rem, 4vw, 3rem);
+		margin-bottom: 1.5rem;
+	}
+
+	.summary {
+		font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+		line-height: 1.8;
+		margin-bottom: 2rem;
+	}
+
+	.summary strong {
+		color: var(--color-gold);
+	}
+
+	.download-btn {
+		background: var(--color-gold);
+		color: var(--color-dark);
+		border-color: var(--color-gold);
+	}
+
+	.download-btn:hover {
+		background: transparent;
+		color: var(--color-gold);
+	}
+
+	/* Education Section */
+	.education {
+		padding: 2.5rem 0;
+	}
+
+	.education .container {
+		max-width: 1000px;
+		padding: 0 2rem;
+	}
+
+	.education h2 {
+		font-size: clamp(1.5rem, 2.5vw, 2rem);
+		text-align: center;
+		margin-bottom: 2rem;
+		color: var(--color-dark);
+	}
+
+	.education-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+	}
+
+	.education-card {
+		display: flex;
+		gap: 1.5rem;
+		align-items: flex-start;
+	}
+
+	.edu-logo {
+		width: 70px;
+		height: auto;
+		object-fit: contain;
+		flex-shrink: 0;
+	}
+
+	.edu-logo.yale-logo {
+		background: #00356b;
+		border-radius: 6px;
+		padding: 0.25rem;
+	}
+
+	.edu-details h3 {
+		font-size: clamp(1rem, 1.3vw, 1.15rem);
+		color: var(--color-dark);
+		margin-bottom: 0.25rem;
+	}
+
+	.edu-details .degree {
+		font-size: 0.9rem;
+		color: var(--color-dark);
+		margin-bottom: 0.15rem;
+		font-weight: 500;
+	}
+
+	.edu-details .field {
+		font-size: 0.85rem;
+		color: var(--color-medium);
+		margin-bottom: 0.5rem;
+	}
+
+	.edu-details .thesis {
+		font-size: 0.8rem;
+		color: var(--color-dark);
+		opacity: 0.8;
+		line-height: 1.5;
+	}
+
+	/* Experience Section */
+	.experience {
+		padding: 2.5rem 0;
+	}
+
+	.experience .container {
+		max-width: 1000px;
+		padding: 0 2rem;
+	}
+
+	.experience h2 {
+		font-size: clamp(1.5rem, 2.5vw, 2rem);
+		text-align: center;
+		margin-bottom: 2rem;
+		color: var(--color-dark);
+	}
+
+	.experience-item {
+		background: var(--color-cream-light);
+		border-radius: 10px;
+		padding: 1.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.experience-item:last-child {
+		margin-bottom: 0;
+	}
+
+	.exp-header {
+		display: flex;
+		gap: 1rem;
+		align-items: flex-start;
+		margin-bottom: 1rem;
+	}
+
+	.exp-logo {
+		width: 50px;
+		height: auto;
+		object-fit: contain;
+		flex-shrink: 0;
+	}
+
+	.exp-logo.yale-logo {
+		background: #00356b;
+		border-radius: 4px;
+		padding: 0.2rem;
+	}
+
+	.exp-title {
+		flex: 1;
+	}
+
+	.exp-title h3 {
+		font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+		color: var(--color-dark);
+		margin-bottom: 0.15rem;
+	}
+
+	.exp-title .role {
+		font-size: 0.85rem;
+		color: var(--color-medium);
+		font-weight: 500;
+		margin-bottom: 0.1rem;
+	}
+
+	.exp-title .location {
+		font-size: 0.8rem;
+		color: var(--color-dark);
+		opacity: 0.7;
+	}
+
+	.exp-date {
+		font-size: 0.8rem;
+		color: var(--color-medium);
+		font-weight: 500;
+		white-space: nowrap;
+	}
+
+	.exp-details {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.exp-details li {
+		font-size: 0.85rem;
+		color: var(--color-dark);
+		line-height: 1.6;
+		padding-left: 1rem;
+		position: relative;
+		margin-bottom: 0.5rem;
+	}
+
+	.exp-details li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.5rem;
+		width: 4px;
+		height: 4px;
+		background: var(--color-medium);
+		border-radius: 50%;
+	}
+
+	.exp-details li:last-child {
+		margin-bottom: 0;
+	}
+
+	/* Skills Section */
+	.skills {
+		padding: 2.5rem 0;
+	}
+
+	.skills .container {
+		max-width: 1000px;
+		padding: 0 2rem;
+	}
+
+	.skills h2 {
+		font-size: clamp(1.5rem, 2.5vw, 2rem);
+		text-align: center;
+		margin-bottom: 2rem;
+	}
+
+	.skills-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.25rem;
+	}
+
+	.skill-card {
+		background: rgba(107, 124, 76, 0.2);
+		border-radius: 10px;
+		padding: 1.25rem;
+		border: 1px solid rgba(212, 201, 142, 0.1);
+	}
+
+	.skill-card h3 {
+		font-size: 0.95rem;
+		color: var(--color-gold);
+		margin-bottom: 0.5rem;
+	}
+
+	.skill-card p {
+		font-size: 0.8rem;
+		line-height: 1.6;
+		color: var(--color-cream);
+		opacity: 0.9;
+	}
+
+	/* Professional Development Section */
+	.professional-dev {
+		padding: 2.5rem 0;
+	}
+
+	.professional-dev .container {
+		max-width: 900px;
+		padding: 0 2rem;
+	}
+
+	.professional-dev h2 {
+		font-size: clamp(1.5rem, 2.5vw, 2rem);
+		text-align: center;
+		margin-bottom: 2rem;
+		color: var(--color-dark);
+	}
+
+	.dev-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+	}
+
+	.dev-item {
+		display: flex;
+		gap: 1.5rem;
+		align-items: flex-start;
+	}
+
+	.dev-year {
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: var(--color-medium);
+		min-width: 50px;
+	}
+
+	.dev-content h3 {
+		font-size: 0.95rem;
+		color: var(--color-dark);
+		margin-bottom: 0.25rem;
+	}
+
+	.dev-content p {
+		font-size: 0.85rem;
+		color: var(--color-dark);
+		line-height: 1.6;
+		opacity: 0.85;
+	}
+
+	/* Certifications Section */
+	.certifications {
+		padding: 2.5rem 0;
+	}
+
+	.certifications .container {
+		max-width: 800px;
+		padding: 0 2rem;
+	}
+
+	.certifications h2 {
+		font-size: clamp(1.5rem, 2.5vw, 2rem);
+		text-align: center;
+		margin-bottom: 1.5rem;
+		color: var(--color-dark);
+	}
+
+	.cert-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.cert-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.75rem 1rem;
+		background: var(--color-cream-light);
+		border-radius: 6px;
+	}
+
+	.cert-name {
+		font-size: 0.9rem;
+		color: var(--color-dark);
+		font-weight: 500;
+	}
+
+	.cert-org {
+		font-size: 0.8rem;
+		color: var(--color-medium);
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.resume-hero {
+			padding-top: 4rem;
+		}
+
+		.education-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.education-card {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+		}
+
+		.skills-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.exp-header {
+			flex-wrap: wrap;
+		}
+
+		.exp-date {
+			width: 100%;
+			margin-top: 0.5rem;
+		}
+
+		.dev-item {
+			flex-direction: column;
+			gap: 0.25rem;
+		}
+
+		.cert-item {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.25rem;
+		}
+	}
+</style>
