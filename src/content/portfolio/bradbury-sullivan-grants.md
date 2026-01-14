@@ -8,29 +8,21 @@ size: "large"
 order: 1
 organization: "Bradbury-Sullivan LGBT Community Center"
 timeline: "June 2023 - Present"
-challenge: "The organization needed to diversify and grow its funding base to sustain expanding programs serving the LGBTQ+ community in the Lehigh Valley region."
-approach: "Developed a comprehensive grants strategy including prospect research, relationship cultivation, and tailored proposal development aligned with funder priorities and organizational capacity."
-outcome: "Secured over $1 million in foundation and corporate support, establishing long-term funder relationships and sustainable funding pipelines for core programs."
+role: "Grant Writer & Development Strategist"
+scope: "$1M+ portfolio across 15+ funders"
+impact: "3x growth in foundation revenue"
 skills: ["Prospect Research", "Proposal Writing", "Budget Development", "Funder Stewardship", "Impact Reporting", "Cross-functional Collaboration"]
 ---
 
-## Overview
+At Bradbury-Sullivan LGBT Community Center, I built and manage the organization's grant portfolio from the ground up. What started as a modest foundation funding base has grown into a diversified $1M+ portfolio supporting health education, community programs, and capacity building across the Lehigh Valley's LGBTQ+ community.
 
-At Bradbury-Sullivan LGBT Community Center, I built and managed a diversified grant portfolio that has secured over $1 million in foundation and corporate support. This work involved strategic prospecting, relationship cultivation, and developing tailored proposals that align organizational needs with funder priorities.
+## What I Do
 
-## The Challenge
+I handle the full grant lifecycle: prospect research to identify aligned funders, relationship cultivation through site visits and ongoing communication, proposal development that connects community needs to funder priorities, and stewardship reporting that demonstrates impact and builds long-term partnerships.
 
-The center needed to diversify its funding sources and establish sustainable revenue streams to support expanding programs serving the LGBTQ+ community across the Lehigh Valley. This required building a systematic approach to grant seeking while maintaining authentic relationships with funders.
+## Key Wins
 
-## My Approach
-
-I developed a full-cycle grant management process that included:
-
-- **Prospect Research**: Identifying foundations and corporate funders whose priorities aligned with our mission
-- **Relationship Building**: Cultivating long-term partnerships through consistent communication, site visits, and impact updates
-- **Proposal Development**: Crafting compelling narratives that connected community needs to fundable initiatives
-- **Compliance & Reporting**: Ensuring all grant requirements were met and outcomes clearly communicated
-
-## Impact
-
-This systematic approach resulted in securing over $1 million in competitive grants, with many funders becoming multi-year supporters. The diversified portfolio has provided stable funding for health education, community programs, and capacity building initiatives.
+- Secured first-time funding from multiple regional and national foundations
+- Converted several one-time grants into multi-year commitments
+- Built sustainable funding pipelines for core programs including health education and community wellness
+- Developed internal systems for grant tracking, deadline management, and impact reporting

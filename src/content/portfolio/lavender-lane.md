@@ -8,29 +8,18 @@ size: "large"
 order: 5
 organization: "Lafayette College"
 timeline: "2019 - 2022"
-challenge: "LGBTQ+ students, particularly transgender and non-binary students, faced housing environments that didn't affirm their identities, impacting wellbeing and sense of belonging."
-approach: "Advocated for and helped design a gender-affirming housing option, working with administration to develop policies and implementation plans."
-outcome: "Successfully launched Lavender Lane, Lafayette's first gender-neutral housing option, creating lasting institutional change that continues to support students."
+role: "Student Advocate & Program Designer"
+scope: "Campus-wide institutional change"
+impact: "First gender-neutral housing at Lafayette"
 skills: ["Advocacy", "Policy Development", "Stakeholder Engagement", "Program Design", "Institutional Change", "Community Organizing"]
 ---
 
-## Overview
+This is one of the projects I'm most proud of. Traditional dorm assignments often fail transgender, non-binary, and other LGBTQ+ students, creating environments where people can't fully be themselves. That affects everything: mental health, academics, sense of belonging.
 
-Lavender Lane represents one of the projects I'm most proud of from my undergraduate years—working to establish Lafayette College's first gender-affirming and gender-neutral housing option for LGBTQ+ students.
+## Building the Case
 
-## The Challenge
+Working with students, staff, and administrators, I helped document the need through testimonies and research, developed a proposal addressing practical and policy concerns, advocated through official channels while building grassroots support, and designed implementation guidelines to make the space welcoming and sustainable.
 
-Traditional dormitory housing assignments often failed to account for the needs of transgender, non-binary, and other LGBTQ+ students. This created environments where students couldn't fully be themselves, impacting mental health, academic performance, and sense of belonging on campus.
+## Lasting Change
 
-## My Approach
-
-I worked collaboratively with students, staff, and administrators to:
-
-- Document the need for gender-affirming housing through student testimonies and research
-- Develop a proposal that addressed practical and policy concerns
-- Advocate through official channels while building grassroots support
-- Help design implementation guidelines that would make the space welcoming and sustainable
-
-## Impact
-
-Lavender Lane opened as Lafayette's first gender-neutral housing option, providing a space where LGBTQ+ students could live authentically. The initiative created lasting institutional change that continues to support students today, demonstrating how community advocacy can reshape institutional structures.
+Lavender Lane opened as Lafayette's first gender-neutral housing option. It still exists today, which is the point: this wasn't about a single cohort of students, but about changing the institution itself. The project showed me how community advocacy can reshape structures that weren't built with everyone in mind.

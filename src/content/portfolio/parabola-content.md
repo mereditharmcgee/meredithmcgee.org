@@ -8,29 +8,18 @@ size: "medium"
 order: 8
 organization: "Parabola Center"
 timeline: "July 2024 - Present"
-challenge: "Cannabis policy research often remains inaccessible to the public and policymakers who need it most, limiting its impact on decision-making."
-approach: "Developed a content strategy that translates complex research into multiple formats—reports, webinars, social media—tailored to different audience needs."
-outcome: "Created educational content that expanded the reach of policy research, building strategic partnerships and engaging cross-sector stakeholders."
+role: "Research Fellow & Content Lead"
+scope: "Multi-format educational content"
+impact: "Expanded research reach to policymakers"
 skills: ["Content Strategy", "Science Communication", "Research Translation", "Webinar Production", "Social Media", "Partnership Building"]
 ---
 
-## Overview
+Cannabis policy research too often stays trapped in journals and conferences, never reaching the policymakers, advocates, and community members who could actually use it. As a Research Fellow and Parabola Leader, I develop content that bridges that gap.
 
-As a Public Health Research Fellow and Parabola Leader, I develop educational content that makes cannabis policy research accessible to diverse audiences.
+## The Strategy
 
-## The Challenge
+I create multi-format content tailored to different audiences: research briefs that translate findings into actionable language, webinars that bring researchers and practitioners into conversation, and social media content that introduces complex topics to broader audiences. I also build partnerships with organizations and experts to expand reach and credibility.
 
-Academic research on cannabis policy often remains siloed in journals and conferences, failing to reach the policymakers, advocates, and community members who could use it to inform decisions.
+## Building Trust
 
-## My Approach
-
-I developed a multi-format content strategy including:
-
-- **Research Reports**: Translating findings into clear, actionable briefs
-- **Webinars**: Designing and facilitating conversations that bring researchers and practitioners together
-- **Social Media**: Creating engaging content that introduces complex topics to broader audiences
-- **Partnerships**: Building relationships with organizations and experts to expand reach and credibility
-
-## Impact
-
-This work has helped Parabola Center establish itself as a trusted source for cannabis policy education, connecting rigorous research to the conversations and decisions that shape public health outcomes.
+This work has helped establish Parabola Center as a trusted source for cannabis policy education. Good content isn't just about simplifying information; it's about connecting rigorous research to the real conversations and decisions that shape public health outcomes.

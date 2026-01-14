@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const { title, category, image, description, tags, challenge, approach, outcome, skills, timeline, organization, video } = entry.data;
+const { title, category, image, description, tags, role, scope, impact, skills, timeline, organization, video } = entry.data;
 ---
 
 <!doctype html>
@@ -53,31 +53,33 @@ const { title, category, image, description, tags, challenge, approach, outcome,
 			</div>
 		</section>
 
-		<!-- Overview Cards -->
-		<section class="overview-section bg-light">
-			<div class="container">
-				<div class="overview-grid">
-					{challenge && (
-						<div class="overview-card">
-							<h3>The Challenge</h3>
-							<p>{challenge}</p>
-						</div>
-					)}
-					{approach && (
-						<div class="overview-card">
-							<h3>My Approach</h3>
-							<p>{approach}</p>
-						</div>
-					)}
-					{outcome && (
-						<div class="overview-card highlight">
-							<h3>The Outcome</h3>
-							<p>{outcome}</p>
-						</div>
-					)}
+		<!-- At a Glance Cards -->
+		{(role || scope || impact) && (
+			<section class="glance-section bg-light">
+				<div class="container">
+					<div class="glance-grid">
+						{role && (
+							<div class="glance-card">
+								<span class="glance-label">My Role</span>
+								<p class="glance-value">{role}</p>
+							</div>
+						)}
+						{scope && (
+							<div class="glance-card">
+								<span class="glance-label">The Scale</span>
+								<p class="glance-value">{scope}</p>
+							</div>
+						)}
+						{impact && (
+							<div class="glance-card highlight">
+								<span class="glance-label">The Impact</span>
+								<p class="glance-value">{impact}</p>
+							</div>
+						)}
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		)}
 
 		<!-- Main Content -->
 		<section class="project-content bg-medium">
@@ -209,53 +211,58 @@ const { title, category, image, description, tags, challenge, approach, outcome,
 		background: var(--color-dark);
 	}
 
-	/* Overview Section */
-	.overview-section {
-		padding: 2.5rem 0;
+	/* At a Glance Section */
+	.glance-section {
+		padding: 2rem 0;
 	}
 
-	.overview-section .container {
+	.glance-section .container {
 		max-width: 1000px;
 		padding: 0 2rem;
 	}
 
-	.overview-grid {
+	.glance-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 1.5rem;
 	}
 
-	.overview-card {
+	.glance-card {
 		background: var(--color-cream);
-		padding: 1.5rem;
-		border-radius: 10px;
+		padding: 1.75rem;
+		border-radius: 12px;
 		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+		text-align: center;
 	}
 
-	.overview-card.highlight {
+	.glance-card.highlight {
 		background: var(--color-dark);
-		color: var(--color-cream);
 	}
 
-	.overview-card h3 {
-		font-size: 0.85rem;
+	.glance-label {
+		display: block;
+		font-size: 0.7rem;
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		letter-spacing: 0.12em;
 		color: var(--color-medium);
-		margin-bottom: 0.75rem;
+		margin-bottom: 0.5rem;
+		font-weight: 600;
 	}
 
-	.overview-card.highlight h3 {
+	.glance-card.highlight .glance-label {
 		color: var(--color-gold);
 	}
 
-	.overview-card p {
-		font-size: 0.9rem;
-		line-height: 1.7;
+	.glance-value {
+		font-family: var(--font-heading);
+		font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+		font-weight: 600;
+		line-height: 1.3;
 		color: var(--color-dark);
+		margin: 0;
 	}
 
-	.overview-card.highlight p {
+	.glance-card.highlight .glance-value {
 		color: var(--color-cream);
 	}
 
@@ -387,7 +394,7 @@ const { title, category, image, description, tags, challenge, approach, outcome,
 			padding-top: 4rem;
 		}
 
-		.overview-grid {
+		.glance-grid {
 			grid-template-columns: 1fr;
 		}
 

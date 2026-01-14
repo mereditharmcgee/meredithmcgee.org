@@ -8,29 +8,18 @@ size: "medium"
 order: 7
 organization: "Yale University Office of Public Health Practice"
 timeline: "November 2024 - May 2025"
-challenge: "Public health internship programs need systematic evaluation to understand student experiences and improve program effectiveness."
-approach: "Designed and conducted mixed-methods evaluation including stakeholder interviews, focus groups, and data analysis to assess program outcomes."
-outcome: "Produced actionable recommendations that informed program improvements, demonstrating the value of rigorous evaluation in educational settings."
+role: "Evaluation Specialist"
+scope: "Mixed-methods program assessment"
+impact: "Actionable recommendations adopted"
 skills: ["Program Evaluation", "Mixed Methods", "Stakeholder Interviews", "Focus Groups", "Data Analysis", "Report Writing"]
 ---
 
-## Overview
+Good programs need good evaluation. At Yale's Office of Public Health Practice, I led comprehensive assessments of public health internship programs to understand how students experience practicum placements and how those experiences translate to professional development.
 
-As an Applied Practice Experience Evaluation Specialist at Yale's Office of Public Health Practice, I led comprehensive evaluations of public health internship programs.
+## The Process
 
-## The Challenge
+I handled the full evaluation cycle: designing frameworks aligned with program goals, conducting stakeholder interviews and focus groups with students and supervisors, synthesizing qualitative and quantitative data, and translating findings into actionable recommendations for program leadership.
 
-Understanding how students experience practicum placements—and how those experiences translate to professional development—requires systematic evaluation that captures both quantitative outcomes and qualitative experiences.
+## Making It Useful
 
-## My Approach
-
-I conducted full-cycle program evaluations including:
-
-- **Study Design**: Developing evaluation frameworks aligned with program goals
-- **Data Collection**: Conducting stakeholder interviews and focus groups with students, supervisors, and program staff
-- **Analysis**: Synthesizing qualitative and quantitative data to identify patterns and insights
-- **Reporting**: Translating findings into actionable recommendations for program leadership
-
-## Impact
-
-The evaluation work produced concrete recommendations that informed program improvements, demonstrating how rigorous assessment can strengthen public health education and training.
+The point of evaluation is improvement, not just measurement. The work produced concrete recommendations that informed real program changes, demonstrating how rigorous assessment can strengthen public health education when findings are communicated clearly enough to act on.
