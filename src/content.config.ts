@@ -21,9 +21,9 @@ const portfolio = defineCollection({
 		tags: z.array(z.string()),
 		size: z.enum(['small', 'medium', 'large']),
 		order: z.number(),
-		// At-a-glance cards (punchy, quantitative)
+		// At-a-glance cards
 		role: z.string().optional(),
-		scope: z.string().optional(),
+		challenge: z.string().optional(),
 		impact: z.string().optional(),
 		// Meta info
 		skills: z.array(z.string()).optional(),

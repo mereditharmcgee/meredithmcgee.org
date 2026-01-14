@@ -9,7 +9,7 @@ order: 1
 organization: "Bradbury-Sullivan LGBT Community Center"
 timeline: "June 2023 - Present"
 role: "Grant Writer & Development Strategist"
-scope: "$1M+ portfolio across 15+ funders"
+challenge: "Diversify and grow foundation revenue for LGBTQ+ services"
 impact: "3x growth in foundation revenue"
 skills: ["Prospect Research", "Proposal Writing", "Budget Development", "Funder Stewardship", "Impact Reporting", "Cross-functional Collaboration"]
 ---

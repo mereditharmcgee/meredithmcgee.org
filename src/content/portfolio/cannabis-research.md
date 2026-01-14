@@ -9,7 +9,7 @@ order: 2
 organization: "Yale School of Public Health"
 timeline: "2024 - 2025"
 role: "Lead Researcher & Analyst"
-scope: "Multi-state BRFSS dataset, 200K+ respondents"
+challenge: "LGBTQ+ populations underrepresented in cannabis research"
 impact: "Original contribution to LGBTQ+ health evidence"
 skills: ["R Programming", "Statistical Analysis", "BRFSS Data", "Research Design", "Academic Writing", "Data Visualization"]
 ---

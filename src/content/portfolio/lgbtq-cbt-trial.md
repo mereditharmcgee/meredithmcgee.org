@@ -9,7 +9,7 @@ order: 3
 organization: "Yale LGBTQ Mental Health Initiative"
 timeline: "November 2023 - August 2025"
 role: "Research Assistant & Outreach Lead"
-scope: "NIH-funded clinical trial"
+challenge: "Reaching LGBTQ+ communities historically excluded from research"
 impact: "100+ participants enrolled"
 skills: ["Participant Recruitment", "Outreach Strategy", "Podcast Marketing", "Community Engagement", "Data Management", "Research Coordination"]
 ---

@@ -9,7 +9,7 @@ order: 6
 organization: "Lafayette College"
 timeline: "2021"
 role: "Event Coordinator & Educator"
-scope: "Campus-wide exhibition"
+challenge: "Students disconnected from LGBTQ+ history"
 impact: "First quilt display in 30 years"
 skills: ["Event Coordination", "Educational Programming", "Partnership Building", "Historical Education", "Community Engagement"]
 ---

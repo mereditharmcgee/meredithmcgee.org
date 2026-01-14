@@ -9,7 +9,7 @@ order: 7
 organization: "Yale University Office of Public Health Practice"
 timeline: "November 2024 - May 2025"
 role: "Evaluation Specialist"
-scope: "Mixed-methods program assessment"
+challenge: "Assess program effectiveness and identify improvements"
 impact: "Actionable recommendations adopted"
 skills: ["Program Evaluation", "Mixed Methods", "Stakeholder Interviews", "Focus Groups", "Data Analysis", "Report Writing"]
 ---

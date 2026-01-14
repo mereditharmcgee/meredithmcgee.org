@@ -9,7 +9,7 @@ order: 8
 organization: "Parabola Center"
 timeline: "July 2024 - Present"
 role: "Research Fellow & Content Lead"
-scope: "Multi-format educational content"
+challenge: "Cannabis research not reaching policymakers who need it"
 impact: "Expanded research reach to policymakers"
 skills: ["Content Strategy", "Science Communication", "Research Translation", "Webinar Production", "Social Media", "Partnership Building"]
 ---
