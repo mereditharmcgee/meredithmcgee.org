@@ -15,12 +15,15 @@ skills: ["Script Writing", "Research Translation", "Community Engagement", "Vide
 video: "/portfolio/yale-lgbtmhi-podcast.mp4"
 ---
 
-Recruiting LGBTQ+ participants for mental health research requires more than sharing information. It requires building trust. Given historical harms, many LGBTQ+ individuals have valid reasons to be cautious about research participation. The approach needed to be transparent, respectful, and genuinely inviting.
+I developed a podcast-style recruitment video for a Yale School of Public Health study on LGBTQ+ mental health, translating research goals into an engaging, accessible format designed to build trust with communities historically underrepresented in research.
 
-## The Concept
+## Approach
 
-I developed the script and narrative framing for a podcast-style recruitment video that centered community (framing the study as an opportunity for LGBTQ+ voices to shape research), demystified participation (clearly explaining what was involved), and used warm, conversational language that respected audience intelligence.
+- Wrote script and narrative framing centering LGBTQ+ community as partners in shaping research
+- Demystified participation by clearly explaining study procedures and expectations
+- Used warm, conversational language that respected audience intelligence while remaining inviting
+- Designed messaging that acknowledged historical research harms while demonstrating commitment to ethical practice
 
-## Research Communication Done Right
+## Results
 
-The video demonstrates that reaching communities means meeting them where they are, with messaging that honors their experiences and invites genuine partnership. It's both a functional recruitment tool and an example of how research communication can be done with care and intention.
+The video serves as both a functional recruitment tool and a model for community-centered research communication. This approach demonstrates that reaching LGBTQ+ communities requires meeting them where they are with messaging that honors their experiences and invites genuine partnership.

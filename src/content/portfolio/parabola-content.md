@@ -14,12 +14,15 @@ impact: "Expanded research reach to policymakers"
 skills: ["Content Strategy", "Science Communication", "Research Translation", "Webinar Production", "Social Media", "Partnership Building"]
 ---
 
-Cannabis policy research too often stays trapped in journals and conferences, never reaching the policymakers, advocates, and community members who could actually use it. As a Research Fellow and Parabola Leader, I develop content that bridges that gap.
+I develop educational content at the Parabola Center that translates complex cannabis policy research into accessible formats for policymakers, advocates, and community members. This work bridges the gap between academic research and the stakeholders who can act on it.
 
-## The Strategy
+## Approach
 
-I create multi-format content tailored to different audiences: research briefs that translate findings into actionable language, webinars that bring researchers and practitioners into conversation, and social media content that introduces complex topics to broader audiences. I also build partnerships with organizations and experts to expand reach and credibility.
+- Produce research briefs synthesizing findings into actionable language for policy audiences
+- Coordinate webinars connecting researchers, practitioners, and community advocates
+- Create social media content introducing complex cannabis policy topics to broader audiences
+- Build partnerships with organizations and subject matter experts to expand reach and credibility
 
-## Building Trust
+## Results
 
-This work has helped establish Parabola Center as a trusted source for cannabis policy education. Good content isn't just about simplifying information; it's about connecting rigorous research to the real conversations and decisions that shape public health outcomes.
+Content strategy has helped establish Parabola Center as a trusted resource for cannabis policy education. By connecting rigorous research to real policy conversations, this work ensures findings reach decision-makers positioned to shape public health outcomes.

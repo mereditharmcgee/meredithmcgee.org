@@ -14,15 +14,15 @@ impact: "100+ participants enrolled"
 skills: ["Participant Recruitment", "Outreach Strategy", "Podcast Marketing", "Community Engagement", "Data Management", "Research Coordination"]
 ---
 
-Recruiting LGBTQ+ participants for mental health research means overcoming historical mistrust and meeting people where they are. For this NIH-funded clinical trial testing LGBTQ+ affirmative CBT, I developed and executed a multi-channel outreach strategy that prioritized authenticity and accessibility.
+I developed and executed a multi-channel recruitment strategy for an NIH-funded clinical trial testing LGBTQ+ affirmative cognitive behavioral therapy at the Yale LGBTQ Mental Health Initiative. The approach prioritized authentic, community-centered outreach to build trust with populations historically underrepresented in research.
 
-## The Strategy
+## Strategy
 
-- **Podcast appearances** on LGBTQ+-focused shows generated 50+ direct inquiries by explaining the research in conversational, trustworthy contexts
-- **Social media content** translated clinical concepts into inviting, clear messaging
-- **Community partnerships** extended our reach through organizations already trusted by potential participants
-- **Real-time tracking** allowed us to evaluate what worked and adjust strategies accordingly
+- Secured appearances on LGBTQ+-focused podcasts, generating 50+ direct participant inquiries
+- Developed social media content translating clinical concepts into accessible, inviting messaging
+- Built partnerships with LGBTQ+ organizations to extend reach through trusted community networks
+- Managed tracking systems to evaluate campaign effectiveness and adjust strategies in real-time
 
-## The Result
+## Results
 
-The approach enrolled over 100 participants and demonstrated that thoughtful, community-centered outreach can overcome traditional barriers to research participation. The podcast strategy in particular proved that meeting people in spaces they already occupy is more effective than expecting them to find you.
+The multi-channel approach successfully enrolled over 100 participants in the clinical trial. Findings demonstrated that thoughtful, community-centered outreach can overcome traditional barriers to research participation, with podcast appearances proving particularly effective for reaching LGBTQ+ audiences in spaces they already trust.

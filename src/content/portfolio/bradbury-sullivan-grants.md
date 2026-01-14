@@ -14,15 +14,15 @@ impact: "3x growth in foundation revenue"
 skills: ["Prospect Research", "Proposal Writing", "Budget Development", "Funder Stewardship", "Impact Reporting", "Cross-functional Collaboration"]
 ---
 
-At Bradbury-Sullivan LGBT Community Center, I built and manage the organization's grant portfolio from the ground up. What started as a modest foundation funding base has grown into a diversified $1M+ portfolio supporting health education, community programs, and capacity building across the Lehigh Valley's LGBTQ+ community.
+I built and manage a diversified grant portfolio at Bradbury-Sullivan LGBT Community Center, securing over $1 million in foundation and corporate support for health education, community programs, and capacity building initiatives serving the Lehigh Valley's LGBTQ+ community.
 
-## What I Do
+## Approach
 
-I handle the full grant lifecycle: prospect research to identify aligned funders, relationship cultivation through site visits and ongoing communication, proposal development that connects community needs to funder priorities, and stewardship reporting that demonstrates impact and builds long-term partnerships.
+I handle the full grant lifecycle: conducting prospect research to identify aligned funders, cultivating relationships through site visits and ongoing communication, developing tailored proposals that connect community needs to funder priorities, and producing stewardship reports that demonstrate impact and strengthen long-term partnerships.
 
-## Key Wins
+## Results
 
 - Secured first-time funding from multiple regional and national foundations
-- Converted several one-time grants into multi-year commitments
+- Converted one-time grants into multi-year commitments through strategic relationship building
 - Built sustainable funding pipelines for core programs including health education and community wellness
 - Developed internal systems for grant tracking, deadline management, and impact reporting

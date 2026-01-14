@@ -14,12 +14,12 @@ impact: "Original contribution to LGBTQ+ health evidence"
 skills: ["R Programming", "Statistical Analysis", "BRFSS Data", "Research Design", "Academic Writing", "Data Visualization"]
 ---
 
-My MPH thesis addresses a gap in the research: how do cannabis use patterns differ across sexual identity groups? As legalization expands, understanding these differences is essential for public health messaging that actually reaches all communities.
+For my MPH thesis, I conducted quantitative research examining cannabis use patterns across sexual identity groups using multi-state Behavioral Risk Factor Surveillance System (BRFSS) data. The study analyzed prevalence, frequency, and consumption modality differences, controlling for demographic and geographic factors.
 
-## The Research
+## Methods
 
-Using Behavioral Risk Factor Surveillance System (BRFSS) data from multiple states, I analyzed prevalence, frequency, and consumption modality (smoking, edibles, etc.) by sexual identity. The analysis controls for demographic and geographic factors to isolate meaningful differences.
+Using R for statistical analysis, I examined how cannabis use behaviors vary by sexual identity, including differences in consumption methods (smoking, edibles, vaping) and frequency of use. The analysis draws on a dataset of over 200,000 respondents across multiple states with cannabis-related BRFSS modules.
 
-## Why It Matters
+## Significance
 
-LGBTQ+ populations are often underrepresented or aggregated in substance use research, limiting our ability to develop targeted interventions. This work contributes to a more nuanced evidence base that can inform culturally responsive public health approaches to cannabis education and harm reduction.
+LGBTQ+ populations are often underrepresented or aggregated in substance use research, creating gaps in our ability to develop targeted interventions. This research contributes to a more nuanced evidence base, providing insights that can inform culturally responsive public health approaches to cannabis education and harm reduction.
