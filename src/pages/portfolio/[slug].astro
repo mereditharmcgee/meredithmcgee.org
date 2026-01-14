@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const { title, category, image, description, tags, challenge, approach, outcome, skills, timeline, organization } = entry.data;
+const { title, category, image, description, tags, challenge, approach, outcome, skills, timeline, organization, video } = entry.data;
 ---
 
 <!doctype html>
@@ -37,10 +37,19 @@ const { title, category, image, description, tags, challenge, approach, outcome,
 			</div>
 		</section>
 
-		<!-- Project Image -->
+		<!-- Project Media -->
 		<section class="project-image-section">
 			<div class="container">
-				<div class="project-image" style={`background-image: url('${image}')`}></div>
+				{video ? (
+					<div class="project-video">
+						<video controls preload="metadata">
+							<source src={video} type="video/mp4" />
+							Your browser does not support the video tag.
+						</video>
+					</div>
+				) : (
+					<div class="project-image" style={`background-image: url('${image}')`}></div>
+				)}
 			</div>
 		</section>
 
@@ -186,6 +195,18 @@ const { title, category, image, description, tags, challenge, approach, outcome,
 		background-size: cover;
 		background-position: center;
 		background-color: var(--color-medium);
+	}
+
+	.project-video {
+		width: 100%;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.project-video video {
+		width: 100%;
+		border-radius: 12px;
+		background: var(--color-dark);
 	}
 
 	/* Overview Section */
