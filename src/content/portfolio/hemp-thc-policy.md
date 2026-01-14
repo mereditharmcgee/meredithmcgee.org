@@ -1,7 +1,7 @@
 ---
 title: "Diet Weed Or Deception?"
 category: "Policy & Writing"
-image: "/portfolio/hemp-policy.jpg"
+image: "/portfolio/diet-weed-poster.png"
 description: "Presented original research at APHA 2024 evaluating marketing practices and health information quality from 30 companies selling hemp-derived THC products."
 tags: ["Cannabis", "Research", "Communications"]
 size: "small"
