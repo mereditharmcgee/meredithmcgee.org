@@ -3,7 +3,7 @@ title: "Hemp-Derived THC Policy Analysis"
 category: "Policy & Writing"
 image: "/portfolio/hemp-policy.jpg"
 description: "Presented original research at APHA Annual Meeting analyzing marketing and regulatory oversight of hemp-derived THC products."
-tags: ["Cannabis Policy", "APHA", "Regulation"]
+tags: ["Cannabis", "Research", "Communications"]
 size: "small"
 order: 4
 organization: "Parabola Center"

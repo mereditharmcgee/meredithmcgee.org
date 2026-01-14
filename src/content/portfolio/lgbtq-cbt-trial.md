@@ -3,7 +3,7 @@ title: "LGBTQ+ Affirmative CBT Trial"
 category: "Research"
 image: "/portfolio/cbt-trial.jpg"
 description: "Developed multi-channel outreach strategy for NIH-funded research, including a podcast campaign generating 50+ participant inquiries and enrolling 100+ participants."
-tags: ["Mental Health", "Recruitment", "NIH"]
+tags: ["LGBTQ+", "Research", "Communications"]
 size: "medium"
 order: 3
 organization: "Yale LGBTQ Mental Health Initiative"

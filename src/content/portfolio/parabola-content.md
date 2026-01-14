@@ -3,7 +3,7 @@ title: "Parabola Center Content Strategy"
 category: "Policy & Writing"
 image: "/portfolio/parabola-content.jpg"
 description: "Developed educational content translating complex cannabis policy research into accessible reports, webinars, and social media content for diverse audiences."
-tags: ["Science Communication", "Cannabis", "Education"]
+tags: ["Cannabis", "Communications"]
 size: "medium"
 order: 8
 organization: "Parabola Center"

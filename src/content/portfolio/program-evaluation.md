@@ -3,7 +3,7 @@ title: "Applied Practice Experience Evaluation"
 category: "Evaluation"
 image: "/portfolio/evaluation.jpg"
 description: "Led full-cycle program evaluations including study design, stakeholder interviews, focus groups, data analysis, and actionable reporting for decision-makers."
-tags: ["Mixed Methods", "Program Design", "Yale"]
+tags: ["Research", "Communications"]
 size: "medium"
 order: 7
 organization: "Yale University Office of Public Health Practice"
