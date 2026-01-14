@@ -8,7 +8,7 @@ size: "medium"
 order: 3
 organization: "Yale LGBTQ+ Mental Health Initiative"
 timeline: "2024"
-role: "Script Writer & Content Creator"
+role: "Script Writer"
 challenge: "Building trust with communities wary of research"
 impact: "100s engaged, increased study enrollment"
 skills: ["Script Writing", "Research Translation", "Community Engagement", "Health Communication"]
@@ -26,4 +26,4 @@ I wrote the script for a podcast-style recruitment video for the EQuIP study, an
 
 ## Results
 
-After the video launched, we saw a nationwide uptick in interest in the Yale LGBTQ+ Mental Health Initiative and the EQuIP study specifically. Hundreds of individuals engaged with our research through the video, and we successfully saw an increase in study enrollment. The project demonstrated that meeting LGBTQ+ communities where they are—with messaging that honors their experiences—can overcome traditional barriers to research participation.
+After the video launched, we saw a nationwide uptick in interest in the Yale LGBTQ+ Mental Health Initiative and the EQuIP study specifically. Hundreds of individuals engaged with our research through the video, and we successfully saw an increase in study enrollment. The project demonstrated that meeting LGBTQ+ communities where they are, with messaging that honors their experiences, can overcome traditional barriers to research participation.
