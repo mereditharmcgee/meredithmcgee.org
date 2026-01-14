@@ -1,0 +1,530 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`My Work | ${SITE_TITLE}`} description="Explore how Meredith McGee works - from grant writing and strategic messaging to research translation and content strategy. Writing as a tool for impact." />
+	</head>
+	<body>
+		<Header />
+
+		<!-- Hero Section -->
+		<section class="work-hero bg-dark bg-pattern">
+			<div class="container">
+				<h1>How I Work</h1>
+				<p class="hero-intro">
+					Writing is how I make sense of complexity and help others do the same. Whether I'm crafting a grant proposal, translating research for public audiences, or shaping an organization's voice, I bring the same approach: listen closely, understand context, and write with clarity and purpose.
+				</p>
+			</div>
+		</section>
+
+		<!-- Services/Skills Grid -->
+		<section class="services-section bg-light">
+			<div class="container">
+				<h2 class="section-title">What I Do</h2>
+
+				<div class="service-block">
+					<div class="service-content">
+						<span class="service-number">01</span>
+						<h3>Grant Writing & Proposals</h3>
+						<p class="service-description">
+							I write grant proposals that win funding by connecting organizational impact to funder priorities. This isn't just about following guidelines—it's about crafting a compelling case that makes readers want to say yes.
+						</p>
+						<div class="service-details">
+							<h4>What this looks like:</h4>
+							<ul>
+								<li>Letters of inquiry that open doors</li>
+								<li>Full proposals with clear narratives and logical budgets</li>
+								<li>Case statements that articulate organizational value</li>
+								<li>Renewal applications that demonstrate impact</li>
+								<li>Corporate sponsorship pitches</li>
+							</ul>
+						</div>
+						<div class="service-outcome">
+							<span class="outcome-label">Track Record:</span>
+							<span class="outcome-value">$1M+ secured through persuasive, strategic proposals</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="service-block alt">
+					<div class="service-content">
+						<span class="service-number">02</span>
+						<h3>Strategic Messaging & Narrative</h3>
+						<p class="service-description">
+							I help organizations find and refine their voice. This means understanding who you're talking to, what you're trying to accomplish, and how to frame your work in ways that resonate and inspire action.
+						</p>
+						<div class="service-details">
+							<h4>What this looks like:</h4>
+							<ul>
+								<li>Organizational messaging frameworks</li>
+								<li>Stakeholder communications strategies</li>
+								<li>Key messages and talking points</li>
+								<li>Brand voice development and guidelines</li>
+								<li>Pitch decks and presentation narratives</li>
+							</ul>
+						</div>
+						<div class="service-outcome">
+							<span class="outcome-label">Approach:</span>
+							<span class="outcome-value">Audience-centered framing that connects mission to impact</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="service-block">
+					<div class="service-content">
+						<span class="service-number">03</span>
+						<h3>Research Translation & Science Communication</h3>
+						<p class="service-description">
+							Complex research deserves to reach the people who can use it. I translate academic findings, policy analysis, and technical information into clear, engaging content that informs and empowers diverse audiences.
+						</p>
+						<div class="service-details">
+							<h4>What this looks like:</h4>
+							<ul>
+								<li>Research briefs and executive summaries</li>
+								<li>Policy explainers for general audiences</li>
+								<li>Blog posts and articles from academic sources</li>
+								<li>Educational materials and fact sheets</li>
+								<li>Conference presentations and talking points</li>
+							</ul>
+						</div>
+						<div class="service-outcome">
+							<span class="outcome-label">Philosophy:</span>
+							<span class="outcome-value">Accessibility without oversimplification</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="service-block alt">
+					<div class="service-content">
+						<span class="service-number">04</span>
+						<h3>Content Strategy & Production</h3>
+						<p class="service-description">
+							I develop content strategies that turn organizational expertise into consistent, valuable communication across channels. This means thinking beyond individual pieces to build systems that sustain engagement over time.
+						</p>
+						<div class="service-details">
+							<h4>What this looks like:</h4>
+							<ul>
+								<li>Content calendars and editorial planning</li>
+								<li>Multi-channel content strategies</li>
+								<li>Social media content and campaigns</li>
+								<li>Newsletter development and email sequences</li>
+								<li>Webinar scripting and production</li>
+							</ul>
+						</div>
+						<div class="service-outcome">
+							<span class="outcome-label">Goal:</span>
+							<span class="outcome-value">Sustainable content systems that build trust and credibility</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="service-block">
+					<div class="service-content">
+						<span class="service-number">05</span>
+						<h3>Evaluation & Impact Reporting</h3>
+						<p class="service-description">
+							I turn data and feedback into stories that demonstrate value. Whether for funders, boards, or internal teams, I write reports that make findings actionable and impact visible.
+						</p>
+						<div class="service-details">
+							<h4>What this looks like:</h4>
+							<ul>
+								<li>Funder reports and impact updates</li>
+								<li>Program evaluation summaries</li>
+								<li>Annual reports and organizational narratives</li>
+								<li>Data visualization and infographics</li>
+								<li>Board presentations and briefings</li>
+							</ul>
+						</div>
+						<div class="service-outcome">
+							<span class="outcome-label">Approach:</span>
+							<span class="outcome-value">Data-informed storytelling that centers real outcomes</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="service-block alt">
+					<div class="service-content">
+						<span class="service-number">06</span>
+						<h3>Community-Centered Communications</h3>
+						<p class="service-description">
+							The best communications start with listening. I write in ways that honor lived experience, center community voices, and build trust rather than extract stories.
+						</p>
+						<div class="service-details">
+							<h4>What this looks like:</h4>
+							<ul>
+								<li>Outreach materials that meet people where they are</li>
+								<li>Recruitment content for research and programs</li>
+								<li>Communications that reflect community input</li>
+								<li>Culturally responsive messaging</li>
+								<li>Accessible, plain-language content</li>
+							</ul>
+						</div>
+						<div class="service-outcome">
+							<span class="outcome-label">Foundation:</span>
+							<span class="outcome-value">Writing that builds trust, not just awareness</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Areas of Focus -->
+		<section class="focus-section bg-dark bg-pattern">
+			<div class="container">
+				<h2 class="section-title">Areas of Focus</h2>
+				<p class="focus-intro">
+					I'm drawn to work that sits at the intersection of health, equity, and public understanding. These are the areas where I bring the deepest context and care.
+				</p>
+
+				<div class="focus-grid">
+					<div class="focus-card">
+						<div class="focus-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+						</div>
+						<h3>Public Health</h3>
+						<p>Health is shaped by systems, not just individual choices. I write to make public health concepts accessible and to support work that improves community wellbeing.</p>
+					</div>
+
+					<div class="focus-card">
+						<div class="focus-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+						</div>
+						<h3>LGBTQ+ Health & Equity</h3>
+						<p>From mental health research to community center programming, I bring both professional expertise and personal investment to communications that serve LGBTQ+ communities.</p>
+					</div>
+
+					<div class="focus-card">
+						<div class="focus-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/></svg>
+						</div>
+						<h3>Cannabis Policy</h3>
+						<p>Cannabis policy is public health policy. I communicate the evidence, history, and stakes of legalization in ways that inform better decisions and protect communities.</p>
+					</div>
+
+					<div class="focus-card">
+						<div class="focus-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 10-4 4-4-4"/></svg>
+						</div>
+						<h3>Prevention & Access</h3>
+						<p>I care about work that helps reduce harm before it escalates and expands access to resources, services, and opportunities for healthier lives.</p>
+					</div>
+
+					<div class="focus-card">
+						<div class="focus-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+						</div>
+						<h3>Nonprofit & Mission-Driven</h3>
+						<p>Organizations doing important work deserve communications that match their impact. I help nonprofits tell their stories and secure the resources to keep going.</p>
+					</div>
+
+					<div class="focus-card">
+						<div class="focus-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+						</div>
+						<h3>Education & Knowledge</h3>
+						<p>I believe in expanding access to knowledge. Whether through research translation or educational content, I write to help people understand and act.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="work-cta bg-medium">
+			<div class="container">
+				<h2>Let's Work Together</h2>
+				<p>If you're looking for a writer who brings strategic thinking, public health expertise, and genuine care to every project, I'd love to hear from you.</p>
+				<div class="cta-buttons">
+					<a href="/portfolio" class="btn">See My Work</a>
+					<a href="/contact" class="btn btn-outline">Get in Touch</a>
+				</div>
+			</div>
+		</section>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* Hero Section */
+	.work-hero {
+		padding-top: 5rem;
+		padding-bottom: 2.5rem;
+		text-align: center;
+	}
+
+	.work-hero .container {
+		max-width: 800px;
+		padding: 0 2rem;
+	}
+
+	.work-hero h1 {
+		font-size: clamp(2rem, 4vw, 3rem);
+		margin-bottom: 1rem;
+	}
+
+	.hero-intro {
+		font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+		line-height: 1.8;
+		opacity: 0.95;
+	}
+
+	/* Services Section */
+	.services-section {
+		padding: 3rem 0;
+	}
+
+	.services-section .container {
+		max-width: 900px;
+		padding: 0 2rem;
+	}
+
+	.section-title {
+		font-size: clamp(1.5rem, 2.5vw, 2rem);
+		text-align: center;
+		margin-bottom: 2.5rem;
+		color: var(--color-dark);
+	}
+
+	.service-block {
+		margin-bottom: 2rem;
+		padding: 2rem;
+		background: var(--color-cream);
+		border-radius: 12px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+		border-left: 4px solid var(--color-medium);
+	}
+
+	.service-block.alt {
+		border-left-color: var(--color-gold);
+	}
+
+	.service-block:last-child {
+		margin-bottom: 0;
+	}
+
+	.service-number {
+		font-size: 0.75rem;
+		font-weight: 700;
+		color: var(--color-medium);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		display: block;
+		margin-bottom: 0.5rem;
+	}
+
+	.service-block.alt .service-number {
+		color: var(--color-gold);
+	}
+
+	.service-content h3 {
+		font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+		color: var(--color-dark);
+		margin-bottom: 0.75rem;
+	}
+
+	.service-description {
+		font-size: clamp(0.9rem, 1vw, 1rem);
+		line-height: 1.7;
+		color: var(--color-dark);
+		margin-bottom: 1.25rem;
+	}
+
+	.service-details h4 {
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--color-medium);
+		margin-bottom: 0.5rem;
+	}
+
+	.service-details ul {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1.25rem 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.service-details li {
+		font-size: 0.8rem;
+		color: var(--color-dark);
+		background: rgba(107, 124, 76, 0.1);
+		padding: 0.35rem 0.75rem;
+		border-radius: 20px;
+	}
+
+	.service-outcome {
+		display: flex;
+		align-items: baseline;
+		gap: 0.5rem;
+		padding-top: 1rem;
+		border-top: 1px solid rgba(61, 74, 42, 0.1);
+	}
+
+	.outcome-label {
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--color-medium);
+		font-weight: 600;
+	}
+
+	.outcome-value {
+		font-size: 0.9rem;
+		color: var(--color-dark);
+		font-style: italic;
+	}
+
+	/* Focus Section */
+	.focus-section {
+		padding: 3rem 0;
+	}
+
+	.focus-section .container {
+		max-width: 1100px;
+		padding: 0 2rem;
+	}
+
+	.focus-section .section-title {
+		color: var(--color-cream);
+	}
+
+	.focus-intro {
+		text-align: center;
+		max-width: 700px;
+		margin: 0 auto 2.5rem;
+		font-size: clamp(0.9rem, 1vw, 1rem);
+		line-height: 1.7;
+		opacity: 0.9;
+	}
+
+	.focus-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+	}
+
+	.focus-card {
+		background: rgba(107, 124, 76, 0.15);
+		border-radius: 12px;
+		padding: 1.5rem;
+		border: 1px solid rgba(212, 201, 142, 0.1);
+		transition: transform 0.3s ease, border-color 0.3s ease;
+	}
+
+	.focus-card:hover {
+		transform: translateY(-4px);
+		border-color: rgba(212, 201, 142, 0.3);
+	}
+
+	.focus-icon {
+		color: var(--color-gold);
+		margin-bottom: 1rem;
+	}
+
+	.focus-card h3 {
+		font-size: 1.05rem;
+		color: var(--color-cream);
+		margin-bottom: 0.5rem;
+	}
+
+	.focus-card p {
+		font-size: 0.85rem;
+		line-height: 1.6;
+		color: var(--color-cream);
+		opacity: 0.85;
+	}
+
+	/* CTA Section */
+	.work-cta {
+		padding: 3rem 0;
+		text-align: center;
+	}
+
+	.work-cta .container {
+		max-width: 600px;
+		padding: 0 2rem;
+	}
+
+	.work-cta h2 {
+		font-size: clamp(1.5rem, 2.5vw, 2rem);
+		color: var(--color-dark);
+		margin-bottom: 0.75rem;
+	}
+
+	.work-cta p {
+		font-size: clamp(0.9rem, 1vw, 1rem);
+		color: var(--color-dark);
+		margin-bottom: 1.5rem;
+		line-height: 1.7;
+	}
+
+	.cta-buttons {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.btn-outline {
+		background: transparent;
+		border-color: var(--color-dark);
+		color: var(--color-dark);
+	}
+
+	.btn-outline:hover {
+		background: var(--color-dark);
+		color: var(--color-cream);
+	}
+
+	/* Responsive */
+	@media (max-width: 968px) {
+		.focus-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.work-hero {
+			padding-top: 4rem;
+		}
+
+		.service-block {
+			padding: 1.5rem;
+		}
+
+		.service-details ul {
+			flex-direction: column;
+		}
+
+		.service-details li {
+			width: fit-content;
+		}
+
+		.service-outcome {
+			flex-direction: column;
+			gap: 0.25rem;
+		}
+
+		.focus-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.cta-buttons {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.cta-buttons .btn {
+			width: 100%;
+			max-width: 250px;
+		}
+	}
+</style>
