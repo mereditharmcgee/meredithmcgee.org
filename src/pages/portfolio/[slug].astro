@@ -48,7 +48,7 @@ const { title, category, image, description, tags, role, challenge, impact, skil
 						</video>
 					</div>
 				) : (
-					<div class="project-image" style={`background-image: url('${image}')`}></div>
+					<img src={image} alt={title} class="project-image" />
 				)}
 			</div>
 		</section>
@@ -193,9 +193,9 @@ const { title, category, image, description, tags, role, challenge, impact, skil
 
 	.project-image {
 		width: 100%;
-		height: 400px;
-		background-size: cover;
-		background-position: center;
+		max-width: 100%;
+		height: auto;
+		display: block;
 		background-color: var(--color-medium);
 	}
 
@@ -399,7 +399,7 @@ const { title, category, image, description, tags, role, challenge, impact, skil
 		}
 
 		.project-image {
-			height: 250px;
+			width: 100%;
 		}
 
 		.content-wrapper {
