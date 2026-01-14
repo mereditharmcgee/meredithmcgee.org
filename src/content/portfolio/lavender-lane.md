@@ -3,7 +3,7 @@ title: "Lavender Lane Housing Initiative"
 category: "Community Impact"
 image: "/portfolio/lavender-lane.jpg"
 description: "Launched Lafayette College's first gender-affirming and gender-neutral housing option, creating structural support for LGBTQ+ student wellbeing."
-tags: ["LGBTQ+", "Housing", "Institutional Change"]
+tags: ["LGBTQ+", "Development", "Communications"]
 size: "large"
 order: 5
 organization: "Lafayette College"

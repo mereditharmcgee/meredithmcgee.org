@@ -3,7 +3,7 @@ title: "Bradbury-Sullivan Grant Portfolio"
 category: "Grant Writing"
 image: "/portfolio/grants.jpg"
 description: "Built and managed a diversified grant portfolio securing over $1M in foundation and corporate support through strategic prospecting and tailored proposal development."
-tags: ["Grants", "Fundraising", "Nonprofit"]
+tags: ["Development", "LGBTQ+", "Grants"]
 size: "large"
 order: 1
 organization: "Bradbury-Sullivan LGBT Community Center"

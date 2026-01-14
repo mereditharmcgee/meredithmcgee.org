@@ -3,7 +3,7 @@ title: "Cannabis Use & Sexual Identity Research"
 category: "Research"
 image: "/portfolio/research.jpg"
 description: "MPH thesis analyzing cannabis use patterns by sexual identity using multi-state BRFSS data, examining prevalence, frequency, and modality differences."
-tags: ["Quantitative", "LGBTQ+", "Public Health"]
+tags: ["Research", "Cannabis", "LGBTQ+"]
 size: "medium"
 order: 2
 organization: "Yale School of Public Health"

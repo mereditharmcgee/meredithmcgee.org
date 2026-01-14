@@ -3,7 +3,7 @@ title: "AIDS Memorial Quilt Exhibition"
 category: "Community Impact"
 image: "/portfolio/aids-quilt.jpg"
 description: "Brought panels of the National AIDS Memorial Quilt to Lafayette College for the first time in three decades, connecting history to present advocacy."
-tags: ["HIV/AIDS", "Education", "History"]
+tags: ["LGBTQ+", "Communications", "Development"]
 size: "small"
 order: 6
 organization: "Lafayette College"

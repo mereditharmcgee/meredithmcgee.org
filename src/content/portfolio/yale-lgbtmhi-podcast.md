@@ -3,7 +3,7 @@ title: "LGBTQ+ Mental Health Podcast Recruitment"
 category: "Research Communications"
 image: "/portfolio/yale-lgbtmhi-thumb.jpg"
 description: "Created a podcast-style recruitment video for a Yale School of Public Health study on LGBTQ+ mental health, translating research goals into an engaging, accessible format for community outreach."
-tags: ["LGBTQ+", "Research", "Public Health", "Mental Health"]
+tags: ["LGBTQ+", "Research", "Communications"]
 size: "medium"
 order: 3
 organization: "Yale School of Public Health"
