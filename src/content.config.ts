@@ -21,10 +21,11 @@ const portfolio = defineCollection({
 		tags: z.array(z.string()),
 		size: z.enum(['small', 'medium', 'large']),
 		order: z.number(),
-		// Detail page fields
-		challenge: z.string().optional(),
-		approach: z.string().optional(),
-		outcome: z.string().optional(),
+		// At-a-glance cards (punchy, quantitative)
+		role: z.string().optional(),
+		scope: z.string().optional(),
+		impact: z.string().optional(),
+		// Meta info
 		skills: z.array(z.string()).optional(),
 		timeline: z.string().optional(),
 		organization: z.string().optional(),

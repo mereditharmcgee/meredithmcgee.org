@@ -8,29 +8,18 @@ size: "small"
 order: 6
 organization: "Lafayette College"
 timeline: "2021"
-challenge: "Many young people are disconnected from the history of the AIDS crisis, limiting understanding of LGBTQ+ health advocacy and the ongoing impact of HIV/AIDS."
-approach: "Coordinated with the National AIDS Memorial and campus partners to bring quilt panels to campus, designing educational programming to contextualize the exhibition."
-outcome: "Hosted Lafayette's first AIDS Memorial Quilt display in thirty years, creating space for intergenerational dialogue and historical education."
+role: "Event Coordinator & Educator"
+scope: "Campus-wide exhibition"
+impact: "First quilt display in 30 years"
 skills: ["Event Coordination", "Educational Programming", "Partnership Building", "Historical Education", "Community Engagement"]
 ---
 
-## Overview
+For many college students, the AIDS crisis feels like distant history. But it's a defining moment in LGBTQ+ community experience, and that disconnect limits understanding of health advocacy, community resilience, and the ongoing impact of HIV/AIDS.
 
-I helped bring panels of the National AIDS Memorial Quilt to Lafayette College's campus for the first time in three decades, creating an opportunity for education, reflection, and connection to LGBTQ+ history.
+## Making History Present
 
-## The Challenge
+I coordinated with the National AIDS Memorial to bring quilt panels to campus for the first time in three decades. Beyond logistics, I developed educational programming to contextualize the exhibition and create opportunities for intergenerational dialogue.
 
-For many college students, the AIDS crisis feels like distant history rather than a defining moment in LGBTQ+ community experience. This disconnect limits understanding of health advocacy, community resilience, and the ongoing impact of HIV/AIDS.
+## Why It Mattered
 
-## My Approach
-
-Working with campus partners, I:
-
-- Coordinated with the National AIDS Memorial to secure quilt panels
-- Developed educational programming to contextualize the exhibition
-- Created opportunities for intergenerational dialogue
-- Connected historical reflection to present-day advocacy
-
-## Impact
-
-The exhibition brought LGBTQ+ history into physical space on campus, creating powerful moments of reflection and education. It demonstrated how connecting past and present can deepen understanding of community health and advocacy.
+The exhibition brought LGBTQ+ history into physical space, creating powerful moments of reflection and connection. It demonstrated how making the past tangible can deepen understanding of present-day health advocacy and community care.

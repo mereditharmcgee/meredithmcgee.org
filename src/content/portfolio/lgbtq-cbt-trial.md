@@ -8,29 +8,21 @@ size: "medium"
 order: 3
 organization: "Yale LGBTQ Mental Health Initiative"
 timeline: "November 2023 - August 2025"
-challenge: "Recruiting diverse LGBTQ+ participants for mental health research requires building trust and reaching communities through authentic, accessible channels."
-approach: "Developed and executed a multi-channel outreach strategy including podcast appearances, social media campaigns, and community partnerships."
-outcome: "Generated 50+ participant inquiries through podcast outreach alone, ultimately enrolling over 100 participants in the NIH-funded clinical trial."
+role: "Research Assistant & Outreach Lead"
+scope: "NIH-funded clinical trial"
+impact: "100+ participants enrolled"
 skills: ["Participant Recruitment", "Outreach Strategy", "Podcast Marketing", "Community Engagement", "Data Management", "Research Coordination"]
 ---
 
-## Overview
+Recruiting LGBTQ+ participants for mental health research means overcoming historical mistrust and meeting people where they are. For this NIH-funded clinical trial testing LGBTQ+ affirmative CBT, I developed and executed a multi-channel outreach strategy that prioritized authenticity and accessibility.
 
-As a Graduate Research Assistant with the Yale LGBTQ Mental Health Initiative, I developed and executed recruitment strategies for an NIH-funded clinical trial testing LGBTQ+ affirmative cognitive behavioral therapy.
+## The Strategy
 
-## The Challenge
+- **Podcast appearances** on LGBTQ+-focused shows generated 50+ direct inquiries by explaining the research in conversational, trustworthy contexts
+- **Social media content** translated clinical concepts into inviting, clear messaging
+- **Community partnerships** extended our reach through organizations already trusted by potential participants
+- **Real-time tracking** allowed us to evaluate what worked and adjust strategies accordingly
 
-Mental health research with LGBTQ+ populations requires overcoming historical mistrust of research institutions and reaching diverse community members through channels they trust and engage with.
+## The Result
 
-## My Approach
-
-I created a comprehensive outreach strategy that included:
-
-- **Podcast Campaign**: Secured appearances on LGBTQ+-focused podcasts, generating over 50 direct participant inquiries
-- **Digital Outreach**: Developed social media content that translated research concepts into accessible, inviting messaging
-- **Community Partnerships**: Built relationships with LGBTQ+ organizations to extend reach through trusted networks
-- **Data Systems**: Managed tracking systems to evaluate campaign effectiveness and adjust strategies in real-time
-
-## Impact
-
-The multi-channel approach successfully enrolled over 100 participants, demonstrating that thoughtful, community-centered outreach can overcome traditional barriers to research participation.
+The approach enrolled over 100 participants and demonstrated that thoughtful, community-centered outreach can overcome traditional barriers to research participation. The podcast strategy in particular proved that meeting people in spaces they already occupy is more effective than expecting them to find you.
