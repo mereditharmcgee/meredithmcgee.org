@@ -14,12 +14,12 @@ impact: "Presented at APHA 2024"
 skills: ["Policy Analysis", "Conference Presentation", "Research Communication", "Regulatory Review", "Public Health Advocacy"]
 ---
 
-The 2018 Farm Bill created a regulatory gray area, and the hemp-derived THC market rushed to fill it. Products containing intoxicating cannabinoids now sit on shelves with minimal oversight, raising serious questions about marketing practices, product safety, and consumer protection.
+At the 2024 APHA Annual Meeting, I presented research examining the marketing of hemp-derived THC products advertised as "federally legal" and "mail-order" cannabis under the 2018 Farm Bill loophole. The study analyzed online advertising strategies, consumer-targeted health information, and gaps in regulatory oversight.
 
-## The Analysis
+## Analysis
 
-I examined marketing practices across hemp-derived THC product categories, mapped current regulatory frameworks and enforcement gaps, and assessed public health implications of inadequate oversight. The goal: provide evidence that can inform smarter policy responses.
+I examined marketing practices across hemp-derived THC product categories, documenting how products containing intoxicating cannabinoids are positioned to consumers. The research mapped current regulatory frameworks and enforcement gaps, assessing public health implications of inadequate oversight.
 
-## The Presentation
+## Significance
 
-I presented this original research at the 2024 American Public Health Association Annual Meeting, contributing to national conversations about how cannabis regulation needs to evolve to protect consumers while enabling legitimate markets.
+Findings highlighted potential consumer misinformation, public health risks, and the evolving legal landscape of hemp-derived cannabinoids. This research contributes to ongoing policy discussions regarding cannabis regulation, harm reduction, and informed consumer decision-making.

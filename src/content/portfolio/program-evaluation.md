@@ -14,12 +14,15 @@ impact: "Actionable recommendations adopted"
 skills: ["Program Evaluation", "Mixed Methods", "Stakeholder Interviews", "Focus Groups", "Data Analysis", "Report Writing"]
 ---
 
-Good programs need good evaluation. At Yale's Office of Public Health Practice, I led comprehensive assessments of public health internship programs to understand how students experience practicum placements and how those experiences translate to professional development.
+I conducted an evaluation of the Applied Practice Experience program at Yale's Office of Public Health Practice to assess its effectiveness in fostering meaningful student learning and community engagement. Through qualitative interviews with student fellows and community hosts, I identified key successes, challenges, and opportunities for program improvement.
 
-## The Process
+## Methods
 
-I handled the full evaluation cycle: designing frameworks aligned with program goals, conducting stakeholder interviews and focus groups with students and supervisors, synthesizing qualitative and quantitative data, and translating findings into actionable recommendations for program leadership.
+- Designed evaluation frameworks aligned with program learning objectives
+- Conducted stakeholder interviews and focus groups with students and supervisors
+- Synthesized qualitative and quantitative data to identify patterns and insights
+- Compiled findings into a formal report with actionable recommendations
 
-## Making It Useful
+## Results
 
-The point of evaluation is improvement, not just measurement. The work produced concrete recommendations that informed real program changes, demonstrating how rigorous assessment can strengthen public health education when findings are communicated clearly enough to act on.
+The evaluation produced concrete recommendations that informed strategic program improvements, ensuring stronger alignment with community needs and student development goals. This project demonstrated how rigorous assessment can strengthen public health education when findings are communicated clearly enough to act on.

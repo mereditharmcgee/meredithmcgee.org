@@ -14,12 +14,15 @@ impact: "First quilt display in 30 years"
 skills: ["Event Coordination", "Educational Programming", "Partnership Building", "Historical Education", "Community Engagement"]
 ---
 
-For many college students, the AIDS crisis feels like distant history. But it's a defining moment in LGBTQ+ community experience, and that disconnect limits understanding of health advocacy, community resilience, and the ongoing impact of HIV/AIDS.
+I coordinated with the National AIDS Memorial to bring panels of the AIDS Memorial Quilt to Lafayette College for the first time in three decades. The exhibition created opportunities for education, reflection, and connection to LGBTQ+ history for students often disconnected from this defining moment in community experience.
 
-## Making History Present
+## Approach
 
-I coordinated with the National AIDS Memorial to bring quilt panels to campus for the first time in three decades. Beyond logistics, I developed educational programming to contextualize the exhibition and create opportunities for intergenerational dialogue.
+- Coordinated logistics with the National AIDS Memorial to secure quilt panels
+- Developed educational programming to contextualize the exhibition for campus audiences
+- Created opportunities for intergenerational dialogue connecting historical reflection to present-day advocacy
+- Partnered with campus organizations to extend reach and engagement
 
-## Why It Mattered
+## Significance
 
-The exhibition brought LGBTQ+ history into physical space, creating powerful moments of reflection and connection. It demonstrated how making the past tangible can deepen understanding of present-day health advocacy and community care.
+The exhibition brought LGBTQ+ history into physical space on campus, fostering reflection on health advocacy, community resilience, and the ongoing impact of HIV/AIDS. This project highlighted the importance of documenting and sharing LGBTQ+ history to inform present-day understanding and action.
