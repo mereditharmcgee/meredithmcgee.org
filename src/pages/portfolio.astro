@@ -27,20 +27,50 @@ const sortedItems = portfolioItems.sort((a, b) => a.data.order - b.data.order);
 			</div>
 		</section>
 
+		<!-- Filter Bar -->
+		<section class="filter-section bg-light">
+			<div class="container">
+				<div class="filter-bar">
+					<button class="filter-btn active" data-filter="all">All Work</button>
+					<button class="filter-btn" data-filter="public-health">Public Health</button>
+					<button class="filter-btn" data-filter="lgbtq">LGBTQ+ Health</button>
+					<button class="filter-btn" data-filter="cannabis">Cannabis Policy</button>
+					<button class="filter-btn" data-filter="nonprofit">Nonprofit</button>
+					<button class="filter-btn" data-filter="research">Research</button>
+				</div>
+			</div>
+		</section>
+
 		<!-- Portfolio Grid -->
 		<section class="portfolio-section bg-light">
 			<div class="container">
 				<div class="portfolio-grid">
 					{sortedItems.map((item, index) => (
-						<a href={`/portfolio/${item.slug}`} class={`flip-card ${item.data.size}`} style={`--delay: ${index * 0.1}s`}>
+						<a href={`/portfolio/${item.slug}`}
+						   class={`flip-card ${item.data.size}`}
+						   style={`--delay: ${index * 0.1}s`}
+						   data-tags={item.data.tags.join(',').toLowerCase()}
+						   data-category={item.data.category.toLowerCase()}>
 							<div class="flip-card-inner">
 								<div class="flip-card-front">
-									<div class="card-image" style={`background-image: url('${item.data.image}')`}>
-										<div class="card-overlay">
-											<span class="card-category">{item.data.category}</span>
-											<h3 class="card-title">{item.data.title}</h3>
+									{item.data.video ? (
+										<div class="card-video">
+											<video autoplay loop muted playsinline>
+												<source src={item.data.video} type="video/mp4" />
+											</video>
+											<div class="card-overlay">
+												<span class="card-category">{item.data.category}</span>
+												<h3 class="card-title">{item.data.title}</h3>
+											</div>
 										</div>
-									</div>
+									) : (
+										<div class="card-image" style={`background-image: url('${item.data.image}')`}>
+											<div class="card-overlay">
+												<span class="card-category">{item.data.category}</span>
+												<h3 class="card-title">{item.data.title}</h3>
+											</div>
+										</div>
+									)}
 								</div>
 								<div class="flip-card-back">
 									<div class="back-content">
@@ -59,6 +89,7 @@ const sortedItems = portfolioItems.sort((a, b) => a.data.order - b.data.order);
 						</a>
 					))}
 				</div>
+				<p class="no-results" style="display: none; text-align: center; padding: 2rem; color: var(--color-medium);">No projects match this filter. <a href="/portfolio">View all work</a></p>
 			</div>
 		</section>
 
@@ -76,6 +107,47 @@ const sortedItems = portfolioItems.sort((a, b) => a.data.order - b.data.order);
 </html>
 
 <style>
+	/* Filter Section */
+	.filter-section {
+		padding: 1.5rem 0 0 0;
+	}
+
+	.filter-section .container {
+		max-width: 1200px;
+		padding: 0 2rem;
+	}
+
+	.filter-bar {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		justify-content: center;
+	}
+
+	.filter-btn {
+		padding: 0.5rem 1.25rem;
+		font-size: 0.85rem;
+		font-family: var(--font-body);
+		background: transparent;
+		border: 1px solid var(--color-medium);
+		color: var(--color-dark);
+		border-radius: 25px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.filter-btn:hover {
+		background: var(--color-medium);
+		color: var(--color-cream);
+		border-color: var(--color-medium);
+	}
+
+	.filter-btn.active {
+		background: var(--color-dark);
+		color: var(--color-cream);
+		border-color: var(--color-dark);
+	}
+
 	/* Hero Section */
 	.portfolio-hero {
 		padding-top: 5rem;
@@ -194,6 +266,20 @@ const sortedItems = portfolioItems.sort((a, b) => a.data.order - b.data.order);
 		background-position: center;
 		background-color: var(--color-medium);
 		position: relative;
+	}
+
+	.card-video {
+		width: 100%;
+		height: 100%;
+		position: relative;
+		overflow: hidden;
+		background-color: var(--color-dark);
+	}
+
+	.card-video video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	.card-overlay {
@@ -385,6 +471,75 @@ const sortedItems = portfolioItems.sort((a, b) => a.data.order - b.data.order);
 </style>
 
 <script>
+	// Filter functionality
+	const filterBtns = document.querySelectorAll('.filter-btn');
+	const flipCards = document.querySelectorAll('.flip-card');
+	const noResults = document.querySelector('.no-results');
+
+	function filterCards(filter) {
+		let visibleCount = 0;
+
+		flipCards.forEach(card => {
+			const tags = card.dataset.tags || '';
+			const category = card.dataset.category || '';
+
+			if (filter === 'all') {
+				card.style.display = 'block';
+				visibleCount++;
+			} else if (tags.includes(filter) || category.includes(filter)) {
+				card.style.display = 'block';
+				visibleCount++;
+			} else {
+				card.style.display = 'none';
+			}
+		});
+
+		// Show/hide no results message
+		if (noResults) {
+			noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+		}
+	}
+
+	function setActiveFilter(filter) {
+		filterBtns.forEach(btn => {
+			if (btn.dataset.filter === filter) {
+				btn.classList.add('active');
+			} else {
+				btn.classList.remove('active');
+			}
+		});
+	}
+
+	// Handle filter button clicks
+	filterBtns.forEach(btn => {
+		btn.addEventListener('click', () => {
+			const filter = btn.dataset.filter;
+			setActiveFilter(filter);
+			filterCards(filter);
+			// Update URL hash
+			if (filter === 'all') {
+				history.pushState(null, '', window.location.pathname);
+			} else {
+				history.pushState(null, '', `#${filter}`);
+			}
+		});
+	});
+
+	// Check for hash on page load
+	function checkHash() {
+		const hash = window.location.hash.slice(1);
+		if (hash && hash !== 'all') {
+			setActiveFilter(hash);
+			filterCards(hash);
+		}
+	}
+
+	// Run on page load
+	checkHash();
+
+	// Handle back/forward navigation
+	window.addEventListener('hashchange', checkHash);
+
 	// Touch support for mobile - tap to flip, second tap to navigate
 	if ('ontouchstart' in window) {
 		document.querySelectorAll('.flip-card').forEach(card => {
