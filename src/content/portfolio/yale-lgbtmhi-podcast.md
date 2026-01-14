@@ -9,7 +9,7 @@ order: 3
 organization: "Yale School of Public Health"
 timeline: "2024"
 role: "Script Writer & Content Creator"
-scope: "Recruitment video production"
+challenge: "Building trust with communities wary of research"
 impact: "Trust-building research outreach"
 skills: ["Script Writing", "Research Translation", "Community Engagement", "Video Production", "Health Communication"]
 video: "/portfolio/yale-lgbtmhi-podcast.mp4"

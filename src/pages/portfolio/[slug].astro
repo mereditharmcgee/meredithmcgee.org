@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const { title, category, image, description, tags, role, scope, impact, skills, timeline, organization, video } = entry.data;
+const { title, category, image, description, tags, role, challenge, impact, skills, timeline, organization, video } = entry.data;
 ---
 
 <!doctype html>
@@ -54,7 +54,7 @@ const { title, category, image, description, tags, role, scope, impact, skills, 
 		</section>
 
 		<!-- At a Glance Cards -->
-		{(role || scope || impact) && (
+		{(role || challenge || impact) && (
 			<section class="glance-section bg-light">
 				<div class="container">
 					<div class="glance-grid">
@@ -64,10 +64,10 @@ const { title, category, image, description, tags, role, scope, impact, skills, 
 								<p class="glance-value">{role}</p>
 							</div>
 						)}
-						{scope && (
+						{challenge && (
 							<div class="glance-card">
-								<span class="glance-label">The Scale</span>
-								<p class="glance-value">{scope}</p>
+								<span class="glance-label">The Challenge</span>
+								<p class="glance-value">{challenge}</p>
 							</div>
 						)}
 						{impact && (

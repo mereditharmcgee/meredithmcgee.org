@@ -9,7 +9,7 @@ order: 4
 organization: "Parabola Center"
 timeline: "2024"
 role: "Policy Researcher & Presenter"
-scope: "National regulatory landscape"
+challenge: "Unregulated hemp THC products reaching consumers"
 impact: "Presented at APHA 2024"
 skills: ["Policy Analysis", "Conference Presentation", "Research Communication", "Regulatory Review", "Public Health Advocacy"]
 ---

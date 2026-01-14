@@ -9,7 +9,7 @@ order: 5
 organization: "Lafayette College"
 timeline: "2019 - 2022"
 role: "Student Advocate & Program Designer"
-scope: "Campus-wide institutional change"
+challenge: "No gender-affirming housing options existed on campus"
 impact: "First gender-neutral housing at Lafayette"
 skills: ["Advocacy", "Policy Development", "Stakeholder Engagement", "Program Design", "Institutional Change", "Community Organizing"]
 ---
