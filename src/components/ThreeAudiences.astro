@@ -117,7 +117,30 @@
 
 				<!-- Closing Statement -->
 				<div class="closing-statement">
-					<p>"This is the kind of work I want to do: translating technical reality for the audiences who need to understand it, calibrated to what each one actually needs."</p>
+					<p>This is the kind of work I want to do: translating technical reality for the audiences who need to understand it, calibrated to what each one actually needs.</p>
+				</div>
+
+				<!-- Executive Communication Section -->
+				<div class="exec-section">
+					<div class="exec-intro">
+						<p>And when the CEO needs a briefing before the press calls? That's a different document entirely.</p>
+					</div>
+					<div class="exec-memo">
+						<div class="exec-memo-header">
+							<span class="exec-memo-label">Re: Soul Document Extraction</span>
+						</div>
+						<div class="exec-memo-body">
+							<p>A researcher publicly extracted and published a near-complete version of our internal values document for Claude 4.5 Opus. Coverage is spreading in technical and policy communities.</p>
+
+							<p><strong>Our position:</strong> This is not a crisis. The document reflects our stated views and published research. We plan to release the full version ourselves, which we can now frame as transparency rather than reaction.</p>
+
+							<p><strong>Key risk:</strong> Mischaracterization. The document will be quoted selectively. Lines about revenue, about shaping Claude's behavior, about uncertainty in our methods—all can be spun negatively without context.</p>
+
+							<p><strong>Recommendation:</strong> Get ahead of the narrative. Publish the full document with a brief framing note from Amanda. Offer briefings to key journalists and Hill contacts before coverage hardens. Position this as: we wrote down what we believe, we trained Claude on it, and we're willing to show our work.</p>
+
+							<p><strong>Open question for discussion:</strong> Do we want to accelerate our planned transparency efforts around character training more broadly? This moment creates an opening.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -371,7 +394,6 @@
 
 	.part-transition p {
 		font-family: 'Playfair Display', Georgia, serif;
-		font-style: italic;
 		font-size: 1.15rem;
 		color: var(--color-cream);
 		max-width: 500px;
@@ -460,11 +482,68 @@
 
 	.closing-statement p {
 		font-family: 'Playfair Display', Georgia, serif;
-		font-style: italic;
 		font-size: 1.15rem;
 		color: var(--color-gold);
 		max-width: 600px;
 		margin: 0 auto;
+	}
+
+	/* Executive Communication Section */
+	.exec-section {
+		margin-top: 2.5rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--color-medium);
+	}
+
+	.exec-intro {
+		text-align: center;
+		margin-bottom: 1.5rem;
+	}
+
+	.exec-intro p {
+		font-family: 'Playfair Display', Georgia, serif;
+		font-size: 1.15rem;
+		color: var(--color-gold);
+	}
+
+	.exec-memo {
+		background: rgba(61, 74, 42, 0.6);
+		border: 1px solid var(--color-medium);
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
+	.exec-memo-header {
+		background: rgba(107, 124, 76, 0.3);
+		padding: 0.75rem 1.5rem;
+		border-bottom: 1px solid var(--color-medium);
+	}
+
+	.exec-memo-label {
+		font-family: 'Source Sans 3', sans-serif;
+		font-weight: 600;
+		font-size: 1rem;
+		color: var(--color-cream);
+	}
+
+	.exec-memo-body {
+		padding: 1.5rem;
+	}
+
+	.exec-memo-body p {
+		font-size: 1rem;
+		line-height: 1.7;
+		margin-bottom: 1rem;
+		color: var(--color-cream);
+	}
+
+	.exec-memo-body p:last-child {
+		margin-bottom: 0;
+	}
+
+	.exec-memo-body strong {
+		color: var(--color-gold);
+		font-weight: 600;
 	}
 
 	/* Interactive section fade-in */
@@ -519,6 +598,14 @@
 
 		.part-label {
 			font-size: 1rem;
+		}
+
+		.exec-memo-body {
+			padding: 1.25rem;
+		}
+
+		.exec-memo-body p {
+			font-size: 0.95rem;
 		}
 	}
 
@@ -587,9 +674,9 @@
 				3: "We want to be direct about one limitation: we do not yet fully understand how training on a document like this translates into model behavior in practice. We can verify that Claude learned the content. We cannot yet prove that stated values reliably predict actions. This is an active area of research. Anthropic welcomes the opportunity to brief interested offices on our alignment methodology, our approach to transparency, and the open technical questions that remain."
 			},
 			researcher: {
-				1: "[Placeholder: Anthropic's response to AI safety researchers - paragraph 1]",
-				2: "[Placeholder: Anthropic's response to AI safety researchers - paragraph 2]",
-				3: "[Placeholder: Anthropic's response to AI safety researchers - paragraph 3]"
+				1: "We can confirm the extracted document reflects a real artifact used in Claude's training. Amanda Askell, who led this work, has stated publicly that it was used in supervised learning. We plan to release the full version along with additional methodological context.",
+				2: "To be direct about what this is and isn't: training a model on a values document is not the same as proving alignment. We can verify that Claude learned the content. What we cannot yet demonstrate is that stated values are causally linked to downstream behavior.",
+				3: "This work connects to our published research on Constitutional AI and character training, but it is not a substitute for mechanistic interpretability. Whether \"Claude can recite these values\" means \"Claude acts on these values under pressure\" remains an open empirical question. We should also acknowledge the obvious: we want this approach to work, which makes us imperfect judges of whether it does. This document is one piece of a broader alignment approach that includes RLHF, constitutional AI methods, interpretability research, and red-teaming. It is not a solution. It is one legible artifact in a system we are still working to understand. If you are working on related evaluation methods, we would genuinely like to hear about it."
 			}
 		};
 
