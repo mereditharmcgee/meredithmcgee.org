@@ -21,7 +21,6 @@
 			<div class="intro-section">
 				<h2 id="modal-title" class="intro-title"></h2>
 				<div class="intro-body"></div>
-				<span class="typewriter-cursor intro-cursor">|</span>
 			</div>
 
 			<!-- Interactive Element (hidden until intro completes) -->
@@ -633,7 +632,6 @@
 		const backdrop = modal?.querySelector('.modal-backdrop');
 		const introTitle = modal?.querySelector('.intro-title');
 		const introBody = modal?.querySelector('.intro-body');
-		const introCursor = modal?.querySelector('.intro-cursor');
 		const interactiveSection = modal?.querySelector('.interactive-section');
 		const audienceTabs = modal?.querySelectorAll('.audience-tab');
 		const part1Block = modal?.querySelector('#part1-block');
@@ -849,7 +847,6 @@
 			if (hasAnimated) {
 				introTitle.textContent = titleText;
 				introBody.innerHTML = bodyText.map(p => `<p>${p}</p>`).join('');
-				introCursor?.classList.add('hidden');
 				if (interactiveSection) {
 					interactiveSection.hidden = false;
 				}
@@ -871,7 +868,6 @@
 				await new Promise(r => setTimeout(r, 200));
 			}
 
-			introCursor?.classList.add('hidden');
 			await new Promise(r => setTimeout(r, 500));
 
 			if (interactiveSection) {
