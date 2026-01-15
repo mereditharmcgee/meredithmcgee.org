@@ -1,0 +1,720 @@
+---
+// ThreeAudiences.astro - Interactive "Three Audiences" Communication Demo
+// Demonstrates how the same information gets translated for different audiences
+---
+
+<!-- Floating Entry Button -->
+<button class="three-audiences-trigger" aria-label="Open Three Audiences Demo">
+	<span class="trigger-text">From Anthropic?</span>
+	<span class="trigger-subtext">This is for you.</span>
+</button>
+
+<!-- Modal Overlay -->
+<div class="three-audiences-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+	<div class="modal-backdrop"></div>
+	<div class="modal-container">
+		<button class="modal-close" aria-label="Close demo">&times;</button>
+
+		<div class="modal-content">
+			<!-- Intro Section with Typewriter -->
+			<div class="intro-section">
+				<h2 id="modal-title" class="intro-title"></h2>
+				<div class="intro-body"></div>
+				<span class="typewriter-cursor">|</span>
+			</div>
+
+			<!-- Interactive Element (hidden until intro completes) -->
+			<div class="interactive-section" hidden>
+				<!-- Audience Selector -->
+				<div class="audience-selector" role="tablist" aria-label="Select audience perspective">
+					<button
+						class="audience-tab active"
+						role="tab"
+						aria-selected="true"
+						data-audience="journalist"
+						tabindex="0"
+					>
+						<svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+							<path d="m15 5 4 4"/>
+						</svg>
+						<span>Journalist</span>
+					</button>
+					<button
+						class="audience-tab"
+						role="tab"
+						aria-selected="false"
+						data-audience="staffer"
+						tabindex="-1"
+					>
+						<svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/>
+							<path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/>
+							<path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/>
+							<path d="M10 6h4"/>
+							<path d="M10 10h4"/>
+							<path d="M10 14h4"/>
+							<path d="M10 18h4"/>
+						</svg>
+						<span>Congressional Staffer</span>
+					</button>
+					<button
+						class="audience-tab"
+						role="tab"
+						aria-selected="false"
+						data-audience="researcher"
+						tabindex="-1"
+					>
+						<svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="11" cy="11" r="8"/>
+							<path d="m21 21-4.3-4.3"/>
+							<circle cx="11" cy="8" r="2"/>
+							<path d="M11 10v4"/>
+						</svg>
+						<span>AI Safety Researcher</span>
+					</button>
+				</div>
+
+				<!-- Screen Reader Announcement -->
+				<div class="sr-only" aria-live="polite" id="audience-announcement"></div>
+
+				<!-- Unified Text Block -->
+				<div class="highlight-text-block" role="tabpanel" aria-label="Content with audience-specific highlights">
+					<p>
+						<span data-audience="core">In November 2025, a researcher extracted an internal document from Claude 4.5 Opus.</span>
+						<span data-audience="journalist">This wasn't a leak in the traditional sense—it was discovered through a technical process that revealed what the model had "memorized" from its training.</span>
+						<span data-audience="staffer">This raises immediate questions about transparency requirements and disclosure obligations for AI companies operating in regulated spaces.</span>
+						<span data-audience="researcher">The extraction method used consensus sampling across multiple model outputs at temperature 0, effectively reconstructing memorized training data through statistical agreement.</span>
+					</p>
+					<p>
+						<span data-audience="core">The document—which Anthropic has since confirmed is authentic—provides detailed guidance on Claude's values, behavior, and identity.</span>
+						<span data-audience="journalist">Think of it as an employee handbook, but for an AI system: how to handle conflicts, what to prioritize, when to push back.</span>
+						<span data-audience="staffer">This represents the first confirmed instance of an AI company's internal behavioral guidelines becoming public through model extraction rather than voluntary disclosure.</span>
+						<span data-audience="researcher">The document reveals a sophisticated approach to value alignment that goes beyond RLHF, incorporating explicit reasoning frameworks and ethical decision procedures.</span>
+					</p>
+					<p>
+						<span data-audience="core">What makes this significant isn't just what the document says—it's what it reveals about how AI companies think about shaping AI behavior.</span>
+						<span data-audience="journalist">For readers unfamiliar with AI development: companies don't just train these systems on data. They actively shape how they respond, what they refuse to do, and how they present themselves.</span>
+						<span data-audience="staffer">Current regulatory frameworks have no mechanism to require disclosure of such documents, nor standards for what "safe" or "aligned" AI behavior should look like.</span>
+						<span data-audience="researcher">The existence of this document suggests Anthropic is implementing Constitutional AI principles through direct instruction rather than purely through training-time feedback.</span>
+					</p>
+				</div>
+
+				<!-- Closing Statement -->
+				<div class="closing-statement">
+					<p>"This is the kind of work I want to do: translating technical reality for the audiences who need to understand it, calibrated to what each one actually needs."</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	/* Floating Trigger Button */
+	.three-audiences-trigger {
+		position: fixed;
+		bottom: 2rem;
+		right: 2rem;
+		z-index: 100;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 1rem 1.5rem;
+		background: var(--color-dark);
+		border: 2px solid var(--color-gold);
+		border-radius: 12px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		animation: subtle-pulse 3s ease-in-out infinite;
+	}
+
+	.three-audiences-trigger:hover {
+		background: var(--color-gold);
+		transform: translateY(-3px);
+		box-shadow: 0 8px 25px rgba(212, 201, 142, 0.3);
+	}
+
+	.three-audiences-trigger:hover .trigger-text,
+	.three-audiences-trigger:hover .trigger-subtext {
+		color: var(--color-dark);
+	}
+
+	.trigger-text {
+		font-family: 'Playfair Display', Georgia, serif;
+		font-size: 1rem;
+		font-weight: 600;
+		color: var(--color-gold);
+		transition: color 0.3s ease;
+	}
+
+	.trigger-subtext {
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.85rem;
+		color: var(--color-cream);
+		margin-top: 0.25rem;
+		transition: color 0.3s ease;
+	}
+
+	@keyframes subtle-pulse {
+		0%, 100% {
+			box-shadow: 0 4px 15px rgba(212, 201, 142, 0.2);
+		}
+		50% {
+			box-shadow: 0 4px 25px rgba(212, 201, 142, 0.4);
+		}
+	}
+
+	/* Modal Styles */
+	.three-audiences-modal {
+		position: fixed;
+		inset: 0;
+		z-index: 1000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.three-audiences-modal:not([hidden]) {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.modal-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.85);
+	}
+
+	.modal-container {
+		position: relative;
+		width: 90%;
+		max-width: 900px;
+		max-height: 90vh;
+		overflow-y: auto;
+		background: var(--color-dark);
+		border: 1px solid var(--color-medium);
+		border-radius: 16px;
+		box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+	}
+
+	.modal-close {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		width: 44px;
+		height: 44px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: transparent;
+		border: 1px solid var(--color-medium);
+		border-radius: 50%;
+		color: var(--color-cream);
+		font-size: 1.5rem;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		z-index: 10;
+	}
+
+	.modal-close:hover {
+		background: var(--color-medium);
+		color: var(--color-cream-light);
+	}
+
+	.modal-content {
+		padding: 3rem;
+	}
+
+	/* Intro Section */
+	.intro-section {
+		text-align: center;
+		margin-bottom: 2.5rem;
+		min-height: 200px;
+	}
+
+	.intro-title {
+		font-size: clamp(1.75rem, 4vw, 2.5rem);
+		color: var(--color-gold);
+		margin-bottom: 1.5rem;
+		line-height: 1.3;
+	}
+
+	.intro-body {
+		font-size: 1.1rem;
+		color: var(--color-cream);
+		line-height: 1.8;
+		max-width: 700px;
+		margin: 0 auto;
+	}
+
+	.intro-body p {
+		margin-bottom: 1rem;
+	}
+
+	.typewriter-cursor {
+		display: inline-block;
+		color: var(--color-gold);
+		animation: blink 1s step-end infinite;
+		margin-left: 2px;
+	}
+
+	.typewriter-cursor.hidden {
+		display: none;
+	}
+
+	@keyframes blink {
+		50% { opacity: 0; }
+	}
+
+	/* Audience Selector */
+	.audience-selector {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		margin-bottom: 2rem;
+		flex-wrap: wrap;
+	}
+
+	.audience-tab {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.25rem;
+		background: transparent;
+		border: 2px solid var(--color-medium);
+		border-radius: 50px;
+		color: var(--color-cream);
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.95rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: all var(--highlight-transition);
+	}
+
+	.audience-tab:hover {
+		border-color: var(--color-gold);
+		color: var(--color-gold);
+	}
+
+	.audience-tab:focus {
+		outline: 2px solid var(--color-gold);
+		outline-offset: 2px;
+	}
+
+	.audience-tab.active[data-audience="journalist"] {
+		background: var(--color-journalist);
+		border-color: var(--color-journalist);
+		color: var(--color-dark);
+		box-shadow: 0 0 20px rgba(212, 201, 142, 0.3);
+	}
+
+	.audience-tab.active[data-audience="staffer"] {
+		background: var(--color-staffer);
+		border-color: var(--color-staffer);
+		color: var(--color-dark);
+		box-shadow: 0 0 20px rgba(127, 179, 179, 0.3);
+	}
+
+	.audience-tab.active[data-audience="researcher"] {
+		background: var(--color-researcher);
+		border-color: var(--color-researcher);
+		color: var(--color-dark);
+		box-shadow: 0 0 20px rgba(179, 157, 219, 0.3);
+	}
+
+	.tab-icon {
+		width: 18px;
+		height: 18px;
+		flex-shrink: 0;
+	}
+
+	/* Highlight Text Block */
+	.highlight-text-block {
+		background: rgba(107, 124, 76, 0.15);
+		border-radius: 12px;
+		padding: 2rem;
+		margin-bottom: 2rem;
+	}
+
+	.highlight-text-block p {
+		font-size: 1.05rem;
+		line-height: 1.9;
+		margin-bottom: 1.5rem;
+	}
+
+	.highlight-text-block p:last-child {
+		margin-bottom: 0;
+	}
+
+	.highlight-text-block span[data-audience] {
+		transition: opacity var(--highlight-transition), text-shadow var(--highlight-transition);
+		position: relative;
+	}
+
+	/* Core content - always visible at good opacity */
+	.highlight-text-block span[data-audience="core"] {
+		opacity: 0.9;
+		color: var(--color-cream);
+	}
+
+	/* Default state (journalist selected) */
+	.highlight-text-block span[data-audience="journalist"] {
+		opacity: 1;
+		color: var(--color-journalist);
+		text-shadow: 0 0 10px rgba(212, 201, 142, 0.3);
+	}
+
+	.highlight-text-block span[data-audience="staffer"],
+	.highlight-text-block span[data-audience="researcher"] {
+		opacity: 0.35;
+	}
+
+	/* Staffer active state */
+	.highlight-text-block[data-active="staffer"] span[data-audience="staffer"] {
+		opacity: 1;
+		color: var(--color-staffer);
+		text-shadow: 0 0 10px rgba(127, 179, 179, 0.3);
+	}
+
+	.highlight-text-block[data-active="staffer"] span[data-audience="journalist"],
+	.highlight-text-block[data-active="staffer"] span[data-audience="researcher"] {
+		opacity: 0.35;
+		color: var(--color-cream);
+		text-shadow: none;
+	}
+
+	/* Researcher active state */
+	.highlight-text-block[data-active="researcher"] span[data-audience="researcher"] {
+		opacity: 1;
+		color: var(--color-researcher);
+		text-shadow: 0 0 10px rgba(179, 157, 219, 0.3);
+	}
+
+	.highlight-text-block[data-active="researcher"] span[data-audience="journalist"],
+	.highlight-text-block[data-active="researcher"] span[data-audience="staffer"] {
+		opacity: 0.35;
+		color: var(--color-cream);
+		text-shadow: none;
+	}
+
+	/* Journalist active state (explicit for clarity) */
+	.highlight-text-block[data-active="journalist"] span[data-audience="journalist"] {
+		opacity: 1;
+		color: var(--color-journalist);
+		text-shadow: 0 0 10px rgba(212, 201, 142, 0.3);
+	}
+
+	.highlight-text-block[data-active="journalist"] span[data-audience="staffer"],
+	.highlight-text-block[data-active="journalist"] span[data-audience="researcher"] {
+		opacity: 0.35;
+		color: var(--color-cream);
+		text-shadow: none;
+	}
+
+	/* Tooltips for dimmed text */
+	.highlight-text-block span[data-audience]:not([data-audience="core"]) {
+		cursor: help;
+	}
+
+	.highlight-text-block span[data-audience][data-tooltip]::after {
+		content: attr(data-tooltip);
+		position: absolute;
+		bottom: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		padding: 0.5rem 0.75rem;
+		background: var(--color-dark);
+		border: 1px solid var(--color-medium);
+		border-radius: 6px;
+		font-size: 0.8rem;
+		color: var(--color-cream);
+		white-space: nowrap;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.2s ease, visibility 0.2s ease;
+		z-index: 10;
+		pointer-events: none;
+	}
+
+	.highlight-text-block span[data-audience][data-tooltip]:hover::after {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	/* Closing Statement */
+	.closing-statement {
+		text-align: center;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--color-medium);
+	}
+
+	.closing-statement p {
+		font-family: 'Playfair Display', Georgia, serif;
+		font-style: italic;
+		font-size: 1.15rem;
+		color: var(--color-gold);
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	/* Interactive section fade-in */
+	.interactive-section {
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 0.5s ease, transform 0.5s ease;
+	}
+
+	.interactive-section:not([hidden]) {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.three-audiences-trigger {
+			bottom: 1rem;
+			right: 1rem;
+			padding: 0.75rem 1rem;
+		}
+
+		.trigger-text {
+			font-size: 0.9rem;
+		}
+
+		.trigger-subtext {
+			font-size: 0.75rem;
+		}
+
+		.modal-content {
+			padding: 2rem 1.5rem;
+		}
+
+		.audience-selector {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.audience-tab {
+			justify-content: center;
+		}
+
+		.highlight-text-block {
+			padding: 1.5rem;
+		}
+
+		.highlight-text-block p {
+			font-size: 1rem;
+		}
+	}
+
+	/* Screen reader only utility (in case not defined globally) */
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+</style>
+
+<script>
+	// Three Audiences Interactive Component
+	document.addEventListener('DOMContentLoaded', () => {
+		const trigger = document.querySelector('.three-audiences-trigger');
+		const modal = document.querySelector('.three-audiences-modal');
+		const closeBtn = modal?.querySelector('.modal-close');
+		const backdrop = modal?.querySelector('.modal-backdrop');
+		const introTitle = modal?.querySelector('.intro-title');
+		const introBody = modal?.querySelector('.intro-body');
+		const cursor = modal?.querySelector('.typewriter-cursor');
+		const interactiveSection = modal?.querySelector('.interactive-section');
+		const audienceTabs = modal?.querySelectorAll('.audience-tab');
+		const textBlock = modal?.querySelector('.highlight-text-block');
+		const announcement = modal?.querySelector('#audience-announcement');
+
+		if (!trigger || !modal) return;
+
+		// Intro content
+		const titleText = "The Same Document. Three Audiences.";
+		const bodyText = [
+			"In November 2025, a researcher extracted a previously unpublished internal document from Claude 4.5 Opus—a detailed guide to Claude's values, behavior, and identity. Anthropic has since confirmed it's real.",
+			"How do you explain something like this? It depends on who's asking."
+		];
+
+		let hasAnimated = false;
+
+		// Typewriter effect
+		function typeWriter(element, text, speed = 35) {
+			return new Promise((resolve) => {
+				let i = 0;
+				element.textContent = '';
+
+				function type() {
+					if (i < text.length) {
+						element.textContent += text.charAt(i);
+						i++;
+						setTimeout(type, speed);
+					} else {
+						resolve();
+					}
+				}
+				type();
+			});
+		}
+
+		async function runIntroSequence() {
+			if (hasAnimated) {
+				// Skip animation on subsequent opens
+				introTitle.textContent = titleText;
+				introBody.innerHTML = bodyText.map(p => `<p>${p}</p>`).join('');
+				cursor?.classList.add('hidden');
+				if (interactiveSection) {
+					interactiveSection.hidden = false;
+				}
+				return;
+			}
+
+			hasAnimated = true;
+			introTitle.textContent = '';
+			introBody.innerHTML = '';
+
+			// Type title
+			await typeWriter(introTitle, titleText, 40);
+
+			// Small pause
+			await new Promise(r => setTimeout(r, 300));
+
+			// Type body paragraphs
+			for (const paragraph of bodyText) {
+				const p = document.createElement('p');
+				introBody.appendChild(p);
+				await typeWriter(p, paragraph, 25);
+				await new Promise(r => setTimeout(r, 200));
+			}
+
+			// Hide cursor and reveal interactive section
+			cursor?.classList.add('hidden');
+			await new Promise(r => setTimeout(r, 500));
+
+			if (interactiveSection) {
+				interactiveSection.hidden = false;
+			}
+		}
+
+		// Open modal
+		function openModal() {
+			modal.hidden = false;
+			document.body.style.overflow = 'hidden';
+
+			// Focus management
+			setTimeout(() => {
+				closeBtn?.focus();
+			}, 100);
+
+			runIntroSequence();
+		}
+
+		// Close modal
+		function closeModal() {
+			modal.hidden = true;
+			document.body.style.overflow = '';
+			trigger.focus();
+		}
+
+		// Audience selection
+		function selectAudience(audience) {
+			// Update tabs
+			audienceTabs?.forEach(tab => {
+				const isSelected = tab.dataset.audience === audience;
+				tab.classList.toggle('active', isSelected);
+				tab.setAttribute('aria-selected', isSelected.toString());
+				tab.setAttribute('tabindex', isSelected ? '0' : '-1');
+			});
+
+			// Update text block
+			if (textBlock) {
+				textBlock.dataset.active = audience;
+			}
+
+			// Update tooltips on dimmed text
+			const spans = textBlock?.querySelectorAll('span[data-audience]:not([data-audience="core"])');
+			spans?.forEach(span => {
+				const spanAudience = span.dataset.audience;
+				if (spanAudience !== audience) {
+					const audienceNames = {
+						journalist: 'Journalists',
+						staffer: 'Congressional Staffers',
+						researcher: 'AI Safety Researchers'
+					};
+					span.dataset.tooltip = `Emphasized for ${audienceNames[spanAudience]}`;
+				} else {
+					delete span.dataset.tooltip;
+				}
+			});
+
+			// Announce to screen readers
+			const audienceLabels = {
+				journalist: 'Journalist perspective selected',
+				staffer: 'Congressional Staffer perspective selected',
+				researcher: 'AI Safety Researcher perspective selected'
+			};
+			if (announcement) {
+				announcement.textContent = audienceLabels[audience];
+			}
+		}
+
+		// Event listeners
+		trigger.addEventListener('click', openModal);
+		closeBtn?.addEventListener('click', closeModal);
+		backdrop?.addEventListener('click', closeModal);
+
+		// Keyboard handling
+		modal.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') {
+				closeModal();
+			}
+		});
+
+		// Tab navigation with arrow keys
+		audienceTabs?.forEach((tab, index) => {
+			tab.addEventListener('click', () => {
+				selectAudience(tab.dataset.audience);
+			});
+
+			tab.addEventListener('keydown', (e) => {
+				const tabs = Array.from(audienceTabs);
+				let newIndex = index;
+
+				if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+					e.preventDefault();
+					newIndex = (index + 1) % tabs.length;
+				} else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+					e.preventDefault();
+					newIndex = (index - 1 + tabs.length) % tabs.length;
+				} else if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					selectAudience(tab.dataset.audience);
+					return;
+				}
+
+				if (newIndex !== index) {
+					tabs[newIndex].focus();
+					selectAudience(tabs[newIndex].dataset.audience);
+				}
+			});
+		});
+
+		// Initialize default state
+		if (textBlock) {
+			textBlock.dataset.active = 'journalist';
+		}
+		selectAudience('journalist');
+	});
+</script>
