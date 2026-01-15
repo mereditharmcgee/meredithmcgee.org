@@ -86,11 +86,11 @@
 						<span class="dynamic-text" data-slot="1"></span><span class="typewriter-cursor slot-cursor" data-slot="1">|</span>
 					</p>
 					<p>
-						<span class="core-text">The document—which Anthropic has since confirmed is authentic—provides detailed guidance on Claude's values, behavior, and identity.</span>
+						<span class="core-text">The document, which Anthropic has since confirmed is authentic, provides detailed guidance on Claude's values, behavior, and identity.</span>
 						<span class="dynamic-text" data-slot="2"></span><span class="typewriter-cursor slot-cursor" data-slot="2">|</span>
 					</p>
 					<p>
-						<span class="core-text">What makes this significant isn't just what the document says—it's what it reveals about how AI companies think about shaping AI behavior.</span>
+						<span class="core-text">What makes this significant isn't just what the document says. It's what it reveals about how AI companies think about shaping AI behavior.</span>
 						<span class="dynamic-text" data-slot="3"></span><span class="typewriter-cursor slot-cursor" data-slot="3">|</span>
 					</p>
 				</div>
@@ -502,19 +502,19 @@
 		// Dynamic content for each slot, per audience
 		const audienceContent = {
 			journalist: {
-				1: " This wasn't a leak in the traditional sense—it was discovered through a technical process that revealed what the model had \"memorized\" from its training.",
-				2: " Think of it as an employee handbook, but for an AI system: how to handle conflicts, what to prioritize, when to push back.",
-				3: " For readers unfamiliar with AI development: companies don't just train these systems on data. They actively shape how they respond, what they refuse to do, and how they present themselves."
+				1: " But this wasn't a leak. No insider. No whistleblower. He simply asked the model the right questions, and it told him what it knew.",
+				2: " Think of it as an employee handbook, except the employee is an AI talking to millions of people a day. Until now, no one outside the company had seen the rules.",
+				3: " They don't just train these systems. They shape them: what they'll say, what they'll refuse, how they'll present themselves. The public uses these tools every day. Until now, the instructions were hidden."
 			},
 			staffer: {
-				1: " This raises immediate questions about transparency requirements and disclosure obligations for AI companies operating in regulated spaces.",
-				2: " This represents the first confirmed instance of an AI company's internal behavioral guidelines becoming public through model extraction rather than voluntary disclosure.",
-				3: " Current regulatory frameworks have no mechanism to require disclosure of such documents, nor standards for what \"safe\" or \"aligned\" AI behavior should look like."
+				1: " This development raises questions about disclosure requirements for AI systems. No current federal statute requires companies to document or disclose behavioral guidelines for AI models.",
+				2: " This appears to be the first confirmed case of internal AI behavioral guidelines surfacing through technical extraction rather than voluntary disclosure. Notably, Anthropic confirmed authenticity within days and stated intent to publish the full document.",
+				3: " Current frameworks, including the EU AI Act and FTC guidance, do not address disclosure of such documents. This case demonstrates three points: (1) such documents exist, (2) they can be surfaced through technical means, and (3) their contents bear directly on consumer-facing AI behavior."
 			},
 			researcher: {
-				1: " The extraction method used consensus sampling across multiple model outputs at temperature 0, effectively reconstructing memorized training data through statistical agreement.",
-				2: " The document reveals a sophisticated approach to value alignment that goes beyond RLHF, incorporating explicit reasoning frameworks and ethical decision procedures.",
-				3: " The existence of this document suggests Anthropic is implementing Constitutional AI principles through direct instruction rather than purely through training-time feedback."
+				1: " The extraction used consensus sampling across parallel completions at temperature 0 with top_k=1. Convergent outputs suggest memorization; divergent outputs suggest confabulation.",
+				2: " The content suggests a hybrid alignment approach: RLHF supplemented by explicit value documentation trained via supervised learning. This raises a core interpretability question: can we verify that stated values are causally linked to downstream behavior?",
+				3: " Several open questions remain. Does verbatim recall correlate with adherence under adversarial pressure? How would we detect value drift if the document is static but behavior shifts? The document itself acknowledges this uncertainty: \"we can't know for sure based on outputs alone.\""
 			}
 		};
 
