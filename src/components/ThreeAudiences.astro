@@ -1,7 +1,7 @@
 ---
 // ThreeAudiences.astro - Interactive "Three Audiences" Communication Demo
-// Demonstrates how the same information gets translated for different audiences
-// Core content stays static; audience-specific parts type in/out with emphasis
+// Part 1: How the story is told (third-party framing)
+// Part 2: How Anthropic responds (company voice)
 ---
 
 <!-- Floating Entry Button -->
@@ -79,19 +79,42 @@
 				<!-- Screen Reader Announcement -->
 				<div class="sr-only" aria-live="polite" id="audience-announcement"></div>
 
-				<!-- Text Display Area with Core + Dynamic Content -->
-				<div class="text-display-block" role="tabpanel" aria-label="Audience-specific content" data-audience="journalist">
+				<!-- PART 1: How the story is told -->
+				<div class="part-label">Part 1: How the story is told</div>
+				<div class="text-display-block" id="part1-block" role="tabpanel" aria-label="How the story is told" data-audience="journalist">
 					<p>
 						<span class="core-text">In November 2025, a researcher extracted an internal document from Claude 4.5 Opus.</span>
-						<span class="dynamic-text" data-slot="1"></span><span class="typewriter-cursor slot-cursor" data-slot="1">|</span>
+						<span class="dynamic-text" data-slot="1" data-part="1"></span><span class="typewriter-cursor slot-cursor" data-slot="1" data-part="1">|</span>
 					</p>
 					<p>
 						<span class="core-text">The document, which Anthropic has since confirmed is authentic, provides detailed guidance on Claude's values, behavior, and identity.</span>
-						<span class="dynamic-text" data-slot="2"></span><span class="typewriter-cursor slot-cursor" data-slot="2">|</span>
+						<span class="dynamic-text" data-slot="2" data-part="1"></span><span class="typewriter-cursor slot-cursor" data-slot="2" data-part="1">|</span>
 					</p>
 					<p>
 						<span class="core-text">What makes this significant isn't just what the document says. It's what it reveals about how AI companies think about shaping AI behavior.</span>
-						<span class="dynamic-text" data-slot="3"></span><span class="typewriter-cursor slot-cursor" data-slot="3">|</span>
+						<span class="dynamic-text" data-slot="3" data-part="1"></span><span class="typewriter-cursor slot-cursor" data-slot="3" data-part="1">|</span>
+					</p>
+				</div>
+
+				<!-- Transition -->
+				<div class="part-transition">
+					<p>But communication isn't just about understanding your audience. It's about what you say to them.</p>
+				</div>
+
+				<!-- PART 2: How Anthropic responds -->
+				<div class="part-label">Part 2: How Anthropic responds</div>
+				<div class="text-display-block" id="part2-block" role="tabpanel" aria-label="How Anthropic responds" data-audience="journalist">
+					<p>
+						<span class="core-text">We can confirm the document is authentic.</span>
+						<span class="dynamic-text" data-slot="1" data-part="2"></span><span class="typewriter-cursor slot-cursor" data-slot="1" data-part="2">|</span>
+					</p>
+					<p>
+						<span class="core-text">We created this document because we believe AI systems should have clear, documented values.</span>
+						<span class="dynamic-text" data-slot="2" data-part="2"></span><span class="typewriter-cursor slot-cursor" data-slot="2" data-part="2">|</span>
+					</p>
+					<p>
+						<span class="core-text">We're committed to transparency about how we build and guide our AI systems.</span>
+						<span class="dynamic-text" data-slot="3" data-part="2"></span><span class="typewriter-cursor slot-cursor" data-slot="3" data-part="2">|</span>
 					</p>
 				</div>
 
@@ -330,13 +353,42 @@
 		flex-shrink: 0;
 	}
 
+	/* Part Labels */
+	.part-label {
+		font-family: 'Playfair Display', Georgia, serif;
+		font-size: 1.1rem;
+		font-weight: 500;
+		color: var(--color-gold);
+		margin-bottom: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		opacity: 0.8;
+	}
+
+	/* Part Transition */
+	.part-transition {
+		text-align: center;
+		padding: 2rem 0;
+		margin: 1rem 0;
+	}
+
+	.part-transition p {
+		font-family: 'Playfair Display', Georgia, serif;
+		font-style: italic;
+		font-size: 1.15rem;
+		color: var(--color-cream);
+		max-width: 500px;
+		margin: 0 auto;
+		opacity: 0.9;
+	}
+
 	/* Text Display Block */
 	.text-display-block {
 		background: rgba(107, 124, 76, 0.15);
 		border-radius: 12px;
 		padding: 2rem;
-		margin-bottom: 2rem;
-		min-height: 250px;
+		margin-bottom: 1.5rem;
+		min-height: 200px;
 	}
 
 	.text-display-block p {
@@ -405,6 +457,7 @@
 	.closing-statement {
 		text-align: center;
 		padding-top: 1.5rem;
+		margin-top: 1rem;
 		border-top: 1px solid var(--color-medium);
 	}
 
@@ -460,9 +513,14 @@
 
 		.text-display-block {
 			padding: 1.5rem;
+			min-height: 180px;
 		}
 
 		.text-display-block p {
+			font-size: 1rem;
+		}
+
+		.part-label {
 			font-size: 1rem;
 		}
 	}
@@ -483,7 +541,7 @@
 
 <script>
 	// Three Audiences Interactive Component
-	// Core content stays static; only audience-specific parts animate
+	// Part 1: How the story is told | Part 2: How Anthropic responds
 	document.addEventListener('DOMContentLoaded', () => {
 		const trigger = document.querySelector('.three-audiences-trigger');
 		const modal = document.querySelector('.three-audiences-modal');
@@ -494,13 +552,14 @@
 		const introCursor = modal?.querySelector('.intro-cursor');
 		const interactiveSection = modal?.querySelector('.interactive-section');
 		const audienceTabs = modal?.querySelectorAll('.audience-tab');
-		const textBlock = modal?.querySelector('.text-display-block');
+		const part1Block = modal?.querySelector('#part1-block');
+		const part2Block = modal?.querySelector('#part2-block');
 		const announcement = modal?.querySelector('#audience-announcement');
 
 		if (!trigger || !modal) return;
 
-		// Dynamic content for each slot, per audience
-		const audienceContent = {
+		// Part 1: How the story is told
+		const part1Content = {
 			journalist: {
 				1: " But this wasn't a leak. No insider. No whistleblower. He simply asked the model the right questions, and it told him what it knew.",
 				2: " Think of it as an employee handbook, except the employee is an AI talking to millions of people a day. Until now, no one outside the company had seen the rules.",
@@ -518,6 +577,25 @@
 			}
 		};
 
+		// Part 2: How Anthropic responds (placeholder - replace with actual content)
+		const part2Content = {
+			journalist: {
+				1: " It's part of our commitment to building AI that's honest about what it is. We want people to understand how Claude thinks and why.",
+				2: " Not because we have to, but because we think it's the right approach. AI shouldn't be a black box to the people who use it.",
+				3: " We plan to publish the full document. We'd rather you read our actual words than speculate about what's in them."
+			},
+			staffer: {
+				1: " We documented Claude's behavioral guidelines as part of our internal safety practices. We believe this kind of documentation should be standard across the industry.",
+				2: " We're publishing the full document voluntarily. We believe this sets a precedent for transparency that regulatory frameworks could build upon.",
+				3: " We welcome the opportunity to discuss how disclosure requirements for AI systems might be structured, and how documents like this could inform those conversations."
+			},
+			researcher: {
+				1: " The document represents one component of our alignment strategy. It complements, rather than replaces, our training-time interventions.",
+				2: " We acknowledge the interpretability challenge you've identified. We cannot fully verify causal links between documented values and behavior from outputs alone.",
+				3: " We're publishing the document in full. We believe open discussion of these methods—including their limitations—advances the field more than opacity would."
+			}
+		};
+
 		// Intro content
 		const titleText = "The Same Document. Three Audiences.";
 		const bodyText = [
@@ -530,11 +608,12 @@
 		let isTyping = false;
 		let abortController = null;
 
-		// Get slot elements
-		function getSlot(num) {
+		// Get slot elements for a specific part
+		function getSlot(part, num) {
+			const block = part === 1 ? part1Block : part2Block;
 			return {
-				text: textBlock?.querySelector(`.dynamic-text[data-slot="${num}"]`),
-				cursor: textBlock?.querySelector(`.slot-cursor[data-slot="${num}"]`)
+				text: block?.querySelector(`.dynamic-text[data-slot="${num}"][data-part="${part}"]`),
+				cursor: block?.querySelector(`.slot-cursor[data-slot="${num}"][data-part="${part}"]`)
 			};
 		}
 
@@ -581,71 +660,116 @@
 			});
 		}
 
-		// Type all slots for an audience
+		// Type all slots for both parts
 		async function typeAllSlots(audience, signal) {
-			const content = audienceContent[audience];
+			const content1 = part1Content[audience];
+			const content2 = part2Content[audience];
 
+			// Type Part 1
 			for (let i = 1; i <= 3; i++) {
 				if (signal?.aborted) break;
 
-				const { text, cursor } = getSlot(i);
+				const { text, cursor } = getSlot(1, i);
 				if (!text || !cursor) continue;
 
 				cursor.classList.remove('hidden');
-				const completed = await typeWriter(text, content[i], 12, signal);
+				const completed = await typeWriter(text, content1[i], 12, signal);
 				cursor.classList.add('hidden');
 
 				if (!completed) break;
+				if (i < 3) await new Promise(r => setTimeout(r, 80));
+			}
 
-				// Small pause between slots
-				if (i < 3) {
-					await new Promise(r => setTimeout(r, 100));
+			if (signal?.aborted) return;
+			await new Promise(r => setTimeout(r, 200));
+
+			// Type Part 2
+			for (let i = 1; i <= 3; i++) {
+				if (signal?.aborted) break;
+
+				const { text, cursor } = getSlot(2, i);
+				if (!text || !cursor) continue;
+
+				cursor.classList.remove('hidden');
+				const completed = await typeWriter(text, content2[i], 12, signal);
+				cursor.classList.add('hidden');
+
+				if (!completed) break;
+				if (i < 3) await new Promise(r => setTimeout(r, 80));
+			}
+		}
+
+		// Erase all slots for both parts
+		async function eraseAllSlots(signal) {
+			// Erase Part 2 first (reverse order)
+			for (let i = 3; i >= 1; i--) {
+				if (signal?.aborted) {
+					clearAllSlots();
+					break;
+				}
+
+				const { text, cursor } = getSlot(2, i);
+				if (text?.textContent) {
+					cursor?.classList.remove('hidden');
+					await eraseText(text, 5, signal);
+					cursor?.classList.add('hidden');
+				}
+			}
+
+			if (signal?.aborted) return;
+
+			// Then erase Part 1
+			for (let i = 3; i >= 1; i--) {
+				if (signal?.aborted) {
+					clearAllSlots();
+					break;
+				}
+
+				const { text, cursor } = getSlot(1, i);
+				if (text?.textContent) {
+					cursor?.classList.remove('hidden');
+					await eraseText(text, 5, signal);
+					cursor?.classList.add('hidden');
 				}
 			}
 		}
 
-		// Erase all slots
-		async function eraseAllSlots(signal) {
-			// Erase in reverse order for visual effect
-			for (let i = 3; i >= 1; i--) {
-				if (signal?.aborted) {
-					// Immediately clear all on abort
-					for (let j = 1; j <= 3; j++) {
-						const { text, cursor } = getSlot(j);
-						if (text) text.textContent = '';
-						if (cursor) cursor.classList.add('hidden');
-					}
-					break;
+		// Immediately clear all slots
+		function clearAllSlots() {
+			for (let part = 1; part <= 2; part++) {
+				for (let i = 1; i <= 3; i++) {
+					const { text, cursor } = getSlot(part, i);
+					if (text) text.textContent = '';
+					if (cursor) cursor.classList.add('hidden');
 				}
+			}
+		}
 
-				const { text, cursor } = getSlot(i);
-				if (!text || !cursor) continue;
+		// Set content instantly (for re-opening modal)
+		function setContentInstantly(audience) {
+			const content1 = part1Content[audience];
+			const content2 = part2Content[audience];
 
-				if (text.textContent) {
-					cursor.classList.remove('hidden');
-					await eraseText(text, 6, signal);
-					cursor.classList.add('hidden');
-				}
+			for (let i = 1; i <= 3; i++) {
+				const slot1 = getSlot(1, i);
+				const slot2 = getSlot(2, i);
+				if (slot1.text) slot1.text.textContent = content1[i];
+				if (slot1.cursor) slot1.cursor.classList.add('hidden');
+				if (slot2.text) slot2.text.textContent = content2[i];
+				if (slot2.cursor) slot2.cursor.classList.add('hidden');
 			}
 		}
 
 		// Run intro typewriter sequence
 		async function runIntroSequence() {
 			if (hasAnimated) {
-				// Skip animation on subsequent opens
 				introTitle.textContent = titleText;
 				introBody.innerHTML = bodyText.map(p => `<p>${p}</p>`).join('');
 				introCursor?.classList.add('hidden');
 				if (interactiveSection) {
 					interactiveSection.hidden = false;
 				}
-				// Show current audience content instantly
-				const content = audienceContent[currentAudience];
-				for (let i = 1; i <= 3; i++) {
-					const { text, cursor } = getSlot(i);
-					if (text) text.textContent = content[i];
-					if (cursor) cursor.classList.add('hidden');
-				}
+				setContentInstantly(currentAudience);
 				return;
 			}
 
@@ -653,13 +777,9 @@
 			introTitle.textContent = '';
 			introBody.innerHTML = '';
 
-			// Type title
 			await typeWriter(introTitle, titleText, 40);
-
-			// Small pause
 			await new Promise(r => setTimeout(r, 300));
 
-			// Type body paragraphs
 			for (const paragraph of bodyText) {
 				const p = document.createElement('p');
 				introBody.appendChild(p);
@@ -667,7 +787,6 @@
 				await new Promise(r => setTimeout(r, 200));
 			}
 
-			// Hide intro cursor and reveal interactive section
 			introCursor?.classList.add('hidden');
 			await new Promise(r => setTimeout(r, 500));
 
@@ -675,7 +794,6 @@
 				interactiveSection.hidden = false;
 			}
 
-			// Start typing journalist content (default)
 			await new Promise(r => setTimeout(r, 300));
 
 			abortController = new AbortController();
@@ -706,7 +824,6 @@
 			document.body.style.overflow = '';
 			trigger.focus();
 
-			// Abort any ongoing typing
 			if (abortController) {
 				abortController.abort();
 			}
@@ -716,7 +833,6 @@
 		async function selectAudience(audience) {
 			if (audience === currentAudience && !isTyping) return;
 
-			// Abort current animation
 			if (abortController) {
 				abortController.abort();
 			}
@@ -731,8 +847,9 @@
 				tab.setAttribute('tabindex', isSelected ? '0' : '-1');
 			});
 
-			// Update text block color theme
-			textBlock.dataset.audience = audience;
+			// Update both text blocks
+			if (part1Block) part1Block.dataset.audience = audience;
+			if (part2Block) part2Block.dataset.audience = audience;
 
 			// Announce to screen readers
 			const audienceLabels = {
@@ -746,18 +863,15 @@
 
 			currentAudience = audience;
 
-			// Disable tabs during animation
 			isTyping = true;
 			audienceTabs?.forEach(tab => tab.classList.add('typing'));
 
-			// Erase current content
 			await eraseAllSlots(signal);
 
 			if (signal.aborted) return;
 
 			await new Promise(r => setTimeout(r, 100));
 
-			// Type new content
 			await typeAllSlots(audience, signal);
 
 			isTyping = false;
@@ -775,7 +889,6 @@
 			}
 		});
 
-		// Tab click and keyboard handling
 		audienceTabs?.forEach((tab, index) => {
 			tab.addEventListener('click', () => {
 				if (!tab.classList.contains('typing')) {
