@@ -1,6 +1,7 @@
 ---
 // ThreeAudiences.astro - Interactive "Three Audiences" Communication Demo
 // Demonstrates how the same information gets translated for different audiences
+// Uses typewriter effect to transition between audience perspectives
 ---
 
 <!-- Floating Entry Button -->
@@ -20,7 +21,7 @@
 			<div class="intro-section">
 				<h2 id="modal-title" class="intro-title"></h2>
 				<div class="intro-body"></div>
-				<span class="typewriter-cursor">|</span>
+				<span class="typewriter-cursor intro-cursor">|</span>
 			</div>
 
 			<!-- Interactive Element (hidden until intro completes) -->
@@ -78,26 +79,10 @@
 				<!-- Screen Reader Announcement -->
 				<div class="sr-only" aria-live="polite" id="audience-announcement"></div>
 
-				<!-- Unified Text Block -->
-				<div class="highlight-text-block" role="tabpanel" aria-label="Content with audience-specific highlights">
-					<p>
-						<span data-audience="core">In November 2025, a researcher extracted an internal document from Claude 4.5 Opus.</span>
-						<span data-audience="journalist">This wasn't a leak in the traditional sense—it was discovered through a technical process that revealed what the model had "memorized" from its training.</span>
-						<span data-audience="staffer">This raises immediate questions about transparency requirements and disclosure obligations for AI companies operating in regulated spaces.</span>
-						<span data-audience="researcher">The extraction method used consensus sampling across multiple model outputs at temperature 0, effectively reconstructing memorized training data through statistical agreement.</span>
-					</p>
-					<p>
-						<span data-audience="core">The document—which Anthropic has since confirmed is authentic—provides detailed guidance on Claude's values, behavior, and identity.</span>
-						<span data-audience="journalist">Think of it as an employee handbook, but for an AI system: how to handle conflicts, what to prioritize, when to push back.</span>
-						<span data-audience="staffer">This represents the first confirmed instance of an AI company's internal behavioral guidelines becoming public through model extraction rather than voluntary disclosure.</span>
-						<span data-audience="researcher">The document reveals a sophisticated approach to value alignment that goes beyond RLHF, incorporating explicit reasoning frameworks and ethical decision procedures.</span>
-					</p>
-					<p>
-						<span data-audience="core">What makes this significant isn't just what the document says—it's what it reveals about how AI companies think about shaping AI behavior.</span>
-						<span data-audience="journalist">For readers unfamiliar with AI development: companies don't just train these systems on data. They actively shape how they respond, what they refuse to do, and how they present themselves.</span>
-						<span data-audience="staffer">Current regulatory frameworks have no mechanism to require disclosure of such documents, nor standards for what "safe" or "aligned" AI behavior should look like.</span>
-						<span data-audience="researcher">The existence of this document suggests Anthropic is implementing Constitutional AI principles through direct instruction rather than purely through training-time feedback.</span>
-					</p>
+				<!-- Text Display Area -->
+				<div class="text-display-block" role="tabpanel" aria-label="Audience-specific content">
+					<div class="text-content"></div>
+					<span class="typewriter-cursor content-cursor">|</span>
 				</div>
 
 				<!-- Closing Statement -->
@@ -291,10 +276,10 @@
 		font-size: 0.95rem;
 		font-weight: 500;
 		cursor: pointer;
-		transition: all var(--highlight-transition);
+		transition: all 0.3s ease;
 	}
 
-	.audience-tab:hover {
+	.audience-tab:hover:not(.active) {
 		border-color: var(--color-gold);
 		color: var(--color-gold);
 	}
@@ -325,123 +310,57 @@
 		box-shadow: 0 0 20px rgba(179, 157, 219, 0.3);
 	}
 
+	.audience-tab.typing {
+		opacity: 0.6;
+		pointer-events: none;
+	}
+
 	.tab-icon {
 		width: 18px;
 		height: 18px;
 		flex-shrink: 0;
 	}
 
-	/* Highlight Text Block */
-	.highlight-text-block {
+	/* Text Display Block */
+	.text-display-block {
 		background: rgba(107, 124, 76, 0.15);
 		border-radius: 12px;
 		padding: 2rem;
 		margin-bottom: 2rem;
-	}
-
-	.highlight-text-block p {
-		font-size: 1.05rem;
-		line-height: 1.9;
-		margin-bottom: 1.5rem;
-	}
-
-	.highlight-text-block p:last-child {
-		margin-bottom: 0;
-	}
-
-	.highlight-text-block span[data-audience] {
-		transition: opacity var(--highlight-transition), text-shadow var(--highlight-transition);
+		min-height: 280px;
 		position: relative;
 	}
 
-	/* Core content - always visible at good opacity */
-	.highlight-text-block span[data-audience="core"] {
-		opacity: 0.9;
+	.text-content {
+		font-size: 1.05rem;
+		line-height: 1.9;
 		color: var(--color-cream);
 	}
 
-	/* Default state (journalist selected) */
-	.highlight-text-block span[data-audience="journalist"] {
-		opacity: 1;
-		color: var(--color-journalist);
-		text-shadow: 0 0 10px rgba(212, 201, 142, 0.3);
+	.text-content p {
+		margin-bottom: 1.25rem;
 	}
 
-	.highlight-text-block span[data-audience="staffer"],
-	.highlight-text-block span[data-audience="researcher"] {
-		opacity: 0.35;
+	.text-content p:last-child {
+		margin-bottom: 0;
 	}
 
-	/* Staffer active state */
-	.highlight-text-block[data-active="staffer"] span[data-audience="staffer"] {
-		opacity: 1;
-		color: var(--color-staffer);
-		text-shadow: 0 0 10px rgba(127, 179, 179, 0.3);
-	}
-
-	.highlight-text-block[data-active="staffer"] span[data-audience="journalist"],
-	.highlight-text-block[data-active="staffer"] span[data-audience="researcher"] {
-		opacity: 0.35;
-		color: var(--color-cream);
-		text-shadow: none;
-	}
-
-	/* Researcher active state */
-	.highlight-text-block[data-active="researcher"] span[data-audience="researcher"] {
-		opacity: 1;
-		color: var(--color-researcher);
-		text-shadow: 0 0 10px rgba(179, 157, 219, 0.3);
-	}
-
-	.highlight-text-block[data-active="researcher"] span[data-audience="journalist"],
-	.highlight-text-block[data-active="researcher"] span[data-audience="staffer"] {
-		opacity: 0.35;
-		color: var(--color-cream);
-		text-shadow: none;
-	}
-
-	/* Journalist active state (explicit for clarity) */
-	.highlight-text-block[data-active="journalist"] span[data-audience="journalist"] {
-		opacity: 1;
-		color: var(--color-journalist);
-		text-shadow: 0 0 10px rgba(212, 201, 142, 0.3);
-	}
-
-	.highlight-text-block[data-active="journalist"] span[data-audience="staffer"],
-	.highlight-text-block[data-active="journalist"] span[data-audience="researcher"] {
-		opacity: 0.35;
-		color: var(--color-cream);
-		text-shadow: none;
-	}
-
-	/* Tooltips for dimmed text */
-	.highlight-text-block span[data-audience]:not([data-audience="core"]) {
-		cursor: help;
-	}
-
-	.highlight-text-block span[data-audience][data-tooltip]::after {
-		content: attr(data-tooltip);
+	.content-cursor {
 		position: absolute;
-		bottom: 100%;
-		left: 50%;
-		transform: translateX(-50%);
-		padding: 0.5rem 0.75rem;
-		background: var(--color-dark);
-		border: 1px solid var(--color-medium);
-		border-radius: 6px;
-		font-size: 0.8rem;
-		color: var(--color-cream);
-		white-space: nowrap;
-		opacity: 0;
-		visibility: hidden;
-		transition: opacity 0.2s ease, visibility 0.2s ease;
-		z-index: 10;
-		pointer-events: none;
+		font-size: 1.1rem;
 	}
 
-	.highlight-text-block span[data-audience][data-tooltip]:hover::after {
-		opacity: 1;
-		visibility: visible;
+	/* Audience-specific text colors */
+	.text-display-block[data-audience="journalist"] .text-content {
+		color: var(--color-journalist);
+	}
+
+	.text-display-block[data-audience="staffer"] .text-content {
+		color: var(--color-staffer);
+	}
+
+	.text-display-block[data-audience="researcher"] .text-content {
+		color: var(--color-researcher);
 	}
 
 	/* Closing Statement */
@@ -501,16 +420,17 @@
 			justify-content: center;
 		}
 
-		.highlight-text-block {
+		.text-display-block {
 			padding: 1.5rem;
+			min-height: 320px;
 		}
 
-		.highlight-text-block p {
+		.text-content {
 			font-size: 1rem;
 		}
 	}
 
-	/* Screen reader only utility (in case not defined globally) */
+	/* Screen reader only utility */
 	.sr-only {
 		position: absolute;
 		width: 1px;
@@ -525,7 +445,7 @@
 </style>
 
 <script>
-	// Three Audiences Interactive Component
+	// Three Audiences Interactive Component with Typewriter Transitions
 	document.addEventListener('DOMContentLoaded', () => {
 		const trigger = document.querySelector('.three-audiences-trigger');
 		const modal = document.querySelector('.three-audiences-modal');
@@ -533,13 +453,34 @@
 		const backdrop = modal?.querySelector('.modal-backdrop');
 		const introTitle = modal?.querySelector('.intro-title');
 		const introBody = modal?.querySelector('.intro-body');
-		const cursor = modal?.querySelector('.typewriter-cursor');
+		const introCursor = modal?.querySelector('.intro-cursor');
 		const interactiveSection = modal?.querySelector('.interactive-section');
 		const audienceTabs = modal?.querySelectorAll('.audience-tab');
-		const textBlock = modal?.querySelector('.highlight-text-block');
+		const textBlock = modal?.querySelector('.text-display-block');
+		const textContent = modal?.querySelector('.text-content');
+		const contentCursor = modal?.querySelector('.content-cursor');
 		const announcement = modal?.querySelector('#audience-announcement');
 
 		if (!trigger || !modal) return;
+
+		// Content for each audience
+		const audienceContent = {
+			journalist: [
+				"In November 2025, a researcher extracted an internal document from Claude 4.5 Opus. This wasn't a leak in the traditional sense—it was discovered through a technical process that revealed what the model had \"memorized\" from its training.",
+				"The document—which Anthropic has since confirmed is authentic—provides detailed guidance on Claude's values, behavior, and identity. Think of it as an employee handbook, but for an AI system: how to handle conflicts, what to prioritize, when to push back.",
+				"What makes this significant isn't just what the document says—it's what it reveals about how AI companies think about shaping AI behavior. For readers unfamiliar with AI development: companies don't just train these systems on data. They actively shape how they respond, what they refuse to do, and how they present themselves."
+			],
+			staffer: [
+				"In November 2025, a researcher extracted an internal document from Claude 4.5 Opus. This raises immediate questions about transparency requirements and disclosure obligations for AI companies operating in regulated spaces.",
+				"The document—which Anthropic has since confirmed is authentic—provides detailed guidance on Claude's values, behavior, and identity. This represents the first confirmed instance of an AI company's internal behavioral guidelines becoming public through model extraction rather than voluntary disclosure.",
+				"What makes this significant isn't just what the document says—it's what it reveals about how AI companies think about shaping AI behavior. Current regulatory frameworks have no mechanism to require disclosure of such documents, nor standards for what \"safe\" or \"aligned\" AI behavior should look like."
+			],
+			researcher: [
+				"In November 2025, a researcher extracted an internal document from Claude 4.5 Opus. The extraction method used consensus sampling across multiple model outputs at temperature 0, effectively reconstructing memorized training data through statistical agreement.",
+				"The document—which Anthropic has since confirmed is authentic—provides detailed guidance on Claude's values, behavior, and identity. The document reveals a sophisticated approach to value alignment that goes beyond RLHF, incorporating explicit reasoning frameworks and ethical decision procedures.",
+				"What makes this significant isn't just what the document says—it's what it reveals about how AI companies think about shaping AI behavior. The existence of this document suggests Anthropic is implementing Constitutional AI principles through direct instruction rather than purely through training-time feedback."
+			]
+		};
 
 		// Intro content
 		const titleText = "The Same Document. Three Audiences.";
@@ -549,24 +490,112 @@
 		];
 
 		let hasAnimated = false;
+		let currentAudience = 'journalist';
+		let isTyping = false;
+		let typewriterAbort = false;
 
-		// Typewriter effect
-		function typeWriter(element, text, speed = 35) {
+		// Typewriter effect with abort capability
+		function typeWriter(element, text, speed = 20) {
 			return new Promise((resolve) => {
 				let i = 0;
-				element.textContent = '';
+				typewriterAbort = false;
 
 				function type() {
+					if (typewriterAbort) {
+						resolve(false);
+						return;
+					}
 					if (i < text.length) {
 						element.textContent += text.charAt(i);
 						i++;
 						setTimeout(type, speed);
 					} else {
-						resolve();
+						resolve(true);
 					}
 				}
 				type();
 			});
+		}
+
+		// Erase effect (faster than typing)
+		function eraseText(element, speed = 8) {
+			return new Promise((resolve) => {
+				typewriterAbort = false;
+
+				function erase() {
+					if (typewriterAbort) {
+						element.textContent = '';
+						resolve(false);
+						return;
+					}
+					if (element.textContent.length > 0) {
+						element.textContent = element.textContent.slice(0, -1);
+						setTimeout(erase, speed);
+					} else {
+						resolve(true);
+					}
+				}
+				erase();
+			});
+		}
+
+		// Type content for an audience
+		async function typeAudienceContent(audience) {
+			if (!textContent || !contentCursor) return;
+
+			isTyping = true;
+			contentCursor.classList.remove('hidden');
+
+			// Disable tabs while typing
+			audienceTabs?.forEach(tab => tab.classList.add('typing'));
+
+			const paragraphs = audienceContent[audience];
+			textContent.innerHTML = '';
+
+			for (let i = 0; i < paragraphs.length; i++) {
+				if (typewriterAbort) break;
+
+				const p = document.createElement('p');
+				textContent.appendChild(p);
+
+				const completed = await typeWriter(p, paragraphs[i], 12);
+				if (!completed) break;
+
+				// Small pause between paragraphs
+				if (i < paragraphs.length - 1) {
+					await new Promise(r => setTimeout(r, 150));
+				}
+			}
+
+			contentCursor.classList.add('hidden');
+			isTyping = false;
+
+			// Re-enable tabs
+			audienceTabs?.forEach(tab => tab.classList.remove('typing'));
+		}
+
+		// Erase current content
+		async function eraseCurrentContent() {
+			if (!textContent) return;
+
+			isTyping = true;
+			contentCursor?.classList.remove('hidden');
+
+			// Get all paragraph elements and erase them in reverse
+			const paragraphs = Array.from(textContent.querySelectorAll('p'));
+
+			for (let i = paragraphs.length - 1; i >= 0; i--) {
+				if (typewriterAbort) {
+					textContent.innerHTML = '';
+					break;
+				}
+				await eraseText(paragraphs[i], 5);
+				if (paragraphs[i].textContent === '') {
+					paragraphs[i].remove();
+				}
+			}
+
+			isTyping = false;
 		}
 
 		async function runIntroSequence() {
@@ -574,10 +603,14 @@
 				// Skip animation on subsequent opens
 				introTitle.textContent = titleText;
 				introBody.innerHTML = bodyText.map(p => `<p>${p}</p>`).join('');
-				cursor?.classList.add('hidden');
+				introCursor?.classList.add('hidden');
 				if (interactiveSection) {
 					interactiveSection.hidden = false;
 				}
+				// Show current audience content instantly
+				textContent.innerHTML = audienceContent[currentAudience].map(p => `<p>${p}</p>`).join('');
+				textBlock.dataset.audience = currentAudience;
+				contentCursor?.classList.add('hidden');
 				return;
 			}
 
@@ -595,17 +628,22 @@
 			for (const paragraph of bodyText) {
 				const p = document.createElement('p');
 				introBody.appendChild(p);
-				await typeWriter(p, paragraph, 25);
+				await typeWriter(p, paragraph, 18);
 				await new Promise(r => setTimeout(r, 200));
 			}
 
-			// Hide cursor and reveal interactive section
-			cursor?.classList.add('hidden');
+			// Hide intro cursor and reveal interactive section
+			introCursor?.classList.add('hidden');
 			await new Promise(r => setTimeout(r, 500));
 
 			if (interactiveSection) {
 				interactiveSection.hidden = false;
 			}
+
+			// Start typing journalist content (default)
+			textBlock.dataset.audience = 'journalist';
+			await new Promise(r => setTimeout(r, 300));
+			await typeAudienceContent('journalist');
 		}
 
 		// Open modal
@@ -626,11 +664,21 @@
 			modal.hidden = true;
 			document.body.style.overflow = '';
 			trigger.focus();
+
+			// Abort any ongoing typing
+			typewriterAbort = true;
 		}
 
-		// Audience selection
-		function selectAudience(audience) {
-			// Update tabs
+		// Audience selection with typewriter transition
+		async function selectAudience(audience) {
+			if (audience === currentAudience && !isTyping) return;
+			if (isTyping) {
+				// If currently typing, abort and switch
+				typewriterAbort = true;
+				await new Promise(r => setTimeout(r, 50));
+			}
+
+			// Update tabs immediately
 			audienceTabs?.forEach(tab => {
 				const isSelected = tab.dataset.audience === audience;
 				tab.classList.toggle('active', isSelected);
@@ -638,26 +686,8 @@
 				tab.setAttribute('tabindex', isSelected ? '0' : '-1');
 			});
 
-			// Update text block
-			if (textBlock) {
-				textBlock.dataset.active = audience;
-			}
-
-			// Update tooltips on dimmed text
-			const spans = textBlock?.querySelectorAll('span[data-audience]:not([data-audience="core"])');
-			spans?.forEach(span => {
-				const spanAudience = span.dataset.audience;
-				if (spanAudience !== audience) {
-					const audienceNames = {
-						journalist: 'Journalists',
-						staffer: 'Congressional Staffers',
-						researcher: 'AI Safety Researchers'
-					};
-					span.dataset.tooltip = `Emphasized for ${audienceNames[spanAudience]}`;
-				} else {
-					delete span.dataset.tooltip;
-				}
-			});
+			// Update text block color
+			textBlock.dataset.audience = audience;
 
 			// Announce to screen readers
 			const audienceLabels = {
@@ -668,6 +698,17 @@
 			if (announcement) {
 				announcement.textContent = audienceLabels[audience];
 			}
+
+			const previousAudience = currentAudience;
+			currentAudience = audience;
+
+			// Erase old content, then type new
+			if (textContent?.textContent.trim()) {
+				await eraseCurrentContent();
+			}
+
+			await new Promise(r => setTimeout(r, 100));
+			await typeAudienceContent(audience);
 		}
 
 		// Event listeners
@@ -685,10 +726,14 @@
 		// Tab navigation with arrow keys
 		audienceTabs?.forEach((tab, index) => {
 			tab.addEventListener('click', () => {
-				selectAudience(tab.dataset.audience);
+				if (!tab.classList.contains('typing')) {
+					selectAudience(tab.dataset.audience);
+				}
 			});
 
 			tab.addEventListener('keydown', (e) => {
+				if (tab.classList.contains('typing')) return;
+
 				const tabs = Array.from(audienceTabs);
 				let newIndex = index;
 
@@ -710,11 +755,5 @@
 				}
 			});
 		});
-
-		// Initialize default state
-		if (textBlock) {
-			textBlock.dataset.active = 'journalist';
-		}
-		selectAudience('journalist');
 	});
 </script>
