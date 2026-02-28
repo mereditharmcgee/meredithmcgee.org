@@ -111,52 +111,52 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| STRC-01 | — | Pending |
-| STRC-02 | — | Pending |
-| STRC-03 | — | Pending |
-| STRC-04 | — | Pending |
-| STRC-05 | — | Pending |
-| HOME-01 | — | Pending |
-| HOME-02 | — | Pending |
-| HOME-03 | — | Pending |
-| HOME-04 | — | Pending |
-| HOME-05 | — | Pending |
-| ABUT-01 | — | Pending |
-| ABUT-02 | — | Pending |
-| ABUT-03 | — | Pending |
-| GRLV-01 | — | Pending |
-| GRLV-02 | — | Pending |
-| GRLV-03 | — | Pending |
-| GRLV-04 | — | Pending |
-| WORK-01 | — | Pending |
-| WORK-02 | — | Pending |
-| WORK-03 | — | Pending |
-| WORK-04 | — | Pending |
-| WORK-05 | — | Pending |
-| WORK-06 | — | Pending |
-| CNTC-01 | — | Pending |
-| CNTC-02 | — | Pending |
-| CNTC-03 | — | Pending |
-| DSGN-01 | — | Pending |
-| DSGN-02 | — | Pending |
-| DSGN-03 | — | Pending |
-| DSGN-04 | — | Pending |
-| DSGN-05 | — | Pending |
-| DSGN-06 | — | Pending |
-| DSGN-07 | — | Pending |
-| DLGT-01 | — | Pending |
-| DLGT-02 | — | Pending |
-| DLGT-03 | — | Pending |
-| DLGT-04 | — | Pending |
-| SEO-01 | — | Pending |
-| SEO-02 | — | Pending |
-| SEO-03 | — | Pending |
+| STRC-01 | Phase 1 | Pending |
+| STRC-02 | Phase 1 | Pending |
+| STRC-03 | Phase 1 | Pending |
+| STRC-04 | Phase 1 | Pending |
+| STRC-05 | Phase 1 | Pending |
+| HOME-01 | Phase 4 | Pending |
+| HOME-02 | Phase 4 | Pending |
+| HOME-03 | Phase 4 | Pending |
+| HOME-04 | Phase 4 | Pending |
+| HOME-05 | Phase 4 | Pending |
+| ABUT-01 | Phase 3 | Pending |
+| ABUT-02 | Phase 3 | Pending |
+| ABUT-03 | Phase 3 | Pending |
+| GRLV-01 | Phase 4 | Pending |
+| GRLV-02 | Phase 4 | Pending |
+| GRLV-03 | Phase 4 | Pending |
+| GRLV-04 | Phase 2 | Pending |
+| WORK-01 | Phase 3 | Pending |
+| WORK-02 | Phase 3 | Pending |
+| WORK-03 | Phase 3 | Pending |
+| WORK-04 | Phase 3 | Pending |
+| WORK-05 | Phase 3 | Pending |
+| WORK-06 | Phase 3 | Pending |
+| CNTC-01 | Phase 3 | Pending |
+| CNTC-02 | Phase 3 | Pending |
+| CNTC-03 | Phase 3 | Pending |
+| DSGN-01 | Phase 5 | Pending |
+| DSGN-02 | Phase 5 | Pending |
+| DSGN-03 | Phase 5 | Pending |
+| DSGN-04 | Phase 5 | Pending |
+| DSGN-05 | Phase 5 | Pending |
+| DSGN-06 | Phase 5 | Pending |
+| DSGN-07 | Phase 5 | Pending |
+| DLGT-01 | Phase 6 | Pending |
+| DLGT-02 | Phase 6 | Pending |
+| DLGT-03 | Phase 6 | Pending |
+| DLGT-04 | Phase 6 | Pending |
+| SEO-01 | Phase 5 | Pending |
+| SEO-02 | Phase 5 | Pending |
+| SEO-03 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 40 total
-- Mapped to phases: 0
-- Unmapped: 40
+- Mapped to phases: 40
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-28*
-*Last updated: 2026-02-28 after initial definition*
+*Last updated: 2026-02-28 after roadmap creation — all 40 requirements mapped*
