@@ -22,13 +22,13 @@ progress:
 
 ## Current Position
 
-**Phase:** 2 - Shared Components
-**Plan:** 02 complete — Phase 2 COMPLETE
-**Status:** Milestone complete
+**Phase:** 3 - Static Pages
+**Plan:** 03-02 at checkpoint (Task 3: visual verify of Work page + Archive); 03-03 also at checkpoint
+**Status:** In progress
 
 ```
 Progress: [####------] 33% complete
-Phase 2 of 6 (All plans complete — 02-01 and 02-02 done)
+Phase 3 of 6 (03-02 Tasks 1+2 complete, at visual checkpoint; 03-03 Task 1 complete, at visual checkpoint)
 ```
 
 ---
@@ -62,7 +62,7 @@ Phase 2 of 6 (All plans complete — 02-01 and 02-02 done)
 |-------|------|--------|
 | 1 - Foundation Cleanup | Clean codebase, new nav, redirects | Complete |
 | 2 - Shared Components | SubstackFeed, WorkCard, Header, Footer, data layer | Complete |
-| 3 - Static Pages | About, Work, Work Archive, Contact | Not started |
+| 3 - Static Pages | About, Work, Work Archive, Contact | In progress (03-03 at checkpoint) |
 | 4 - RSS-Dependent Pages | Homepage, Ground Level | Not started |
 | 5 - Design System Elevation | Palette, typography, spacing, animations, SEO | Not started |
 | 6 - Easter Eggs and Polish | Ember click, micro-delights, accessibility | Not started |
@@ -96,6 +96,9 @@ Phase 2 of 6 (All plans complete — 02-01 and 02-02 done)
 | Header required no changes in Phase 2 | Already correct from Phase 1 with 5-item nav, logo, active state, and mobile hamburger (02-02) |
 | Footer collapsed to centered single column | Removing tagline, button, and location left too little content to justify two-column layout (02-02) |
 | WorkCard has two link affordances | Linked title plus Read more arrow when link prop present gives two clear interaction points (02-02) |
+| Formspree form kept and simplified to 3 fields | Subject dropdown removed; name/email/message only keeps contact friction low (03-03) |
+| Contact hero heading only, no intro paragraph | Clean direct hero; warm copy lives in the content section below where it's easier to read (03-03) |
+| Contact email displayed as standalone prominent link | Email not buried in body text; own paragraph block between intro and social links (03-03) |
 
 ### Critical Pitfalls to Avoid
 
@@ -109,7 +112,7 @@ Phase 2 of 6 (All plans complete — 02-01 and 02-02 done)
 
 - ~~**Before Phase 2:** Fetch `https://meredithwritespublichealth.substack.com/feed` and inspect raw XML to confirm RSS 2.0 vs Atom format before writing the parser~~ RESOLVED: RSS 2.0 confirmed; parser implemented in 02-01
 - ~~**Before Phase 2 Plan 02:** Verify `motion` package version via `npm show motion version` — do not assume training-data version is current~~ Deferred — motion not used in 02-02; verify before Phase 5 (animations)
-- **Before Phase 3:** Confirm Formspree form decision: keep, simplify, or remove (spec says simplify but not resolved)
+- ~~**Before Phase 3:** Confirm Formspree form decision: keep, simplify, or remove (spec says simplify but not resolved)~~ RESOLVED: Kept and simplified to 3 fields in 03-03
 - **Before Phase 3:** Work page curated content is not finalized — use placeholder entries per WORK-03; flag to user
 - **Before Phase 4:** Test build-time RSS fetch in a GitHub Actions dry run before merging — CI network restrictions may affect external fetches
 - **After Phase 5:** Verify OG images and BaseHead still correct after design system changes
@@ -121,7 +124,7 @@ Phase 2 of 6 (All plans complete — 02-01 and 02-02 done)
 | Homepage intro copy | FINAL (in WEBSITE-SPEC.md) |
 | About page copy | FINAL (provided by user) |
 | Work page content | TBD — placeholder structure for now |
-| Contact page | Adapt existing, simplify |
+| Contact page | COMPLETE (03-03) |
 | Photos | Use existing assets, assess during implementation |
 
 ---
@@ -130,7 +133,7 @@ Phase 2 of 6 (All plans complete — 02-01 and 02-02 done)
 
 - [ ] Read WEBSITE-SPEC.md for final homepage intro copy before Phase 4
 - [x] Fetch Substack RSS feed and inspect XML format before Phase 2 — COMPLETE (02-01)
-- [ ] Confirm Formspree decision before Phase 3
+- [x] Confirm Formspree decision before Phase 3 — RESOLVED: kept and simplified to 3 fields (03-03)
 - [ ] Get Work page curated content from user or confirm placeholder approach before Phase 3
 
 ---
@@ -152,4 +155,4 @@ To resume work in a new session:
 ---
 
 *State initialized: 2026-02-28*
-*Last updated: 2026-03-01 after 02-02 execution (WorkCard component, Footer simplification, Header review — Phase 2 complete)*
+*Last updated: 2026-03-01 after 03-03 Task 1 execution (Contact page rewrite — at human-verify checkpoint)*

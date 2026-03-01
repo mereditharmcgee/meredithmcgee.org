@@ -47,9 +47,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Contact
 
-- [ ] **CNTC-01**: Contact page is warm, human, and direct with email address displayed
-- [ ] **CNTC-02**: Contact page includes LinkedIn and Substack links
-- [ ] **CNTC-03**: Contact page copy follows voice rules (no em dashes, contractions, no corporate language)
+- [x] **CNTC-01**: Contact page is warm, human, and direct with email address displayed
+- [x] **CNTC-02**: Contact page includes LinkedIn and Substack links
+- [x] **CNTC-03**: Contact page copy follows voice rules (no em dashes, contractions, no corporate language)
 
 ### Design
 
@@ -134,9 +134,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | WORK-04 | Phase 3 | Pending |
 | WORK-05 | Phase 3 | Pending |
 | WORK-06 | Phase 3 | Pending |
-| CNTC-01 | Phase 3 | Pending |
-| CNTC-02 | Phase 3 | Pending |
-| CNTC-03 | Phase 3 | Pending |
+| CNTC-01 | Phase 3 | Complete |
+| CNTC-02 | Phase 3 | Complete |
+| CNTC-03 | Phase 3 | Complete |
 | DSGN-01 | Phase 5 | Pending |
 | DSGN-02 | Phase 5 | Pending |
 | DSGN-03 | Phase 5 | Pending |
