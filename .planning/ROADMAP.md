@@ -26,7 +26,7 @@
 | 1. Foundation Cleanup | 2/2 | Complete | 2026-03-01 |
 | 2. Shared Components | 2/2 | Complete | 2026-03-01 |
 | 3. Static Pages | 2/3 | In progress (03-01 About remaining) | - |
-| 4. RSS-Dependent Pages | 0/TBD | Not started | - |
+| 4. RSS-Dependent Pages | 0/2 | Not started | - |
 | 5. Design System Elevation | 0/TBD | Not started | - |
 | 6. Easter Eggs and Polish | 0/TBD | Not started | - |
 
@@ -82,7 +82,10 @@ Plans:
   2. The "What I'm Working On" section shows exactly 3 recent Substack posts, each with a title, date, excerpt, and link that opens the actual Substack post
   3. The "Selected Work" section shows 3 to 4 highlighted pieces with a visible "See more" link leading to the full Work page
   4. The Ground Level page has an intro paragraph explaining what Ground Level is, a Substack subscribe CTA, and 5 to 6 recent posts with title, date, excerpt, and link
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 04-01-PLAN.md -- Homepage three-beat rewrite (HOME-01, HOME-02, HOME-03, HOME-04, HOME-05)
+- [ ] 04-02-PLAN.md -- Ground Level page rewrite + visual verification (GRLV-01, GRLV-02, GRLV-03)
 
 ### Phase 5: Design System Elevation
 **Goal**: The visual identity is cohesive, warm, and professional — every page benefits from the refined palette, typography, spacing, and entrance animations without any page feeling cramped or generic.
@@ -186,4 +189,4 @@ Phase 6 (Easter Eggs and Polish)
 ---
 
 *Roadmap created: 2026-02-28*
-*Last updated: 2026-03-01 after 03-03 completion (Contact page rewrite — user approved visual checkpoint)*
+*Last updated: 2026-03-01 after Phase 4 planning (2 plans created)*
