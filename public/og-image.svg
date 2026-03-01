@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background: evolved --color-dark #2d3a1e -->
+  <rect width="1200" height="630" fill="#2d3a1e" />
+
+  <!-- Subtle botanical pattern overlay using --color-medium #5a6e3c at low opacity -->
+  <defs>
+    <pattern id="botanical" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M30 5c-2 8-8 14-16 16 8 2 14 8 16 16 2-8 8-14 16-16-8-2-14-8-16-16z" fill="#5a6e3c" fill-opacity="0.18"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#botanical)" />
+
+  <!-- Top and bottom border accent lines using --color-gold #d4b968 -->
+  <rect x="60" y="52" width="1080" height="2" fill="#d4b968" opacity="0.5" />
+  <rect x="60" y="576" width="1080" height="2" fill="#d4b968" opacity="0.5" />
+
+  <!-- Left and right border accent lines -->
+  <rect x="60" y="52" width="2" height="526" fill="#d4b968" opacity="0.5" />
+  <rect x="1138" y="52" width="2" height="526" fill="#d4b968" opacity="0.5" />
+
+  <!-- Main heading: "Meredith McGee" in Playfair Display style, --color-gold #d4b968 -->
+  <!-- Centered vertically around y=280 -->
+  <text
+    x="600"
+    y="288"
+    font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+    font-size="88"
+    font-weight="500"
+    fill="#d4b968"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    letter-spacing="-1.5"
+  >Meredith McGee</text>
+
+  <!-- Thin decorative rule below name -->
+  <rect x="380" y="324" width="440" height="1" fill="#d4b968" opacity="0.4" />
+
+  <!-- Subtitle in Source Sans 3 style, --color-cream #ece6d0 -->
+  <text
+    x="600"
+    y="372"
+    font-family="'Source Sans 3', 'Source Sans Pro', -apple-system, sans-serif"
+    font-size="28"
+    font-weight="400"
+    fill="#ece6d0"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    letter-spacing="0.5"
+  >Public health writer, evaluator, and researcher</text>
+
+  <!-- Bottom URL in Source Sans 3, --color-cream at ~60% opacity -->
+  <text
+    x="600"
+    y="543"
+    font-family="'Source Sans 3', 'Source Sans Pro', -apple-system, sans-serif"
+    font-size="20"
+    font-weight="400"
+    fill="#ece6d0"
+    fill-opacity="0.6"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    letter-spacing="0.5"
+  >meredithmcgee.org</text>
+</svg>
