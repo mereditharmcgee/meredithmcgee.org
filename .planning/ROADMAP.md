@@ -12,7 +12,7 @@
 
 - [x] **Phase 1: Foundation Cleanup** - Remove old structure, establish nav, wire redirects for old routes
 - [x] **Phase 2: Shared Components** - Build SubstackFeed, WorkCard, updated Header/Footer, and data layer (2/2 plans complete)
-- [ ] **Phase 3: Static Pages** - Build About, Work, Work Archive, and Contact without external dependencies
+- [x] **Phase 3: Static Pages** - Build About, Work, Work Archive, and Contact without external dependencies
 - [x] **Phase 4: RSS-Dependent Pages** - Build Homepage and Ground Level using the SubstackFeed component
 - [ ] **Phase 5: Design System Elevation** - Evolve palette, typography, spacing, and scroll animations
 - [ ] **Phase 6: Easter Eggs and Polish** - Add Ember click, micro-delights, accessibility verification
@@ -25,7 +25,7 @@
 |-------|----------------|--------|-----------|
 | 1. Foundation Cleanup | 2/2 | Complete | 2026-03-01 |
 | 2. Shared Components | 2/2 | Complete | 2026-03-01 |
-| 3. Static Pages | 2/3 | In progress (03-01 About remaining) | - |
+| 3. Static Pages | 3/3 | Complete | 2026-03-01 |
 | 4. RSS-Dependent Pages | 2/2 | Complete | 2026-03-01 |
 | 5. Design System Elevation | 0/TBD | Not started | - |
 | 6. Easter Eggs and Polish | 0/TBD | Not started | - |
@@ -69,8 +69,8 @@
   5. The Contact page gives the email address plainly, includes LinkedIn and Substack links, uses contractions, and contains zero corporate language or em dashes
 **Plans**: 3 plans
 Plans:
-- [ ] 03-01-PLAN.md -- About page essay transformation (ABUT-01, ABUT-02, ABUT-03)
-- [ ] 03-02-PLAN.md -- Work page restructure + Work Archive creation (WORK-01 through WORK-06)
+- [x] 03-01-PLAN.md -- About page essay transformation (ABUT-01, ABUT-02, ABUT-03) — COMPLETE
+- [x] 03-02-PLAN.md -- Work page restructure + Work Archive creation (WORK-01 through WORK-06) — COMPLETE
 - [x] 03-03-PLAN.md -- Contact page simplification (CNTC-01, CNTC-02, CNTC-03) — COMPLETE (user approved)
 
 ### Phase 4: RSS-Dependent Pages

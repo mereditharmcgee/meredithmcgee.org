@@ -25,9 +25,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### About
 
-- [ ] **ABUT-01**: About page displays the full narrative essay copy in a continuous, essay-style layout
-- [ ] **ABUT-02**: About page has good reading line-length (not full-width text)
-- [ ] **ABUT-03**: About page has generous spacing between paragraphs, feels like reading a personal essay
+- [x] **ABUT-01**: About page displays the full narrative essay copy in a continuous, essay-style layout
+- [x] **ABUT-02**: About page has good reading line-length (not full-width text)
+- [x] **ABUT-03**: About page has generous spacing between paragraphs, feels like reading a personal essay
 
 ### Ground Level
 
@@ -121,9 +121,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | HOME-03 | Phase 4 | Pending |
 | HOME-04 | Phase 4 | Pending |
 | HOME-05 | Phase 4 | Pending |
-| ABUT-01 | Phase 3 | Pending |
-| ABUT-02 | Phase 3 | Pending |
-| ABUT-03 | Phase 3 | Pending |
+| ABUT-01 | Phase 3 | Complete |
+| ABUT-02 | Phase 3 | Complete |
+| ABUT-03 | Phase 3 | Complete |
 | GRLV-01 | Phase 4 | Complete |
 | GRLV-02 | Phase 4 | Complete |
 | GRLV-03 | Phase 4 | Complete |
