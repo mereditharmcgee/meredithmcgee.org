@@ -11,7 +11,6 @@ requirements:
 files_modified:
   - src/pages/index.astro
   - src/content.config.ts
-  - src/pages/rss.xml.js
   - astro.config.mjs
 files_deleted:
   - src/components/ThreeAudiences.astro
@@ -45,6 +44,17 @@ files_deleted:
   - src/assets/blog-placeholder-about.jpg
 files_created: []
 autonomous: true
+truths:
+  - ThreeAudiences component is fully removed (no file, no imports, no rendered output)
+  - Blog and portfolio content collections, schemas, page routes, and layout are all deleted
+  - "`npm run build` succeeds with zero errors after all deletions"
+  - "Visiting /portfolio, /blog, /resume redirects to /work, /ground-level, /about via Astro SSG meta-refresh redirect pages"
+  - rss.xml.js is deleted (it depends on the removed blog collection)
+artifacts:
+  - dist/portfolio/index.html (meta-refresh redirect to /work)
+  - dist/blog/index.html (meta-refresh redirect to /ground-level)
+  - dist/resume/index.html (meta-refresh redirect to /about)
+key_links: []
 ---
 
 # Plan A: Remove Old Structure and Wire Redirects
@@ -55,6 +65,10 @@ Remove the blog, portfolio, resume, and ThreeAudiences artifacts from the codeba
 
 <task id="A1">
 <title>Remove ThreeAudiences from index.astro and delete the component</title>
+<files>
+- src/pages/index.astro (modify)
+- src/components/ThreeAudiences.astro (delete)
+</files>
 <action>
 In `src/pages/index.astro`:
 1. Delete the import line (line 5): `import ThreeAudiences from '../components/ThreeAudiences.astro';`
@@ -70,64 +84,67 @@ CRITICAL: Both edits to index.astro AND the file deletion must happen together. 
 - `src/pages/index.astro` contains no reference to "ThreeAudiences"
 - No file in the project contains the string "ThreeAudiences"
 </verify>
+<done>
+- File `src/components/ThreeAudiences.astro` does not exist on disk
+- `grep -r "ThreeAudiences" src/` returns zero matches
+</done>
 </task>
 
 <task id="A2">
-<title>Delete unused HeaderLink component</title>
+<title>Delete all old structure files and clean up content config</title>
+<files>
+- src/components/HeaderLink.astro (delete)
+- src/layouts/BlogPost.astro (delete)
+- src/pages/blog/index.astro (delete)
+- src/pages/blog/[...slug].astro (delete)
+- src/pages/portfolio/[slug].astro (delete)
+- src/pages/portfolio.astro (delete)
+- src/pages/resume.astro (delete)
+- src/pages/rss.xml.js (delete)
+- src/content/blog/ (delete directory and all contents)
+- src/content/portfolio/ (delete directory and all contents)
+- src/assets/blog-placeholder-1.jpg (delete)
+- src/assets/blog-placeholder-2.jpg (delete)
+- src/assets/blog-placeholder-3.jpg (delete)
+- src/assets/blog-placeholder-4.jpg (delete)
+- src/assets/blog-placeholder-5.jpg (delete)
+- src/assets/blog-placeholder-about.jpg (delete)
+- src/content.config.ts (modify)
+</files>
 <action>
-Delete `src/components/HeaderLink.astro`. This component is not imported by any file in the codebase (confirmed during research).
-</action>
-<verify>
-- `src/components/HeaderLink.astro` does not exist
-</verify>
-</task>
+Delete all of the following files and directories:
 
-<task id="A3">
-<title>Delete blog pages, portfolio pages, and resume page</title>
-<action>
-Delete the following page files:
+**Components:**
+- `src/components/HeaderLink.astro` (not imported by any file)
+
+**Layouts:**
+- `src/layouts/BlogPost.astro`
+
+**Pages:**
 - `src/pages/blog/index.astro`
 - `src/pages/blog/[...slug].astro`
 - `src/pages/portfolio/[slug].astro`
 - `src/pages/portfolio.astro`
 - `src/pages/resume.astro`
+- `src/pages/rss.xml.js`
 
-After deleting the files, remove the now-empty directories:
+**Content collections:**
+- All files in `src/content/blog/` (5 files: first-post.md, markdown-style-guide.md, second-post.md, third-post.md, using-mdx.mdx)
+- All files in `src/content/portfolio/` (9 files: aids-quilt.md, bradbury-sullivan-grants.md, cannabis-research.md, hemp-thc-policy.md, lavender-lane.md, lgbtq-cbt-trial.md, parabola-content.md, program-evaluation.md, yale-lgbtmhi-podcast.md)
+
+**Assets:**
+- `src/assets/blog-placeholder-1.jpg` through `blog-placeholder-5.jpg`
+- `src/assets/blog-placeholder-about.jpg`
+
+After deleting files, remove now-empty directories:
 - `src/pages/blog/`
 - `src/pages/portfolio/`
-</action>
-<verify>
-- None of the listed files exist
-- `src/pages/blog/` directory does not exist
-- `src/pages/portfolio/` directory does not exist
-- `src/pages/resume.astro` does not exist
-</verify>
-</task>
-
-<task id="A4">
-<title>Delete blog and portfolio content collections and their schemas</title>
-<action>
-Delete all content markdown files:
-- `src/content/blog/first-post.md`
-- `src/content/blog/markdown-style-guide.md`
-- `src/content/blog/second-post.md`
-- `src/content/blog/third-post.md`
-- `src/content/blog/using-mdx.mdx`
-- `src/content/portfolio/aids-quilt.md`
-- `src/content/portfolio/bradbury-sullivan-grants.md`
-- `src/content/portfolio/cannabis-research.md`
-- `src/content/portfolio/hemp-thc-policy.md`
-- `src/content/portfolio/lavender-lane.md`
-- `src/content/portfolio/lgbtq-cbt-trial.md`
-- `src/content/portfolio/parabola-content.md`
-- `src/content/portfolio/program-evaluation.md`
-- `src/content/portfolio/yale-lgbtmhi-podcast.md`
-
-Remove the now-empty directories:
 - `src/content/blog/`
 - `src/content/portfolio/`
+- `src/layouts/` (if empty)
+- `src/assets/` (if empty)
 
-Replace `src/content.config.ts` with an empty collections export:
+**Replace** `src/content.config.ts` with an empty collections export:
 
 ```typescript
 import { defineCollection } from 'astro:content';
@@ -138,51 +155,30 @@ export const collections = {};
 This removes the `z` import, the `blog` definition, the `portfolio` definition, and the old export. The file must still exist with an empty `collections` export so Astro does not warn about a missing config.
 </action>
 <verify>
-- `src/content/blog/` directory does not exist
-- `src/content/portfolio/` directory does not exist
+- None of the listed files exist
+- `src/pages/blog/` and `src/pages/portfolio/` directories do not exist
+- `src/content/blog/` and `src/content/portfolio/` directories do not exist
 - `src/content.config.ts` exports `collections = {}`
-- No file in the project calls `getCollection('blog')` or `getCollection('portfolio')`
-</verify>
-</task>
-
-<task id="A5">
-<title>Delete BlogPost layout and blog placeholder assets</title>
-<action>
-Delete `src/layouts/BlogPost.astro`.
-
-Delete all blog placeholder images:
-- `src/assets/blog-placeholder-1.jpg`
-- `src/assets/blog-placeholder-2.jpg`
-- `src/assets/blog-placeholder-3.jpg`
-- `src/assets/blog-placeholder-4.jpg`
-- `src/assets/blog-placeholder-5.jpg`
-- `src/assets/blog-placeholder-about.jpg`
-
-Remove the now-empty directories if they are empty after deletion:
-- `src/layouts/` (if empty)
-- `src/assets/` (if empty)
-</action>
-<verify>
-- `src/layouts/BlogPost.astro` does not exist
 - No `blog-placeholder-*.jpg` files exist in `src/assets/`
-</verify>
-</task>
-
-<task id="A6">
-<title>Delete rss.xml.js</title>
-<action>
-Delete `src/pages/rss.xml.js`. This file calls `getCollection('blog')` which will fail after the blog collection is removed. There is no internal blog anymore; Substack has its own RSS feed.
-
-NOTE: The `@astrojs/rss` package can remain in package.json. Removing it is optional housekeeping for a later phase.
-</action>
-<verify>
-- `src/pages/rss.xml.js` does not exist
+- No file in the project calls `getCollection('blog')` or `getCollection('portfolio')`
 - No file in the project imports from `@astrojs/rss`
 </verify>
+<done>
+- `ls src/pages/blog/ src/pages/portfolio/ src/content/blog/ src/content/portfolio/` all fail (dirs do not exist)
+- `src/components/HeaderLink.astro` does not exist
+- `src/layouts/BlogPost.astro` does not exist
+- `src/pages/rss.xml.js` does not exist
+- `grep -r "getCollection" src/` returns zero matches for blog/portfolio
+- `src/content.config.ts` contains `export const collections = {};`
+- No `blog-placeholder` files exist under `src/assets/`
+</done>
 </task>
 
-<task id="A7">
+<task id="A3">
 <title>Add redirect configuration to astro.config.mjs</title>
+<files>
+- astro.config.mjs (modify)
+</files>
 <action>
 Edit `astro.config.mjs` to add the `redirects` key. The final file should be:
 
@@ -221,6 +217,13 @@ Astro SSG will generate static HTML pages with `<meta http-equiv="refresh">` at 
 - Check that `dist/blog/index.html` exists and contains a meta refresh to `/ground-level`
 - Check that `dist/resume/index.html` exists and contains a meta refresh to `/about`
 </verify>
+<done>
+- `astro.config.mjs` contains the string `redirects:` with entries for `/portfolio`, `/resume`, `/blog`
+- `npm run build` exits with code 0
+- `dist/portfolio/index.html` contains `meta http-equiv="refresh"` pointing to `/work`
+- `dist/blog/index.html` contains `meta http-equiv="refresh"` pointing to `/ground-level`
+- `dist/resume/index.html` contains `meta http-equiv="refresh"` pointing to `/about`
+</done>
 </task>
 
 ## Verification
@@ -228,15 +231,7 @@ Astro SSG will generate static HTML pages with `<meta http-equiv="refresh">` at 
 After all tasks are complete:
 
 1. **Build succeeds:** `npm run build` completes with exit code 0 and no errors
-2. **No orphaned imports:** grep the entire `src/` directory for "ThreeAudiences", "getCollection('blog')", "getCollection('portfolio')", "BlogPost" — zero matches
+2. **No orphaned imports:** grep the entire `src/` directory for "ThreeAudiences", "getCollection('blog')", "getCollection('portfolio')", "BlogPost" -- zero matches
 3. **Redirects exist in build output:** `dist/portfolio/index.html`, `dist/blog/index.html`, and `dist/resume/index.html` all contain `<meta http-equiv="refresh">`
 4. **Old content gone:** no files exist under `src/content/blog/`, `src/content/portfolio/`, `src/pages/blog/`, `src/pages/portfolio/`
 5. **No dead components:** `src/components/ThreeAudiences.astro` and `src/components/HeaderLink.astro` do not exist
-
-## must_haves
-
-- ThreeAudiences component is fully removed from the codebase (no file, no imports, no rendered output)
-- Blog and portfolio content collections, schemas, page routes, and layout are all deleted
-- `npm run build` succeeds with zero errors after all deletions
-- Visiting /portfolio, /blog, /resume redirects visitors to /work, /ground-level, /about respectively (via Astro SSG meta-refresh redirect pages)
-- rss.xml.js is deleted (it depends on the removed blog collection)
