@@ -43,8 +43,7 @@ const { title, description, category, link } = Astro.props;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-cream);
-    opacity: 0.6;
+    color: var(--color-text-muted);
     margin-bottom: 0.5rem;
   }
 
@@ -65,6 +64,9 @@ const { title, description, category, link } = Astro.props;
 
   .work-card__title a:hover {
     color: var(--color-cream);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    text-decoration-thickness: 1px;
   }
 
   .work-card__description {
@@ -81,11 +83,12 @@ const { title, description, category, link } = Astro.props;
     font-size: 0.875rem;
     color: var(--color-gold);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
     font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
   }
 
   .work-card__link:hover {
     color: var(--color-cream);
+    transform: translateX(3px);
   }
 </style>
