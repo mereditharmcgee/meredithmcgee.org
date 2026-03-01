@@ -193,6 +193,47 @@ section {
 	white-space: nowrap;
 }
 
+/* Scroll-triggered entrance animations */
+@keyframes fadeRise {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* JS adds .will-animate — no-JS visitors always see content at full opacity */
+.will-animate {
+	opacity: 0;
+	transform: translateY(20px);
+}
+
+.will-animate.is-visible {
+	animation: fadeRise 0.5s ease-out both;
+}
+
+/* Stagger delays for lists (cards, posts) */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+	.will-animate {
+		opacity: 1;
+		transform: none;
+	}
+	.will-animate.is-visible {
+		animation: none;
+	}
+}
+
 /* Responsive */
 @media (max-width: 768px) {
 	body {
