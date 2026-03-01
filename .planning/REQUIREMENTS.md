@@ -31,9 +31,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Ground Level
 
-- [ ] **GRLV-01**: Ground Level page displays brief description of what Ground Level is
-- [ ] **GRLV-02**: Ground Level page includes Substack subscribe CTA
-- [ ] **GRLV-03**: Ground Level page shows 5-6 most recent Substack posts with title, date, excerpt, and link
+- [x] **GRLV-01**: Ground Level page displays brief description of what Ground Level is
+- [x] **GRLV-02**: Ground Level page includes Substack subscribe CTA
+- [x] **GRLV-03**: Ground Level page shows 5-6 most recent Substack posts with title, date, excerpt, and link
 - [x] **GRLV-04**: Substack RSS is fetched at build time (not client-side) to avoid CORS issues
 
 ### Work
@@ -124,9 +124,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ABUT-01 | Phase 3 | Pending |
 | ABUT-02 | Phase 3 | Pending |
 | ABUT-03 | Phase 3 | Pending |
-| GRLV-01 | Phase 4 | Pending |
-| GRLV-02 | Phase 4 | Pending |
-| GRLV-03 | Phase 4 | Pending |
+| GRLV-01 | Phase 4 | Complete |
+| GRLV-02 | Phase 4 | Complete |
+| GRLV-03 | Phase 4 | Complete |
 | GRLV-04 | Phase 2 | Complete |
 | WORK-01 | Phase 3 | Complete |
 | WORK-02 | Phase 3 | Complete |
@@ -159,4 +159,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-28*
-*Last updated: 2026-02-28 after roadmap creation — all 40 requirements mapped*
+*Last updated: 2026-03-01 after 04-02 completion — GRLV-01, GRLV-02, GRLV-03 marked complete*
