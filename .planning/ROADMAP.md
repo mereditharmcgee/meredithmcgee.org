@@ -28,7 +28,7 @@
 | 3. Static Pages | 3/3 | Complete | 2026-03-01 |
 | 4. RSS-Dependent Pages | 2/2 | Complete | 2026-03-01 |
 | 5. Design System Elevation | 5/5 | Complete | 2026-03-01 |
-| 6. Easter Eggs and Polish | 0/TBD | Not started | - |
+| 6. Easter Eggs and Polish | 0/2 | Not started | - |
 
 ---
 
@@ -115,7 +115,10 @@ Plans:
   2. At least 2 additional micro-delight moments exist somewhere on the site — hover surprises, hidden elements, or playful interactions that feel specific to Meredith
   3. All Easter egg interactions have zero effect when `prefers-reduced-motion` is enabled — they either show a static version or do nothing
   4. All Easter egg interactions work correctly on iOS Safari and Android Chrome — no hover-only triggers, no interactions that require a mouse
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 06-01-PLAN.md -- Ember click interaction: photo popup, gold particle burst, click escalation (DLGT-01, DLGT-03, DLGT-04)
+- [ ] 06-02-PLAN.md -- About page footnote tooltips + hidden footer message (DLGT-02, DLGT-03, DLGT-04)
 
 ---
 
