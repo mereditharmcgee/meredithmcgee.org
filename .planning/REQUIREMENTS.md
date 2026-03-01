@@ -127,7 +127,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GRLV-01 | Phase 4 | Pending |
 | GRLV-02 | Phase 4 | Pending |
 | GRLV-03 | Phase 4 | Pending |
-| GRLV-04 | Phase 2 | Pending |
+| GRLV-04 | Phase 2 | Complete |
 | WORK-01 | Phase 3 | Pending |
 | WORK-02 | Phase 3 | Pending |
 | WORK-03 | Phase 3 | Pending |
