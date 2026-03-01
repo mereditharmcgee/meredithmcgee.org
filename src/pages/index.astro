@@ -20,7 +20,7 @@ const featuredWork = work.filter(item => item.featured);
 
 		<!-- Beat 1: Intro -->
 		<section class="intro bg-dark bg-pattern">
-			<div class="container">
+			<div class="container animate-on-scroll">
 				<h1>Meredith McGee</h1>
 				<img src="/meredith-headshot.jpg" alt="Meredith McGee" class="hero-photo" />
 				<p class="intro-copy">I'm Meredith. I'm deeply curious about systems and what happens when they fall short. That curiosity has taken me a lot of places: reviving LGBTQ+ programming and building the first gender-inclusive housing at my college, writing grants that have funded over a million dollars in health equity and community programs, researching LGBTQ+ mental health at Yale, studying how people actually experience legal cannabis markets, and occasionally building weird things on the internet. The thread that connects all of it is trying to make public health make sense to the people it's supposed to serve. Right now I'm in Boston, publishing Ground Level (a Substack about cannabis, public health, and the gap between policy and practice), doing research at Parabola Center for Law and Policy, and writing grants at Bradbury-Sullivan LGBT Community Center. I live with my partner K and a black lab named Ember who is scientifically proven to reduce my stress.</p>
@@ -30,7 +30,7 @@ const featuredWork = work.filter(item => item.featured);
 		<!-- Beat 2: What I'm Working On -->
 		<section class="working-on bg-medium">
 			<div class="container">
-				<h2>What I'm working on</h2>
+				<h2 class="animate-on-scroll">What I'm working on</h2>
 				<SubstackFeed limit={3} />
 			</div>
 		</section>
@@ -38,7 +38,7 @@ const featuredWork = work.filter(item => item.featured);
 		<!-- Beat 3: Selected Work -->
 		<section class="selected-work bg-dark">
 			<div class="container">
-				<h2>Selected work</h2>
+				<h2 class="animate-on-scroll">Selected work</h2>
 				{featuredWork.map(item => (
 					<WorkCard
 						title={item.title}
@@ -96,7 +96,7 @@ const featuredWork = work.filter(item => item.featured);
 
 	/* Beat 2: Working On */
 	.working-on {
-		padding: 4rem 0;
+		padding: 5rem 0;
 	}
 
 	.working-on .container {
@@ -112,7 +112,7 @@ const featuredWork = work.filter(item => item.featured);
 
 	/* Beat 3: Selected Work */
 	.selected-work {
-		padding: 4rem 0;
+		padding: 5rem 0;
 	}
 
 	.selected-work .container {
