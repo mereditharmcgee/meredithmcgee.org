@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-last_updated: "2026-03-01T00:12:09.506Z"
+status: in_progress
+last_updated: "2026-02-28T20:00:00Z"
 progress:
-  total_phases: 1
+  total_phases: 6
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_plans: 3
+  completed_plans: 3
 ---
 
 # Project State: meredithmcgee.org Rebuild
@@ -22,13 +22,13 @@ progress:
 
 ## Current Position
 
-**Phase:** 1 - Foundation Cleanup
-**Plan:** 01 and 02 complete — Phase 1 complete
-**Status:** Milestone complete
+**Phase:** 2 - Shared Components
+**Plan:** 01 complete — 02 pending
+**Status:** In progress
 
 ```
-Progress: [##--------] 17% complete
-Phase 1 of 6 (both plans executed and committed)
+Progress: [###-------] 25% complete
+Phase 2 of 6 (Plan 02-01 complete, 02-02 pending)
 ```
 
 ---
@@ -61,7 +61,7 @@ Phase 1 of 6 (both plans executed and committed)
 | Phase | Goal | Status |
 |-------|------|--------|
 | 1 - Foundation Cleanup | Clean codebase, new nav, redirects | Complete |
-| 2 - Shared Components | SubstackFeed, WorkCard, Header, Footer, data layer | Not started |
+| 2 - Shared Components | SubstackFeed, WorkCard, Header, Footer, data layer | In progress (1/2 plans) |
 | 3 - Static Pages | About, Work, Work Archive, Contact | Not started |
 | 4 - RSS-Dependent Pages | Homepage, Ground Level | Not started |
 | 5 - Design System Elevation | Palette, typography, spacing, animations, SEO | Not started |
@@ -89,6 +89,10 @@ Phase 1 of 6 (both plans executed and committed)
 | Inline SVG icons for footer social links | Zero icon library dependencies; icons follow CSS color tokens (01-02) |
 | Wildcard redirect patterns omitted from astro.config.mjs | Astro SSG requires getStaticPaths() for wildcard redirects; root-level redirects sufficient since individual slugs no longer exist (01-01) |
 | BaseHead OG image uses string path to public/ | Imported ImageMetadata from src/assets/ no longer valid after asset deletion; public/ path avoids import churn (01-01) |
+| SUBSTACK_FEED_URL uses meredithwritespublichealth.substack.com/feed | Old publication slug returns valid RSS XML; meredithmcgee.substack.com/feed redirects to HTML profile page, not RSS (02-01) |
+| cdataPropName: '__cdata' + getField() helper | fast-xml-parser CDATA handling varies by field; helper normalizes both plain string and {__cdata: string} formats (02-01) |
+| Single-item normalization in SubstackFeed | fast-xml-parser returns object instead of array when feed has only one item; Array.isArray check handles edge case (02-01) |
+| Work data: 8 placeholder entries in src/data/work.ts | Final curated content provided by user before Phase 3; placeholder references real orgs from existing site (02-01) |
 
 ### Critical Pitfalls to Avoid
 
@@ -100,8 +104,8 @@ Phase 1 of 6 (both plans executed and committed)
 
 ### Research Flags (Resolve Before Relevant Phase)
 
-- **Before Phase 2:** Fetch `https://meredithwritespublichealth.substack.com/feed` and inspect raw XML to confirm RSS 2.0 vs Atom format before writing the parser
-- **Before Phase 2:** Verify `motion` package version via `npm show motion version` — do not assume training-data version is current
+- ~~**Before Phase 2:** Fetch `https://meredithwritespublichealth.substack.com/feed` and inspect raw XML to confirm RSS 2.0 vs Atom format before writing the parser~~ RESOLVED: RSS 2.0 confirmed; parser implemented in 02-01
+- **Before Phase 2 Plan 02:** Verify `motion` package version via `npm show motion version` — do not assume training-data version is current
 - **Before Phase 3:** Confirm Formspree form decision: keep, simplify, or remove (spec says simplify but not resolved)
 - **Before Phase 3:** Work page curated content is not finalized — use placeholder entries per WORK-03; flag to user
 - **Before Phase 4:** Test build-time RSS fetch in a GitHub Actions dry run before merging — CI network restrictions may affect external fetches
@@ -122,7 +126,7 @@ Phase 1 of 6 (both plans executed and committed)
 ## Todos
 
 - [ ] Read WEBSITE-SPEC.md for final homepage intro copy before Phase 4
-- [ ] Fetch Substack RSS feed and inspect XML format before Phase 2
+- [x] Fetch Substack RSS feed and inspect XML format before Phase 2 — COMPLETE (02-01)
 - [ ] Confirm Formspree decision before Phase 3
 - [ ] Get Work page curated content from user or confirm placeholder approach before Phase 3
 
@@ -145,4 +149,4 @@ To resume work in a new session:
 ---
 
 *State initialized: 2026-02-28*
-*Last updated: 2026-03-01 after 01-01 execution (removed old structure, added redirects)*
+*Last updated: 2026-02-28 after 02-01 execution (SubstackFeed, work data layer, Substack constants)*

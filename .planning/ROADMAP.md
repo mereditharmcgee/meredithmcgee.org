@@ -11,7 +11,7 @@
 ## Phases
 
 - [x] **Phase 1: Foundation Cleanup** - Remove old structure, establish nav, wire redirects for old routes
-- [ ] **Phase 2: Shared Components** - Build SubstackFeed, WorkCard, updated Header/Footer, and data layer
+- [ ] **Phase 2: Shared Components** - Build SubstackFeed, WorkCard, updated Header/Footer, and data layer (1/2 plans complete)
 - [ ] **Phase 3: Static Pages** - Build About, Work, Work Archive, and Contact without external dependencies
 - [ ] **Phase 4: RSS-Dependent Pages** - Build Homepage and Ground Level using the SubstackFeed component
 - [ ] **Phase 5: Design System Elevation** - Evolve palette, typography, spacing, and scroll animations
@@ -24,7 +24,7 @@
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation Cleanup | 2/2 | Complete | 2026-03-01 |
-| 2. Shared Components | 0/TBD | Not started | - |
+| 2. Shared Components | 1/2 | In progress | - |
 | 3. Static Pages | 0/TBD | Not started | - |
 | 4. RSS-Dependent Pages | 0/TBD | Not started | - |
 | 5. Design System Elevation | 0/TBD | Not started | - |
@@ -182,4 +182,4 @@ Phase 6 (Easter Eggs and Polish)
 ---
 
 *Roadmap created: 2026-02-28*
-*Last updated: 2026-03-01 after 01-01 execution (Phase 1 complete: both plans executed)*
+*Last updated: 2026-02-28 after 02-01 execution (Phase 2 in progress: SubstackFeed, work data layer, Substack constants complete)*

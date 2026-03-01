@@ -34,7 +34,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **GRLV-01**: Ground Level page displays brief description of what Ground Level is
 - [ ] **GRLV-02**: Ground Level page includes Substack subscribe CTA
 - [ ] **GRLV-03**: Ground Level page shows 5-6 most recent Substack posts with title, date, excerpt, and link
-- [ ] **GRLV-04**: Substack RSS is fetched at build time (not client-side) to avoid CORS issues
+- [x] **GRLV-04**: Substack RSS is fetched at build time (not client-side) to avoid CORS issues
 
 ### Work
 
