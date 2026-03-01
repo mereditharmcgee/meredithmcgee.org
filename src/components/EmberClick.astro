@@ -1,0 +1,266 @@
+---
+// EmberClick.astro
+// Self-contained Ember click Easter egg component.
+// Import once per page that contains "Ember" mentions.
+// Replace /ember.jpg and /ember-silly.jpg in public/ with real Ember photos before launch.
+---
+
+<div id="ember-overlay" aria-hidden="true">
+  <div class="ember-popup">
+    <img src="" alt="Ember, Meredith's black lab" id="ember-photo" />
+    <p class="ember-caption" id="ember-caption"></p>
+  </div>
+</div>
+
+<style>
+  /* .ember-trigger styles use :global() since those spans live in page files */
+  :global(.ember-trigger) {
+    border-bottom: 1.5px dotted var(--color-gold);
+    cursor: pointer;
+    touch-action: manipulation;
+    color: inherit;
+    transition: border-bottom-color 0.2s ease;
+    display: inline;
+  }
+
+  :global(.ember-trigger:hover) {
+    border-bottom-color: var(--color-cream);
+  }
+
+  :global(.ember-trigger:focus-visible) {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  #ember-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    pointer-events: none;
+    display: none;
+  }
+
+  #ember-overlay.active {
+    display: block;
+  }
+
+  .ember-popup {
+    position: fixed;
+    width: 180px;
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    pointer-events: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--color-gold);
+    z-index: 1002;
+  }
+
+  .ember-popup img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ember-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(45, 58, 30, 0.85);
+    color: var(--color-gold);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.8rem;
+    font-style: italic;
+    padding: 0.4rem 0.6rem;
+    text-align: center;
+    margin: 0;
+    display: none;
+  }
+
+  :global(.ember-particle) {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-gold);
+    pointer-events: none;
+    z-index: 1002;
+    animation: particleBurst 0.8s ease-out forwards;
+  }
+
+  @keyframes particleBurst {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--dx), var(--dy)) scale(0.3);
+    }
+  }
+
+  @keyframes floatDismiss {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+  }
+
+  .ember-popup.dismissing {
+    animation: floatDismiss 0.6s ease-in forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.ember-particle) {
+      animation: none;
+      opacity: 0;
+    }
+
+    .ember-popup.dismissing {
+      animation: none;
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  function initEmberClick() {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let emberClickCount = 0;
+    let dismissTimer: ReturnType<typeof setTimeout> | null = null;
+
+    const triggers = document.querySelectorAll('.ember-trigger');
+    if (triggers.length === 0) return;
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', (e: Event) => {
+        emberClickCount += 1;
+        const isSilly = emberClickCount >= 3;
+        const mouseEvent = e as MouseEvent;
+        showEmberPopup(mouseEvent.clientX, mouseEvent.clientY, isSilly);
+      });
+
+      // Keyboard accessibility: trigger on Enter/Space like a button
+      trigger.addEventListener('keydown', (e: Event) => {
+        const ke = e as KeyboardEvent;
+        if (ke.key === 'Enter' || ke.key === ' ') {
+          ke.preventDefault();
+          emberClickCount += 1;
+          const isSilly = emberClickCount >= 3;
+          const rect = (trigger as HTMLElement).getBoundingClientRect();
+          showEmberPopup(rect.left + rect.width / 2, rect.top + rect.height / 2, isSilly);
+        }
+      });
+    });
+
+    function showEmberPopup(x: number, y: number, isSilly: boolean) {
+      // Clear any existing dismiss timer
+      if (dismissTimer !== null) {
+        clearTimeout(dismissTimer);
+        dismissTimer = null;
+      }
+
+      // Fast-click particle protection: remove excess particles
+      const existingParticles = document.querySelectorAll('.ember-particle');
+      if (existingParticles.length > 30) {
+        existingParticles.forEach((p) => p.remove());
+      }
+
+      const overlay = document.getElementById('ember-overlay') as HTMLElement | null;
+      const popup = overlay?.querySelector('.ember-popup') as HTMLElement | null;
+      const photo = document.getElementById('ember-photo') as HTMLImageElement | null;
+      const captionEl = document.getElementById('ember-caption') as HTMLElement | null;
+
+      if (!overlay || !popup || !photo || !captionEl) return;
+
+      // Remove dismissing state if mid-animation
+      popup.classList.remove('dismissing');
+
+      // Set photo source
+      photo.src = isSilly ? '/ember-silly.jpg' : '/ember.jpg';
+
+      // Position with viewport clamping
+      const POPUP_SIZE = 180;
+      const popupX = Math.min(x + 15, window.innerWidth - POPUP_SIZE - 15);
+      const popupY = Math.max(y - POPUP_SIZE - 15, 80);
+
+      popup.style.left = `${popupX}px`;
+      popup.style.top = `${popupY}px`;
+
+      // Caption for silly mode
+      if (isSilly) {
+        const captions = ['she says hi', 'good girl', 'best dog'];
+        captionEl.textContent = captions[(emberClickCount - 3) % captions.length];
+        captionEl.style.display = 'block';
+      } else {
+        captionEl.style.display = 'none';
+      }
+
+      // Show overlay
+      overlay.classList.add('active');
+
+      // Create particles (skip if reduced motion)
+      if (!prefersReduced) {
+        const particleCount = Math.floor(Math.random() * 3) + 6; // 6-8 particles
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('span');
+          particle.classList.add('ember-particle');
+          particle.style.left = `${x}px`;
+          particle.style.top = `${y}px`;
+          particle.style.setProperty('--dx', `${Math.random() * 100 - 50}px`);
+          particle.style.setProperty('--dy', `${Math.random() * -80 - 20}px`);
+          document.body.appendChild(particle);
+
+          particle.addEventListener('animationend', () => {
+            particle.remove();
+          });
+          // Fallback cleanup in case animationend doesn't fire
+          setTimeout(() => {
+            if (particle.parentNode) particle.remove();
+          }, 900);
+        }
+      }
+
+      // Auto-dismiss after 2 seconds
+      dismissTimer = setTimeout(() => {
+        dismissPopup();
+      }, 2000);
+    }
+
+    function dismissPopup() {
+      const overlay = document.getElementById('ember-overlay') as HTMLElement | null;
+      const popup = overlay?.querySelector('.ember-popup') as HTMLElement | null;
+
+      if (!overlay || !popup) return;
+
+      if (prefersReduced) {
+        overlay.classList.remove('active');
+        return;
+      }
+
+      popup.classList.add('dismissing');
+
+      const onDone = () => {
+        overlay.classList.remove('active');
+        popup.classList.remove('dismissing');
+        popup.removeEventListener('animationend', onDone);
+      };
+      popup.addEventListener('animationend', onDone);
+
+      // Fallback in case animationend doesn't fire
+      setTimeout(() => {
+        overlay.classList.remove('active');
+        popup.classList.remove('dismissing');
+      }, 700);
+    }
+  }
+
+  document.addEventListener('astro:page-load', initEmberClick);
+</script>
