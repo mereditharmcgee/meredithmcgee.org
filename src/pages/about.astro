@@ -1,5 +1,6 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
+import EmberClick from '../components/EmberClick.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_TITLE } from '../consts';
@@ -40,7 +41,7 @@ import { SITE_TITLE } from '../consts';
 				</p>
 
 				<p>
-					I also got Ember during college, a black lab who has been my best friend ever since.
+					I also got <span class="ember-trigger" tabindex="0" role="button" aria-label="Click to meet Ember">Ember</span> during college, a black lab who has been my best friend ever since.
 				</p>
 
 				<p>
@@ -72,11 +73,12 @@ import { SITE_TITLE } from '../consts';
 				</p>
 
 				<p>
-					I live with my partner, K, and Ember (the aforementioned black lab) in Boston. Outside of work, I'm trying to learn how to cook, I read across disciplines because I can't help it, and I spend as much time outside and with dogs as I can.
+					I live with my partner, K, and <span class="ember-trigger" tabindex="0" role="button" aria-label="Click to meet Ember">Ember</span> (the aforementioned black lab) in Boston. Outside of work, I'm trying to learn how to cook, I read across disciplines because I can't help it, and I spend as much time outside and with dogs as I can.
 				</p>
 			</div>
 		</section>
 
+		<EmberClick />
 		<Footer />
 	</body>
 </html>

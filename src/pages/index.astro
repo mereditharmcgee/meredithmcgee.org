@@ -1,5 +1,6 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
+import EmberClick from '../components/EmberClick.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import SubstackFeed from '../components/SubstackFeed.astro';
@@ -23,7 +24,7 @@ const featuredWork = work.filter(item => item.featured);
 			<div class="container animate-on-scroll">
 				<h1>Meredith McGee</h1>
 				<img src="/meredith-headshot.jpg" alt="Meredith McGee" class="hero-photo" />
-				<p class="intro-copy">I'm Meredith. I'm deeply curious about systems and what happens when they fall short. That curiosity has taken me a lot of places: reviving LGBTQ+ programming and building the first gender-inclusive housing at my college, writing grants that have funded over a million dollars in health equity and community programs, researching LGBTQ+ mental health at Yale, studying how people actually experience legal cannabis markets, and occasionally building weird things on the internet. The thread that connects all of it is trying to make public health make sense to the people it's supposed to serve. Right now I'm in Boston, publishing Ground Level (a Substack about cannabis, public health, and the gap between policy and practice), doing research at Parabola Center for Law and Policy, and writing grants at Bradbury-Sullivan LGBT Community Center. I live with my partner K and a black lab named Ember who is scientifically proven to reduce my stress.</p>
+				<p class="intro-copy">I'm Meredith. I'm deeply curious about systems and what happens when they fall short. That curiosity has taken me a lot of places: reviving LGBTQ+ programming and building the first gender-inclusive housing at my college, writing grants that have funded over a million dollars in health equity and community programs, researching LGBTQ+ mental health at Yale, studying how people actually experience legal cannabis markets, and occasionally building weird things on the internet. The thread that connects all of it is trying to make public health make sense to the people it's supposed to serve. Right now I'm in Boston, publishing Ground Level (a Substack about cannabis, public health, and the gap between policy and practice), doing research at Parabola Center for Law and Policy, and writing grants at Bradbury-Sullivan LGBT Community Center. I live with my partner K and a black lab named <span class="ember-trigger" tabindex="0" role="button" aria-label="Click to meet Ember">Ember</span> who is scientifically proven to reduce my stress.</p>
 			</div>
 		</section>
 
@@ -53,6 +54,7 @@ const featuredWork = work.filter(item => item.featured);
 			</div>
 		</section>
 
+		<EmberClick />
 		<Footer />
 	</body>
 </html>
