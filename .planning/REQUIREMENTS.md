@@ -38,12 +38,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Work
 
-- [ ] **WORK-01**: Work page displays curated highlights organized by actual pieces of work, not abstract categories
-- [ ] **WORK-02**: Each work piece shows title, short description of what it is and what it did, and link if available
-- [ ] **WORK-03**: Work page uses placeholder entries with real descriptive text until final content is provided
-- [ ] **WORK-04**: Work page has subtle category tags (research, grants, writing, projects) for visual context
-- [ ] **WORK-05**: Work Archive subpage linked from bottom of Work page, not in main nav
-- [ ] **WORK-06**: Work Archive is a comprehensive, utilitarian listing
+- [x] **WORK-01**: Work page displays curated highlights organized by actual pieces of work, not abstract categories
+- [x] **WORK-02**: Each work piece shows title, short description of what it is and what it did, and link if available
+- [x] **WORK-03**: Work page uses placeholder entries with real descriptive text until final content is provided
+- [x] **WORK-04**: Work page has subtle category tags (research, grants, writing, projects) for visual context
+- [x] **WORK-05**: Work Archive subpage linked from bottom of Work page, not in main nav
+- [x] **WORK-06**: Work Archive is a comprehensive, utilitarian listing
 
 ### Contact
 
@@ -128,12 +128,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GRLV-02 | Phase 4 | Pending |
 | GRLV-03 | Phase 4 | Pending |
 | GRLV-04 | Phase 2 | Complete |
-| WORK-01 | Phase 3 | Pending |
-| WORK-02 | Phase 3 | Pending |
-| WORK-03 | Phase 3 | Pending |
-| WORK-04 | Phase 3 | Pending |
-| WORK-05 | Phase 3 | Pending |
-| WORK-06 | Phase 3 | Pending |
+| WORK-01 | Phase 3 | Complete |
+| WORK-02 | Phase 3 | Complete |
+| WORK-03 | Phase 3 | Complete |
+| WORK-04 | Phase 3 | Complete |
+| WORK-05 | Phase 3 | Complete |
+| WORK-06 | Phase 3 | Complete |
 | CNTC-01 | Phase 3 | Complete |
 | CNTC-02 | Phase 3 | Complete |
 | CNTC-03 | Phase 3 | Complete |

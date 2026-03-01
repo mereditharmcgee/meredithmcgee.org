@@ -25,7 +25,7 @@
 |-------|----------------|--------|-----------|
 | 1. Foundation Cleanup | 2/2 | Complete | 2026-03-01 |
 | 2. Shared Components | 2/2 | Complete | 2026-03-01 |
-| 3. Static Pages | 0/3 | In progress (03-03 at checkpoint) | - |
+| 3. Static Pages | 2/3 | In progress (03-01 About remaining) | - |
 | 4. RSS-Dependent Pages | 0/TBD | Not started | - |
 | 5. Design System Elevation | 0/TBD | Not started | - |
 | 6. Easter Eggs and Polish | 0/TBD | Not started | - |
@@ -71,7 +71,7 @@
 Plans:
 - [ ] 03-01-PLAN.md -- About page essay transformation (ABUT-01, ABUT-02, ABUT-03)
 - [ ] 03-02-PLAN.md -- Work page restructure + Work Archive creation (WORK-01 through WORK-06)
-- [~] 03-03-PLAN.md -- Contact page simplification (CNTC-01, CNTC-02, CNTC-03) — Task 1 complete, at human-verify checkpoint
+- [x] 03-03-PLAN.md -- Contact page simplification (CNTC-01, CNTC-02, CNTC-03) — COMPLETE (user approved)
 
 ### Phase 4: RSS-Dependent Pages
 **Goal**: The Homepage and Ground Level page are complete and live — showing real Substack content pulled at build time, with the homepage landing experience matching the "person first" brief.
@@ -186,4 +186,4 @@ Phase 6 (Easter Eggs and Polish)
 ---
 
 *Roadmap created: 2026-02-28*
-*Last updated: 2026-03-01 after 03-03 Task 1 execution (Contact page rewrite — at human-verify checkpoint)*
+*Last updated: 2026-03-01 after 03-03 completion (Contact page rewrite — user approved visual checkpoint)*
