@@ -2,6 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
 	title: string;
@@ -42,3 +43,36 @@ const { title, description, image = '/meredith-headshot.jpg' } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- View Transitions for page-to-page navigation -->
+<ViewTransitions />
+
+<script>
+  function initAnimations() {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!prefersReduced) {
+      document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        el.classList.add('will-animate');
+        el.classList.remove('animate-on-scroll');
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      document.querySelectorAll('.will-animate').forEach(el => observer.observe(el));
+    }
+  }
+
+  // Run on initial page load and after View Transitions navigate
+  document.addEventListener('astro:page-load', initAnimations);
+</script>
