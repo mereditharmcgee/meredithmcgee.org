@@ -8,4 +8,9 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 	site: 'https://meredithmcgee.org',
 	integrations: [mdx(), sitemap()],
+	redirects: {
+		'/portfolio': '/work',
+		'/resume': '/about',
+		'/blog': '/ground-level',
+	},
 });
