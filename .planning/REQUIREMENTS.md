@@ -63,10 +63,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Delight
 
-- [ ] **DLGT-01**: Clicking Ember's name anywhere on the site triggers a photo popup or small animation
+- [x] **DLGT-01**: Clicking Ember's name anywhere on the site triggers a photo popup or small animation
 - [ ] **DLGT-02**: 2-3 additional micro-delights spread throughout the site (hover surprises, hidden elements, playful moments)
-- [ ] **DLGT-03**: Easter eggs feel personal to Meredith, not generic web magic
-- [ ] **DLGT-04**: All interactions respect prefers-reduced-motion and work on touch devices
+- [x] **DLGT-03**: Easter eggs feel personal to Meredith, not generic web magic
+- [x] **DLGT-04**: All interactions respect prefers-reduced-motion and work on touch devices
 
 ### SEO
 
@@ -144,10 +144,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DSGN-05 | Phase 5 | Complete |
 | DSGN-06 | Phase 5 | Complete |
 | DSGN-07 | Phase 5 | Complete |
-| DLGT-01 | Phase 6 | Pending |
+| DLGT-01 | Phase 6 | Complete |
 | DLGT-02 | Phase 6 | Pending |
-| DLGT-03 | Phase 6 | Pending |
-| DLGT-04 | Phase 6 | Pending |
+| DLGT-03 | Phase 6 | Complete |
+| DLGT-04 | Phase 6 | Complete |
 | SEO-01 | Phase 5 | Complete (05-05) |
 | SEO-02 | Phase 5 | Complete (05-05) |
 | SEO-03 | Phase 5 | Complete (05-05) |

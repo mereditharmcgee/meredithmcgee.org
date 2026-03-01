@@ -3,7 +3,7 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-last_updated: "2026-03-01T09:00:00Z"
+last_updated: "2026-03-01T09:36:49Z"
 progress:
   total_phases: 6
   completed_phases: 5
@@ -22,13 +22,13 @@ progress:
 
 ## Current Position
 
-**Phase:** 5 - Design System Elevation
-**Plan:** 05-05 COMPLETE (SEO and social sharing — OG image, meta descriptions, sitemap)
-**Status:** Phase 5 complete
+**Phase:** 6 - Easter Eggs and Polish
+**Plan:** 06-01 (Ember click Easter egg — tasks 1-2 complete, awaiting human verification at Task 3 checkpoint)
+**Status:** In progress
 
 ```
-Progress: [##############] 93% complete
-Phase 5 of 6 COMPLETE. All 5 plans in Phase 5 complete.
+Progress: [##############] 93% complete (Phase 6 started)
+Phase 5 of 6 COMPLETE. Phase 6 in progress — 06-01 tasks 1-2 done, checkpoint pending.
 ```
 
 ---
@@ -65,7 +65,7 @@ Phase 5 of 6 COMPLETE. All 5 plans in Phase 5 complete.
 | 3 - Static Pages | About, Work, Work Archive, Contact | In progress (03-03 complete; 03-01 About remaining) |
 | 4 - RSS-Dependent Pages | Homepage, Ground Level | Complete (04-01 Homepage, 04-02 Ground Level — user-approved 2026-03-01) |
 | 5 - Design System Elevation | Palette, typography, spacing, animations, SEO | Complete (all 5 plans done) |
-| 6 - Easter Eggs and Polish | Ember click, micro-delights, accessibility | Not started |
+| 6 - Easter Eggs and Polish | Ember click, micro-delights, accessibility | In progress (06-01 tasks 1-2 complete; checkpoint pending verification) |
 
 ---
 
@@ -123,6 +123,9 @@ Phase 5 of 6 COMPLETE. All 5 plans in Phase 5 complete.
 | OG image created as SVG in public/og-image.svg | No image generation library needed; crisp at all sizes; user can convert to PNG if social platforms don't render SVG (05-05) |
 | BaseHead default image changed to /og-image.svg | Designed social card replaces portrait headshot as default for all pages without custom image prop (05-05) |
 | About description rewritten as narrative hook | Removed MPH, em dash, and corporate language; voice-rule compliant: "The story behind the work. Meredith McGee writes about how she got from Rochester to Yale to Boston..." (05-05) |
+| Used :global(.ember-trigger) CSS modifier | Trigger spans live in page files, not inside EmberClick.astro; :global() reaches them without is:global on the whole style block (06-01) |
+| Keyboard Enter/Space handler added to .ember-trigger | role="button" requires keyboard activation via Enter/Space for correct ARIA semantics; not in plan spec but required for accessibility correctness (06-01) |
+| EmberClick click count resets on page navigation | Per astro:page-load initialization; acceptable tradeoff — escalation resets on navigation, consistent with page-scoped interaction model (06-01) |
 
 ### Critical Pitfalls to Avoid
 
@@ -180,3 +183,4 @@ To resume work in a new session:
 
 *State initialized: 2026-02-28*
 *Last updated: 2026-03-01 after 05-05 completion (SEO — OG social card image created at public/og-image.svg with evolved dark palette, BaseHead default changed from headshot to og-image.svg, MPH removed from all meta descriptions with voice-rule rewrites, sitemap verified at 6 correct routes, canonical URLs verified correct across all pages; Phase 5 complete)*
+*Updated: 2026-03-01 — 06-01 tasks 1-2 complete (EmberClick.astro component, ember-trigger spans on index.astro and about.astro); checkpoint:human-verify pending for Task 3 browser verification*

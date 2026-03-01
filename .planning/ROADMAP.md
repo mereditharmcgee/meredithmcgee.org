@@ -28,7 +28,7 @@
 | 3. Static Pages | 3/3 | Complete | 2026-03-01 |
 | 4. RSS-Dependent Pages | 2/2 | Complete | 2026-03-01 |
 | 5. Design System Elevation | 5/5 | Complete | 2026-03-01 |
-| 6. Easter Eggs and Polish | 0/2 | Not started | - |
+| 6. Easter Eggs and Polish | 1/2 | In Progress|  |
 
 ---
 
