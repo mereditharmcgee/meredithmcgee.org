@@ -8,7 +8,7 @@ progress:
   total_phases: 6
   completed_phases: 4
   total_plans: 14
-  completed_plans: 10
+  completed_plans: 11
 ---
 
 # Project State: meredithmcgee.org Rebuild
@@ -23,12 +23,12 @@ progress:
 ## Current Position
 
 **Phase:** 5 - Design System Elevation
-**Plan:** 05-01 COMPLETE (Design token foundation)
+**Plan:** 05-02 COMPLETE (Animation infrastructure)
 **Status:** Phase 5 in progress
 
 ```
-Progress: [##########] 71% complete
-Phase 4 of 6 COMPLETE. Phase 5 Plan 1 of 5 complete.
+Progress: [###########] 74% complete
+Phase 4 of 6 COMPLETE. Phase 5 Plan 2 of 5 complete.
 ```
 
 ---
@@ -108,6 +108,8 @@ Phase 4 of 6 COMPLETE. Phase 5 Plan 1 of 5 complete.
 | --color-text-muted added: rgba(236, 230, 208, 0.6) | New utility token for dates, metadata, secondary text; needed by spacing and animation plans (05-01) |
 | Atkinson font preloads removed from BaseHead.astro | Font files exist in public/fonts/ but no CSS references them; removing eliminates wasted network requests on every page load (05-01) |
 | Playfair Display headings: letter-spacing -0.02em | Tighter tracking for editorial feel; Source Sans 3 body at line-height 1.75 for dark-background readability (05-01) |
+| Used astro:page-load event instead of DOMContentLoaded | DOMContentLoaded doesn't fire after Astro View Transitions navigations; astro:page-load fires on both initial load and every transition (05-02) |
+| Progressive enhancement for animation: .will-animate is JS-only | Static HTML always shows content at full opacity; no-JS visitors are unaffected by animation infrastructure (05-02) |
 | Homepage three-beat layout: Intro (bg-dark) > Working On (bg-medium) > Selected Work (bg-dark) | bg-medium for Beat 2 provides contrast from adjacent bg-dark sections; gold/cream tokens readable on all three (04-01) |
 | All 4 featured work items on homepage (no slice) | Plan spec says show all 4 featured items; provides full picture without requiring /work visit (04-01) |
 | Ground Level uses two bg-dark sections (no bg-medium) | Single-subject newsletter page suits a unified dark field; no contrast section needed (04-02) |
@@ -169,4 +171,4 @@ To resume work in a new session:
 ---
 
 *State initialized: 2026-02-28*
-*Last updated: 2026-03-01 after 05-01 completion (Design token foundation — evolved color palette, typography refinement, dead token cleanup, Atkinson preload removal, SITE_TITLE update)*
+*Last updated: 2026-03-01 after 05-02 completion (Animation infrastructure — @keyframes fadeRise, .will-animate classes, stagger utilities, prefers-reduced-motion overrides, Astro ViewTransitions, IntersectionObserver script in BaseHead)*

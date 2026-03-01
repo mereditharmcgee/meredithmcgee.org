@@ -55,8 +55,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **DSGN-01**: Color palette evolves existing greens/browns/warm tones to feel more professional and cohesive
 - [x] **DSGN-02**: Typography refines Playfair Display + Source Sans 3 with tuned weights, sizes, and spacing
-- [ ] **DSGN-03**: Layout has generous whitespace throughout, nothing feels cramped
-- [ ] **DSGN-04**: Subtle scroll-triggered entrance animations on key sections
+- [x] **DSGN-03**: Layout has generous whitespace throughout, nothing feels cramped
+- [x] **DSGN-04**: Subtle scroll-triggered entrance animations on key sections
 - [ ] **DSGN-05**: Smooth page transitions and hover states feel alive but not flashy
 - [ ] **DSGN-06**: Site is mobile-responsive and looks great on a phone
 - [x] **DSGN-07**: All copy follows voice rules: no em dashes, no bullet points in prose, contractions always, no corporate buzzwords
@@ -139,8 +139,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CNTC-03 | Phase 3 | Complete |
 | DSGN-01 | Phase 5 | Complete |
 | DSGN-02 | Phase 5 | Complete |
-| DSGN-03 | Phase 5 | Pending |
-| DSGN-04 | Phase 5 | Pending |
+| DSGN-03 | Phase 5 | Complete |
+| DSGN-04 | Phase 5 | Complete |
 | DSGN-05 | Phase 5 | Pending |
 | DSGN-06 | Phase 5 | Pending |
 | DSGN-07 | Phase 5 | Complete |
@@ -159,4 +159,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-28*
-*Last updated: 2026-03-01 after 04-02 completion — GRLV-01, GRLV-02, GRLV-03 marked complete*
+*Last updated: 2026-03-01 after 05-02 completion — DSGN-03, DSGN-04 marked complete*
