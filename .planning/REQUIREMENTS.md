@@ -70,9 +70,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### SEO
 
-- [ ] **SEO-01**: Open Graph images updated to reflect new design for correct social sharing previews
-- [ ] **SEO-02**: Sitemap regenerated for new page structure
-- [ ] **SEO-03**: Canonical URLs correct for all new pages
+- [x] **SEO-01**: Open Graph images updated to reflect new design for correct social sharing previews
+- [x] **SEO-02**: Sitemap regenerated for new page structure
+- [x] **SEO-03**: Canonical URLs correct for all new pages
 
 ## v2 Requirements
 
@@ -148,9 +148,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DLGT-02 | Phase 6 | Pending |
 | DLGT-03 | Phase 6 | Pending |
 | DLGT-04 | Phase 6 | Pending |
-| SEO-01 | Phase 5 | Pending |
-| SEO-02 | Phase 5 | Pending |
-| SEO-03 | Phase 5 | Pending |
+| SEO-01 | Phase 5 | Complete (05-05) |
+| SEO-02 | Phase 5 | Complete (05-05) |
+| SEO-03 | Phase 5 | Complete (05-05) |
 
 **Coverage:**
 - v1 requirements: 40 total

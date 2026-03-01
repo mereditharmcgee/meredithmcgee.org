@@ -14,7 +14,7 @@
 - [x] **Phase 2: Shared Components** - Build SubstackFeed, WorkCard, updated Header/Footer, and data layer (2/2 plans complete)
 - [x] **Phase 3: Static Pages** - Build About, Work, Work Archive, and Contact without external dependencies
 - [x] **Phase 4: RSS-Dependent Pages** - Build Homepage and Ground Level using the SubstackFeed component
-- [ ] **Phase 5: Design System Elevation** - Evolve palette, typography, spacing, and scroll animations (05-01, 05-02, 05-03, 05-04 complete)
+- [x] **Phase 5: Design System Elevation** - Evolve palette, typography, spacing, scroll animations, SEO (all 5 plans complete)
 - [ ] **Phase 6: Easter Eggs and Polish** - Add Ember click, micro-delights, accessibility verification
 
 ---
@@ -27,7 +27,7 @@
 | 2. Shared Components | 2/2 | Complete | 2026-03-01 |
 | 3. Static Pages | 3/3 | Complete | 2026-03-01 |
 | 4. RSS-Dependent Pages | 2/2 | Complete | 2026-03-01 |
-| 5. Design System Elevation | 4/5 | In progress | - |
+| 5. Design System Elevation | 5/5 | Complete | 2026-03-01 |
 | 6. Easter Eggs and Polish | 0/TBD | Not started | - |
 
 ---
@@ -104,7 +104,7 @@ Plans:
 - [x] 05-02-PLAN.md -- Animation infrastructure: @keyframes fadeRise, .will-animate classes, stagger utilities, prefers-reduced-motion, ViewTransitions, IntersectionObserver (DSGN-03, DSGN-04) — COMPLETE 2026-03-01
 - [x] 05-03-PLAN.md -- Page animations and spacing: .animate-on-scroll on all 6 pages, spacing uplift (DSGN-03, DSGN-05) — COMPLETE 2026-03-01
 - [x] 05-04-PLAN.md -- Component polish: WorkCard and SubstackFeed refined hover states, --color-text-muted metadata tokens, user visual approval (DSGN-05, DSGN-06) — COMPLETE 2026-03-01
-- [ ] 05-05-PLAN.md -- SEO, final polish and mobile audit (SEO-01, SEO-02, SEO-03)
+- [x] 05-05-PLAN.md -- SEO: OG image, BaseHead default, meta description rewrites, sitemap + canonical verification (SEO-01, SEO-02, SEO-03) — COMPLETE 2026-03-01
 
 ### Phase 6: Easter Eggs and Polish
 **Goal**: The site has personality beyond content — Ember's click interaction and 2 additional micro-delights are working, accessible on touch, and feel specific to Meredith rather than generic web magic.
@@ -195,4 +195,4 @@ Phase 6 (Easter Eggs and Polish)
 ---
 
 *Roadmap created: 2026-02-28*
-*Last updated: 2026-03-01 after 05-04 completion (Component polish — WorkCard and SubstackFeed refined with --color-text-muted metadata tokens, hover underline pattern, translateX Read more lift; user approved and pushed to production)*
+*Last updated: 2026-03-01 after 05-05 completion (SEO — OG social card, MPH-free meta descriptions, sitemap + canonical verification; Phase 5 complete)*

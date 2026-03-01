@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-last_updated: "2026-03-01T07:23:00Z"
+last_updated: "2026-03-01T09:00:00Z"
 progress:
   total_phases: 6
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 14
-  completed_plans: 12
+  completed_plans: 13
 ---
 
 # Project State: meredithmcgee.org Rebuild
@@ -23,12 +23,12 @@ progress:
 ## Current Position
 
 **Phase:** 5 - Design System Elevation
-**Plan:** 05-04 COMPLETE (Component polish — WorkCard and SubstackFeed hover states)
-**Status:** Phase 5 in progress
+**Plan:** 05-05 COMPLETE (SEO and social sharing — OG image, meta descriptions, sitemap)
+**Status:** Phase 5 complete
 
 ```
-Progress: [############] 85% complete
-Phase 4 of 6 COMPLETE. Phase 5 Plan 4 of 5 complete.
+Progress: [##############] 93% complete
+Phase 5 of 6 COMPLETE. All 5 plans in Phase 5 complete.
 ```
 
 ---
@@ -64,7 +64,7 @@ Phase 4 of 6 COMPLETE. Phase 5 Plan 4 of 5 complete.
 | 2 - Shared Components | SubstackFeed, WorkCard, Header, Footer, data layer | Complete |
 | 3 - Static Pages | About, Work, Work Archive, Contact | In progress (03-03 complete; 03-01 About remaining) |
 | 4 - RSS-Dependent Pages | Homepage, Ground Level | Complete (04-01 Homepage, 04-02 Ground Level — user-approved 2026-03-01) |
-| 5 - Design System Elevation | Palette, typography, spacing, animations, SEO | In progress (05-01 Design Tokens complete) |
+| 5 - Design System Elevation | Palette, typography, spacing, animations, SEO | Complete (all 5 plans done) |
 | 6 - Easter Eggs and Polish | Ember click, micro-delights, accessibility | Not started |
 
 ---
@@ -120,6 +120,9 @@ Phase 4 of 6 COMPLETE. Phase 5 Plan 4 of 5 complete.
 | WorkCard and SubstackFeed metadata use --color-text-muted token (not raw opacity) | Token is the proper abstraction; consistent muted styling across all secondary text (05-04) |
 | Hover underline pattern: text-underline-offset 0.15em + text-decoration-thickness 1px | Consistent hover affordance across both interactive components (05-04) |
 | Read more CTA gets translateX(3px) on hover | Directional lift reinforces forward motion without being heavy (05-04) |
+| OG image created as SVG in public/og-image.svg | No image generation library needed; crisp at all sizes; user can convert to PNG if social platforms don't render SVG (05-05) |
+| BaseHead default image changed to /og-image.svg | Designed social card replaces portrait headshot as default for all pages without custom image prop (05-05) |
+| About description rewritten as narrative hook | Removed MPH, em dash, and corporate language; voice-rule compliant: "The story behind the work. Meredith McGee writes about how she got from Rochester to Yale to Boston..." (05-05) |
 
 ### Critical Pitfalls to Avoid
 
@@ -136,7 +139,7 @@ Phase 4 of 6 COMPLETE. Phase 5 Plan 4 of 5 complete.
 - ~~**Before Phase 3:** Confirm Formspree form decision: keep, simplify, or remove (spec says simplify but not resolved)~~ RESOLVED: Kept and simplified to 3 fields in 03-03
 - **Before Phase 3:** Work page curated content is not finalized — use placeholder entries per WORK-03; flag to user
 - **Before Phase 4:** Test build-time RSS fetch in a GitHub Actions dry run before merging — CI network restrictions may affect external fetches
-- **After Phase 5:** Verify OG images and BaseHead still correct after design system changes
+- ~~**After Phase 5:** Verify OG images and BaseHead still correct after design system changes~~ RESOLVED: OG image created and BaseHead updated in 05-05
 
 ### Content Status
 
@@ -176,4 +179,4 @@ To resume work in a new session:
 ---
 
 *State initialized: 2026-02-28*
-*Last updated: 2026-03-01 after 05-04 completion (Component polish — WorkCard and SubstackFeed refined with --color-text-muted metadata tokens, hover underline pattern, translateX Read more lift; user approved and pushed to production)*
+*Last updated: 2026-03-01 after 05-05 completion (SEO — OG social card image created at public/og-image.svg with evolved dark palette, BaseHead default changed from headshot to og-image.svg, MPH removed from all meta descriptions with voice-rule rewrites, sitemap verified at 6 correct routes, canonical URLs verified correct across all pages; Phase 5 complete)*
