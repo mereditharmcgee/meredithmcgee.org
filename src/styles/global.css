@@ -28,8 +28,9 @@ body {
 	background-color: var(--color-dark);
 	color: var(--color-cream);
 	font-size: 18px;
-	line-height: 1.7;
+	line-height: 1.75;
 	overflow-x: hidden;
+	font-optical-sizing: auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -37,6 +38,7 @@ h1, h2, h3, h4, h5, h6 {
 	color: var(--color-gold);
 	line-height: 1.2;
 	font-weight: 500;
+	letter-spacing: -0.02em;
 }
 
 h1 {
