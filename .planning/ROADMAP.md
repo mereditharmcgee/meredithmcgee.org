@@ -14,7 +14,7 @@
 - [x] **Phase 2: Shared Components** - Build SubstackFeed, WorkCard, updated Header/Footer, and data layer (2/2 plans complete)
 - [x] **Phase 3: Static Pages** - Build About, Work, Work Archive, and Contact without external dependencies
 - [x] **Phase 4: RSS-Dependent Pages** - Build Homepage and Ground Level using the SubstackFeed component
-- [ ] **Phase 5: Design System Elevation** - Evolve palette, typography, spacing, and scroll animations (05-01, 05-02 complete)
+- [ ] **Phase 5: Design System Elevation** - Evolve palette, typography, spacing, and scroll animations (05-01, 05-02, 05-03 complete)
 - [ ] **Phase 6: Easter Eggs and Polish** - Add Ember click, micro-delights, accessibility verification
 
 ---
@@ -27,7 +27,7 @@
 | 2. Shared Components | 2/2 | Complete | 2026-03-01 |
 | 3. Static Pages | 3/3 | Complete | 2026-03-01 |
 | 4. RSS-Dependent Pages | 2/2 | Complete | 2026-03-01 |
-| 5. Design System Elevation | 2/5 | In progress | - |
+| 5. Design System Elevation | 3/5 | In progress | - |
 | 6. Easter Eggs and Polish | 0/TBD | Not started | - |
 
 ---
@@ -102,8 +102,8 @@ Plans:
 Plans:
 - [x] 05-01-PLAN.md -- Design token foundation: color palette evolution, typography refinement, dead token cleanup, SITE_TITLE update (DSGN-01, DSGN-02, DSGN-07) — COMPLETE 2026-03-01
 - [x] 05-02-PLAN.md -- Animation infrastructure: @keyframes fadeRise, .will-animate classes, stagger utilities, prefers-reduced-motion, ViewTransitions, IntersectionObserver (DSGN-03, DSGN-04) — COMPLETE 2026-03-01
-- [ ] 05-03-PLAN.md -- Spacing and rhythm (DSGN-06)
-- [ ] 05-04-PLAN.md -- Page animations: add .animate-on-scroll markup to pages (DSGN-04, DSGN-05)
+- [x] 05-03-PLAN.md -- Page animations and spacing: .animate-on-scroll on all 6 pages, spacing uplift (DSGN-03, DSGN-05) — COMPLETE 2026-03-01
+- [ ] 05-04-PLAN.md -- Component polish: stagger animations for WorkCard/SubstackFeed items (DSGN-04, DSGN-05)
 - [ ] 05-05-PLAN.md -- SEO, final polish and mobile audit (SEO-01, SEO-02, SEO-03)
 
 ### Phase 6: Easter Eggs and Polish
@@ -195,4 +195,4 @@ Phase 6 (Easter Eggs and Polish)
 ---
 
 *Roadmap created: 2026-02-28*
-*Last updated: 2026-03-01 after 05-02 completion (Animation infrastructure — fadeRise keyframes, will-animate classes, stagger utilities, reduced-motion overrides, Astro ViewTransitions, IntersectionObserver in BaseHead)*
+*Last updated: 2026-03-01 after 05-03 completion (Page animations and spacing — animate-on-scroll marker classes on all 6 pages, spacing uplift with 4rem+ minimum vertical padding on all sections)*

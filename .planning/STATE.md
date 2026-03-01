@@ -23,12 +23,12 @@ progress:
 ## Current Position
 
 **Phase:** 5 - Design System Elevation
-**Plan:** 05-02 COMPLETE (Animation infrastructure)
+**Plan:** 05-03 COMPLETE (Page animations and spacing)
 **Status:** Phase 5 in progress
 
 ```
-Progress: [###########] 74% complete
-Phase 4 of 6 COMPLETE. Phase 5 Plan 2 of 5 complete.
+Progress: [###########] 78% complete
+Phase 4 of 6 COMPLETE. Phase 5 Plan 3 of 5 complete.
 ```
 
 ---
@@ -110,6 +110,8 @@ Phase 4 of 6 COMPLETE. Phase 5 Plan 2 of 5 complete.
 | Playfair Display headings: letter-spacing -0.02em | Tighter tracking for editorial feel; Source Sans 3 body at line-height 1.75 for dark-background readability (05-01) |
 | Used astro:page-load event instead of DOMContentLoaded | DOMContentLoaded doesn't fire after Astro View Transitions navigations; astro:page-load fires on both initial load and every transition (05-02) |
 | Progressive enhancement for animation: .will-animate is JS-only | Static HTML always shows content at full opacity; no-JS visitors are unaffected by animation infrastructure (05-02) |
+| About essay body excluded from animate-on-scroll | Continuous reading experiences should not interrupt flow with per-paragraph entrance animations; heading section only (05-03) |
+| animate-on-scroll applied to .container divs not section elements | Scopes animation to content area rather than full-bleed backgrounds; more intentional visual effect (05-03) |
 | Homepage three-beat layout: Intro (bg-dark) > Working On (bg-medium) > Selected Work (bg-dark) | bg-medium for Beat 2 provides contrast from adjacent bg-dark sections; gold/cream tokens readable on all three (04-01) |
 | All 4 featured work items on homepage (no slice) | Plan spec says show all 4 featured items; provides full picture without requiring /work visit (04-01) |
 | Ground Level uses two bg-dark sections (no bg-medium) | Single-subject newsletter page suits a unified dark field; no contrast section needed (04-02) |
@@ -171,4 +173,4 @@ To resume work in a new session:
 ---
 
 *State initialized: 2026-02-28*
-*Last updated: 2026-03-01 after 05-02 completion (Animation infrastructure — @keyframes fadeRise, .will-animate classes, stagger utilities, prefers-reduced-motion overrides, Astro ViewTransitions, IntersectionObserver script in BaseHead)*
+*Last updated: 2026-03-01 after 05-03 completion (Page animations and spacing — animate-on-scroll marker classes on all 6 pages, spacing uplift with 4rem+ minimum vertical padding on all sections)*
