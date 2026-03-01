@@ -29,7 +29,7 @@ import { SITE_TITLE } from '../consts';
 				</p>
 
 				<p>
-					Earning a B.S. in biology and a B.A. in history meant I got the "why don't you just pick one?" question a lot. But to me, both were asking the same question in different languages: how do complex systems work, and what happens to the people inside them? I competed in Division I track and field, throwing the hammer until my body and health had other plans. But stepping away from athletics pushed me toward the thing I actually wanted to spend my energy on: building something for my community, and I wouldn't trade how that turned out.
+					Earning a B.S. in biology and a B.A. in history meant I got the "why don't you just pick one?" question a lot. But to me, both were asking the same question in different languages: how do complex systems work, and what happens to the people inside them? I competed in Division I track and field, <span class="footnote-trigger" tabindex="0" role="button" aria-describedby="footnote-tooltip" data-aside="The hammer is a 16-pound metal ball on a steel wire. You spin in a seven-foot circle and try to throw it as far as possible. It takes years to convince your body to trust the chaos of it, and I loved it completely.">throwing the hammer</span> until my body and health had other plans. But stepping away from athletics pushed me toward the thing I actually wanted to spend my energy on: building something for my community, and I wouldn't trade how that turned out.
 				</p>
 
 				<figure class="essay-photo">
@@ -37,7 +37,7 @@ import { SITE_TITLE } from '../consts';
 				</figure>
 
 				<p>
-					Lafayette didn't have enough support for LGBTQ+ students when I arrived, so I helped change that. My partner K and I co-founded OUT Lafayette to create space for LGBTQ+ students to gather, and we launched Lavender Lane, a living-learning community in a converted sorority house that became the college's first gender-affirming and gender-neutral housing option. This culminated in the project I'm still proudest of: bringing panels of the National AIDS Memorial Quilt to campus for the first time in three decades.
+					Lafayette didn't have enough support for LGBTQ+ students when I arrived, so I helped change that. My partner K and I co-founded OUT Lafayette to create space for LGBTQ+ students to gather, and we launched <span class="footnote-trigger" tabindex="0" role="button" aria-describedby="footnote-tooltip" data-aside="We converted a former sorority house into gender-neutral housing, which sounds simple until you realize how many institutional hurdles a sorority house has. It became a real home. I still think about the students who needed it before it existed.">Lavender Lane</span>, a living-learning community in a converted sorority house that became the college's first gender-affirming and gender-neutral housing option. This culminated in the project I'm still proudest of: bringing panels of the National AIDS Memorial Quilt to campus for the first time in three decades.
 				</p>
 
 				<p>
@@ -53,7 +53,7 @@ import { SITE_TITLE } from '../consts';
 				</p>
 
 				<p>
-					While I was at Yale, I was also working as a grant specialist at Bradbury-Sullivan LGBT Community Center in Pennsylvania. That role taught me that development is, in itself, public health work. Every proposal I write is built around community needs, program evidence, and data, structured into a narrative that makes a funder understand why this work matters and what it changes. I've helped secure over a million dollars in funding for health equity and community programs, and I think of every one of those proposals as a case for why a community deserves resources it shouldn't have to ask for.
+					While I was at Yale, I was also working as a grant specialist at Bradbury-Sullivan LGBT Community Center in Pennsylvania. That role taught me that development is, in itself, public health work. Every proposal I write is built around community needs, program evidence, and data, structured into a narrative that makes a funder understand why this work matters and what it changes. I've helped secure <span class="footnote-trigger" tabindex="0" role="button" aria-describedby="footnote-tooltip" data-aside="That number is made up of individual awards, most of them hard-won and none of them guaranteed. Each one funded something real: a staff position, a health program, a year of services for people who needed them. It doesn't feel like a big number when you see what it's actually doing.">over a million dollars</span> in funding for health equity and community programs, and I think of every one of those proposals as a case for why a community deserves resources it shouldn't have to ask for.
 				</p>
 
 				<p>
@@ -75,6 +75,9 @@ import { SITE_TITLE } from '../consts';
 				<p>
 					I live with my partner, K, and <span class="ember-trigger" tabindex="0" role="button" aria-label="Click to meet Ember">Ember</span> (the aforementioned black lab) in Boston. Outside of work, I'm trying to learn how to cook, I read across disciplines because I can't help it, and I spend as much time outside and with dogs as I can.
 				</p>
+			</div>
+			<div id="footnote-tooltip" class="footnote-tooltip" role="tooltip" aria-hidden="true">
+				<p class="footnote-text"></p>
 			</div>
 		</section>
 
@@ -138,6 +141,56 @@ import { SITE_TITLE } from '../consts';
 		display: block;
 	}
 
+	/* Footnote Triggers */
+	.footnote-trigger {
+		border-bottom: 1px dotted var(--color-text-muted);
+		cursor: pointer;
+		touch-action: manipulation;
+		transition: border-bottom-color 0.2s ease;
+	}
+
+	.footnote-trigger:hover {
+		border-bottom-color: var(--color-gold);
+	}
+
+	/* Footnote Tooltip */
+	.footnote-tooltip {
+		position: fixed;
+		max-width: 280px;
+		padding: 0.75rem 1rem;
+		background: var(--color-dark);
+		border: 1px solid var(--color-gold);
+		border-radius: 8px;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+		z-index: 1001;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.2s ease;
+	}
+
+	.footnote-tooltip.visible {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	.footnote-tooltip .footnote-text {
+		color: var(--color-cream);
+		font-size: 0.85rem;
+		line-height: 1.5;
+		font-style: italic;
+		margin: 0;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.footnote-trigger {
+			transition: none;
+		}
+
+		.footnote-tooltip {
+			transition: none;
+		}
+	}
+
 	/* Responsive */
 	@media (max-width: 768px) {
 		.about-heading {
@@ -153,3 +206,56 @@ import { SITE_TITLE } from '../consts';
 		}
 	}
 </style>
+
+<script>
+	document.addEventListener('astro:page-load', () => {
+		const tooltip = document.getElementById('footnote-tooltip');
+		const tooltipText = tooltip?.querySelector('.footnote-text');
+		if (!tooltip || !tooltipText) return;
+
+		const triggers = document.querySelectorAll('.footnote-trigger');
+		if (triggers.length === 0) return;
+
+		triggers.forEach(trigger => {
+			trigger.addEventListener('click', (e) => {
+				e.stopPropagation();
+				const aside = trigger.getAttribute('data-aside');
+				if (!aside) return;
+
+				tooltipText.textContent = aside;
+
+				// Position near click with viewport clamping
+				const TOOLTIP_WIDTH = 280;
+				const x = Math.min(e.clientX + 10, window.innerWidth - TOOLTIP_WIDTH - 15);
+				const y = Math.max(e.clientY - 80, 80);
+				tooltip.style.left = `${x}px`;
+				tooltip.style.top = `${y}px`;
+
+				tooltip.classList.add('visible');
+				tooltip.setAttribute('aria-hidden', 'false');
+			});
+
+			// Keyboard support
+			trigger.addEventListener('keydown', (e) => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					trigger.click();
+				}
+			});
+		});
+
+		// Dismiss on click anywhere else
+		document.addEventListener('click', () => {
+			tooltip.classList.remove('visible');
+			tooltip.setAttribute('aria-hidden', 'true');
+		});
+
+		// Dismiss on Escape key
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') {
+				tooltip.classList.remove('visible');
+				tooltip.setAttribute('aria-hidden', 'true');
+			}
+		});
+	});
+</script>

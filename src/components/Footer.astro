@@ -25,6 +25,7 @@ const currentYear = new Date().getFullYear();
 		</div>
 		<div class="footer-bottom">
 			<p>&copy; {currentYear} Meredith McGee. All rights reserved.</p>
+			<p class="footer-secret">made with care, coffee, and a black lab at my feet</p>
 		</div>
 	</div>
 </footer>
@@ -104,6 +105,29 @@ const currentYear = new Date().getFullYear();
 		margin: 0;
 	}
 
+	.footer-secret {
+		color: rgba(45, 58, 30, 0.03);
+		font-size: 0.65rem;
+		margin-top: 0.5rem;
+		cursor: default;
+		transition: color 0.4s ease;
+		user-select: none;
+		text-align: center;
+		letter-spacing: 0.02em;
+		opacity: 1;
+	}
+
+	.footer-secret:hover,
+	.footer-secret.revealed {
+		color: rgba(236, 230, 208, 0.35);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.footer-secret {
+			transition: none;
+		}
+	}
+
 	@media (max-width: 768px) {
 		footer .container {
 			padding: 0 1.5rem;
@@ -118,3 +142,15 @@ const currentYear = new Date().getFullYear();
 		}
 	}
 </style>
+
+<script>
+	document.addEventListener('astro:page-load', () => {
+		const secret = document.querySelector('.footer-secret');
+		if (!secret) return;
+
+		// Mobile tap reveal (hover doesn't work on touch)
+		secret.addEventListener('click', () => {
+			secret.classList.toggle('revealed');
+		});
+	});
+</script>
