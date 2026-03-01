@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-last_updated: "2026-03-01T09:36:49Z"
+last_updated: "2026-03-01T14:44:06Z"
 progress:
   total_phases: 6
-  completed_phases: 5
-  total_plans: 14
-  completed_plans: 14
+  completed_phases: 6
+  total_plans: 16
+  completed_plans: 16
 ---
 
 # Project State: meredithmcgee.org Rebuild
@@ -23,12 +23,12 @@ progress:
 ## Current Position
 
 **Phase:** 6 - Easter Eggs and Polish
-**Plan:** 06-01 COMPLETE (Ember click Easter egg — all 3 tasks complete, human-verified and approved)
-**Status:** In progress
+**Plan:** 06-02 COMPLETE (Footnote tooltips + hidden footer message — all tasks complete, human-verified and approved)
+**Status:** COMPLETE — all 6 phases done, v1 milestone reached
 
 ```
-Progress: [###############] 96% complete (Phase 6 in progress)
-Phase 5 of 6 COMPLETE. Phase 6 in progress — 06-01 complete; 06-02 next.
+Progress: [################] 100% complete
+Phase 6 of 6 COMPLETE. v1 milestone complete.
 ```
 
 ---
@@ -65,7 +65,7 @@ Phase 5 of 6 COMPLETE. Phase 6 in progress — 06-01 complete; 06-02 next.
 | 3 - Static Pages | About, Work, Work Archive, Contact | In progress (03-03 complete; 03-01 About remaining) |
 | 4 - RSS-Dependent Pages | Homepage, Ground Level | Complete (04-01 Homepage, 04-02 Ground Level — user-approved 2026-03-01) |
 | 5 - Design System Elevation | Palette, typography, spacing, animations, SEO | Complete (all 5 plans done) |
-| 6 - Easter Eggs and Polish | Ember click, micro-delights, accessibility | In progress (06-01 complete; 06-02 next) |
+| 6 - Easter Eggs and Polish | Ember click, micro-delights, accessibility | Complete (06-01 Ember click, 06-02 footnote tooltips + footer secret — all human-verified) |
 
 ---
 
@@ -126,6 +126,9 @@ Phase 5 of 6 COMPLETE. Phase 6 in progress — 06-01 complete; 06-02 next.
 | Used :global(.ember-trigger) CSS modifier | Trigger spans live in page files, not inside EmberClick.astro; :global() reaches them without is:global on the whole style block (06-01) |
 | Keyboard Enter/Space handler added to .ember-trigger | role="button" requires keyboard activation via Enter/Space for correct ARIA semantics; not in plan spec but required for accessibility correctness (06-01) |
 | EmberClick click count resets on page navigation | Per astro:page-load initialization; acceptable tradeoff — escalation resets on navigation, consistent with page-scoped interaction model (06-01) |
+| Footnote underline: 1px dotted color-text-muted vs ember-trigger 1.5px solid gold | Two affordances must be visually distinct; footnotes are dimmer/thinner so users don't conflate the two interaction types (06-02) |
+| Single shared tooltip div reused across all footnote triggers | Simpler than per-trigger tooltips; JS swaps textContent and repositions on each click; no z-index stacking issues (06-02) |
+| Footer secret uses rgba(45, 58, 30, 0.03) on matching dark background | Invisible against color-dark background; stays in DOM for screen reader access per accessibility guidance; hover/:revealed class toggle reveals on desktop/touch (06-02) |
 
 ### Critical Pitfalls to Avoid
 
@@ -183,4 +186,5 @@ To resume work in a new session:
 
 *State initialized: 2026-02-28*
 *Last updated: 2026-03-01 after 05-05 completion (SEO — OG social card image created at public/og-image.svg with evolved dark palette, BaseHead default changed from headshot to og-image.svg, MPH removed from all meta descriptions with voice-rule rewrites, sitemap verified at 6 correct routes, canonical URLs verified correct across all pages; Phase 5 complete)*
-*Updated: 2026-03-01 — 06-01 complete (EmberClick.astro component, ember-trigger spans on index.astro and about.astro, browser verification approved by user); 06-02 is next*
+*Updated: 2026-03-01 — 06-01 complete (EmberClick.astro component, ember-trigger spans on index.astro and about.astro, browser verification approved by user)*
+*Updated: 2026-03-01 — 06-02 complete (footnote tooltips on About essay with 3 annotated phrases + hidden footer secret; browser verification approved by user); v1 milestone COMPLETE — all 6 phases done*

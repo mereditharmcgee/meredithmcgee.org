@@ -64,7 +64,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Delight
 
 - [x] **DLGT-01**: Clicking Ember's name anywhere on the site triggers a photo popup or small animation
-- [ ] **DLGT-02**: 2-3 additional micro-delights spread throughout the site (hover surprises, hidden elements, playful moments)
+- [x] **DLGT-02**: 2-3 additional micro-delights spread throughout the site (hover surprises, hidden elements, playful moments)
 - [x] **DLGT-03**: Easter eggs feel personal to Meredith, not generic web magic
 - [x] **DLGT-04**: All interactions respect prefers-reduced-motion and work on touch devices
 
@@ -145,7 +145,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DSGN-06 | Phase 5 | Complete |
 | DSGN-07 | Phase 5 | Complete |
 | DLGT-01 | Phase 6 | Complete |
-| DLGT-02 | Phase 6 | Pending |
+| DLGT-02 | Phase 6 | Complete |
 | DLGT-03 | Phase 6 | Complete |
 | DLGT-04 | Phase 6 | Complete |
 | SEO-01 | Phase 5 | Complete (05-05) |
@@ -160,3 +160,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 ---
 *Requirements defined: 2026-02-28*
 *Last updated: 2026-03-01 after 05-04 completion — DSGN-06 marked complete (user approved mobile responsiveness; visual approval of complete design system elevation)*
+*Updated: 2026-03-01 after 06-02 completion — DLGT-02 marked complete (footnote tooltips on About + hidden footer secret); all 40 v1 requirements now complete*

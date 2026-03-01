@@ -15,7 +15,7 @@
 - [x] **Phase 3: Static Pages** - Build About, Work, Work Archive, and Contact without external dependencies
 - [x] **Phase 4: RSS-Dependent Pages** - Build Homepage and Ground Level using the SubstackFeed component
 - [x] **Phase 5: Design System Elevation** - Evolve palette, typography, spacing, scroll animations, SEO (all 5 plans complete)
-- [ ] **Phase 6: Easter Eggs and Polish** - Add Ember click, micro-delights, accessibility verification
+- [x] **Phase 6: Easter Eggs and Polish** - Add Ember click, micro-delights, accessibility verification
 
 ---
 
@@ -28,7 +28,7 @@
 | 3. Static Pages | 3/3 | Complete | 2026-03-01 |
 | 4. RSS-Dependent Pages | 2/2 | Complete | 2026-03-01 |
 | 5. Design System Elevation | 5/5 | Complete | 2026-03-01 |
-| 6. Easter Eggs and Polish | 1/2 | In Progress| |
+| 6. Easter Eggs and Polish | 2/2 | Complete | 2026-03-01 |
 
 ---
 
@@ -118,7 +118,7 @@ Plans:
 **Plans**: 2 plans
 Plans:
 - [x] 06-01-PLAN.md -- Ember click interaction: photo popup, gold particle burst, click escalation (DLGT-01, DLGT-03, DLGT-04) — COMPLETE 2026-03-01
-- [ ] 06-02-PLAN.md -- About page footnote tooltips + hidden footer message (DLGT-02, DLGT-03, DLGT-04)
+- [x] 06-02-PLAN.md -- About page footnote tooltips + hidden footer message (DLGT-02, DLGT-03, DLGT-04) — COMPLETE 2026-03-01
 
 ---
 
@@ -199,3 +199,4 @@ Phase 6 (Easter Eggs and Polish)
 
 *Roadmap created: 2026-02-28*
 *Last updated: 2026-03-01 after 06-01 completion (Ember click Easter egg — EmberClick.astro component, ember-trigger spans on index.astro and about.astro, browser-verified and approved)*
+*Updated: 2026-03-01 after 06-02 completion (About page footnote tooltips + hidden footer message — browser-verified and approved); Phase 6 complete; v1 milestone complete*
