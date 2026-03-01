@@ -28,7 +28,7 @@
 | 3. Static Pages | 3/3 | Complete | 2026-03-01 |
 | 4. RSS-Dependent Pages | 2/2 | Complete | 2026-03-01 |
 | 5. Design System Elevation | 5/5 | Complete | 2026-03-01 |
-| 6. Easter Eggs and Polish | 1/2 | In Progress|  |
+| 6. Easter Eggs and Polish | 1/2 | In Progress| |
 
 ---
 
@@ -117,7 +117,7 @@ Plans:
   4. All Easter egg interactions work correctly on iOS Safari and Android Chrome — no hover-only triggers, no interactions that require a mouse
 **Plans**: 2 plans
 Plans:
-- [ ] 06-01-PLAN.md -- Ember click interaction: photo popup, gold particle burst, click escalation (DLGT-01, DLGT-03, DLGT-04)
+- [x] 06-01-PLAN.md -- Ember click interaction: photo popup, gold particle burst, click escalation (DLGT-01, DLGT-03, DLGT-04) — COMPLETE 2026-03-01
 - [ ] 06-02-PLAN.md -- About page footnote tooltips + hidden footer message (DLGT-02, DLGT-03, DLGT-04)
 
 ---
@@ -198,4 +198,4 @@ Phase 6 (Easter Eggs and Polish)
 ---
 
 *Roadmap created: 2026-02-28*
-*Last updated: 2026-03-01 after 05-05 completion (SEO — OG social card, MPH-free meta descriptions, sitemap + canonical verification; Phase 5 complete)*
+*Last updated: 2026-03-01 after 06-01 completion (Ember click Easter egg — EmberClick.astro component, ember-trigger spans on index.astro and about.astro, browser-verified and approved)*
