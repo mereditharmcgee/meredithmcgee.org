@@ -96,6 +96,9 @@ Phase 3 of 6 (03-02 Tasks 1+2 complete, at visual checkpoint; 03-03 Task 1 compl
 | Header required no changes in Phase 2 | Already correct from Phase 1 with 5-item nav, logo, active state, and mobile hamburger (02-02) |
 | Footer collapsed to centered single column | Removing tagline, button, and location left too little content to justify two-column layout (02-02) |
 | WorkCard has two link affordances | Linked title plus Read more arrow when link prop present gives two clear interaction points (02-02) |
+| Work page intro uses contractions, leads with concrete | Voice rules enforced: "I work at the intersection..." frames the page without corporate language (03-02) |
+| Archive page not in main nav — reachable via /work text link only | Keeps nav clean; archive is supplementary, not primary destination (03-02) |
+| Both Work pages use bg-dark to match WorkCard design contract | WorkCard styles use gold/cream tokens designed for dark backgrounds (03-02) |
 | Formspree form kept and simplified to 3 fields | Subject dropdown removed; name/email/message only keeps contact friction low (03-03) |
 | Contact hero heading only, no intro paragraph | Clean direct hero; warm copy lives in the content section below where it's easier to read (03-03) |
 | Contact email displayed as standalone prominent link | Email not buried in body text; own paragraph block between intro and social links (03-03) |
@@ -155,4 +158,4 @@ To resume work in a new session:
 ---
 
 *State initialized: 2026-02-28*
-*Last updated: 2026-03-01 after 03-03 Task 1 execution (Contact page rewrite — at human-verify checkpoint)*
+*Last updated: 2026-03-01 after 03-02 Tasks 1+2 execution (Work page restructure + Work Archive created — at human-verify checkpoint)*
