@@ -26,7 +26,7 @@
 | 1. Foundation Cleanup | 2/2 | Complete | 2026-03-01 |
 | 2. Shared Components | 2/2 | Complete | 2026-03-01 |
 | 3. Static Pages | 2/3 | In progress (03-01 About remaining) | - |
-| 4. RSS-Dependent Pages | 0/2 | Not started | - |
+| 4. RSS-Dependent Pages | 1/2 | In progress (04-01 Homepage done) | - |
 | 5. Design System Elevation | 0/TBD | Not started | - |
 | 6. Easter Eggs and Polish | 0/TBD | Not started | - |
 
@@ -84,7 +84,7 @@ Plans:
   4. The Ground Level page has an intro paragraph explaining what Ground Level is, a Substack subscribe CTA, and 5 to 6 recent posts with title, date, excerpt, and link
 **Plans**: 2 plans
 Plans:
-- [ ] 04-01-PLAN.md -- Homepage three-beat rewrite (HOME-01, HOME-02, HOME-03, HOME-04, HOME-05)
+- [x] 04-01-PLAN.md -- Homepage three-beat rewrite (HOME-01, HOME-02, HOME-03, HOME-04, HOME-05) — COMPLETE 2026-03-01
 - [ ] 04-02-PLAN.md -- Ground Level page rewrite + visual verification (GRLV-01, GRLV-02, GRLV-03)
 
 ### Phase 5: Design System Elevation

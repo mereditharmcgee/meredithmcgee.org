@@ -17,11 +17,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Homepage
 
-- [ ] **HOME-01**: Homepage opens with Meredith's name and hero photo, no "MPH" in the main display
-- [ ] **HOME-02**: Homepage displays final intro copy as the first thing visitors read after the name
-- [ ] **HOME-03**: Homepage "What I'm Working On" section shows 3 most recent Substack posts with title, date, excerpt, and link to Substack
-- [ ] **HOME-04**: Homepage "Selected Work" section displays 3-4 highlighted pieces with title, description, and link
-- [ ] **HOME-05**: Homepage has a "See more" link from Selected Work to the full Work page
+- [x] **HOME-01**: Homepage opens with Meredith's name and hero photo, no "MPH" in the main display
+- [x] **HOME-02**: Homepage displays final intro copy as the first thing visitors read after the name
+- [x] **HOME-03**: Homepage "What I'm Working On" section shows 3 most recent Substack posts with title, date, excerpt, and link to Substack
+- [x] **HOME-04**: Homepage "Selected Work" section displays 3-4 highlighted pieces with title, description, and link
+- [x] **HOME-05**: Homepage has a "See more" link from Selected Work to the full Work page
 
 ### About
 

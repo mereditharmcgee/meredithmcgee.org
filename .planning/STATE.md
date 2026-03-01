@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-last_updated: "2026-03-01T05:48:38.412Z"
+status: in_progress
+last_updated: "2026-03-01T06:09:00Z"
 progress:
-  total_phases: 3
+  total_phases: 6
   completed_phases: 3
-  total_plans: 7
-  completed_plans: 7
+  total_plans: 8
+  completed_plans: 8
 ---
 
 # Project State: meredithmcgee.org Rebuild
@@ -22,13 +22,13 @@ progress:
 
 ## Current Position
 
-**Phase:** 3 - Static Pages
-**Plan:** 03-02 COMPLETE; 03-03 COMPLETE (checkpoint approved)
-**Status:** Milestone complete
+**Phase:** 4 - RSS-Dependent Pages
+**Plan:** 04-01 COMPLETE (Homepage rewrite)
+**Status:** In progress
 
 ```
-Progress: [####------] 33% complete
-Phase 3 of 6 (03-02 done; 03-03 done — Contact page fully verified; 03-01 About page remaining)
+Progress: [######----] 50% complete
+Phase 4 of 6 (04-01 Homepage done; 04-02 Ground Level page remaining)
 ```
 
 ---
@@ -63,7 +63,7 @@ Phase 3 of 6 (03-02 done; 03-03 done — Contact page fully verified; 03-01 Abou
 | 1 - Foundation Cleanup | Clean codebase, new nav, redirects | Complete |
 | 2 - Shared Components | SubstackFeed, WorkCard, Header, Footer, data layer | Complete |
 | 3 - Static Pages | About, Work, Work Archive, Contact | In progress (03-03 complete; 03-01 About remaining) |
-| 4 - RSS-Dependent Pages | Homepage, Ground Level | Not started |
+| 4 - RSS-Dependent Pages | Homepage, Ground Level | In progress (04-01 Homepage done) |
 | 5 - Design System Elevation | Palette, typography, spacing, animations, SEO | Not started |
 | 6 - Easter Eggs and Polish | Ember click, micro-delights, accessibility | Not started |
 
@@ -102,6 +102,9 @@ Phase 3 of 6 (03-02 done; 03-03 done — Contact page fully verified; 03-01 Abou
 | Formspree form kept and simplified to 3 fields | Subject dropdown removed; name/email/message only keeps contact friction low (03-03) |
 | Contact hero heading only, no intro paragraph | Clean direct hero; warm copy lives in the content section below where it's easier to read (03-03) |
 | Contact email displayed as standalone prominent link | Email not buried in body text; own paragraph block between intro and social links (03-03) |
+| Homepage h1 is "Meredith McGee" only (no MPH) | SITE_TITLE (with MPH) only appears in BaseHead meta title; name-only h1 matches "person first" brief (04-01) |
+| Homepage three-beat layout: Intro (bg-dark) > Working On (bg-medium) > Selected Work (bg-dark) | bg-medium for Beat 2 provides contrast from adjacent bg-dark sections; gold/cream tokens readable on all three (04-01) |
+| All 4 featured work items on homepage (no slice) | Plan spec says show all 4 featured items; provides full picture without requiring /work visit (04-01) |
 
 ### Critical Pitfalls to Avoid
 
@@ -124,7 +127,7 @@ Phase 3 of 6 (03-02 done; 03-03 done — Contact page fully verified; 03-01 Abou
 
 | Content | Status |
 |---------|--------|
-| Homepage intro copy | FINAL (in WEBSITE-SPEC.md) |
+| Homepage intro copy | FINAL — applied verbatim in 04-01 |
 | About page copy | FINAL (provided by user) |
 | Work page content | PLACEHOLDER — 8 entries from work.ts; user to confirm before launch |
 | Contact page | COMPLETE (03-03) |
@@ -134,7 +137,7 @@ Phase 3 of 6 (03-02 done; 03-03 done — Contact page fully verified; 03-01 Abou
 
 ## Todos
 
-- [ ] Read WEBSITE-SPEC.md for final homepage intro copy before Phase 4
+- [x] Read WEBSITE-SPEC.md for final homepage intro copy before Phase 4 — COMPLETE: FINAL copy applied verbatim in 04-01
 - [x] Fetch Substack RSS feed and inspect XML format before Phase 2 — COMPLETE (02-01)
 - [x] Confirm Formspree decision before Phase 3 — RESOLVED: kept and simplified to 3 fields (03-03)
 - [ ] Get Work page curated content from user or confirm placeholder approach before Phase 3
@@ -158,4 +161,4 @@ To resume work in a new session:
 ---
 
 *State initialized: 2026-02-28*
-*Last updated: 2026-03-01 after 03-03 completion (Contact page — user approved visual checkpoint)*
+*Last updated: 2026-03-01 after 04-01 completion (Homepage rewrite — three-beat layout with live Substack RSS)*
