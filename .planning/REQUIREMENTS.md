@@ -58,7 +58,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **DSGN-03**: Layout has generous whitespace throughout, nothing feels cramped
 - [x] **DSGN-04**: Subtle scroll-triggered entrance animations on key sections
 - [x] **DSGN-05**: Smooth page transitions and hover states feel alive but not flashy
-- [ ] **DSGN-06**: Site is mobile-responsive and looks great on a phone
+- [x] **DSGN-06**: Site is mobile-responsive and looks great on a phone
 - [x] **DSGN-07**: All copy follows voice rules: no em dashes, no bullet points in prose, contractions always, no corporate buzzwords
 
 ### Delight
@@ -142,7 +142,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DSGN-03 | Phase 5 | Complete |
 | DSGN-04 | Phase 5 | Complete |
 | DSGN-05 | Phase 5 | Complete |
-| DSGN-06 | Phase 5 | Pending |
+| DSGN-06 | Phase 5 | Complete |
 | DSGN-07 | Phase 5 | Complete |
 | DLGT-01 | Phase 6 | Pending |
 | DLGT-02 | Phase 6 | Pending |
@@ -159,4 +159,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-28*
-*Last updated: 2026-03-01 after 05-03 completion — DSGN-05 marked complete (page animations applied; spacing uplift complete)*
+*Last updated: 2026-03-01 after 05-04 completion — DSGN-06 marked complete (user approved mobile responsiveness; visual approval of complete design system elevation)*

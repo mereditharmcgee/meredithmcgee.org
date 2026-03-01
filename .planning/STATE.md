@@ -8,7 +8,7 @@ progress:
   total_phases: 6
   completed_phases: 4
   total_plans: 14
-  completed_plans: 11
+  completed_plans: 12
 ---
 
 # Project State: meredithmcgee.org Rebuild
@@ -23,12 +23,12 @@ progress:
 ## Current Position
 
 **Phase:** 5 - Design System Elevation
-**Plan:** 05-03 COMPLETE (Page animations and spacing)
+**Plan:** 05-04 COMPLETE (Component polish — WorkCard and SubstackFeed hover states)
 **Status:** Phase 5 in progress
 
 ```
-Progress: [###########] 78% complete
-Phase 4 of 6 COMPLETE. Phase 5 Plan 3 of 5 complete.
+Progress: [############] 85% complete
+Phase 4 of 6 COMPLETE. Phase 5 Plan 4 of 5 complete.
 ```
 
 ---
@@ -117,6 +117,9 @@ Phase 4 of 6 COMPLETE. Phase 5 Plan 3 of 5 complete.
 | Ground Level uses two bg-dark sections (no bg-medium) | Single-subject newsletter page suits a unified dark field; no contrast section needed (04-02) |
 | Subscribe CTA is a plain .btn link, no embedded Substack form | Matches locked CONTEXT.md decision; zero JavaScript, just a styled anchor (04-02) |
 | SubstackFeed limit={6} on Ground Level vs limit={3} on homepage | Newsletter-dedicated page warrants deeper listing; homepage shows tease only (04-02) |
+| WorkCard and SubstackFeed metadata use --color-text-muted token (not raw opacity) | Token is the proper abstraction; consistent muted styling across all secondary text (05-04) |
+| Hover underline pattern: text-underline-offset 0.15em + text-decoration-thickness 1px | Consistent hover affordance across both interactive components (05-04) |
+| Read more CTA gets translateX(3px) on hover | Directional lift reinforces forward motion without being heavy (05-04) |
 
 ### Critical Pitfalls to Avoid
 
@@ -173,4 +176,4 @@ To resume work in a new session:
 ---
 
 *State initialized: 2026-02-28*
-*Last updated: 2026-03-01 after 05-03 completion (Page animations and spacing — animate-on-scroll marker classes on all 6 pages, spacing uplift with 4rem+ minimum vertical padding on all sections)*
+*Last updated: 2026-03-01 after 05-04 completion (Component polish — WorkCard and SubstackFeed refined with --color-text-muted metadata tokens, hover underline pattern, translateX Read more lift; user approved and pushed to production)*
