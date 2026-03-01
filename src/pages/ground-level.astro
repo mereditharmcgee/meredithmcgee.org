@@ -1,0 +1,63 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Ground Level | ${SITE_TITLE}`} description="Ground Level is Meredith McGee's newsletter on public health, research, and the gaps between." />
+	</head>
+	<body>
+		<Header />
+
+		<main class="ground-level">
+			<div class="container">
+				<h1>Ground Level</h1>
+				<p>
+					Ground Level is where I write about public health, research, and the spaces between what we know and what we do about it. It's honest, it's specific, and it doesn't pretend the work is simple.
+				</p>
+				<p>
+					I publish on Substack. You can <a href="https://meredithmcgee.substack.com" target="_blank" rel="noopener noreferrer">read it there</a> and subscribe if you'd like new posts in your inbox.
+				</p>
+			</div>
+		</main>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.ground-level {
+		padding-top: 8rem;
+		padding-bottom: 4rem;
+	}
+
+	.ground-level .container {
+		max-width: 700px;
+		padding: 0 2rem;
+	}
+
+	.ground-level h1 {
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		margin-bottom: 1.5rem;
+	}
+
+	.ground-level p {
+		font-size: 1.05rem;
+		line-height: 1.7;
+		margin-bottom: 1.25rem;
+	}
+
+	.ground-level a {
+		color: var(--color-gold);
+		text-decoration: underline;
+		text-underline-offset: 0.15em;
+	}
+
+	.ground-level a:hover {
+		color: var(--color-cream);
+	}
+</style>
