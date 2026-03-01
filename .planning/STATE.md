@@ -3,19 +3,19 @@
 **Project:** meredithmcgee.org — personal website rebuild
 **Core Value:** The site makes visitors think "this person is interesting, I want to keep reading." Person first, work second.
 **Milestone:** v1
-**Last Updated:** 2026-02-28
+**Last Updated:** 2026-03-01
 
 ---
 
 ## Current Position
 
 **Phase:** 1 - Foundation Cleanup
-**Plan:** Not started
-**Status:** Roadmap complete, ready to begin
+**Plan:** 01 and 02 complete — Phase 1 complete
+**Status:** Phase 1 complete, ready for Phase 2
 
 ```
-Progress: [----------] 0% complete
-Phase 1 of 6
+Progress: [##--------] 17% complete
+Phase 1 of 6 (both plans executed and committed)
 ```
 
 ---
@@ -71,6 +71,9 @@ Phase 1 of 6
 | Work items in `src/data/work.ts` | Short metadata entries, no markdown bodies needed |
 | LinkedIn + Substack as only social links | Only platforms Meredith actively uses |
 | Easter eggs included in v1 | User wants playful elements from the start |
+| Substack URL: https://meredithmcgee.substack.com | Confirmed URL for Ground Level newsletter (01-02) |
+| LinkedIn URL: https://www.linkedin.com/in/meredith-mcgee | Confirmed URL for footer social link (01-02) |
+| Inline SVG icons for footer social links | Zero icon library dependencies; icons follow CSS color tokens (01-02) |
 
 ### Critical Pitfalls to Avoid
 
@@ -127,4 +130,4 @@ To resume work in a new session:
 ---
 
 *State initialized: 2026-02-28*
-*Last updated: 2026-02-28 after roadmap creation*
+*Last updated: 2026-03-01 after 01-02 execution (nav update, footer social links, ground-level page)*

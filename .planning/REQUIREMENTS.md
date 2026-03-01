@@ -9,11 +9,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Structure
 
-- [ ] **STRC-01**: Site navigation displays exactly 5 items: Home, About, Work, Ground Level, Contact
+- [x] **STRC-01**: Site navigation displays exactly 5 items: Home, About, Work, Ground Level, Contact
 - [ ] **STRC-02**: Old routes (/portfolio, /blog, /resume, /blog/*) redirect to appropriate new pages instead of 404ing
 - [ ] **STRC-03**: ThreeAudiences interactive demo component is removed
 - [ ] **STRC-04**: Blog and portfolio content collections, schemas, and associated pages are removed
-- [ ] **STRC-05**: Footer displays LinkedIn and Substack social links plus email
+- [x] **STRC-05**: Footer displays LinkedIn and Substack social links plus email
 
 ### Homepage
 
