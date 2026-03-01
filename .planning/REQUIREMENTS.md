@@ -53,13 +53,13 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Design
 
-- [ ] **DSGN-01**: Color palette evolves existing greens/browns/warm tones to feel more professional and cohesive
-- [ ] **DSGN-02**: Typography refines Playfair Display + Source Sans 3 with tuned weights, sizes, and spacing
+- [x] **DSGN-01**: Color palette evolves existing greens/browns/warm tones to feel more professional and cohesive
+- [x] **DSGN-02**: Typography refines Playfair Display + Source Sans 3 with tuned weights, sizes, and spacing
 - [ ] **DSGN-03**: Layout has generous whitespace throughout, nothing feels cramped
 - [ ] **DSGN-04**: Subtle scroll-triggered entrance animations on key sections
 - [ ] **DSGN-05**: Smooth page transitions and hover states feel alive but not flashy
 - [ ] **DSGN-06**: Site is mobile-responsive and looks great on a phone
-- [ ] **DSGN-07**: All copy follows voice rules: no em dashes, no bullet points in prose, contractions always, no corporate buzzwords
+- [x] **DSGN-07**: All copy follows voice rules: no em dashes, no bullet points in prose, contractions always, no corporate buzzwords
 
 ### Delight
 
@@ -137,13 +137,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CNTC-01 | Phase 3 | Complete |
 | CNTC-02 | Phase 3 | Complete |
 | CNTC-03 | Phase 3 | Complete |
-| DSGN-01 | Phase 5 | Pending |
-| DSGN-02 | Phase 5 | Pending |
+| DSGN-01 | Phase 5 | Complete |
+| DSGN-02 | Phase 5 | Complete |
 | DSGN-03 | Phase 5 | Pending |
 | DSGN-04 | Phase 5 | Pending |
 | DSGN-05 | Phase 5 | Pending |
 | DSGN-06 | Phase 5 | Pending |
-| DSGN-07 | Phase 5 | Pending |
+| DSGN-07 | Phase 5 | Complete |
 | DLGT-01 | Phase 6 | Pending |
 | DLGT-02 | Phase 6 | Pending |
 | DLGT-03 | Phase 6 | Pending |

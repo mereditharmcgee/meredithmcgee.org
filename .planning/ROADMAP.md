@@ -14,7 +14,7 @@
 - [x] **Phase 2: Shared Components** - Build SubstackFeed, WorkCard, updated Header/Footer, and data layer (2/2 plans complete)
 - [x] **Phase 3: Static Pages** - Build About, Work, Work Archive, and Contact without external dependencies
 - [x] **Phase 4: RSS-Dependent Pages** - Build Homepage and Ground Level using the SubstackFeed component
-- [ ] **Phase 5: Design System Elevation** - Evolve palette, typography, spacing, and scroll animations
+- [ ] **Phase 5: Design System Elevation** - Evolve palette, typography, spacing, and scroll animations (05-01 complete)
 - [ ] **Phase 6: Easter Eggs and Polish** - Add Ember click, micro-delights, accessibility verification
 
 ---
@@ -27,7 +27,7 @@
 | 2. Shared Components | 2/2 | Complete | 2026-03-01 |
 | 3. Static Pages | 3/3 | Complete | 2026-03-01 |
 | 4. RSS-Dependent Pages | 2/2 | Complete | 2026-03-01 |
-| 5. Design System Elevation | 0/TBD | Not started | - |
+| 5. Design System Elevation | 1/5 | In progress | - |
 | 6. Easter Eggs and Polish | 0/TBD | Not started | - |
 
 ---
@@ -98,7 +98,13 @@ Plans:
   4. Scrolling down any page triggers subtle entrance animations on key sections; all animations respect `prefers-reduced-motion` and are absent for users who have that preference set
   5. The site renders correctly and looks good on a phone screen — tap targets are adequate, text is readable without zooming, nav works
   6. Social sharing previews show correct OG images and metadata reflecting the new design; the sitemap includes all new pages and excludes all removed routes
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+- [x] 05-01-PLAN.md -- Design token foundation: color palette evolution, typography refinement, dead token cleanup, SITE_TITLE update (DSGN-01, DSGN-02, DSGN-07) — COMPLETE 2026-03-01
+- [ ] 05-02-PLAN.md -- Spacing and rhythm (DSGN-03, DSGN-06)
+- [ ] 05-03-PLAN.md -- SEO and meta (SEO-01, SEO-02, SEO-03)
+- [ ] 05-04-PLAN.md -- Animations (DSGN-04, DSGN-05)
+- [ ] 05-05-PLAN.md -- Final polish and mobile audit
 
 ### Phase 6: Easter Eggs and Polish
 **Goal**: The site has personality beyond content — Ember's click interaction and 2 additional micro-delights are working, accessible on touch, and feel specific to Meredith rather than generic web magic.
@@ -189,4 +195,4 @@ Phase 6 (Easter Eggs and Polish)
 ---
 
 *Roadmap created: 2026-02-28*
-*Last updated: 2026-03-01 after Phase 4 completion (04-02 Ground Level — user visual approval)*
+*Last updated: 2026-03-01 after 05-01 completion (Design token foundation — evolved palette, typography, dead token cleanup)*

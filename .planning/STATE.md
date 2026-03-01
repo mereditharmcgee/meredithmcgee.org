@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-last_updated: "2026-03-01T06:28:13.414Z"
+status: in_progress
+last_updated: "2026-03-01T07:23:00Z"
 progress:
-  total_phases: 4
+  total_phases: 6
   completed_phases: 4
-  total_plans: 9
-  completed_plans: 9
+  total_plans: 14
+  completed_plans: 10
 ---
 
 # Project State: meredithmcgee.org Rebuild
@@ -22,13 +22,13 @@ progress:
 
 ## Current Position
 
-**Phase:** 4 - RSS-Dependent Pages
-**Plan:** 04-02 COMPLETE (Ground Level page)
-**Status:** Milestone complete
+**Phase:** 5 - Design System Elevation
+**Plan:** 05-01 COMPLETE (Design token foundation)
+**Status:** Phase 5 in progress
 
 ```
-Progress: [########--] 67% complete
-Phase 4 of 6 COMPLETE (04-01 Homepage, 04-02 Ground Level — both user-approved)
+Progress: [##########] 71% complete
+Phase 4 of 6 COMPLETE. Phase 5 Plan 1 of 5 complete.
 ```
 
 ---
@@ -64,7 +64,7 @@ Phase 4 of 6 COMPLETE (04-01 Homepage, 04-02 Ground Level — both user-approved
 | 2 - Shared Components | SubstackFeed, WorkCard, Header, Footer, data layer | Complete |
 | 3 - Static Pages | About, Work, Work Archive, Contact | In progress (03-03 complete; 03-01 About remaining) |
 | 4 - RSS-Dependent Pages | Homepage, Ground Level | Complete (04-01 Homepage, 04-02 Ground Level — user-approved 2026-03-01) |
-| 5 - Design System Elevation | Palette, typography, spacing, animations, SEO | Not started |
+| 5 - Design System Elevation | Palette, typography, spacing, animations, SEO | In progress (05-01 Design Tokens complete) |
 | 6 - Easter Eggs and Polish | Ember click, micro-delights, accessibility | Not started |
 
 ---
@@ -103,6 +103,11 @@ Phase 4 of 6 COMPLETE (04-01 Homepage, 04-02 Ground Level — both user-approved
 | Contact hero heading only, no intro paragraph | Clean direct hero; warm copy lives in the content section below where it's easier to read (03-03) |
 | Contact email displayed as standalone prominent link | Email not buried in body text; own paragraph block between intro and social links (03-03) |
 | Homepage h1 is "Meredith McGee" only (no MPH) | SITE_TITLE (with MPH) only appears in BaseHead meta title; name-only h1 matches "person first" brief (04-01) |
+| SITE_TITLE is now 'Meredith McGee' (no MPH) | Matches homepage h1 and person-first brief; MPH credential removed from page title meta tag (05-01) |
+| Evolved :root palette: --color-dark #2d3a1e, --color-medium #5a6e3c, --color-gold #d4b968 | Warmer, deeper forest green and amber-gold replace old gray-olive tones; same family, meaningfully richer (05-01) |
+| --color-text-muted added: rgba(236, 230, 208, 0.6) | New utility token for dates, metadata, secondary text; needed by spacing and animation plans (05-01) |
+| Atkinson font preloads removed from BaseHead.astro | Font files exist in public/fonts/ but no CSS references them; removing eliminates wasted network requests on every page load (05-01) |
+| Playfair Display headings: letter-spacing -0.02em | Tighter tracking for editorial feel; Source Sans 3 body at line-height 1.75 for dark-background readability (05-01) |
 | Homepage three-beat layout: Intro (bg-dark) > Working On (bg-medium) > Selected Work (bg-dark) | bg-medium for Beat 2 provides contrast from adjacent bg-dark sections; gold/cream tokens readable on all three (04-01) |
 | All 4 featured work items on homepage (no slice) | Plan spec says show all 4 featured items; provides full picture without requiring /work visit (04-01) |
 | Ground Level uses two bg-dark sections (no bg-medium) | Single-subject newsletter page suits a unified dark field; no contrast section needed (04-02) |
@@ -164,4 +169,4 @@ To resume work in a new session:
 ---
 
 *State initialized: 2026-02-28*
-*Last updated: 2026-03-01 after 04-02 completion (Ground Level page — description copy, subscribe CTA, 6-post feed — user-approved)*
+*Last updated: 2026-03-01 after 05-01 completion (Design token foundation — evolved color palette, typography refinement, dead token cleanup, Atkinson preload removal, SITE_TITLE update)*
