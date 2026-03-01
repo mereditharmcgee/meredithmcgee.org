@@ -47,7 +47,7 @@ Phase 1 of 6 (both plans executed and committed)
 
 | Phase | Goal | Status |
 |-------|------|--------|
-| 1 - Foundation Cleanup | Clean codebase, new nav, redirects | Not started |
+| 1 - Foundation Cleanup | Clean codebase, new nav, redirects | Complete |
 | 2 - Shared Components | SubstackFeed, WorkCard, Header, Footer, data layer | Not started |
 | 3 - Static Pages | About, Work, Work Archive, Contact | Not started |
 | 4 - RSS-Dependent Pages | Homepage, Ground Level | Not started |
@@ -74,6 +74,8 @@ Phase 1 of 6 (both plans executed and committed)
 | Substack URL: https://meredithmcgee.substack.com | Confirmed URL for Ground Level newsletter (01-02) |
 | LinkedIn URL: https://www.linkedin.com/in/meredith-mcgee | Confirmed URL for footer social link (01-02) |
 | Inline SVG icons for footer social links | Zero icon library dependencies; icons follow CSS color tokens (01-02) |
+| Wildcard redirect patterns omitted from astro.config.mjs | Astro SSG requires getStaticPaths() for wildcard redirects; root-level redirects sufficient since individual slugs no longer exist (01-01) |
+| BaseHead OG image uses string path to public/ | Imported ImageMetadata from src/assets/ no longer valid after asset deletion; public/ path avoids import churn (01-01) |
 
 ### Critical Pitfalls to Avoid
 
@@ -130,4 +132,4 @@ To resume work in a new session:
 ---
 
 *State initialized: 2026-02-28*
-*Last updated: 2026-03-01 after 01-02 execution (nav update, footer social links, ground-level page)*
+*Last updated: 2026-03-01 after 01-01 execution (removed old structure, added redirects)*
