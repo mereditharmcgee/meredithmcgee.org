@@ -1,0 +1,101 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import { SITE_TITLE } from '../../consts';
+import { work } from '../../data/work';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Work Archive | ${SITE_TITLE}`} description="A complete list of selected projects, publications, and work from Meredith McGee, MPH." />
+	</head>
+	<body>
+		<Header />
+
+		<section class="archive-hero bg-dark bg-pattern">
+			<div class="container">
+				<h1>Work Archive</h1>
+				<p class="archive-intro">A complete list of selected projects and publications.</p>
+			</div>
+		</section>
+
+		<section class="archive-list bg-dark">
+			<div class="container">
+				{work.map(item => (
+					<WorkCard
+						title={item.title}
+						description={item.description}
+						category={item.category}
+						link={item.link}
+					/>
+				))}
+
+				<div class="back-link">
+					<a href="/work">&larr; Back to Work</a>
+				</div>
+			</div>
+		</section>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.archive-hero {
+		padding-top: 5rem;
+		padding-bottom: 2.5rem;
+		text-align: center;
+	}
+
+	.archive-hero .container {
+		max-width: 800px;
+		padding: 0 2rem;
+	}
+
+	.archive-hero h1 {
+		font-size: clamp(2rem, 4vw, 3rem);
+		margin-bottom: 1rem;
+	}
+
+	.archive-intro {
+		font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+		line-height: 1.8;
+		opacity: 0.85;
+	}
+
+	.archive-list {
+		padding: 2.5rem 0 3rem;
+	}
+
+	.archive-list .container {
+		max-width: 800px;
+		padding: 0 2rem;
+	}
+
+	.back-link {
+		margin-top: 2rem;
+		text-align: center;
+	}
+
+	.back-link a {
+		font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+		font-size: 0.95rem;
+		color: var(--color-gold);
+		text-decoration: none;
+		letter-spacing: 0.02em;
+		transition: color 0.2s ease;
+	}
+
+	.back-link a:hover {
+		color: var(--color-cream);
+	}
+
+	@media (max-width: 768px) {
+		.archive-hero {
+			padding-top: 4rem;
+		}
+	}
+</style>
