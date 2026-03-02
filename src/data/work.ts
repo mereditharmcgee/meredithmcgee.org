@@ -2,8 +2,6 @@ export interface WorkItem {
   title: string;
   description: string;
   category: string;
-  link?: string;
-  image?: string;
   featured: boolean;
 }
 
@@ -12,38 +10,30 @@ export const work: WorkItem[] = [
     title: 'Cannabis and Psychiatric Risk: A Two-Study Analysis',
     description: 'Synthesized findings from two major cannabis studies to examine how doubled psychiatric risk and declining youth use together raise harder questions about legal market regulation.',
     category: 'RESEARCH',
-    link: 'https://meredithwritespublichealth.substack.com',
-    image: '/logo-parabola.png',
     featured: true,
   },
   {
     title: 'Parabola Center Content Strategy',
     description: 'Developed and executed a content strategy for the Parabola Center, translating complex public health research into accessible narratives for policy audiences.',
     category: 'WRITING',
-    link: 'https://www.parabolacenter.com',
-    image: '/logo-parabola.png',
     featured: true,
   },
   {
     title: 'Bradbury-Sullivan LGBT Community Center Grant Portfolio',
     description: 'Wrote and managed grant applications supporting health equity programming at Bradbury-Sullivan LGBT Community Center, securing funding for community health initiatives.',
     category: 'GRANTS',
-    image: '/logo-bradbury-sullivan.png',
     featured: true,
   },
   {
     title: 'Yale School of Public Health Program Evaluation',
     description: 'Conducted program evaluation research at the Yale School of Public Health, assessing intervention outcomes and developing frameworks for measuring community health impact.',
     category: 'EVALUATION',
-    link: 'https://ysph.yale.edu',
-    image: '/logo-ysph.png',
     featured: true,
   },
   {
     title: 'Ground Level Newsletter',
     description: 'An ongoing newsletter exploring public health, research, and the gaps between what we know and what we do about it. Published on Substack.',
     category: 'WRITING',
-    link: 'https://meredithwritespublichealth.substack.com',
     featured: false,
   },
   {
