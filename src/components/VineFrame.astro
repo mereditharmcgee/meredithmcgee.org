@@ -1,0 +1,158 @@
+---
+// VineFrame.astro
+// Wraps content (a photo) with an SVG botanical vine that draws itself on scroll.
+---
+
+<div class="vine-frame">
+  <svg class="vine-svg" viewBox="0 0 320 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Main vine path — flows up-right side, across top, down-left -->
+    <path
+      class="vine-stem"
+      d="M 160 380
+         C 160 360, 170 340, 175 320
+         C 180 300, 185 280, 190 260
+         C 198 235, 210 215, 225 200
+         C 245 180, 268 160, 280 140
+         C 292 120, 300 100, 305 78
+         C 310 56, 308 38, 295 25
+         C 280 12, 258 6, 235 4
+         C 210 2, 180 2, 155 3
+         C 130 5, 100 8, 75 16
+         C 50 24, 30 38, 20 58
+         C 10 78, 8 100, 12 125
+         C 16 150, 25 170, 38 190
+         C 50 208, 60 220, 65 240"
+      stroke="var(--color-gold)"
+      stroke-width="1.8"
+      stroke-linecap="round"
+      fill="none"
+    />
+
+    <!-- Leaves along the vine — small, organic shapes -->
+    <g class="vine-leaves">
+      <!-- Right side leaves -->
+      <path class="vine-leaf vine-leaf-1" d="M 180 310 C 195 300, 205 305, 198 318 C 191 330, 178 322, 180 310Z" fill="var(--color-medium)" opacity="0" />
+      <path class="vine-leaf vine-leaf-2" d="M 200 255 C 218 248, 225 258, 215 268 C 205 278, 195 266, 200 255Z" fill="var(--color-light)" opacity="0" />
+      <path class="vine-leaf vine-leaf-3" d="M 240 190 C 258 180, 268 188, 258 200 C 248 212, 235 202, 240 190Z" fill="var(--color-medium)" opacity="0" />
+      <path class="vine-leaf vine-leaf-4" d="M 278 135 C 295 125, 305 132, 296 145 C 287 158, 272 148, 278 135Z" fill="var(--color-light)" opacity="0" />
+
+      <!-- Top leaves -->
+      <path class="vine-leaf vine-leaf-5" d="M 295 40 C 310 28, 320 36, 308 48 C 296 60, 284 50, 295 40Z" fill="var(--color-medium)" opacity="0" />
+      <path class="vine-leaf vine-leaf-6" d="M 230 6 C 235 -10, 248 -6, 244 8 C 240 22, 225 18, 230 6Z" fill="var(--color-light)" opacity="0" />
+      <path class="vine-leaf vine-leaf-7" d="M 155 5 C 152 -10, 165 -10, 164 5 C 163 18, 155 16, 155 5Z" fill="var(--color-medium)" opacity="0" />
+      <path class="vine-leaf vine-leaf-8" d="M 85 12 C 78 -2, 92 -4, 94 10 C 96 22, 90 22, 85 12Z" fill="var(--color-light)" opacity="0" />
+
+      <!-- Left side leaves -->
+      <path class="vine-leaf vine-leaf-9" d="M 22 65 C 5 58, 2 70, 14 78 C 26 86, 32 74, 22 65Z" fill="var(--color-medium)" opacity="0" />
+      <path class="vine-leaf vine-leaf-10" d="M 10 115 C -6 110, -6 124, 6 128 C 18 132, 20 122, 10 115Z" fill="var(--color-light)" opacity="0" />
+      <path class="vine-leaf vine-leaf-11" d="M 28 180 C 12 172, 8 185, 20 192 C 32 200, 38 188, 28 180Z" fill="var(--color-medium)" opacity="0" />
+      <path class="vine-leaf vine-leaf-12" d="M 58 230 C 42 222, 38 236, 50 242 C 62 248, 68 238, 58 230Z" fill="var(--color-light)" opacity="0" />
+
+      <!-- Small buds / dots -->
+      <circle class="vine-leaf vine-leaf-13" cx="188" cy="285" r="3" fill="var(--color-gold)" opacity="0" />
+      <circle class="vine-leaf vine-leaf-14" cx="260" cy="165" r="3" fill="var(--color-gold)" opacity="0" />
+      <circle class="vine-leaf vine-leaf-15" cx="305" cy="60" r="2.5" fill="var(--color-gold)" opacity="0" />
+      <circle class="vine-leaf vine-leaf-16" cx="120" cy="6" r="2.5" fill="var(--color-gold)" opacity="0" />
+      <circle class="vine-leaf vine-leaf-17" cx="15" cy="90" r="3" fill="var(--color-gold)" opacity="0" />
+      <circle class="vine-leaf vine-leaf-18" cx="45" cy="210" r="2.5" fill="var(--color-gold)" opacity="0" />
+    </g>
+  </svg>
+
+  <div class="vine-frame__content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .vine-frame {
+    position: relative;
+    display: inline-block;
+  }
+
+  .vine-svg {
+    position: absolute;
+    inset: -20px;
+    width: calc(100% + 40px);
+    height: calc(100% + 40px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .vine-frame__content {
+    position: relative;
+    z-index: 0;
+  }
+
+  /* Vine stem — draw-on animation via stroke-dashoffset */
+  .vine-stem {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    transition: stroke-dashoffset 2.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .vine-frame.in-view .vine-stem {
+    stroke-dashoffset: 0;
+  }
+
+  /* Leaves fade in sequentially after the vine draws */
+  .vine-leaf {
+    transition: opacity 0.5s ease;
+  }
+
+  .vine-frame.in-view .vine-leaf-1  { opacity: 0.7; transition-delay: 0.4s; }
+  .vine-frame.in-view .vine-leaf-2  { opacity: 0.6; transition-delay: 0.7s; }
+  .vine-frame.in-view .vine-leaf-3  { opacity: 0.7; transition-delay: 1.0s; }
+  .vine-frame.in-view .vine-leaf-4  { opacity: 0.6; transition-delay: 1.3s; }
+  .vine-frame.in-view .vine-leaf-5  { opacity: 0.7; transition-delay: 1.5s; }
+  .vine-frame.in-view .vine-leaf-6  { opacity: 0.6; transition-delay: 1.7s; }
+  .vine-frame.in-view .vine-leaf-7  { opacity: 0.7; transition-delay: 1.9s; }
+  .vine-frame.in-view .vine-leaf-8  { opacity: 0.6; transition-delay: 2.0s; }
+  .vine-frame.in-view .vine-leaf-9  { opacity: 0.7; transition-delay: 2.1s; }
+  .vine-frame.in-view .vine-leaf-10 { opacity: 0.6; transition-delay: 2.2s; }
+  .vine-frame.in-view .vine-leaf-11 { opacity: 0.7; transition-delay: 2.4s; }
+  .vine-frame.in-view .vine-leaf-12 { opacity: 0.6; transition-delay: 2.6s; }
+  .vine-frame.in-view .vine-leaf-13 { opacity: 0.8; transition-delay: 0.6s; }
+  .vine-frame.in-view .vine-leaf-14 { opacity: 0.8; transition-delay: 1.2s; }
+  .vine-frame.in-view .vine-leaf-15 { opacity: 0.8; transition-delay: 1.6s; }
+  .vine-frame.in-view .vine-leaf-16 { opacity: 0.8; transition-delay: 2.0s; }
+  .vine-frame.in-view .vine-leaf-17 { opacity: 0.8; transition-delay: 2.2s; }
+  .vine-frame.in-view .vine-leaf-18 { opacity: 0.8; transition-delay: 2.5s; }
+
+  /* Reduced motion: show everything immediately, no animation */
+  @media (prefers-reduced-motion: reduce) {
+    .vine-stem {
+      stroke-dashoffset: 0;
+      transition: none;
+    }
+    .vine-leaf {
+      opacity: 0.7 !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const vineFrame = document.querySelector('.vine-frame');
+    if (!vineFrame) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      vineFrame.classList.add('in-view');
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            vineFrame.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(vineFrame);
+  });
+</script>
