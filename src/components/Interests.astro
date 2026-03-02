@@ -1,0 +1,257 @@
+---
+// Interests.astro
+// Focus areas displayed as botanical specimen-style cards.
+// Each card has a specimen number, title, personal one-liner, and a small botanical SVG accent.
+
+const interests = [
+  {
+    title: 'LGBTQ+ Population Health',
+    description: 'What happens when health systems don\'t see you — and what it takes to change that.',
+  },
+  {
+    title: 'Cannabis Policy',
+    description: 'The messy middle between prohibition and a corporate free-for-all.',
+  },
+  {
+    title: 'Fundraising & Development',
+    description: 'Turning good ideas into funded programs, one grant at a time.',
+  },
+  {
+    title: 'Public Health Writing',
+    description: 'Making evidence make sense to the people it\'s supposed to serve.',
+  },
+  {
+    title: 'Community Building',
+    description: 'The slow, unglamorous work of making spaces that actually hold people.',
+  },
+  {
+    title: 'AI & Public Health',
+    description: 'Figuring out where the shiny new tools meet the actual work.',
+  },
+];
+
+// Cycle through 3 botanical SVG types
+const botanicalTypes = ['leaf', 'sprout', 'berry', 'leaf', 'sprout', 'berry'];
+---
+
+<section class="interests bg-medium">
+  <div class="container">
+    <h2 class="animate-on-scroll">Things I think about</h2>
+    <div class="interests-grid">
+      {interests.map((item, i) => (
+        <article class="interest-card">
+          <span class="interest-num">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="interest-title">{item.title}</h3>
+          <p class="interest-desc">{item.description}</p>
+
+          {botanicalTypes[i] === 'leaf' && (
+            <svg class="interest-botanical" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <path d="M16 4 C8 10, 5 18, 16 28 C27 18, 24 10, 16 4Z" fill="var(--color-light)" opacity="0.3" />
+              <path d="M16 8 L16 24" stroke="var(--color-gold)" stroke-width="0.5" opacity="0.25" />
+              <path d="M16 13 L12 16" stroke="var(--color-gold)" stroke-width="0.4" opacity="0.2" />
+              <path d="M16 17 L20 20" stroke="var(--color-gold)" stroke-width="0.4" opacity="0.2" />
+            </svg>
+          )}
+          {botanicalTypes[i] === 'sprout' && (
+            <svg class="interest-botanical" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <path d="M16 30 L16 16" stroke="var(--color-light)" stroke-width="0.7" opacity="0.3" />
+              <path d="M16 18 C10 12, 7 13, 12 18Z" fill="var(--color-light)" opacity="0.3" />
+              <path d="M16 14 C22 8, 25 9, 20 14Z" fill="var(--color-light)" opacity="0.3" />
+              <path d="M13 15 L16 18" stroke="var(--color-gold)" stroke-width="0.3" opacity="0.2" />
+              <path d="M19 11 L16 14" stroke="var(--color-gold)" stroke-width="0.3" opacity="0.2" />
+            </svg>
+          )}
+          {botanicalTypes[i] === 'berry' && (
+            <svg class="interest-botanical" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <path d="M6 28 C12 20, 20 12, 26 4" stroke="var(--color-light)" stroke-width="0.6" fill="none" opacity="0.3" />
+              <circle cx="10" cy="22" r="3" fill="var(--color-light)" opacity="0.25" />
+              <circle cx="17" cy="14" r="2.5" fill="var(--color-light)" opacity="0.25" />
+              <circle cx="23" cy="7" r="2" fill="var(--color-light)" opacity="0.25" />
+            </svg>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .interests {
+    padding: 5rem 0;
+  }
+
+  .interests .container {
+    max-width: 900px;
+  }
+
+  .interests h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  /* Thin gold rule beneath heading — editorial accent */
+  .interests h2::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 1.5px;
+    background: var(--color-gold);
+    margin: 0.75rem auto 2.5rem;
+    opacity: 0.45;
+  }
+
+  .interests-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .interest-card {
+    position: relative;
+    background: rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(212, 201, 142, 0.08);
+    border-left: 3px solid rgba(212, 185, 104, 0.45);
+    border-radius: 8px;
+    padding: 1.4rem 1.25rem 1.4rem 1.15rem;
+    overflow: hidden;
+    /* Start hidden for scroll-in animation */
+    opacity: 0;
+    transform: translateY(14px) rotate(var(--card-rotation, 0deg));
+    transition:
+      opacity 0.55s ease,
+      transform 0.55s ease,
+      box-shadow 0.35s ease,
+      border-color 0.35s ease;
+  }
+
+  /* Slight alternating rotations — "placed by hand" feel */
+  .interest-card:nth-child(1)  { --card-rotation: -0.6deg; }
+  .interest-card:nth-child(2)  { --card-rotation:  0.4deg; }
+  .interest-card:nth-child(3)  { --card-rotation: -0.3deg; }
+  .interest-card:nth-child(4)  { --card-rotation:  0.5deg; }
+  .interest-card:nth-child(5)  { --card-rotation: -0.4deg; }
+  .interest-card:nth-child(6)  { --card-rotation:  0.7deg; }
+
+  /* Scroll-in: visible state */
+  .interest-card.in-view {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--card-rotation, 0deg));
+  }
+
+  /* Hover: lift and straighten */
+  .interest-card.in-view:hover {
+    transform: translateY(-4px) rotate(0deg);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    border-left-color: var(--color-gold);
+    border-color: rgba(212, 201, 142, 0.18);
+  }
+
+  .interest-num {
+    display: block;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--color-gold);
+    opacity: 0.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .interest-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-cream);
+    margin: 0 0 0.45rem;
+  }
+
+  .interest-desc {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--color-cream);
+    opacity: 0.7;
+    margin: 0;
+    padding-right: 1.5rem; /* keep text clear of botanical accent */
+  }
+
+  .interest-botanical {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 26px;
+    height: 26px;
+    opacity: 0.6;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .interest-card:hover .interest-botanical {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
+  /* Tablet: 2 columns */
+  @media (max-width: 900px) {
+    .interests-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Mobile: single column, remove rotations for cleaner feel */
+  @media (max-width: 600px) {
+    .interests-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .interest-card {
+      --card-rotation: 0deg !important;
+    }
+
+    .interest-card {
+      padding: 1.2rem 1rem 1.2rem 0.9rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .interest-card {
+      opacity: 1;
+      transform: rotate(var(--card-rotation, 0deg));
+      transition: box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const grid = document.querySelector('.interests-grid');
+    if (!grid) return;
+
+    const cards = grid.querySelectorAll('.interest-card');
+    if (cards.length === 0) return;
+
+    // Reduced motion: show everything immediately
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      cards.forEach(card => card.classList.add('in-view'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Stagger each card's entrance by 80ms
+            cards.forEach((card, i) => {
+              setTimeout(() => card.classList.add('in-view'), i * 80);
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(grid);
+  });
+</script>

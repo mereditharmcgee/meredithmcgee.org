@@ -6,11 +6,8 @@ import Header from '../components/Header.astro';
 import SubstackFeed from '../components/SubstackFeed.astro';
 import TypewriterRoles from '../components/TypewriterRoles.astro';
 import VineFrame from '../components/VineFrame.astro';
-import WorkCard from '../components/WorkCard.astro';
+import Interests from '../components/Interests.astro';
 import { SITE_TITLE, SUBSTACK_URL } from '../consts';
-import { work } from '../data/work';
-
-const featuredWork = work.filter(item => item.featured);
 ---
 
 <!doctype html>
@@ -53,25 +50,8 @@ const featuredWork = work.filter(item => item.featured);
 			</div>
 		</section>
 
-		<!-- Beat 4: Selected Work -->
-		<section class="selected-work bg-medium">
-			<div class="container">
-				<h2 class="animate-on-scroll">Selected work</h2>
-				<div class="work-list">
-					{featuredWork.map((item, i) => (
-						<WorkCard
-							title={item.title}
-							description={item.description}
-							category={item.category}
-							index={i}
-						/>
-					))}
-				</div>
-				<div class="see-more">
-					<a href="/work" class="btn btn-small">See all work &rarr;</a>
-				</div>
-			</div>
-		</section>
+		<!-- Beat 4: Things I Think About -->
+		<Interests />
 
 		<!-- Footnote tooltip (shared for bio asides) -->
 		<div id="footnote-tooltip" class="footnote-tooltip" role="tooltip" aria-hidden="true">
@@ -237,30 +217,6 @@ const featuredWork = work.filter(item => item.featured);
 
 	.section-intro a:hover {
 		color: var(--color-cream);
-	}
-
-	/* ==================== Selected Work ==================== */
-	.selected-work {
-		padding: 5rem 0;
-	}
-
-	.selected-work .container {
-		max-width: 850px;
-	}
-
-	.selected-work h2 {
-		font-size: clamp(1.5rem, 2.5vw, 2rem);
-		margin-bottom: 2rem;
-		text-align: center;
-	}
-
-	.work-list {
-		margin-bottom: 1rem;
-	}
-
-	.see-more {
-		margin-top: 2.5rem;
-		text-align: center;
 	}
 
 	/* ==================== Mobile ==================== */
