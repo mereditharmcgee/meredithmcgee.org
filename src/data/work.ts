@@ -11,7 +11,7 @@ export const work: WorkItem[] = [
     title: 'Cannabis and Psychiatric Risk: A Two-Study Analysis',
     description: 'Synthesized findings from two major cannabis studies to examine how doubled psychiatric risk and declining youth use together raise harder questions about legal market regulation.',
     category: 'RESEARCH',
-    link: 'https://meredithmcgee.substack.com',
+    link: 'https://meredithwritespublichealth.substack.com',
     featured: true,
   },
   {
@@ -38,7 +38,7 @@ export const work: WorkItem[] = [
     title: 'Ground Level Newsletter',
     description: 'An ongoing newsletter exploring public health, research, and the gaps between what we know and what we do about it. Published on Substack.',
     category: 'WRITING',
-    link: 'https://meredithmcgee.substack.com',
+    link: 'https://meredithwritespublichealth.substack.com',
     featured: false,
   },
   {
