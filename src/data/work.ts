@@ -3,6 +3,7 @@ export interface WorkItem {
   description: string;
   category: string;
   link?: string;
+  image?: string;
   featured: boolean;
 }
 
@@ -12,6 +13,7 @@ export const work: WorkItem[] = [
     description: 'Synthesized findings from two major cannabis studies to examine how doubled psychiatric risk and declining youth use together raise harder questions about legal market regulation.',
     category: 'RESEARCH',
     link: 'https://meredithwritespublichealth.substack.com',
+    image: '/logo-parabola.png',
     featured: true,
   },
   {
@@ -19,12 +21,14 @@ export const work: WorkItem[] = [
     description: 'Developed and executed a content strategy for the Parabola Center, translating complex public health research into accessible narratives for policy audiences.',
     category: 'WRITING',
     link: 'https://www.parabolacenter.com',
+    image: '/logo-parabola.png',
     featured: true,
   },
   {
     title: 'Bradbury-Sullivan LGBT Community Center Grant Portfolio',
     description: 'Wrote and managed grant applications supporting health equity programming at Bradbury-Sullivan LGBT Community Center, securing funding for community health initiatives.',
     category: 'GRANTS',
+    image: '/logo-bradbury-sullivan.png',
     featured: true,
   },
   {
@@ -32,6 +36,7 @@ export const work: WorkItem[] = [
     description: 'Conducted program evaluation research at the Yale School of Public Health, assessing intervention outcomes and developing frameworks for measuring community health impact.',
     category: 'EVALUATION',
     link: 'https://ysph.yale.edu',
+    image: '/logo-ysph.png',
     featured: true,
   },
   {

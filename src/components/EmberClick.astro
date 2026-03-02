@@ -2,7 +2,6 @@
 // EmberClick.astro
 // Self-contained Ember click Easter egg component.
 // Import once per page that contains "Ember" mentions.
-// Replace /ember.jpg and /ember-silly.jpg in public/ with real Ember photos before launch.
 ---
 
 <div id="ember-overlay" aria-hidden="true">
@@ -47,14 +46,21 @@
 
   .ember-popup {
     position: fixed;
-    width: 180px;
-    height: 180px;
-    border-radius: 12px;
+    width: 240px;
+    height: 240px;
+    border-radius: 16px;
     overflow: hidden;
     pointer-events: auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    border: 2px solid var(--color-gold);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 185, 104, 0.3);
+    border: 2.5px solid var(--color-gold);
     z-index: 1002;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: none;
+  }
+
+  .ember-popup.entering {
+    animation: emberEnter 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
 
   .ember-popup img {
@@ -69,12 +75,12 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(45, 58, 30, 0.85);
+    background: linear-gradient(transparent, rgba(45, 58, 30, 0.9));
     color: var(--color-gold);
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-style: italic;
-    padding: 0.4rem 0.6rem;
+    padding: 1.5rem 0.75rem 0.5rem;
     text-align: center;
     margin: 0;
     display: none;
@@ -91,6 +97,17 @@
     animation: particleBurst 0.8s ease-out forwards;
   }
 
+  @keyframes emberEnter {
+    0% {
+      opacity: 0;
+      transform: scale(0.7);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
   @keyframes particleBurst {
     0% {
       opacity: 1;
@@ -105,22 +122,28 @@
   @keyframes floatDismiss {
     0% {
       opacity: 1;
-      transform: translateY(0);
+      transform: scale(1) translateY(0);
     }
     100% {
       opacity: 0;
-      transform: translateY(-40px);
+      transform: scale(0.9) translateY(-30px);
     }
   }
 
   .ember-popup.dismissing {
-    animation: floatDismiss 0.6s ease-in forwards;
+    animation: floatDismiss 0.5s ease-in forwards;
   }
 
   @media (prefers-reduced-motion: reduce) {
     :global(.ember-particle) {
       animation: none;
       opacity: 0;
+    }
+
+    .ember-popup.entering {
+      animation: none;
+      opacity: 1;
+      transform: scale(1);
     }
 
     .ember-popup.dismissing {
@@ -180,42 +203,48 @@
 
       if (!overlay || !popup || !photo || !captionEl) return;
 
-      // Remove dismissing state if mid-animation
-      popup.classList.remove('dismissing');
+      // Remove animation classes
+      popup.classList.remove('dismissing', 'entering');
 
       // Set photo source
       photo.src = isSilly ? '/ember-silly.png' : '/ember.png';
 
-      // Position with viewport clamping
-      const POPUP_SIZE = 180;
-      const popupX = Math.min(x + 15, window.innerWidth - POPUP_SIZE - 15);
-      const popupY = Math.max(y - POPUP_SIZE - 15, 80);
+      // Position with viewport clamping — center above click point
+      const POPUP_SIZE = 240;
+      const popupX = Math.min(
+        Math.max(x - POPUP_SIZE / 2, 15),
+        window.innerWidth - POPUP_SIZE - 15
+      );
+      const popupY = Math.max(y - POPUP_SIZE - 20, 80);
 
       popup.style.left = `${popupX}px`;
       popup.style.top = `${popupY}px`;
 
       // Caption for silly mode
       if (isSilly) {
-        const captions = ['she says hi', 'good girl', 'best dog'];
+        const captions = ['she says hi', 'good girl', 'best dog', 'scientifically perfect'];
         captionEl.textContent = captions[(emberClickCount - 3) % captions.length];
         captionEl.style.display = 'block';
       } else {
         captionEl.style.display = 'none';
       }
 
-      // Show overlay
+      // Show overlay with entrance animation
       overlay.classList.add('active');
+      // Force reflow so the animation replays
+      void popup.offsetWidth;
+      popup.classList.add('entering');
 
       // Create particles (skip if reduced motion)
       if (!prefersReduced) {
-        const particleCount = Math.floor(Math.random() * 3) + 6; // 6-8 particles
+        const particleCount = Math.floor(Math.random() * 4) + 8; // 8-11 particles
         for (let i = 0; i < particleCount; i++) {
           const particle = document.createElement('span');
           particle.classList.add('ember-particle');
           particle.style.left = `${x}px`;
           particle.style.top = `${y}px`;
-          particle.style.setProperty('--dx', `${Math.random() * 100 - 50}px`);
-          particle.style.setProperty('--dy', `${Math.random() * -80 - 20}px`);
+          particle.style.setProperty('--dx', `${Math.random() * 120 - 60}px`);
+          particle.style.setProperty('--dy', `${Math.random() * -100 - 20}px`);
           document.body.appendChild(particle);
 
           particle.addEventListener('animationend', () => {
@@ -228,10 +257,10 @@
         }
       }
 
-      // Auto-dismiss after 2 seconds
+      // Auto-dismiss after 3 seconds (longer to appreciate Ember)
       dismissTimer = setTimeout(() => {
         dismissPopup();
-      }, 2000);
+      }, 3000);
     }
 
     function dismissPopup() {
@@ -242,9 +271,11 @@
 
       if (prefersReduced) {
         overlay.classList.remove('active');
+        popup.classList.remove('entering');
         return;
       }
 
+      popup.classList.remove('entering');
       popup.classList.add('dismissing');
 
       const onDone = () => {
@@ -258,7 +289,7 @@
       setTimeout(() => {
         overlay.classList.remove('active');
         popup.classList.remove('dismissing');
-      }, 700);
+      }, 600);
     }
   }
 

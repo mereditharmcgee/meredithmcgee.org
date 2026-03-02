@@ -4,8 +4,9 @@ import EmberClick from '../components/EmberClick.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import SubstackFeed from '../components/SubstackFeed.astro';
+import TypewriterRoles from '../components/TypewriterRoles.astro';
 import WorkCard from '../components/WorkCard.astro';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, SUBSTACK_URL } from '../consts';
 import { work } from '../data/work';
 
 const featuredWork = work.filter(item => item.featured);
@@ -19,40 +20,64 @@ const featuredWork = work.filter(item => item.featured);
 	<body>
 		<Header />
 
-		<!-- Beat 1: Intro -->
-		<section class="intro bg-dark bg-pattern">
-			<div class="container animate-on-scroll">
-				<h1>Meredith McGee</h1>
-				<img src="/meredith-headshot.jpg" alt="Meredith McGee" class="hero-photo" />
-				<p class="intro-copy">I'm Meredith. I'm deeply curious about systems and what happens when they fall short. That curiosity has taken me a lot of places: reviving LGBTQ+ programming and building the first gender-inclusive housing at my college, writing grants that have funded over a million dollars in health equity and community programs, researching LGBTQ+ mental health at Yale, studying how people actually experience legal cannabis markets, and occasionally building weird things on the internet. The thread that connects all of it is trying to make public health make sense to the people it's supposed to serve. Right now I'm in Boston, publishing Ground Level (a Substack about cannabis, public health, and the gap between policy and practice), doing research at Parabola Center for Law and Policy, and writing grants at Bradbury-Sullivan LGBT Community Center. I live with my partner K and a black lab named <span class="ember-trigger" tabindex="0" role="button" aria-label="Click to meet Ember">Ember</span> who is scientifically proven to reduce my stress.</p>
+		<!-- Beat 1: Hero -->
+		<section class="hero bg-dark bg-pattern">
+			<div class="container hero-grid">
+				<div class="hero-text animate-on-scroll">
+					<h1>Meredith McGee</h1>
+					<div class="hero-roles">
+						<TypewriterRoles />
+					</div>
+				</div>
+				<div class="hero-photo-wrap animate-on-scroll">
+					<img src="/meredith-headshot.jpg" alt="Meredith McGee" class="hero-photo" />
+				</div>
 			</div>
 		</section>
 
-		<!-- Beat 2: What I'm Working On -->
-		<section class="working-on bg-medium">
+		<!-- Beat 2: Bio -->
+		<section class="bio bg-medium">
+			<div class="container animate-on-scroll">
+				<p class="bio-copy">I'm Meredith. I'm deeply curious about systems and what happens when they fall short. That curiosity has taken me a lot of places: <span class="footnote-trigger" tabindex="0" role="button" data-aside="At Lafayette, K and I co-founded OUT Lafayette and launched Lavender Lane, the college's first gender-affirming housing. We also brought panels of the National AIDS Memorial Quilt to campus for the first time in three decades.">reviving LGBTQ+ programming</span> and building the first gender-inclusive housing at my college, <span class="footnote-trigger" tabindex="0" role="button" data-aside="That number is made up of individual awards, most of them hard-won and none of them guaranteed. Each one funded something real: a staff position, a health program, a year of services for people who needed them.">writing grants that have funded over a million dollars</span> in health equity and community programs, researching LGBTQ+ mental health at Yale, studying how people actually experience <span class="footnote-trigger" tabindex="0" role="button" data-aside="The drug policy parabola: both prohibition and unregulated commercial markets cause harm. The best policy lives somewhere between them. My research at Parabola Center focuses on what that middle ground looks like in practice.">legal cannabis markets</span>, and occasionally <span class="footnote-trigger" tabindex="0" role="button" data-aside="You're looking at one of them. This site was built with Astro, some good design sense, and a lot of opinions about what personal websites should feel like.">building weird things on the internet</span>. The thread that connects all of it is trying to make public health make sense to the people it's supposed to serve.</p>
+				<p class="bio-copy">Right now I'm in Boston, publishing <a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer">Ground Level</a> (a Substack about cannabis, public health, and the gap between policy and practice), doing research at <a href="https://www.parabolacenter.com" target="_blank" rel="noopener noreferrer">Parabola Center for Law and Policy</a>, and writing grants at <a href="https://www.bradburysullivancenter.org/" target="_blank" rel="noopener noreferrer">Bradbury-Sullivan LGBT Community Center</a>. I live with my partner K and a black lab named <span class="ember-trigger" tabindex="0" role="button" aria-label="Click to meet Ember">Ember</span> who is scientifically proven to reduce my stress.</p>
+			</div>
+		</section>
+
+		<!-- Beat 3: What I'm Working On -->
+		<section class="working-on bg-dark">
 			<div class="container">
 				<h2 class="animate-on-scroll">What I'm working on</h2>
+				<p class="section-intro animate-on-scroll">The latest from <a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer">Ground Level</a>, where I write about cannabis, public health, and the gap between policy and practice.</p>
 				<SubstackFeed limit={3} />
 			</div>
 		</section>
 
-		<!-- Beat 3: Selected Work -->
-		<section class="selected-work bg-dark">
+		<!-- Beat 4: Selected Work -->
+		<section class="selected-work bg-medium">
 			<div class="container">
 				<h2 class="animate-on-scroll">Selected work</h2>
-				{featuredWork.map(item => (
-					<WorkCard
-						title={item.title}
-						description={item.description}
-						category={item.category}
-						link={item.link}
-					/>
-				))}
+				<div class="work-list">
+					{featuredWork.map((item, i) => (
+						<WorkCard
+							title={item.title}
+							description={item.description}
+							category={item.category}
+							link={item.link}
+							image={item.image}
+							index={i}
+						/>
+					))}
+				</div>
 				<div class="see-more">
-					<a href="/work">See all work &rarr;</a>
+					<a href="/work" class="btn btn-small">See all work &rarr;</a>
 				</div>
 			</div>
 		</section>
+
+		<!-- Footnote tooltip (shared for bio asides) -->
+		<div id="footnote-tooltip" class="footnote-tooltip" role="tooltip" aria-hidden="true">
+			<p class="footnote-text"></p>
+		</div>
 
 		<EmberClick />
 		<Footer />
@@ -60,100 +85,270 @@ const featuredWork = work.filter(item => item.featured);
 </html>
 
 <style>
-	/* Beat 1: Intro */
-	.intro {
+	/* ==================== Hero ==================== */
+	.hero {
 		padding-top: 6rem;
 		padding-bottom: 4rem;
 	}
 
-	.intro .container {
-		max-width: 800px;
-		padding: 0 2rem;
+	.hero-grid {
+		max-width: 900px;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 3rem;
+		align-items: center;
 	}
 
-	.intro h1 {
-		font-size: clamp(2rem, 4vw, 3rem);
-		margin-bottom: 1.5rem;
-		text-align: center;
+	.hero-text h1 {
+		font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+		margin-bottom: 0.25rem;
+		line-height: 1.1;
+	}
+
+	.hero-roles {
+		font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+		min-height: 1.5em;
+	}
+
+	.hero-photo-wrap {
+		position: relative;
 	}
 
 	.hero-photo {
 		display: block;
-		margin: 0 auto 2rem auto;
-		max-width: 350px;
-		width: 100%;
-		height: auto;
-		border-radius: 12px;
-		box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-		border: 3px solid var(--color-medium);
+		width: 280px;
+		height: 340px;
+		object-fit: cover;
+		border-radius: 16px;
+		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+		border: 3px solid rgba(212, 185, 104, 0.25);
+		transition: border-color 0.4s ease;
 	}
 
-	.intro-copy {
-		font-size: clamp(0.95rem, 1.1vw, 1.1rem);
-		line-height: 1.8;
-		text-align: left;
-		max-width: 700px;
-		margin: 0 auto;
+	.hero-photo:hover {
+		border-color: rgba(212, 185, 104, 0.5);
 	}
 
-	/* Beat 2: Working On */
+	/* ==================== Bio ==================== */
+	.bio {
+		padding: 4rem 0;
+	}
+
+	.bio .container {
+		max-width: 800px;
+	}
+
+	.bio-copy {
+		font-size: clamp(0.95rem, 1.1vw, 1.08rem);
+		line-height: 1.85;
+		margin-bottom: 1.5rem;
+	}
+
+	.bio-copy:last-child {
+		margin-bottom: 0;
+	}
+
+	.bio-copy a {
+		color: var(--color-gold);
+		text-decoration: underline;
+		text-underline-offset: 0.15em;
+		text-decoration-thickness: 1px;
+		transition: color 0.3s ease;
+	}
+
+	.bio-copy a:hover {
+		color: var(--color-cream);
+	}
+
+	/* Footnote triggers (same dotted style as About page) */
+	:global(.footnote-trigger) {
+		border-bottom: 1.5px dotted var(--color-gold);
+		cursor: pointer;
+		touch-action: manipulation;
+		transition: border-bottom-color 0.2s ease;
+	}
+
+	:global(.footnote-trigger:hover) {
+		border-bottom-color: var(--color-cream);
+	}
+
+	:global(.footnote-trigger:focus-visible) {
+		outline: 2px solid var(--color-gold);
+		outline-offset: 2px;
+		border-radius: 2px;
+	}
+
+	/* Footnote tooltip */
+	.footnote-tooltip {
+		position: fixed;
+		max-width: 300px;
+		padding: 0.85rem 1.1rem;
+		background: var(--color-dark);
+		border: 1px solid var(--color-gold);
+		border-radius: 10px;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+		z-index: 1001;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.25s ease;
+	}
+
+	.footnote-tooltip.visible {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	.footnote-tooltip .footnote-text {
+		color: var(--color-cream);
+		font-size: 0.875rem;
+		line-height: 1.55;
+		font-style: italic;
+		margin: 0;
+	}
+
+	/* ==================== Working On ==================== */
 	.working-on {
 		padding: 5rem 0;
 	}
 
 	.working-on .container {
 		max-width: 800px;
-		padding: 0 2rem;
 	}
 
 	.working-on h2 {
 		font-size: clamp(1.5rem, 2.5vw, 2rem);
-		margin-bottom: 1.5rem;
+		margin-bottom: 0.75rem;
 		text-align: center;
 	}
 
-	/* Beat 3: Selected Work */
+	.section-intro {
+		text-align: center;
+		font-size: 0.95rem;
+		color: var(--color-text-muted);
+		margin-bottom: 2.5rem;
+		line-height: 1.6;
+	}
+
+	.section-intro a {
+		color: var(--color-gold);
+		text-decoration: underline;
+		text-underline-offset: 0.15em;
+		text-decoration-thickness: 1px;
+	}
+
+	.section-intro a:hover {
+		color: var(--color-cream);
+	}
+
+	/* ==================== Selected Work ==================== */
 	.selected-work {
 		padding: 5rem 0;
 	}
 
 	.selected-work .container {
-		max-width: 800px;
-		padding: 0 2rem;
+		max-width: 850px;
 	}
 
 	.selected-work h2 {
 		font-size: clamp(1.5rem, 2.5vw, 2rem);
-		margin-bottom: 1.5rem;
+		margin-bottom: 2rem;
 		text-align: center;
+	}
+
+	.work-list {
+		margin-bottom: 1rem;
 	}
 
 	.see-more {
-		margin-top: 2rem;
+		margin-top: 2.5rem;
 		text-align: center;
 	}
 
-	.see-more a {
-		font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
-		font-size: 0.95rem;
-		color: var(--color-gold);
-		text-decoration: none;
-		letter-spacing: 0.02em;
-		transition: color 0.2s ease;
-	}
-
-	.see-more a:hover {
-		color: var(--color-cream);
-	}
-
-	/* Mobile */
+	/* ==================== Mobile ==================== */
 	@media (max-width: 768px) {
-		.intro {
+		.hero {
 			padding-top: 5rem;
 		}
 
+		.hero-grid {
+			grid-template-columns: 1fr;
+			text-align: center;
+			gap: 2rem;
+		}
+
+		.hero-text h1 {
+			text-align: center;
+		}
+
+		.hero-roles {
+			justify-content: center;
+			display: flex;
+		}
+
+		.hero-photo-wrap {
+			order: -1;
+		}
+
 		.hero-photo {
-			max-width: 280px;
+			width: 220px;
+			height: 270px;
+			margin: 0 auto;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.footnote-tooltip {
+			transition: none;
 		}
 	}
 </style>
+
+<script>
+	document.addEventListener('astro:page-load', () => {
+		// --- Footnote tooltip logic ---
+		const tooltip = document.getElementById('footnote-tooltip');
+		const tooltipText = tooltip?.querySelector('.footnote-text');
+		if (!tooltip || !tooltipText) return;
+
+		const triggers = document.querySelectorAll('.footnote-trigger');
+		if (triggers.length === 0) return;
+
+		triggers.forEach(trigger => {
+			trigger.addEventListener('click', (e) => {
+				e.stopPropagation();
+				const aside = trigger.getAttribute('data-aside');
+				if (!aside) return;
+
+				tooltipText.textContent = aside;
+
+				const TOOLTIP_WIDTH = 300;
+				const x = Math.min(e.clientX + 10, window.innerWidth - TOOLTIP_WIDTH - 15);
+				const y = Math.max(e.clientY - 80, 80);
+				tooltip.style.left = `${x}px`;
+				tooltip.style.top = `${y}px`;
+
+				tooltip.classList.add('visible');
+				tooltip.setAttribute('aria-hidden', 'false');
+			});
+
+			trigger.addEventListener('keydown', (e) => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					trigger.click();
+				}
+			});
+		});
+
+		document.addEventListener('click', () => {
+			tooltip.classList.remove('visible');
+			tooltip.setAttribute('aria-hidden', 'true');
+		});
+
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') {
+				tooltip.classList.remove('visible');
+				tooltip.setAttribute('aria-hidden', 'true');
+			}
+		});
+	});
+</script>

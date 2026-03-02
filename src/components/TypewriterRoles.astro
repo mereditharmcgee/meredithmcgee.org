@@ -1,0 +1,135 @@
+---
+// TypewriterRoles.astro
+// Cycles through roles with a type-pause-erase-pause loop.
+// Respects prefers-reduced-motion by showing static text instead.
+
+interface Props {
+  roles?: string[];
+}
+
+const { roles = [
+  'grant writer',
+  'researcher',
+  'public health nerd',
+  'writer',
+  'dog mom',
+  'systems thinker',
+  'cannabis policy researcher',
+] } = Astro.props;
+---
+
+<div class="typewriter-wrap" data-roles={JSON.stringify(roles)}>
+  <span class="typewriter-text" aria-label={roles.join(', ')}></span>
+  <span class="typewriter-cursor" aria-hidden="true"></span>
+  <noscript><span class="typewriter-fallback">{roles[0]}</span></noscript>
+</div>
+
+<style>
+  .typewriter-wrap {
+    display: inline-flex;
+    align-items: baseline;
+    min-height: 1.4em;
+    gap: 0;
+  }
+
+  .typewriter-text {
+    color: var(--color-gold);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .typewriter-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.15em;
+    background: var(--color-gold);
+    margin-left: 1px;
+    vertical-align: text-bottom;
+    animation: blink 0.7s step-end infinite;
+  }
+
+  .typewriter-fallback {
+    color: var(--color-gold);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .typewriter-cursor {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  function initTypewriter() {
+    const wrap = document.querySelector('.typewriter-wrap') as HTMLElement | null;
+    if (!wrap) return;
+
+    const textEl = wrap.querySelector('.typewriter-text') as HTMLElement | null;
+    const cursorEl = wrap.querySelector('.typewriter-cursor') as HTMLElement | null;
+    if (!textEl || !cursorEl) return;
+
+    const roles: string[] = JSON.parse(wrap.dataset.roles || '[]');
+    if (roles.length === 0) return;
+
+    // Reduced motion: show first role statically
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      textEl.textContent = roles[0];
+      cursorEl.style.display = 'none';
+      return;
+    }
+
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const TYPE_SPEED = 70;
+    const DELETE_SPEED = 40;
+    const PAUSE_AFTER_TYPE = 2200;
+    const PAUSE_AFTER_DELETE = 500;
+
+    function tick() {
+      const currentRole = roles[roleIndex];
+
+      if (!isDeleting) {
+        // Typing
+        charIndex++;
+        textEl!.textContent = currentRole.slice(0, charIndex);
+
+        if (charIndex === currentRole.length) {
+          // Done typing — pause then start deleting
+          isDeleting = true;
+          timeoutId = setTimeout(tick, PAUSE_AFTER_TYPE);
+        } else {
+          timeoutId = setTimeout(tick, TYPE_SPEED + Math.random() * 30);
+        }
+      } else {
+        // Deleting
+        charIndex--;
+        textEl!.textContent = currentRole.slice(0, charIndex);
+
+        if (charIndex === 0) {
+          // Done deleting — move to next role
+          isDeleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+          timeoutId = setTimeout(tick, PAUSE_AFTER_DELETE);
+        } else {
+          timeoutId = setTimeout(tick, DELETE_SPEED);
+        }
+      }
+    }
+
+    // Start after a brief delay
+    timeoutId = setTimeout(tick, 600);
+  }
+
+  document.addEventListener('astro:page-load', initTypewriter);
+</script>
