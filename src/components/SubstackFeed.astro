@@ -18,7 +18,9 @@ const { limit = 3 } = Astro.props;
 let posts: SubstackPost[] = [];
 
 try {
-  const res = await fetch(SUBSTACK_FEED_URL);
+  const res = await fetch(SUBSTACK_FEED_URL, {
+    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AstroSSG; +https://meredithmcgee.org)' },
+  });
   if (!res.ok) {
     throw new Error(`RSS fetch failed: ${res.status}`);
   }
