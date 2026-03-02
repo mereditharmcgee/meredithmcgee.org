@@ -1,6 +1,6 @@
 ---
-import { XMLParser } from 'fast-xml-parser';
-import { SUBSTACK_FEED_URL, SUBSTACK_URL } from '../consts';
+import { SUBSTACK_URL } from '../consts';
+import cachedPosts from '../data/substack-cache.json';
 
 interface Props {
   limit?: number;
@@ -17,44 +17,30 @@ const { limit = 3 } = Astro.props;
 
 let posts: SubstackPost[] = [];
 
+// Try fetching fresh data from Substack's JSON API
 try {
-  const res = await fetch(SUBSTACK_FEED_URL, {
-    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AstroSSG; +https://meredithmcgee.org)' },
-  });
-  if (!res.ok) {
-    throw new Error(`RSS fetch failed: ${res.status}`);
-  }
-  const xml = await res.text();
+  const res = await fetch(
+    `https://meredithwritespublichealth.substack.com/api/v1/posts?limit=${limit}`,
+    { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AstroSSG; +https://meredithmcgee.org)' } },
+  );
+  if (!res.ok) throw new Error(`API fetch failed: ${res.status}`);
+  const data = await res.json();
 
-  const parser = new XMLParser({
-    ignoreAttributes: false,
-    cdataPropName: '__cdata',
-  });
-
-  const result = parser.parse(xml);
-  const rawItems = result?.rss?.channel?.item;
-
-  // Normalize: fast-xml-parser returns an object (not array) when there's only 1 item
-  const items = Array.isArray(rawItems) ? rawItems : rawItems ? [rawItems] : [];
-
-  posts = items.slice(0, limit).map((item: any) => {
-    // Handle CDATA-wrapped fields: value may be string or { __cdata: string }
-    const getField = (val: any): string => {
-      if (typeof val === 'string') return val;
-      if (val && typeof val.__cdata === 'string') return val.__cdata;
-      return '';
-    };
-
-    return {
-      title: getField(item.title),
-      excerpt: getField(item.description),
-      url: typeof item.link === 'string' ? item.link : '',
-      date: new Date(item.pubDate),
-    };
-  });
+  posts = data.map((p: any) => ({
+    title: p.title || '',
+    excerpt: p.subtitle || p.description || '',
+    url: p.canonical_url || '',
+    date: new Date(p.post_date),
+  }));
 } catch (e) {
-  // Build continues; posts stays empty, fallback renders below
-  console.warn('[SubstackFeed] Failed to fetch RSS feed:', e instanceof Error ? e.message : e);
+  // Fall back to cached data (committed to repo, refreshed locally)
+  console.warn('[SubstackFeed] Live fetch failed, using cached data:', e instanceof Error ? e.message : e);
+  posts = cachedPosts.slice(0, limit).map((p) => ({
+    title: p.title,
+    excerpt: p.excerpt,
+    url: p.url,
+    date: new Date(p.date),
+  }));
 }
 ---
 
