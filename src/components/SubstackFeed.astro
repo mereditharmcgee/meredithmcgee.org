@@ -57,27 +57,34 @@ try {
 ---
 
 {posts.length > 0 ? (
-  <div class="substack-feed">
-    {posts.map((post) => (
-      <article class="substack-post">
-        <time datetime={post.date.toISOString()}>
-          {post.date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-        </time>
-        <h3>
+  <div class="newspaper-feed">
+    {posts.map((post, i) => (
+      <article class={`newspaper-item ${i === 0 ? 'newspaper-item--lead' : ''}`}>
+        <div class="newspaper-item__dateline">
+          <time datetime={post.date.toISOString()}>
+            {post.date.toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric',
+            }).toUpperCase()}
+          </time>
+        </div>
+        <h3 class="newspaper-item__headline">
           <a href={post.url} target="_blank" rel="noopener noreferrer">
             {post.title}
           </a>
         </h3>
-        <p>{post.excerpt}</p>
+        <p class="newspaper-item__lede">{post.excerpt}</p>
       </article>
     ))}
+    <div class="newspaper-more">
+      <a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer" class="newspaper-more__link">
+        Read the full archive on Substack <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
   </div>
 ) : (
-  <div class="substack-feed substack-feed--fallback">
+  <div class="newspaper-feed newspaper-feed--fallback">
     <p>
       Read the latest on <a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer">Substack</a>.
     </p>
@@ -85,71 +92,111 @@ try {
 )}
 
 <style>
-  .substack-feed {
+  .newspaper-feed {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 0;
+    border-top: 2px solid var(--color-gold);
+    padding-top: 1.5rem;
   }
 
-  .substack-post {
-    padding-bottom: 2rem;
+  .newspaper-item {
+    padding: 1.5rem 0;
     border-bottom: 1px solid rgba(212, 201, 142, 0.15);
   }
 
-  .substack-post:last-child {
+  .newspaper-item:last-of-type {
     border-bottom: none;
-    padding-bottom: 0;
   }
 
-  .substack-post time {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    margin-bottom: 0.5rem;
+  /* Lead story gets bigger treatment */
+  .newspaper-item--lead .newspaper-item__headline {
+    font-size: clamp(1.3rem, 2.5vw, 1.65rem);
+  }
+
+  .newspaper-item--lead .newspaper-item__lede {
+    font-size: 1rem;
+  }
+
+  .newspaper-item__dateline {
+    margin-bottom: 0.4rem;
+  }
+
+  .newspaper-item__dateline time {
     font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
-  }
-
-  .substack-post h3 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-size: 0.72rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
-    line-height: 1.3;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
   }
 
-  .substack-post h3 a {
+  .newspaper-item__headline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 0.5rem;
+  }
+
+  .newspaper-item__headline a {
     color: var(--color-gold);
     text-decoration: none;
     transition: color 0.3s ease;
   }
 
-  .substack-post h3 a:hover {
+  .newspaper-item__headline a:hover {
     color: var(--color-cream);
-    text-decoration: underline;
-    text-underline-offset: 0.15em;
-    text-decoration-thickness: 1px;
   }
 
-  .substack-post p {
-    font-size: 0.95rem;
+  .newspaper-item__lede {
+    font-size: 0.92rem;
     line-height: 1.6;
     color: var(--color-cream);
+    opacity: 0.85;
     margin: 0;
   }
 
-  .substack-feed--fallback p {
+  .newspaper-more {
+    padding-top: 1.25rem;
+    text-align: center;
+  }
+
+  .newspaper-more__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-gold);
+    text-decoration: none;
+    transition: color 0.3s ease, gap 0.3s ease;
+  }
+
+  .newspaper-more__link:hover {
+    color: var(--color-cream);
+    gap: 0.55rem;
+  }
+
+  /* Fallback */
+  .newspaper-feed--fallback {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .newspaper-feed--fallback p {
     font-size: 1rem;
     color: var(--color-cream);
   }
 
-  .substack-feed--fallback a {
+  .newspaper-feed--fallback a {
     color: var(--color-gold);
     text-decoration: underline;
     text-underline-offset: 0.15em;
     transition: color 0.3s ease;
   }
 
-  .substack-feed--fallback a:hover {
+  .newspaper-feed--fallback a:hover {
     color: var(--color-cream);
   }
 </style>

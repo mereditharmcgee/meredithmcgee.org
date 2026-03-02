@@ -42,6 +42,11 @@
 
   #ember-overlay.active {
     display: block;
+    pointer-events: auto;
+    background: rgba(45, 58, 30, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    animation: overlayFadeIn 0.25s ease forwards;
   }
 
   .ember-popup {
@@ -97,6 +102,11 @@
     animation: particleBurst 0.8s ease-out forwards;
   }
 
+  @keyframes overlayFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
   @keyframes emberEnter {
     0% {
       opacity: 0;
@@ -138,6 +148,10 @@
     :global(.ember-particle) {
       animation: none;
       opacity: 0;
+    }
+
+    #ember-overlay.active {
+      animation: none;
     }
 
     .ember-popup.entering {
@@ -256,6 +270,18 @@
           }, 900);
         }
       }
+
+      // Click overlay backdrop to dismiss
+      overlay.addEventListener('click', (ev: Event) => {
+        const target = ev.target as HTMLElement;
+        if (target === overlay) {
+          if (dismissTimer !== null) {
+            clearTimeout(dismissTimer);
+            dismissTimer = null;
+          }
+          dismissPopup();
+        }
+      });
 
       // Auto-dismiss after 3 seconds (longer to appreciate Ember)
       dismissTimer = setTimeout(() => {
