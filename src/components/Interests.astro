@@ -30,8 +30,6 @@ const interests = [
   },
 ];
 
-// Cycle through 3 botanical SVG types
-const botanicalTypes = ['leaf', 'sprout', 'berry', 'leaf', 'sprout', 'berry'];
 ---
 
 <section class="interests bg-medium">
@@ -43,32 +41,6 @@ const botanicalTypes = ['leaf', 'sprout', 'berry', 'leaf', 'sprout', 'berry'];
           <span class="interest-num">{String(i + 1).padStart(2, '0')}</span>
           <h3 class="interest-title">{item.title}</h3>
           <p class="interest-desc">{item.description}</p>
-
-          {botanicalTypes[i] === 'leaf' && (
-            <svg class="interest-botanical" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-              <path d="M16 4 C8 10, 5 18, 16 28 C27 18, 24 10, 16 4Z" fill="var(--color-light)" opacity="0.3" />
-              <path d="M16 8 L16 24" stroke="var(--color-gold)" stroke-width="0.5" opacity="0.25" />
-              <path d="M16 13 L12 16" stroke="var(--color-gold)" stroke-width="0.4" opacity="0.2" />
-              <path d="M16 17 L20 20" stroke="var(--color-gold)" stroke-width="0.4" opacity="0.2" />
-            </svg>
-          )}
-          {botanicalTypes[i] === 'sprout' && (
-            <svg class="interest-botanical" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-              <path d="M16 30 L16 16" stroke="var(--color-light)" stroke-width="0.7" opacity="0.3" />
-              <path d="M16 18 C10 12, 7 13, 12 18Z" fill="var(--color-light)" opacity="0.3" />
-              <path d="M16 14 C22 8, 25 9, 20 14Z" fill="var(--color-light)" opacity="0.3" />
-              <path d="M13 15 L16 18" stroke="var(--color-gold)" stroke-width="0.3" opacity="0.2" />
-              <path d="M19 11 L16 14" stroke="var(--color-gold)" stroke-width="0.3" opacity="0.2" />
-            </svg>
-          )}
-          {botanicalTypes[i] === 'berry' && (
-            <svg class="interest-botanical" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-              <path d="M6 28 C12 20, 20 12, 26 4" stroke="var(--color-light)" stroke-width="0.6" fill="none" opacity="0.3" />
-              <circle cx="10" cy="22" r="3" fill="var(--color-light)" opacity="0.25" />
-              <circle cx="17" cy="14" r="2.5" fill="var(--color-light)" opacity="0.25" />
-              <circle cx="23" cy="7" r="2" fill="var(--color-light)" opacity="0.25" />
-            </svg>
-          )}
         </article>
       ))}
     </div>
@@ -173,22 +145,6 @@ const botanicalTypes = ['leaf', 'sprout', 'berry', 'leaf', 'sprout', 'berry'];
     color: var(--color-cream);
     opacity: 0.7;
     margin: 0;
-    padding-right: 1.5rem; /* keep text clear of botanical accent */
-  }
-
-  .interest-botanical {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    width: 26px;
-    height: 26px;
-    opacity: 0.6;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-  }
-
-  .interest-card:hover .interest-botanical {
-    opacity: 1;
-    transform: scale(1.15);
   }
 
   /* Tablet: 2 columns */
