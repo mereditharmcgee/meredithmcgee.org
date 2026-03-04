@@ -14,10 +14,18 @@ import { SITE_TITLE, SUBSTACK_URL } from '../consts';
 	<body>
 		<Header />
 
-		<section class="gl-intro bg-dark bg-pattern">
+		<!-- Masthead -->
+		<section class="gl-masthead bg-dark bg-pattern">
 			<div class="container animate-on-scroll">
 				<h1>Ground Level</h1>
-				<p class="gl-description">Ground Level is my Substack about cannabis, public health, and the gap between policy and practice.</p>
+				<p class="gl-tagline"><em>Cannabis, public health, and the gap between policy and practice.</em></p>
+			</div>
+		</section>
+
+		<!-- Essay -->
+		<section class="gl-essay bg-medium">
+			<div class="container animate-on-scroll">
+				<p class="gl-copy">Ground Level is where I write about cannabis policy and public health: what the research actually shows, how legal markets are affecting the communities they were supposed to serve, and who's driving those decisions.</p>
 				<div class="gl-cta">
 					<a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer" class="btn">
 						Subscribe on Substack
@@ -26,9 +34,12 @@ import { SITE_TITLE, SUBSTACK_URL } from '../consts';
 			</div>
 		</section>
 
+		<!-- Recent Posts -->
 		<section class="gl-posts bg-dark">
 			<div class="container">
-				<h2>Recent posts</h2>
+				<h2 class="gl-typed-heading" aria-label="Recent posts">
+					<span class="gl-typed-text"></span>
+				</h2>
 				<SubstackFeed limit={6} />
 			</div>
 		</section>
@@ -38,52 +49,120 @@ import { SITE_TITLE, SUBSTACK_URL } from '../consts';
 </html>
 
 <style>
-	.gl-intro {
-		padding-top: 6rem;
-		padding-bottom: 3rem;
+	/* ==================== Masthead ==================== */
+	.gl-masthead {
+		padding-top: 7rem;
+		padding-bottom: 3.5rem;
 		text-align: center;
 	}
 
-	.gl-intro .container {
+	.gl-masthead .container {
 		max-width: 800px;
-		padding: 0 2rem;
 	}
 
-	.gl-intro h1 {
-		font-size: clamp(2rem, 4vw, 3rem);
-		margin-bottom: 1.5rem;
+	.gl-masthead h1 {
+		font-size: clamp(2.5rem, 5vw, 3.5rem);
+		margin-bottom: 0.75rem;
+		letter-spacing: -0.02em;
 	}
 
-	.gl-description {
-		font-size: clamp(0.95rem, 1.1vw, 1.1rem);
-		line-height: 1.8;
+	.gl-tagline {
+		font-family: 'Playfair Display', Georgia, serif;
+		font-size: clamp(1rem, 1.5vw, 1.15rem);
+		color: var(--color-cream);
+		opacity: 0.7;
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	/* ==================== Essay ==================== */
+	.gl-essay {
+		padding: 3.5rem 0;
+		text-align: center;
+	}
+
+	.gl-essay .container {
+		max-width: 700px;
+	}
+
+	.gl-copy {
+		font-size: clamp(0.95rem, 1.1vw, 1.08rem);
+		line-height: 1.85;
+		margin-bottom: 0;
 		max-width: 600px;
-		margin: 0 auto;
-		opacity: 0.95;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.gl-cta {
-		margin-top: 2rem;
+		margin-top: 2.25rem;
+		text-align: center;
 	}
 
+	/* ==================== Posts ==================== */
 	.gl-posts {
-		padding: 4rem 0 5rem;
+		padding: 4.5rem 0 5rem;
 	}
 
 	.gl-posts .container {
 		max-width: 800px;
-		padding: 0 2rem;
 	}
 
-	.gl-posts h2 {
+	.gl-typed-heading {
 		font-size: clamp(1.5rem, 2.5vw, 2rem);
 		margin-bottom: 1.5rem;
 		text-align: center;
+		min-height: 1.3em;
 	}
 
+	.gl-typed-text {
+		color: var(--color-gold);
+	}
+
+	/* ==================== Mobile ==================== */
 	@media (max-width: 768px) {
-		.gl-intro {
-			padding-top: 5rem;
+		.gl-masthead {
+			padding-top: 5.5rem;
+			padding-bottom: 2.5rem;
+		}
+
+		.gl-essay {
+			padding: 2.5rem 0;
 		}
 	}
+
 </style>
+
+<script>
+	document.addEventListener('astro:page-load', () => {
+		const heading = document.querySelector('.gl-typed-heading') as HTMLElement | null;
+		const textEl = heading?.querySelector('.gl-typed-text') as HTMLElement | null;
+		if (!heading || !textEl) return;
+
+		const phrase = 'Recent posts';
+
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			textEl.textContent = phrase;
+			return;
+		}
+
+		let typed = false;
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting && !typed) {
+					typed = true;
+					observer.disconnect();
+					let i = 0;
+					function tick() {
+						i++;
+						textEl!.textContent = phrase.slice(0, i);
+						if (i < phrase.length) setTimeout(tick, 65 + Math.random() * 35);
+					}
+					setTimeout(tick, 300);
+				}
+			});
+		}, { threshold: 0.5 });
+
+		observer.observe(heading);
+	});
+</script>
