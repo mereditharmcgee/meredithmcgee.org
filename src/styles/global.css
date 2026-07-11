@@ -1,20 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&display=swap');
 
 :root {
-	/* Evolved palette: warmer, deeper, more organic */
-	--color-dark: #2d3a1e;            /* Deeper forest green — richer than the old gray-olive */
-	--color-medium: #5a6e3c;          /* Warmer sage — less gray, more green */
-	--color-light: #9baa7c;           /* Muted sage — warmer undertone */
+	/* Warm "Field Notes" palette. Names kept for compatibility:
+	   --color-dark is now the paper background, --color-cream is now ink text. */
+	--color-dark: #f3ecdf;            /* Warm paper (main background) */
+	--color-medium: #e9dfcd;          /* Deeper paper (bands) */
+	--color-light: #ddd0b8;           /* Deepest paper */
 
-	--color-gold: #d4b968;            /* Warmer amber-gold — less washed, more warmth */
-	--color-cream: #ece6d0;           /* Warm parchment cream */
-	--color-cream-light: #f7f4ec;     /* Warm highlight */
+	--color-gold: #a76f2b;            /* Warm ochre accent */
+	--color-cream: #2b2822;           /* Ink (primary text) */
+	--color-cream-light: #4a453d;     /* Soft ink */
 
 	--color-white: #ffffff;
-	--color-dark-overlay: rgba(45, 58, 30, 0.95); /* Match new --color-dark RGB values */
+	--color-dark-overlay: rgba(45, 58, 30, 0.95); /* Dark green, kept for the nav frame */
+
+	/* Warm accents */
+	--color-sage: #6f8250;
+	--color-clay: #b26a3c;
+	--color-plum: #7d5280;
 
 	/* Muted text token for dates, metadata, secondary text */
-	--color-text-muted: rgba(236, 230, 208, 0.6); /* cream at 60% opacity */
+	--color-text-muted: rgba(43, 40, 34, 0.55);
 }
 
 * {
@@ -34,11 +40,11 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Playfair Display', Georgia, serif;
-	color: var(--color-gold);
+	font-family: 'Fraunces', Georgia, serif;
+	color: var(--color-cream);
 	line-height: 1.2;
 	font-weight: 500;
-	letter-spacing: -0.02em;
+	letter-spacing: -0.015em;
 }
 
 h1 {
@@ -152,21 +158,21 @@ section {
 }
 
 .bg-light h1, .bg-light h2, .bg-light h3, .bg-light h4 {
-	color: var(--color-dark);
+	color: var(--color-cream);
 }
 
 .bg-light p, .bg-light {
-	color: var(--color-dark);
+	color: var(--color-cream);
 }
 
 .bg-light .btn {
-	border-color: var(--color-dark);
-	color: var(--color-dark);
+	border-color: var(--color-cream);
+	color: var(--color-cream);
 }
 
 .bg-light .btn:hover {
-	background: var(--color-dark);
-	color: var(--color-cream);
+	background: var(--color-cream);
+	color: var(--color-dark);
 }
 
 /* Text utilities */

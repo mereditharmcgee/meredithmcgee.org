@@ -11,6 +11,7 @@ interface SubstackPost {
   excerpt: string;
   url: string;
   date: Date;
+  cover: string;
 }
 
 const { limit = 3 } = Astro.props;
@@ -31,6 +32,7 @@ try {
     excerpt: p.subtitle || p.description || '',
     url: p.canonical_url || '',
     date: new Date(p.post_date),
+    cover: '',
   }));
 } catch (e) {
   // Fall back to cached data (committed to repo, refreshed locally)
@@ -40,6 +42,7 @@ try {
     excerpt: p.excerpt,
     url: p.url,
     date: new Date(p.date),
+    cover: (p as any).cover || '',
   }));
 }
 ---
@@ -48,6 +51,7 @@ try {
   <div class="newspaper-feed">
     {posts.map((post, i) => (
       <article class={`newspaper-item ${i === 0 ? 'newspaper-item--lead' : ''}`}>
+        {post.cover && (<a href={post.url} target="_blank" rel="noopener noreferrer" class="newspaper-item__img"><img src={post.cover} alt="" loading="lazy" /></a>)}
         <div class="newspaper-item__dateline">
           <time datetime={post.date.toISOString()}>
             {post.date.toLocaleDateString('en-US', {
@@ -104,6 +108,18 @@ try {
 
   .newspaper-item--lead .newspaper-item__lede {
     font-size: 1rem;
+  }
+
+  .newspaper-item__img {
+    display: block;
+    margin-bottom: 0.9rem;
+  }
+  .newspaper-item__img img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
   }
 
   .newspaper-item__dateline {

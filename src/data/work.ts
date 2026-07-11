@@ -19,6 +19,8 @@ export interface WorkItem {
   // Optional image shown on the case-study page
   image?: string;
   imageAlt?: string;
+  // Optional small thumbnail shown on the work card
+  thumb?: string;
   // Long-form content for flagship case-study pages
   caseStudy?: {
     lede: string;
@@ -37,8 +39,7 @@ export const work: WorkItem[] = [
     href: "https://ratemyplace.org",
     linkLabel: "Visit RateMyPlace",
     image: "/rate-my-place.png",
-    imageAlt: "The RateMyPlace homepage, with the tagline Know before you sign and a search bar",
-    caseStudy: {
+    imageAlt: "The RateMyPlace homepage, with the tagline Know before you sign and a search bar",    caseStudy: {
       lede: "Renters make one of the highest-stakes decisions of their lives with almost no reliable information. Landlords have data on tenants. Tenants have word of mouth. RateMyPlace is my attempt to even that out.",
       sections: [
         {
@@ -75,7 +76,8 @@ export const work: WorkItem[] = [
     category: "RESEARCH",
     featured: true,
     slug: "cannabis-legalization-study",
-    role: "Parabola Center for Law and Policy · Junior Research Fellow",
+    role: "Parabola Center for Law and Policy · Junior Research Fellow",    image: "/boston-group.jpg",
+    imageAlt: "Meredith with the Parabola Center team and attendees",
     caseStudy: {
       lede: "Legalization gets argued about in the abstract constantly. I wanted to know what it looks like from the inside, in the states that have lived with it the longest.",
       sections: [
@@ -209,6 +211,5 @@ export const work: WorkItem[] = [
     description: "Original research on how hemp-derived THC products are marketed in the regulatory gap the 2018 Farm Bill left open, presented at the American Public Health Association annual meeting.",
     category: "POLICY",
     featured: false,
-    role: "APHA Annual Meeting · 2024",
-  },
+    role: "APHA Annual Meeting · 2024",  },
 ];

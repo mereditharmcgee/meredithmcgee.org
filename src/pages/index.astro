@@ -3,78 +3,147 @@ import BaseHead from '../components/BaseHead.astro';
 import EmberClick from '../components/EmberClick.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import SubstackFeed from '../components/SubstackFeed.astro';
-import TypewriterRoles from '../components/TypewriterRoles.astro';
-import VineFrame from '../components/VineFrame.astro';
-import Interests from '../components/Interests.astro';
-import WorkCard from '../components/WorkCard.astro';
-import { work } from '../data/work';
 import { SITE_TITLE, SUBSTACK_URL } from '../consts';
+import { work } from '../data/work';
+import cachedPosts from '../data/substack-cache.json';
 
-const featuredWork = work.filter((item) => item.featured).slice(0, 3);
+const featured = work.filter((item) => item.featured).slice(0, 3);
+
+const posts = cachedPosts.slice(0, 3).map((p) => ({
+	...p,
+	dateLabel: new Date(p.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+}));
+
+const interests = [
+	{ title: 'LGBTQ+ Population Health', description: 'Research and programming for communities health systems tend to overlook.' },
+	{ title: 'Cannabis Policy', description: "What happens when cannabis goes legal: who benefits, who doesn't, and why." },
+	{ title: 'Housing & Tenant Power', description: 'Who holds information about the places we live, and who gets kept in the dark.' },
+	{ title: 'Public Health Writing', description: 'Translating research into writing people outside academia actually read.' },
+	{ title: 'Fundraising & Development', description: 'Writing grants, building budgets, making the case for things that need funding.' },
+	{ title: 'Building Things', description: 'Small tools for people navigating systems that were never built for them.' },
+];
+
+const catColor = (c) => ({
+	RESEARCH: '#6f8250', PROJECTS: '#7d5280', WRITING: '#b26a3c',
+	GRANTS: '#b0862f', TOOLS: '#a5673a', POLICY: '#8a6ea0', EVALUATION: '#5f7d85',
+}[c] || '#6a6459');
+
+const workHref = (i) => (i.slug ? `/work/${i.slug}` : i.href || '/work');
+const workExternal = (i) => !i.slug && i.href && i.href.startsWith('http');
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description="Meredith McGee is a public health writer, evaluator, and researcher based in Boston." />
+		<BaseHead title={SITE_TITLE} description="Meredith McGee is a public health researcher, writer, and builder in Boston." />
 	</head>
-	<body>
+	<body class="fn-body">
 		<Header />
 
-		<!-- Beat 1: Hero -->
-		<section class="hero bg-dark bg-pattern">
-			<div class="container hero-grid">
-				<div class="hero-text">
-					<h1>Meredith McGee</h1>
-					<div class="hero-roles">
-						<TypewriterRoles />
+		<main class="fn">
+			<!-- Hero -->
+			<section class="fn-hero">
+				<div class="fn-hero__grid">
+					<div class="fn-hero__text">
+						<p class="fn-eyebrow">Meredith McGee, MPH &middot; Boston</p>
+						<h1 class="fn-statement">
+							I <span class="v v-sage">study</span> how systems fail the people they&rsquo;re supposed to serve, I <span class="v v-clay">write</span> about it publicly, and I <span class="v v-plum">build</span> tools to close the gap.
+						</h1>
+						<p class="fn-lede">
+							I&rsquo;m a public health researcher, writer, and builder. I get close to where systems meet people, listen for what the official story leaves out, and make things that help.
+						</p>
+						<div class="fn-hero__cta">
+							<a href="/work" class="fn-btn fn-btn--solid">See the work</a>
+							<a href="/about" class="fn-btn">My story</a>
+						</div>
+					</div>
+					<div class="fn-hero__photo">
+						<span class="fn-tape" aria-hidden="true"></span>
+						<img src="/meredith-headshot.jpg" alt="Meredith McGee" />
+						<span class="fn-photo-note">that&rsquo;s me</span>
 					</div>
 				</div>
-				<div class="hero-photo-wrap">
-					<VineFrame><img src="/meredith-headshot.jpg" alt="Meredith McGee" class="hero-photo" /></VineFrame>
+			</section>
+
+			<!-- Right now -->
+			<section class="fn-now">
+				<div class="fn-wrap animate-on-scroll">
+					<span class="fn-note">where I am this year</span><p class="fn-kicker">Right now</p>
+					<p class="fn-now__text">
+						I&rsquo;m in Boston, publishing <a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer">Ground Level</a>, a Substack on cannabis, public health, and the gap between policy and practice. I build <a href="https://ratemyplace.org" target="_blank" rel="noopener noreferrer">RateMyPlace</a>, a tenant review platform grounded in public health research. I research at <a href="https://www.parabolacenter.com" target="_blank" rel="noopener noreferrer">Parabola Center</a>, and I write grants at <a href="https://www.bradburysullivancenter.org/" target="_blank" rel="noopener noreferrer">Bradbury-Sullivan</a>. I live with my partner K and a black lab named <span class="ember-trigger" tabindex="0" role="button" aria-label="Click to meet Ember">Ember</span> who is scientifically proven to reduce my stress.
+					</p>
 				</div>
-			</div>
-		</section>
+			</section>
 
-		<!-- Beat 2: Bio -->
-		<section class="bio bg-medium">
-			<div class="container animate-on-scroll">
-				<p class="bio-copy">I'm Meredith. I'm deeply curious about systems and what happens when they fall short. That curiosity has taken me a lot of places: <span class="footnote-trigger" tabindex="0" role="button" data-aside="At Lafayette, K and I co-founded OUT Lafayette and launched Lavender Lane, the college's first gender-affirming housing. We also brought panels of the National AIDS Memorial Quilt to campus for the first time in three decades.">reviving LGBTQ+ programming</span> and building the first gender-inclusive housing at my college, <span class="footnote-trigger" tabindex="0" role="button" data-aside="I genuinely like writing grants, which I realize sounds unhinged. But there's something satisfying about building an argument for why something deserves to exist.">writing grants that have funded over a million dollars</span> in health equity and community programs, researching LGBTQ+ mental health at Yale, studying how people actually experience <span class="footnote-trigger" tabindex="0" role="button" data-aside="The drug policy parabola: both prohibition and unregulated commercial markets cause harm. The best policy lives somewhere between them. My research at Parabola Center focuses on what that middle ground looks like in practice.">legal cannabis markets</span>, and occasionally <span class="footnote-trigger" tabindex="0" role="button" data-aside="You're on one right now, but the bigger one is RateMyPlace, a tenant review platform I built from scratch because renters deserve better data about where they live.">making things on the internet</span>. The thread that connects all of it is trying to make public health make sense to the people it's supposed to serve.</p>
-				<p class="bio-copy">Right now I'm in Boston, publishing <a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer">Ground Level</a> (a Substack about cannabis, public health, and the gap between policy and practice), building <a href="https://ratemyplace.org" target="_blank" rel="noopener noreferrer">RateMyPlace</a> (a tenant review platform grounded in public health research), doing research at <a href="https://www.parabolacenter.com" target="_blank" rel="noopener noreferrer">Parabola Center for Law and Policy</a>, and writing grants at <a href="https://www.bradburysullivancenter.org/" target="_blank" rel="noopener noreferrer">Bradbury-Sullivan LGBT Community Center</a>. I live with my partner K and a black lab named <span class="ember-trigger" tabindex="0" role="button" aria-label="Click to meet Ember">Ember</span> who is scientifically proven to reduce my stress.</p>
-			</div>
-		</section>
-
-		<!-- Beat 3: What I'm Working On -->
-		<section class="working-on bg-dark">
-			<div class="container">
-				<h2 class="animate-on-scroll">What I'm working on</h2>
-				<p class="section-intro animate-on-scroll">The latest from <a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer">Ground Level</a>, where I write about cannabis, public health, and the gap between policy and practice.</p>
-				<SubstackFeed limit={3} />
-			</div>
-		</section>
-
-		<!-- Beat 3.5: Selected Work -->
-		<section class="selected-work bg-dark">
-			<div class="container">
-				<h2 class="animate-on-scroll">Selected work</h2>
-				<p class="section-intro animate-on-scroll">A few things I've made and done. You'll find the rest on the <a href="/work">work page</a>.</p>
-				<div class="selected-work__list animate-on-scroll">
-					{featuredWork.map((item) => <WorkCard {...item} />)}
+			<!-- Selected work -->
+			<section class="fn-block fn-block--paper2">
+				<div class="fn-wrap animate-on-scroll">
+					<div class="fn-head">
+						<span class="fn-note">things I&rsquo;ve actually made</span><p class="fn-kicker">Selected work</p>
+						<a href="/work" class="fn-more">All work &rarr;</a>
+					</div>
+					<div class="fn-list">
+						{featured.map((item) => (
+							<a
+								class="fn-item"
+								href={workHref(item)}
+								{...(workExternal(item) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+							>
+								<span class="fn-tag" style={`color:${catColor(item.category)};border-color:${catColor(item.category)}`}>{item.category}</span>
+								<h3 class="fn-item__title">{item.title}</h3>
+								<p class="fn-item__desc">{item.description}</p>
+								<span class="fn-item__go" style={`color:${catColor(item.category)}`}>
+									{item.slug ? 'Read the case study' : item.linkLabel || 'Take a look'} {workExternal(item) ? '↗' : '→'}
+								</span>
+							</a>
+						))}
+					</div>
 				</div>
-				<div class="selected-work__more animate-on-scroll">
-					<a href="/work">See all work &rarr;</a>
+			</section>
+
+			<!-- Ground Level -->
+			<section class="fn-block">
+				<div class="fn-wrap animate-on-scroll">
+					<div class="fn-head">
+						<span class="fn-note">thinking out loud, most weeks</span><p class="fn-kicker">From Ground Level</p>
+						<a href="/ground-level" class="fn-more">Read more &rarr;</a>
+					</div>
+					<div class="fn-posts">
+						{posts.map((post) => (
+							<a class="fn-post" href={post.url} target="_blank" rel="noopener noreferrer">
+								{post.cover && (<div class="fn-post__cover"><img src={post.cover} alt="" loading="lazy" /></div>)}
+							<time class="fn-post__date">{post.dateLabel}</time>
+								<h3 class="fn-post__title">{post.title}</h3>
+								<p class="fn-post__excerpt">{post.excerpt}</p>
+							</a>
+						))}
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 
-		<!-- Beat 4: Things I Think About -->
-		<Interests />
-
-		<!-- Footnote tooltip (shared for bio asides) -->
-		<div id="footnote-tooltip" class="footnote-tooltip" role="tooltip" aria-hidden="true">
-			<p class="footnote-text"></p>
-		</div>
+			<!-- Things I think about -->
+			<section class="fn-block fn-block--paper2">
+				<div class="fn-wrap animate-on-scroll">
+					<span class="fn-note fn-note--center">questions I keep circling</span><p class="fn-kicker fn-kicker--center">Things I think about</p>
+					<div class="fn-grid">
+						{interests.map((it, i) => (
+							<article class="fn-card">
+								<span class="fn-card__num">{String(i + 1).padStart(2, '0')}</span>
+								<h4 class="fn-card__title">{it.title}</h4>
+								<p class="fn-card__desc">{it.description}</p>
+							</article>
+						))}
+					</div>
+				</div>
+			</section>
+			<!-- Off the clock -->
+			<section class="fn-block fn-signoff">
+				<div class="fn-wrap animate-on-scroll">
+					<figure class="fn-signoff__photo"><img src="/photos/research-quilt.jpg" alt="My notebook and pens out on a quilt in the grass, with Ember lying nearby" loading="lazy" /></figure>
+					<p class="fn-signoff__text">Off the clock, I&rsquo;m usually reading across three disciplines at once, badly attempting to cook, or outside with <span class="ember-trigger" tabindex="0" role="button" aria-label="Click to meet Ember">Ember</span>. If any of this sounds like your kind of thing, <a href="/contact">say hello</a>.<svg class="fn-paw" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><ellipse cx="12" cy="15.5" rx="5" ry="4"></ellipse><ellipse cx="6.6" cy="10" rx="1.7" ry="2.3"></ellipse><ellipse cx="10" cy="7.4" rx="1.7" ry="2.3"></ellipse><ellipse cx="14" cy="7.4" rx="1.7" ry="2.3"></ellipse><ellipse cx="17.4" cy="10" rx="1.7" ry="2.3"></ellipse></svg></p>
+				</div>
+			</section>
+		</main>
 
 		<EmberClick />
 		<Footer />
@@ -82,281 +151,424 @@ const featuredWork = work.filter((item) => item.featured).slice(0, 3);
 </html>
 
 <style>
-	/* ==================== Hero ==================== */
-	.hero {
-		padding-top: 6rem;
-		padding-bottom: 4rem;
+	.fn {
+		--paper: #f3ecdf;
+		--paper-2: #ebe1d0;
+		--ink: #2b2822;
+		--ink-soft: #6c6559;
+		--sage: #6f8250;
+		--clay: #b26a3c;
+		--plum: #7d5280;
+		--gold: #b0862f;
+		--line: rgba(43, 40, 34, 0.14);
+
+		background-color: var(--paper);
+		background-image: radial-gradient(rgba(43, 40, 34, 0.05) 1px, transparent 1px);
+		background-size: 24px 24px;
+		color: var(--ink);
+		font-family: 'Source Sans 3', -apple-system, sans-serif;
 	}
 
-	.hero-grid {
-		max-width: 900px;
-		display: grid;
-		grid-template-columns: 1fr auto;
-		gap: 3rem;
-		align-items: center;
-	}
-
-	.hero-text h1 {
-		font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-		margin-bottom: 0.25rem;
-		line-height: 1.1;
-	}
-
-	.hero-roles {
-		font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-		min-height: 1.5em;
-	}
-
-	.hero-photo-wrap {
+	.fn-wrap {
+		width: 100%;
+		max-width: 940px;
+		margin: 0 auto;
+		padding: 0 2rem;
 		position: relative;
 	}
 
-	.hero-photo {
-		display: block;
-		width: 280px;
-		height: 340px;
-		object-fit: cover;
-		border-radius: 16px;
-		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-		border: 3px solid rgba(212, 185, 104, 0.25);
-		transition: border-color 0.4s ease;
+	.fn-kicker {
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--clay);
+		margin: 0 0 1.4rem;
 	}
 
-	.hero-photo:hover {
-		border-color: rgba(212, 185, 104, 0.5);
+	.fn-kicker--center { text-align: center; margin-bottom: 2.4rem; }
+
+	/* ---------- Hero ---------- */
+	.fn-hero {
+		padding: 8rem 0 4.5rem;
 	}
 
-	/* ==================== Bio ==================== */
-	.bio {
-		padding: 4rem 0;
+	.fn-hero__grid {
+		max-width: 1080px;
+		margin: 0 auto;
+		padding: 0 2rem;
+		display: grid;
+		grid-template-columns: 1.55fr 1fr;
+		gap: 3.5rem;
+		align-items: center;
 	}
 
-	.bio .container {
-		max-width: 800px;
+	.fn-eyebrow {
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.8rem;
+		font-weight: 600;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--ink-soft);
+		margin: 0 0 1.5rem;
 	}
 
-	.bio-copy {
-		font-size: clamp(0.95rem, 1.1vw, 1.08rem);
-		line-height: 1.85;
-		margin-bottom: 1.5rem;
+	.fn-statement {
+		font-family: 'Fraunces', Georgia, serif;
+		font-optical-sizing: auto;
+		font-weight: 500;
+		font-size: clamp(1.9rem, 4vw, 3.3rem);
+		line-height: 1.14;
+		letter-spacing: -0.015em;
+		color: var(--ink);
+		margin: 0 0 1.6rem;
 	}
 
-	.bio-copy:last-child {
-		margin-bottom: 0;
-	}
-
-	.bio-copy a {
-		color: var(--color-gold);
-		text-decoration: underline;
-		text-underline-offset: 0.15em;
-		text-decoration-thickness: 1px;
-		transition: color 0.3s ease;
-	}
-
-	.bio-copy a:hover {
-		color: var(--color-cream);
-	}
-
-	/* Footnote triggers (same dotted style as About page) */
-	:global(.footnote-trigger) {
-		border-bottom: 1.5px dotted var(--color-gold);
-		cursor: pointer;
-		touch-action: manipulation;
-		transition: border-bottom-color 0.2s ease;
-	}
-
-	:global(.footnote-trigger:hover) {
-		border-bottom-color: var(--color-cream);
-	}
-
-	:global(.footnote-trigger:focus-visible) {
-		outline: 2px solid var(--color-gold);
-		outline-offset: 2px;
-		border-radius: 2px;
-	}
-
-	/* Footnote tooltip */
-	.footnote-tooltip {
-		position: fixed;
-		max-width: 300px;
-		padding: 0.85rem 1.1rem;
-		background: var(--color-dark);
-		border: 1px solid var(--color-gold);
-		border-radius: 10px;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-		z-index: 1001;
-		opacity: 0;
-		pointer-events: none;
-		transition: opacity 0.25s ease;
-	}
-
-	.footnote-tooltip.visible {
-		opacity: 1;
-		pointer-events: auto;
-	}
-
-	.footnote-tooltip .footnote-text {
-		color: var(--color-cream);
-		font-size: 0.875rem;
-		line-height: 1.55;
+	.fn-statement .v {
 		font-style: italic;
+		font-weight: 600;
+	}
+	.v-sage { color: var(--sage); }
+	.v-clay { color: var(--clay); }
+	.v-plum { color: var(--plum); }
+
+	.fn-lede {
+		font-size: clamp(1rem, 1.15vw, 1.12rem);
+		line-height: 1.7;
+		color: var(--ink-soft);
+		max-width: 34rem;
+		margin: 0 0 2rem;
+	}
+
+	.fn-hero__cta { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+
+	.fn-btn {
+		display: inline-block;
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.92rem;
+		font-weight: 600;
+		letter-spacing: 0.01em;
+		padding: 0.7rem 1.5rem;
+		border-radius: 40px;
+		border: 1.5px solid var(--ink);
+		color: var(--ink);
+		text-decoration: none;
+		transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+	}
+	.fn-btn:hover { transform: translateY(-2px); }
+	.fn-btn--solid { background: var(--ink); color: var(--paper); }
+	.fn-btn--solid:hover { background: var(--plum); border-color: var(--plum); }
+
+	.fn-hero__photo {
+		position: relative;
+		justify-self: center;
+		transform: rotate(-2.2deg);
+	}
+
+	.fn-hero__photo img {
+		display: block;
+		width: 300px;
+		height: 360px;
+		object-fit: cover;
+		border-radius: 4px;
+		border: 8px solid #fff;
+		box-shadow: 0 16px 40px rgba(43, 40, 34, 0.25);
+	}
+
+	.fn-tape {
+		position: absolute;
+		top: -16px;
+		left: 50%;
+		transform: translateX(-50%) rotate(3deg);
+		width: 120px;
+		height: 30px;
+		background: rgba(176, 134, 47, 0.28);
+		border-left: 1px dashed rgba(255, 255, 255, 0.5);
+		border-right: 1px dashed rgba(255, 255, 255, 0.5);
+		z-index: 2;
+	}
+
+	.fn-photo-note {
+		position: absolute;
+		bottom: -34px;
+		right: -8px;
+		font-family: 'Fraunces', Georgia, serif;
+		font-style: italic;
+		font-size: 1.05rem;
+		color: var(--ink-soft);
+		transform: rotate(-4deg);
+	}
+
+	/* ---------- Right now ---------- */
+	.fn-now {
+		padding: 3.5rem 0 4.5rem;
+		border-top: 1px solid var(--line);
+	}
+
+	.fn-now__text {
+		font-family: 'Fraunces', Georgia, serif;
+		font-weight: 400;
+		font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+		line-height: 1.6;
+		color: var(--ink);
+		max-width: 46rem;
 		margin: 0;
 	}
 
-	/* ==================== Working On ==================== */
-	.working-on {
-		padding: 5rem 0;
-	}
-
-	.working-on .container {
-		max-width: 800px;
-	}
-
-	.working-on h2 {
-		font-size: clamp(1.5rem, 2.5vw, 2rem);
-		margin-bottom: 0.75rem;
-		text-align: center;
-	}
-
-	.section-intro {
-		text-align: center;
-		font-size: 0.95rem;
-		color: var(--color-text-muted);
-		margin-bottom: 2.5rem;
-		line-height: 1.6;
-	}
-
-	.section-intro a {
-		color: var(--color-gold);
+	.fn-now__text a {
+		color: var(--plum);
 		text-decoration: underline;
-		text-underline-offset: 0.15em;
-		text-decoration-thickness: 1px;
+		text-decoration-color: rgba(125, 82, 128, 0.4);
+		text-underline-offset: 0.18em;
+		transition: text-decoration-color 0.2s ease;
 	}
+	.fn-now__text a:hover { text-decoration-color: var(--plum); }
 
-	.section-intro a:hover {
-		color: var(--color-cream);
+	.ember-trigger {
+		border-bottom: 1.5px dotted var(--sage);
+		cursor: pointer;
+		transition: border-color 0.2s ease;
 	}
+	.ember-trigger:hover { border-bottom-color: var(--ink); }
 
-	/* ==================== Selected Work ==================== */
-	.selected-work .container {
-		max-width: 800px;
+	/* ---------- Blocks ---------- */
+	.fn-block { padding: 4.5rem 0; border-top: 1px solid var(--line); }
+	.fn-block--paper2 { background: var(--paper-2); border-top: 1px solid var(--line); }
+
+	.fn-head {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		margin-bottom: 1.8rem;
+		gap: 1rem;
 	}
+	.fn-head .fn-kicker { margin-bottom: 0; }
 
-	.selected-work h2 {
-		font-size: clamp(1.5rem, 2.5vw, 2rem);
-		margin-bottom: 0.75rem;
-		text-align: center;
-	}
-
-	.selected-work__list {
-		border-top: 2px solid var(--color-gold);
-		padding-top: 0.5rem;
-		margin-top: 1.5rem;
-	}
-
-	.selected-work__more {
-		margin-top: 2rem;
-		text-align: center;
-	}
-
-	.selected-work__more a {
-		font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
-		font-size: 0.95rem;
-		color: var(--color-gold);
+	.fn-more {
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: var(--ink);
 		text-decoration: none;
-		letter-spacing: 0.02em;
+		white-space: nowrap;
 		transition: color 0.2s ease;
 	}
+	.fn-more:hover { color: var(--plum); }
 
-	.selected-work__more a:hover {
-		color: var(--color-cream);
+	/* Selected work list */
+	.fn-list { display: flex; flex-direction: column; }
+
+	.fn-item {
+		display: block;
+		padding: 1.7rem 0;
+		border-top: 1px solid var(--line);
+		text-decoration: none;
+		color: var(--ink);
+		transition: transform 0.25s ease;
+	}
+	.fn-item:first-child { border-top: none; }
+	.fn-item:hover { transform: translateX(5px); }
+
+	.fn-tag {
+		display: inline-block;
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.66rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		padding: 0.18rem 0.6rem;
+		border: 1px solid;
+		border-radius: 30px;
+		margin-bottom: 0.6rem;
+		opacity: 0.9;
 	}
 
-	/* ==================== Mobile ==================== */
-	@media (max-width: 768px) {
-		.hero {
-			padding-top: 5rem;
-		}
+	.fn-item__title {
+		font-family: 'Fraunces', Georgia, serif;
+		font-weight: 600;
+		font-size: clamp(1.25rem, 2vw, 1.6rem);
+		line-height: 1.25;
+		margin: 0 0 0.5rem;
+		color: var(--ink);
+	}
 
-		.hero-grid {
-			grid-template-columns: 1fr;
-			text-align: center;
-			gap: 2rem;
-		}
+	.fn-item__desc {
+		font-size: 0.98rem;
+		line-height: 1.6;
+		color: var(--ink-soft);
+		margin: 0 0 0.7rem;
+		max-width: 44rem;
+	}
 
-		.hero-text h1 {
-			text-align: center;
-		}
+	.fn-item__go {
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.85rem;
+		font-weight: 600;
+	}
 
-		.hero-roles {
-			justify-content: center;
-			display: flex;
-		}
+	/* Posts */
+	.fn-posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 
-		.hero-photo-wrap {
-			order: -1;
-		}
+	.fn-post {
+		display: block;
+		padding: 1.5rem 1.4rem;
+		background: var(--paper);
+		border: 1px solid var(--line);
+		border-radius: 10px;
+		text-decoration: none;
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+	}
+	.fn-block--paper2 .fn-post { background: #fff; }
+	.fn-post:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(43, 40, 34, 0.12); }
 
-		.hero-photo {
-			width: 220px;
-			height: 270px;
-			margin: 0 auto;
+	.fn-post__cover { margin: 0 0 0.9rem; }
+	.fn-post__cover img {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		border-radius: 8px;
+		display: block;
+	}
+
+	.fn-post__date {
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--clay);
+	}
+
+	.fn-post__title {
+		font-family: 'Fraunces', Georgia, serif;
+		font-weight: 600;
+		font-size: 1.15rem;
+		line-height: 1.28;
+		color: var(--ink);
+		margin: 0.5rem 0 0.5rem;
+	}
+
+	.fn-post__excerpt {
+		font-size: 0.9rem;
+		line-height: 1.55;
+		color: var(--ink-soft);
+		margin: 0;
+	}
+
+	/* Interests */
+	.fn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+
+	.fn-card {
+		background: var(--paper);
+		border: 1px solid var(--line);
+		border-left: 3px solid var(--sage);
+		border-radius: 8px;
+		padding: 1.4rem 1.3rem;
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+	}
+	.fn-card:nth-child(3n+2) { border-left-color: var(--clay); }
+	.fn-card:nth-child(3n) { border-left-color: var(--plum); }
+	.fn-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(43, 40, 34, 0.12); }
+
+	.fn-card__num {
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		color: var(--ink-soft);
+		opacity: 0.6;
+	}
+
+	.fn-card__title {
+		font-family: 'Fraunces', Georgia, serif;
+		font-weight: 600;
+		font-size: 1.08rem;
+		line-height: 1.3;
+		color: var(--ink);
+		margin: 0.4rem 0 0.4rem;
+	}
+
+	.fn-card__desc {
+		font-size: 0.86rem;
+		line-height: 1.55;
+		color: var(--ink-soft);
+		margin: 0;
+	}
+
+	/* ---------- Responsive ---------- */
+	.fn-signoff { text-align: center; }
+	.fn-signoff__photo { max-width: 470px; margin: 0 auto 2.2rem; }
+	.fn-signoff__photo img { width: 100%; border-radius: 10px; box-shadow: 0 14px 34px rgba(43, 40, 34, 0.16); display: block; }
+	.fn-signoff__text {
+		font-family: 'Fraunces', Georgia, serif;
+		font-style: italic;
+		font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+		line-height: 1.6;
+		color: var(--ink-soft);
+		max-width: 40rem;
+		margin: 0 auto;
+	}
+	.fn-signoff__text a {
+		color: var(--plum);
+		text-decoration: underline;
+		text-underline-offset: 0.15em;
+	}
+
+	.fn-note { display: none; }
+
+	.fn-paw {
+		display: inline-block;
+		vertical-align: -3px;
+		margin-left: 0.35rem;
+		fill: var(--clay);
+		opacity: 0.5;
+	}
+
+	@media (min-width: 1280px) {
+		.fn-note {
+			display: block;
+			position: absolute;
+			left: -168px;
+			top: 0.1rem;
+			width: 144px;
+			text-align: right;
+			font-family: 'Fraunces', Georgia, serif;
+			font-style: italic;
+			font-weight: 400;
+			font-size: 0.92rem;
+			line-height: 1.35;
+			color: var(--ink-soft);
+			opacity: 0.72;
+			transform: rotate(-1.5deg);
+		}
+		.fn-note::after {
+			content: '';
+			position: absolute;
+			right: -24px;
+			top: 0.6em;
+			width: 16px;
+			height: 1px;
+			background: var(--clay);
+			opacity: 0.55;
 		}
 	}
 
-	@media (prefers-reduced-motion: reduce) {
-		.footnote-tooltip {
-			transition: none;
-		}
+	@media (max-width: 860px) {
+		.fn-hero { padding-top: 6.5rem; }
+		.fn-hero__grid { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+		.fn-hero__text { order: 2; }
+		.fn-hero__photo { order: 1; transform: rotate(-2deg); }
+		.fn-hero__photo img { width: 240px; height: 290px; }
+		.fn-lede { margin-left: auto; margin-right: auto; }
+		.fn-hero__cta { justify-content: center; }
+		.fn-posts { grid-template-columns: 1fr; }
+		.fn-grid { grid-template-columns: repeat(2, 1fr); }
+	}
+
+	@media (max-width: 560px) {
+		.fn-grid { grid-template-columns: 1fr; }
+		.fn-wrap { padding: 0 1.5rem; }
+		.fn-hero__grid { padding: 0 1.5rem; }
 	}
 </style>
-
-<script>
-	document.addEventListener('astro:page-load', () => {
-		// --- Footnote tooltip logic ---
-		const tooltip = document.getElementById('footnote-tooltip');
-		const tooltipText = tooltip?.querySelector('.footnote-text');
-		if (!tooltip || !tooltipText) return;
-
-		const triggers = document.querySelectorAll('.footnote-trigger');
-		if (triggers.length === 0) return;
-
-		triggers.forEach(trigger => {
-			trigger.addEventListener('click', (e) => {
-				e.stopPropagation();
-				const aside = trigger.getAttribute('data-aside');
-				if (!aside) return;
-
-				tooltipText.textContent = aside;
-
-				const TOOLTIP_WIDTH = 300;
-				const x = Math.min(e.clientX + 10, window.innerWidth - TOOLTIP_WIDTH - 15);
-				const y = Math.max(e.clientY - 80, 80);
-				tooltip.style.left = `${x}px`;
-				tooltip.style.top = `${y}px`;
-
-				tooltip.classList.add('visible');
-				tooltip.setAttribute('aria-hidden', 'false');
-			});
-
-			trigger.addEventListener('keydown', (e) => {
-				if (e.key === 'Enter' || e.key === ' ') {
-					e.preventDefault();
-					trigger.click();
-				}
-			});
-		});
-
-		document.addEventListener('click', () => {
-			tooltip.classList.remove('visible');
-			tooltip.setAttribute('aria-hidden', 'true');
-		});
-
-		document.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape') {
-				tooltip.classList.remove('visible');
-				tooltip.setAttribute('aria-hidden', 'true');
-			}
-		});
-	});
-</script>
