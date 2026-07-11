@@ -1,0 +1,301 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import SubstackFeed from '../components/SubstackFeed.astro';
+import { SITE_TITLE, SUBSTACK_URL } from '../consts';
+import { clips } from '../data/writing';
+
+const lead = clips.find((c) => c.featured);
+const rest = clips.filter((c) => !c.featured);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Writing | ${SITE_TITLE}`} description="Published writing from Meredith McGee: op-eds and essays on cannabis, public health, and the gap between policy and practice, plus Ground Level, her weekly Substack." />
+	</head>
+	<body>
+		<Header />
+
+		<!-- Masthead -->
+		<section class="wr-masthead bg-dark bg-pattern">
+			<div class="container animate-on-scroll">
+				<h1>Writing</h1>
+				<p class="wr-intro">
+					I write for people outside the room where the decisions get made. Most of it is about cannabis and public health, and the widening gap between what the research shows and what policy actually does. Some of it runs in outlets, some of it runs weekly on my own Substack.
+				</p>
+			</div>
+		</section>
+
+		<!-- In print -->
+		<section class="wr-print bg-medium">
+			<div class="container">
+				<header class="wr-sec-head animate-on-scroll">
+					<p class="wr-kicker">In print</p>
+					<h2 class="wr-sec-title">Published pieces</h2>
+				</header>
+
+				{lead && (
+					<a class="wr-lead animate-on-scroll" href={lead.href} target="_blank" rel="noopener noreferrer">
+						<div class="wr-lead-meta">
+							<span class="wr-outlet">{lead.outlet}</span>
+							<span class="wr-dot" aria-hidden="true">·</span>
+							<span>{lead.kind}</span>
+							<span class="wr-dot" aria-hidden="true">·</span>
+							<span>{lead.date}</span>
+						</div>
+						<h3 class="wr-lead-title">{lead.title}</h3>
+						<p class="wr-lead-blurb">{lead.blurb}</p>
+						<span class="wr-read">Read in {lead.outlet} <span aria-hidden="true">&rarr;</span></span>
+					</a>
+				)}
+
+				<div class="wr-list">
+					{rest.map((c) => (
+						<a class="wr-item animate-on-scroll" href={c.href} target="_blank" rel="noopener noreferrer">
+							<div class="wr-item-meta">
+								<span class="wr-outlet">{c.outlet}</span>
+								<span class="wr-dot" aria-hidden="true">·</span>
+								<span>{c.kind}</span>
+								<span class="wr-dot" aria-hidden="true">·</span>
+								<span>{c.date}</span>
+							</div>
+							<h3 class="wr-item-title">{c.title}</h3>
+							<p class="wr-item-blurb">{c.blurb}</p>
+							<span class="wr-read">Read the piece <span aria-hidden="true">&rarr;</span></span>
+						</a>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- Ground Level -->
+		<section class="wr-gl bg-dark">
+			<div class="container">
+				<header class="wr-sec-head animate-on-scroll">
+					<p class="wr-kicker wr-kicker--plum">The weekly</p>
+					<h2 class="wr-sec-title">Ground Level</h2>
+					<p class="wr-gl-copy">
+						My Substack about cannabis policy and public health: what the research actually shows, how legal markets are affecting the communities they were supposed to serve, and who is driving those decisions. New pieces most weeks.
+					</p>
+				</header>
+
+				<SubstackFeed limit={4} />
+
+				<div class="wr-gl-cta">
+					<a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer" class="btn">Subscribe on Substack</a>
+					<a href="/ground-level" class="wr-gl-more">More about Ground Level <span aria-hidden="true">&rarr;</span></a>
+				</div>
+			</div>
+		</section>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* ==================== Masthead ==================== */
+	.wr-masthead {
+		padding-top: 7rem;
+		padding-bottom: 3.5rem;
+		text-align: center;
+	}
+
+	.wr-masthead .container {
+		max-width: 760px;
+	}
+
+	.wr-masthead h1 {
+		font-size: clamp(2.5rem, 5vw, 3.5rem);
+		margin-bottom: 1rem;
+		letter-spacing: -0.02em;
+	}
+
+	.wr-intro {
+		font-size: clamp(0.98rem, 1.1vw, 1.12rem);
+		line-height: 1.8;
+		color: var(--color-cream-light);
+		margin: 0 auto;
+		max-width: 640px;
+	}
+
+	/* ==================== Section headings ==================== */
+	.wr-sec-head {
+		max-width: 720px;
+		margin: 0 auto 2rem;
+		text-align: center;
+	}
+
+	.wr-kicker {
+		font-size: 0.74rem;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--color-gold);
+		font-weight: 600;
+		margin-bottom: 0.45rem;
+	}
+
+	.wr-kicker--plum {
+		color: var(--color-plum);
+	}
+
+	.wr-sec-title {
+		font-size: clamp(1.7rem, 3vw, 2.3rem);
+	}
+
+	/* ==================== In print ==================== */
+	.wr-print {
+		padding: 4rem 0 4.25rem;
+	}
+
+	.wr-print .container {
+		max-width: 780px;
+	}
+
+	.wr-lead,
+	.wr-item {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+		background: #fbf7ee;
+		border: 1px solid rgba(43, 40, 34, 0.14);
+		border-radius: 12px;
+		transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+	}
+
+	.wr-lead:hover,
+	.wr-item:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 14px 30px rgba(43, 40, 34, 0.14);
+		border-color: rgba(167, 111, 43, 0.5);
+	}
+
+	.wr-lead {
+		padding: 2rem 2.1rem 1.85rem;
+		margin-bottom: 1.5rem;
+		border-left: 4px solid var(--color-gold);
+	}
+
+	.wr-lead-meta,
+	.wr-item-meta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem;
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.78rem;
+		letter-spacing: 0.02em;
+		color: var(--color-text-muted);
+		margin-bottom: 0.6rem;
+	}
+
+	.wr-outlet {
+		color: var(--color-gold);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+	}
+
+	.wr-dot {
+		color: var(--color-text-muted);
+	}
+
+	.wr-lead-title {
+		font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+		line-height: 1.2;
+		margin-bottom: 0.6rem;
+	}
+
+	.wr-lead-blurb {
+		font-size: 1.02rem;
+		line-height: 1.65;
+		color: var(--color-cream-light);
+		margin-bottom: 0.9rem;
+	}
+
+	.wr-list {
+		display: grid;
+		gap: 1.25rem;
+	}
+
+	.wr-item {
+		padding: 1.5rem 1.7rem 1.4rem;
+	}
+
+	.wr-item-title {
+		font-size: 1.28rem;
+		line-height: 1.25;
+		margin-bottom: 0.45rem;
+	}
+
+	.wr-item-blurb {
+		font-size: 0.94rem;
+		line-height: 1.6;
+		color: var(--color-cream-light);
+		margin-bottom: 0.7rem;
+	}
+
+	.wr-read {
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: var(--color-gold);
+	}
+
+	/* ==================== Ground Level ==================== */
+	.wr-gl {
+		padding: 4.25rem 0 5rem;
+	}
+
+	.wr-gl .container {
+		max-width: 780px;
+	}
+
+	.wr-gl-copy {
+		font-size: 1rem;
+		line-height: 1.75;
+		color: var(--color-cream-light);
+		margin: 0.9rem auto 0;
+		max-width: 620px;
+	}
+
+	.wr-gl-cta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 1.25rem 1.75rem;
+		margin-top: 2.5rem;
+	}
+
+	.wr-gl-more {
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--color-plum);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.wr-gl-more:hover {
+		color: var(--color-cream);
+	}
+
+	/* ==================== Mobile ==================== */
+	@media (max-width: 768px) {
+		.wr-masthead {
+			padding-top: 5.5rem;
+			padding-bottom: 2.5rem;
+		}
+
+		.wr-print,
+		.wr-gl {
+			padding: 3rem 0 3.25rem;
+		}
+
+		.wr-lead {
+			padding: 1.5rem 1.4rem;
+		}
+	}
+</style>
