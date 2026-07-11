@@ -20,7 +20,7 @@ let posts: SubstackPost[] = [];
 // Try fetching fresh data from Substack's JSON API
 try {
   const res = await fetch(
-    `https://meredithwritespublichealth.substack.com/api/v1/posts?limit=${limit}`,
+    `https://groundlevelmm.substack.com/api/v1/posts?limit=${limit}`,
     { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AstroSSG; +https://meredithmcgee.org)' } },
   );
   if (!res.ok) throw new Error(`API fetch failed: ${res.status}`);

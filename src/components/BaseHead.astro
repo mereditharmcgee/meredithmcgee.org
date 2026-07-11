@@ -69,7 +69,16 @@ const { title, description, image = '/og-image.svg' } = Astro.props;
         rootMargin: '0px 0px -50px 0px'
       });
 
-      document.querySelectorAll('.will-animate').forEach(el => observer.observe(el));
+      // Reveal anything already in (or near) the initial viewport right away,
+      // so above-the-fold headings never sit invisible. Observe the rest for scroll.
+      document.querySelectorAll('.will-animate').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.9) {
+          el.classList.add('is-visible');
+        } else {
+          observer.observe(el);
+        }
+      });
     }
   }
 

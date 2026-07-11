@@ -25,11 +25,7 @@ import { work } from '../../data/work';
 		<section class="archive-list bg-dark">
 			<div class="container">
 				{work.map(item => (
-					<WorkCard
-						title={item.title}
-						description={item.description}
-						category={item.category}
-					/>
+					<WorkCard {...item} />
 				))}
 
 				<div class="back-link">

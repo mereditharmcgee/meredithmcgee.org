@@ -6,13 +6,23 @@ import WorkCard from '../components/WorkCard.astro';
 import { SITE_TITLE } from '../consts';
 import { work } from '../data/work';
 
-const featuredWork = work.filter(item => item.featured);
+const order = ['RESEARCH', 'PROJECTS', 'WRITING', 'GRANTS', 'EVALUATION', 'TOOLS', 'POLICY'];
+const labels: Record<string, string> = {
+	RESEARCH: 'Research',
+	PROJECTS: 'Building',
+	WRITING: 'Writing',
+	GRANTS: 'Grants',
+	EVALUATION: 'Evaluation',
+	TOOLS: 'Tools',
+	POLICY: 'Policy',
+};
+const cats = order.filter((c) => work.some((w) => w.category === c));
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Work | ${SITE_TITLE}`} description="Research, writing, grants, and evaluation work from Meredith McGee. Here's what that looks like in practice." />
+		<BaseHead title={`Work | ${SITE_TITLE}`} description="Research, building, writing, and grants from Meredith McGee. Here's what that looks like in practice." />
 	</head>
 	<body>
 		<Header />
@@ -21,24 +31,25 @@ const featuredWork = work.filter(item => item.featured);
 			<div class="container animate-on-scroll">
 				<h1>Work</h1>
 				<p class="hero-intro">
-					I work at the intersection of public health, writing, and research. Some of it's published, some of it helped organizations get funded, and some of it lives in reports that made their way to decision-makers. Here's what that looks like in practice.
+					I study how systems fail the people they're supposed to serve, I write about it publicly, and I build tools to close the gap. Here's what that looks like in practice. Filter by the kind of work, or just scroll.
 				</p>
 			</div>
 		</section>
 
 		<section class="work-list bg-dark">
 			<div class="container">
-				{featuredWork.map(item => (
-					<WorkCard
-						title={item.title}
-						description={item.description}
-						category={item.category}
-					/>
-				))}
-
-				<div class="archive-link">
-					<a href="/work/archive">See all work &rarr;</a>
+				<div class="work-filters" aria-label="Filter work by type">
+					<button class="work-filter is-active" data-filter="all" type="button">All</button>
+					{cats.map((c) => (
+						<button class="work-filter" data-filter={c} type="button">{labels[c] || c}</button>
+					))}
 				</div>
+
+				<div class="work-items">
+					{work.map((item) => <WorkCard {...item} />)}
+				</div>
+
+				<p class="work-empty" hidden>Nothing in that category yet.</p>
 			</div>
 		</section>
 
@@ -70,7 +81,7 @@ const featuredWork = work.filter(item => item.featured);
 	}
 
 	.work-list {
-		padding: 4rem 0 5rem;
+		padding: 3rem 0 5rem;
 	}
 
 	.work-list .container {
@@ -78,22 +89,48 @@ const featuredWork = work.filter(item => item.featured);
 		padding: 0 2rem;
 	}
 
-	.archive-link {
-		margin-top: 2rem;
-		text-align: center;
+	.work-filters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		justify-content: center;
+		margin-bottom: 2.25rem;
 	}
 
-	.archive-link a {
+	.work-filter {
 		font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
-		font-size: 0.95rem;
-		color: var(--color-gold);
-		text-decoration: none;
-		letter-spacing: 0.02em;
-		transition: color 0.2s ease;
+		font-size: 0.8rem;
+		letter-spacing: 0.03em;
+		color: var(--color-cream);
+		background: transparent;
+		border: 1px solid rgba(212, 201, 142, 0.25);
+		border-radius: 20px;
+		padding: 0.35rem 0.9rem;
+		cursor: pointer;
+		transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 	}
 
-	.archive-link a:hover {
-		color: var(--color-cream);
+	.work-filter:hover {
+		border-color: var(--color-gold);
+		color: var(--color-gold);
+	}
+
+	.work-filter.is-active {
+		background: var(--color-gold);
+		border-color: var(--color-gold);
+		color: var(--color-dark);
+		font-weight: 600;
+	}
+
+	:global(.work-card.is-hidden) {
+		display: none;
+	}
+
+	.work-empty {
+		text-align: center;
+		color: var(--color-text-muted);
+		font-size: 0.95rem;
+		padding: 2rem 0;
 	}
 
 	@media (max-width: 768px) {
@@ -102,3 +139,28 @@ const featuredWork = work.filter(item => item.featured);
 		}
 	}
 </style>
+
+<script>
+	document.addEventListener('astro:page-load', () => {
+		const filters = Array.from(document.querySelectorAll('.work-filter'));
+		const cards = Array.from(document.querySelectorAll('.work-items .work-card'));
+		const empty = document.querySelector('.work-empty') as HTMLElement | null;
+		if (filters.length === 0) return;
+
+		filters.forEach((btn) => {
+			btn.addEventListener('click', () => {
+				filters.forEach((b) => b.classList.remove('is-active'));
+				btn.classList.add('is-active');
+
+				const f = btn.getAttribute('data-filter');
+				let shown = 0;
+				cards.forEach((card) => {
+					const match = f === 'all' || card.getAttribute('data-category') === f;
+					card.classList.toggle('is-hidden', !match);
+					if (match) shown++;
+				});
+				if (empty) empty.hidden = shown !== 0;
+			});
+		});
+	});
+</script>

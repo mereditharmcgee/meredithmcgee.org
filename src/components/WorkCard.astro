@@ -3,10 +3,14 @@ interface Props {
   title: string;
   description: string;
   category: string;
+  slug?: string;
+  role?: string;
+  href?: string;
+  linkLabel?: string;
   index?: number;
 }
 
-const { title, description, category, index = 0 } = Astro.props;
+const { title, description, category, slug, role, href, linkLabel } = Astro.props;
 
 const categoryColors: Record<string, string> = {
   RESEARCH: '#7c9a5e',
@@ -14,20 +18,43 @@ const categoryColors: Record<string, string> = {
   GRANTS: '#b8856c',
   EVALUATION: '#8ba4b8',
   POLICY: '#a89bc4',
+  TOOLS: '#c99a6a',
+  PROJECTS: '#a87ba0',
 };
 
 const accentColor = categoryColors[category] || 'var(--color-gold)';
+
+// Work out what the card links to, if anything.
+let linkHref: string | null = null;
+let linkText = '';
+let isExternal = false;
+
+if (slug) {
+  linkHref = `/work/${slug}`;
+  linkText = linkLabel || 'Read the case study';
+} else if (href) {
+  linkHref = href;
+  linkText = linkLabel || 'Take a look';
+  isExternal = href.startsWith('http');
+}
 ---
 
-<article class="work-card" style={`--accent: ${accentColor}`}>
+<article class="work-card" data-category={category} style={`--accent: ${accentColor}`}>
   <div class="work-card__meta">
     <span class="work-card__category">{category}</span>
+    {role && <span class="work-card__role">{role}</span>}
   </div>
   <h3 class="work-card__title">{title}</h3>
   <p class="work-card__description">{description}</p>
-  <a href="/work" class="work-card__link">
-    See more work <span aria-hidden="true">&rarr;</span>
-  </a>
+  {linkHref && (
+    <a
+      href={linkHref}
+      class="work-card__link"
+      {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+    >
+      {linkText} <span aria-hidden="true">{isExternal ? '↗' : '→'}</span>
+    </a>
+  )}
 </article>
 
 <style>
@@ -47,6 +74,10 @@ const accentColor = categoryColors[category] || 'var(--color-gold)';
 
   .work-card__meta {
     margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
   }
 
   .work-card__category {
@@ -61,6 +92,14 @@ const accentColor = categoryColors[category] || 'var(--color-gold)';
     border: 1px solid var(--accent);
     border-radius: 20px;
     opacity: 0.85;
+  }
+
+  .work-card__role {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    color: var(--color-cream);
+    opacity: 0.6;
   }
 
   .work-card__title {

@@ -7,7 +7,11 @@ import SubstackFeed from '../components/SubstackFeed.astro';
 import TypewriterRoles from '../components/TypewriterRoles.astro';
 import VineFrame from '../components/VineFrame.astro';
 import Interests from '../components/Interests.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { work } from '../data/work';
 import { SITE_TITLE, SUBSTACK_URL } from '../consts';
+
+const featuredWork = work.filter((item) => item.featured).slice(0, 3);
 ---
 
 <!doctype html>
@@ -21,13 +25,13 @@ import { SITE_TITLE, SUBSTACK_URL } from '../consts';
 		<!-- Beat 1: Hero -->
 		<section class="hero bg-dark bg-pattern">
 			<div class="container hero-grid">
-				<div class="hero-text animate-on-scroll">
+				<div class="hero-text">
 					<h1>Meredith McGee</h1>
 					<div class="hero-roles">
 						<TypewriterRoles />
 					</div>
 				</div>
-				<div class="hero-photo-wrap animate-on-scroll">
+				<div class="hero-photo-wrap">
 					<VineFrame><img src="/meredith-headshot.jpg" alt="Meredith McGee" class="hero-photo" /></VineFrame>
 				</div>
 			</div>
@@ -36,8 +40,8 @@ import { SITE_TITLE, SUBSTACK_URL } from '../consts';
 		<!-- Beat 2: Bio -->
 		<section class="bio bg-medium">
 			<div class="container animate-on-scroll">
-				<p class="bio-copy">I'm Meredith. I'm deeply curious about systems and what happens when they fall short. That curiosity has taken me a lot of places: <span class="footnote-trigger" tabindex="0" role="button" data-aside="At Lafayette, K and I co-founded OUT Lafayette and launched Lavender Lane, the college's first gender-affirming housing. We also brought panels of the National AIDS Memorial Quilt to campus for the first time in three decades.">reviving LGBTQ+ programming</span> and building the first gender-inclusive housing at my college, <span class="footnote-trigger" tabindex="0" role="button" data-aside="I genuinely like writing grants, which I realize sounds unhinged. But there's something satisfying about building an argument for why something deserves to exist.">writing grants that have funded over a million dollars</span> in health equity and community programs, researching LGBTQ+ mental health at Yale, studying how people actually experience <span class="footnote-trigger" tabindex="0" role="button" data-aside="The drug policy parabola: both prohibition and unregulated commercial markets cause harm. The best policy lives somewhere between them. My research at Parabola Center focuses on what that middle ground looks like in practice.">legal cannabis markets</span>, and occasionally <span class="footnote-trigger" tabindex="0" role="button" data-aside="You're on one right now. I think people should have their own corners of the internet, so I built this from scratch.">making things on the internet</span>. The thread that connects all of it is trying to make public health make sense to the people it's supposed to serve.</p>
-				<p class="bio-copy">Right now I'm in Boston, publishing <a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer">Ground Level</a> (a Substack about cannabis, public health, and the gap between policy and practice), doing research at <a href="https://www.parabolacenter.com" target="_blank" rel="noopener noreferrer">Parabola Center for Law and Policy</a>, and writing grants at <a href="https://www.bradburysullivancenter.org/" target="_blank" rel="noopener noreferrer">Bradbury-Sullivan LGBT Community Center</a>. I live with my partner K and a black lab named <span class="ember-trigger" tabindex="0" role="button" aria-label="Click to meet Ember">Ember</span> who is scientifically proven to reduce my stress.</p>
+				<p class="bio-copy">I'm Meredith. I'm deeply curious about systems and what happens when they fall short. That curiosity has taken me a lot of places: <span class="footnote-trigger" tabindex="0" role="button" data-aside="At Lafayette, K and I co-founded OUT Lafayette and launched Lavender Lane, the college's first gender-affirming housing. We also brought panels of the National AIDS Memorial Quilt to campus for the first time in three decades.">reviving LGBTQ+ programming</span> and building the first gender-inclusive housing at my college, <span class="footnote-trigger" tabindex="0" role="button" data-aside="I genuinely like writing grants, which I realize sounds unhinged. But there's something satisfying about building an argument for why something deserves to exist.">writing grants that have funded over a million dollars</span> in health equity and community programs, researching LGBTQ+ mental health at Yale, studying how people actually experience <span class="footnote-trigger" tabindex="0" role="button" data-aside="The drug policy parabola: both prohibition and unregulated commercial markets cause harm. The best policy lives somewhere between them. My research at Parabola Center focuses on what that middle ground looks like in practice.">legal cannabis markets</span>, and occasionally <span class="footnote-trigger" tabindex="0" role="button" data-aside="You're on one right now, but the bigger one is RateMyPlace, a tenant review platform I built from scratch because renters deserve better data about where they live.">making things on the internet</span>. The thread that connects all of it is trying to make public health make sense to the people it's supposed to serve.</p>
+				<p class="bio-copy">Right now I'm in Boston, publishing <a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer">Ground Level</a> (a Substack about cannabis, public health, and the gap between policy and practice), building <a href="https://ratemyplace.org" target="_blank" rel="noopener noreferrer">RateMyPlace</a> (a tenant review platform grounded in public health research), doing research at <a href="https://www.parabolacenter.com" target="_blank" rel="noopener noreferrer">Parabola Center for Law and Policy</a>, and writing grants at <a href="https://www.bradburysullivancenter.org/" target="_blank" rel="noopener noreferrer">Bradbury-Sullivan LGBT Community Center</a>. I live with my partner K and a black lab named <span class="ember-trigger" tabindex="0" role="button" aria-label="Click to meet Ember">Ember</span> who is scientifically proven to reduce my stress.</p>
 			</div>
 		</section>
 
@@ -47,6 +51,20 @@ import { SITE_TITLE, SUBSTACK_URL } from '../consts';
 				<h2 class="animate-on-scroll">What I'm working on</h2>
 				<p class="section-intro animate-on-scroll">The latest from <a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer">Ground Level</a>, where I write about cannabis, public health, and the gap between policy and practice.</p>
 				<SubstackFeed limit={3} />
+			</div>
+		</section>
+
+		<!-- Beat 3.5: Selected Work -->
+		<section class="selected-work bg-dark">
+			<div class="container">
+				<h2 class="animate-on-scroll">Selected work</h2>
+				<p class="section-intro animate-on-scroll">A few things I've made and done. You'll find the rest on the <a href="/work">work page</a>.</p>
+				<div class="selected-work__list animate-on-scroll">
+					{featuredWork.map((item) => <WorkCard {...item} />)}
+				</div>
+				<div class="selected-work__more animate-on-scroll">
+					<a href="/work">See all work &rarr;</a>
+				</div>
 			</div>
 		</section>
 
@@ -216,6 +234,41 @@ import { SITE_TITLE, SUBSTACK_URL } from '../consts';
 	}
 
 	.section-intro a:hover {
+		color: var(--color-cream);
+	}
+
+	/* ==================== Selected Work ==================== */
+	.selected-work .container {
+		max-width: 800px;
+	}
+
+	.selected-work h2 {
+		font-size: clamp(1.5rem, 2.5vw, 2rem);
+		margin-bottom: 0.75rem;
+		text-align: center;
+	}
+
+	.selected-work__list {
+		border-top: 2px solid var(--color-gold);
+		padding-top: 0.5rem;
+		margin-top: 1.5rem;
+	}
+
+	.selected-work__more {
+		margin-top: 2rem;
+		text-align: center;
+	}
+
+	.selected-work__more a {
+		font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+		font-size: 0.95rem;
+		color: var(--color-gold);
+		text-decoration: none;
+		letter-spacing: 0.02em;
+		transition: color 0.2s ease;
+	}
+
+	.selected-work__more a:hover {
 		color: var(--color-cream);
 	}
 

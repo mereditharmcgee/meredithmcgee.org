@@ -10,7 +10,8 @@ export default defineConfig({
 	integrations: [mdx(), sitemap()],
 	redirects: {
 		'/portfolio': '/work',
-		'/resume': '/about',
+		'/resume': '/Meredith-McGee-CV.pdf',
+		'/cv': '/Meredith-McGee-CV.pdf',
 		'/blog': '/ground-level',
 	},
 });
