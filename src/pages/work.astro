@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import ProjectGallery from '../components/ProjectGallery.astro';
 import WorkCard from '../components/WorkCard.astro';
 import { SITE_TITLE } from '../consts';
 import { work } from '../data/work';
@@ -36,8 +37,15 @@ const cats = order.filter((c) => work.some((w) => w.category === c));
 			</div>
 		</section>
 
+		<ProjectGallery />
+
 		<section class="work-list bg-dark">
 			<div class="container">
+				<div class="work-list-head">
+					<p class="work-list-kicker">The full record</p>
+					<h2 class="work-list-title">Everything, filterable</h2>
+				</div>
+
 				<div class="work-filters" aria-label="Filter work by type">
 					<button class="work-filter is-active" data-filter="all" type="button">All</button>
 					{cats.map((c) => (
@@ -87,6 +95,24 @@ const cats = order.filter((c) => work.some((w) => w.category === c));
 	.work-list .container {
 		max-width: 800px;
 		padding: 0 2rem;
+	}
+
+	.work-list-head {
+		text-align: center;
+		margin-bottom: 1.5rem;
+	}
+
+	.work-list-kicker {
+		font-size: 0.74rem;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--color-gold);
+		font-weight: 600;
+		margin-bottom: 0.4rem;
+	}
+
+	.work-list-title {
+		font-size: clamp(1.6rem, 3vw, 2.1rem);
 	}
 
 	.work-filters {

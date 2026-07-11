@@ -1,0 +1,237 @@
+---
+import { projects } from '../data/projects';
+---
+
+<section class="pg bg-medium">
+  <div class="container">
+    <header class="pg-head">
+      <p class="pg-kicker">The work itself</p>
+      <h2 class="pg-title">Selected work, up close</h2>
+      <p class="pg-lede">
+        The actual decks, posters, and prospectuses behind the work. Each one opens as a
+        full PDF you can page through. Nothing here links back out to a login.
+      </p>
+    </header>
+
+    <div class="pg-grid">
+      {projects.map((p) => (
+        <a class="pg-card" href={p.pdf} target="_blank" rel="noopener noreferrer">
+          <div class="pg-thumb">
+            <img src={p.cover} alt={p.coverAlt} loading="lazy" />
+            <span class="pg-open">{p.cta} <span aria-hidden="true">&rarr;</span></span>
+          </div>
+          <div class="pg-body">
+            <div class="pg-meta">
+              <span class={`pg-tag pg-tag--${p.tone}`}>{p.tag}</span>
+              <span class="pg-format">{p.format}</span>
+            </div>
+            <h3 class="pg-name">{p.title}</h3>
+            <p class="pg-role">{p.role}</p>
+            <p class="pg-desc">{p.desc}</p>
+            {p.also && (
+              <span class="pg-also" data-href={p.also.href}>{p.also.label} <span aria-hidden="true">&rarr;</span></span>
+            )}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pg {
+    padding: 4rem 0 4.25rem;
+    border-top: 1px solid rgba(43, 40, 34, 0.08);
+    border-bottom: 1px solid rgba(43, 40, 34, 0.08);
+  }
+
+  .pg .container {
+    max-width: 1160px;
+  }
+
+  .pg-head {
+    max-width: 640px;
+    margin-bottom: 2.5rem;
+  }
+
+  .pg-kicker {
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    font-weight: 600;
+    margin-bottom: 0.55rem;
+  }
+
+  .pg-title {
+    font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+    margin-bottom: 0.7rem;
+  }
+
+  .pg-lede {
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: var(--color-cream-light);
+    margin: 0;
+  }
+
+  /* Masonry via CSS columns keeps portrait posters and landscape decks together */
+  .pg-grid {
+    column-count: 3;
+    column-gap: 1.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .pg-grid { column-count: 2; }
+  }
+
+  @media (max-width: 600px) {
+    .pg-grid { column-count: 1; }
+  }
+
+  .pg-card {
+    break-inside: avoid;
+    display: block;
+    margin: 0 0 1.5rem;
+    background: #fbf7ee;
+    border: 1px solid rgba(43, 40, 34, 0.14);
+    border-radius: 12px;
+    overflow: hidden;
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .pg-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 34px rgba(43, 40, 34, 0.16);
+    border-color: rgba(167, 111, 43, 0.5);
+  }
+
+  .pg-thumb {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(43, 40, 34, 0.12);
+  }
+
+  .pg-thumb img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.45s ease;
+  }
+
+  .pg-card:hover .pg-thumb img {
+    transform: scale(1.035);
+  }
+
+  .pg-open {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.85rem 1rem 0.7rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(to top, rgba(30, 27, 22, 0.82), rgba(30, 27, 22, 0));
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .pg-card:hover .pg-open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .pg-body {
+    padding: 1.05rem 1.15rem 1.25rem;
+  }
+
+  .pg-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .pg-tag {
+    display: inline-block;
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0.22rem 0.5rem;
+    border-radius: 4px;
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .pg-tag--product { background: var(--color-cream); }
+  .pg-tag--research { background: var(--color-plum); }
+  .pg-tag--practice { background: var(--color-sage); }
+  .pg-tag--dev { background: var(--color-clay); }
+  .pg-tag--policy { background: var(--color-gold); }
+
+  .pg-format {
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .pg-name {
+    font-size: 1.2rem;
+    line-height: 1.22;
+    margin-bottom: 0.2rem;
+  }
+
+  .pg-role {
+    font-size: 0.8rem;
+    color: var(--color-gold);
+    font-weight: 600;
+    margin-bottom: 0.55rem;
+    line-height: 1.35;
+  }
+
+  .pg-desc {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--color-cream-light);
+    margin: 0;
+  }
+
+  .pg-also {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    transition: color 0.2s ease;
+  }
+
+  .pg-card:hover .pg-also {
+    color: var(--color-cream);
+  }
+
+  @media (max-width: 600px) {
+    .pg { padding: 3rem 0 3.25rem; }
+  }
+</style>
+
+<script>
+  // The "also" link (thesis talk) lives inside the card's main anchor, so route it
+  // to its own PDF instead of the card's primary link.
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('.pg-also').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const href = el.getAttribute('data-href');
+        if (href) window.open(href, '_blank', 'noopener');
+      });
+    });
+  });
+</script>
