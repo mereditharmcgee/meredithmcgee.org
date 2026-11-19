@@ -20,6 +20,13 @@ const { title, description, image = '/og-image.png' } = Astro.props;
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/png" href="/logo-m-new.png" />
 <link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Fonts. Fraunces is self-hosted. Recia comes from Fontshare because its
+     license does not allow the files to sit in a public repository. -->
+<link rel="preload" href="/fonts/Fraunces-Variable.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=recia@400,401,500,700&display=swap" />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Canonical URL -->

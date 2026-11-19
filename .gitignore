@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# rebuild working files, never committed or deployed
+SITE-REBUILD.md
+PHASE-0-FIXES.md
+site-preview/
+phase-1-assets/
