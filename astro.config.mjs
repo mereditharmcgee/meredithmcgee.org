@@ -13,5 +13,6 @@ export default defineConfig({
 		'/resume': '/Meredith-McGee-CV.pdf',
 		'/cv': '/Meredith-McGee-CV.pdf',
 		'/blog': '/ground-level',
+		'/Meredith-McGee-Resume.pdf': '/Meredith-McGee-CV.pdf',
 	},
 });

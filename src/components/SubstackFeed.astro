@@ -1,53 +1,23 @@
 ---
 import { SUBSTACK_URL } from '../consts';
-import cachedPosts from '../data/substack-cache.json';
+import { getGroundLevelPosts } from '../lib/groundLevel';
 
 interface Props {
   limit?: number;
 }
 
-interface SubstackPost {
-  title: string;
-  excerpt: string;
-  url: string;
-  date: Date;
-  cover: string;
-}
-
 const { limit = 3 } = Astro.props;
 
-let posts: SubstackPost[] = [];
-
-// Try fetching fresh data from Substack's JSON API
-try {
-  const res = await fetch(
-    `https://groundlevelmm.substack.com/api/v1/posts?limit=${limit}`,
-    { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AstroSSG; +https://meredithmcgee.org)' } },
-  );
-  if (!res.ok) throw new Error(`API fetch failed: ${res.status}`);
-  const data = await res.json();
-
-  posts = data.map((p: any) => ({
-    title: p.title || '',
-    excerpt: p.subtitle || p.description || '',
-    url: p.canonical_url || '',
-    date: new Date(p.post_date),
-    cover: '',
-  }));
-} catch (e) {
-  // Fall back to cached data (committed to repo, refreshed locally)
-  console.warn('[SubstackFeed] Live fetch failed, using cached data:', e instanceof Error ? e.message : e);
-  posts = cachedPosts.slice(0, limit).map((p) => ({
-    title: p.title,
-    excerpt: p.excerpt,
-    url: p.url,
-    date: new Date(p.date),
-    cover: (p as any).cover || '',
-  }));
-}
+const { posts, stale } = await getGroundLevelPosts(limit);
 ---
 
-{posts.length > 0 ? (
+{stale ? (
+  <div class="newspaper-feed newspaper-feed--fallback">
+    <p>
+      <a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer">Read Ground Level on Substack</a>
+    </p>
+  </div>
+) : posts.length > 0 ? (
   <div class="newspaper-feed">
     {posts.map((post, i) => (
       <article class={`newspaper-item ${i === 0 ? 'newspaper-item--lead' : ''}`}>
