@@ -47,9 +47,9 @@ export const SUBJECT_PREFIX = 'Consultation request';
 
 // Meredith's wording, approved Nov 20, 2026.
 // Shown in place of the form after it sends.
-export const SENT_MESSAGE = 'Thanks for reaching out. I’ll read this and write back with a few times to talk.';
+export const SENT_MESSAGE = 'Thanks for reaching out. I’ll get back to you within a few days with some times to talk.';
 // Shown under the form if sending fails.
-export const FAILED_MESSAGE = 'Something went wrong and this didn’t send. You can email me directly instead.';
-// PROVISIONAL, not Meredith's wording. It never shows once the form is
+export const FAILED_MESSAGE = 'Something went wrong and it didn’t send. You can email me directly instead.';
+// Kept as is with Meredith's okay. It never shows once the form is
 // connected, because it only appears while CONSULT_FORM_ENDPOINT is empty.
 export const NOT_CONNECTED_MESSAGE = 'This form isn’t connected yet. Please email me instead.';
