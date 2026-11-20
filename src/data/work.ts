@@ -146,7 +146,7 @@ export const work: WorkItem[] = [
   },
   {
     title: "Ground Level",
-    description: "My Substack about cannabis, public health, and the gap between policy and practice. It's where I work out the ideas that don't fit in a research paper, in plain language, most weeks.",
+    description: "My Substack about cannabis, public health, and the gap between policy and practice. It's where I work out the ideas that don't fit in a research paper, in plain language.",
     category: "WRITING",
     featured: true,
     href: "https://groundlevelmm.substack.com",

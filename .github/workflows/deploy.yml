@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Daily rebuild so new Ground Level posts show up without a push.
+  schedule:
+    - cron: '17 11 * * *'
 
 permissions:
   contents: read

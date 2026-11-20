@@ -5,13 +5,15 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_TITLE, SUBSTACK_URL } from '../consts';
 import { work } from '../data/work';
-import cachedPosts from '../data/substack-cache.json';
+import { getGroundLevelPosts } from '../lib/groundLevel';
 
 const featured = work.filter((item) => item.featured).slice(0, 3);
 
-const posts = cachedPosts.slice(0, 3).map((p) => ({
+const groundLevel = await getGroundLevelPosts(3);
+const postsStale = groundLevel.stale;
+const posts = groundLevel.posts.map((p) => ({
 	...p,
-	dateLabel: new Date(p.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+	dateLabel: p.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
 }));
 
 const interests = [
@@ -105,9 +107,12 @@ const workExternal = (i) => !i.slug && i.href && i.href.startsWith('http');
 			<section class="fn-block">
 				<div class="fn-wrap animate-on-scroll">
 					<div class="fn-head">
-						<span class="fn-note">thinking out loud, most weeks</span><p class="fn-kicker">From Ground Level</p>
+						<span class="fn-note">thinking out loud</span><p class="fn-kicker">From Ground Level</p>
 						<a href="/ground-level" class="fn-more">Read more &rarr;</a>
 					</div>
+					{postsStale ? (
+						<p><a href={SUBSTACK_URL} target="_blank" rel="noopener noreferrer">Read Ground Level on Substack</a></p>
+					) : (
 					<div class="fn-posts">
 						{posts.map((post) => (
 							<a class="fn-post" href={post.url} target="_blank" rel="noopener noreferrer">
@@ -118,6 +123,7 @@ const workExternal = (i) => !i.slug && i.href && i.href.startsWith('http');
 							</a>
 						))}
 					</div>
+					)}
 				</div>
 			</section>
 
