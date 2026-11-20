@@ -17,4 +17,4 @@ export const MM_AVATAR = '/img/brand/mm-avatar-160.png';
 // their own subject line. Paste the form's address here, for example
 // 'https://formspree.io/f/abcdwxyz'. While it is empty the form is switched
 // off and says so, and nothing is sent anywhere.
-export const CONSULT_FORM_ENDPOINT = '';
+export const CONSULT_FORM_ENDPOINT = 'https://formspree.io/f/xaeodeqz';
