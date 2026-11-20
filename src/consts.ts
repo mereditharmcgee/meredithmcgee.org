@@ -9,6 +9,5 @@ export const FOOTER_ROLE = 'Public health researcher, writer, and builder.';
 export const FOOTER_AVAILABILITY = 'Available for research, speaking, writing, and development work.';
 
 // The MM avatar that sits beside the name in the header and footer.
-// Stand-in pulled from the preview. Swap for /img/brand/mm-avatar-160.png
-// once that file is in public/.
-export const MM_AVATAR = '/img/brand/mm-avatar-preview-96.webp';
+// Part of the brand family, so it is never redrawn, recolored or cropped.
+export const MM_AVATAR = '/img/brand/mm-avatar-160.png';
