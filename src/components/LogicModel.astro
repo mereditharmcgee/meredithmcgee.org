@@ -1,0 +1,59 @@
+---
+// The RateMyPlace logic model: a pinned stage where loose pieces sort into
+// five columns as the steps scroll past. Content is in src/data/logicModel.ts,
+// styles in src/styles/logic-model.css and walk.css (the page's stylesheet
+// imports both), and the movement in src/scripts/logicModel.ts.
+//
+// With `collapsed`, the model starts hidden and opens from a button with
+// id="lm-open" elsewhere on the page.
+import { chips, columns, gapLabel, intro, outro, steps } from '../data/logicModel';
+
+interface Props {
+	collapsed?: boolean;
+}
+
+const { collapsed = false } = Astro.props;
+---
+
+<div id="lm-wrap" hidden={collapsed}>
+	<section class="lm" id="logic-model">
+		<div class="wrap wide">
+			<header class="lm-intro">
+				<h2 class="h2 brand">{intro.heading}</h2>
+				<p class="lede">{intro.lede}</p>
+				<p><button class="skip" type="button" data-skip-next>{intro.skip}</button></p>
+			</header>
+			<div class="walk" aria-label={intro.walkLabel}>
+				<div class="stagecol">
+					<div
+						class="stage"
+						id="stage"
+						role="img"
+						aria-label={intro.stageLabel}
+						data-cols={JSON.stringify(columns)}
+						data-chips={JSON.stringify(chips)}
+						data-gap={gapLabel}
+					>
+					</div>
+				</div>
+				<div class="steps" id="steps">
+					{steps.map((step, i) => (
+						<article class="step" data-step={i}>
+							<p class="n">{step.n}</p>
+							<h3>{step.title}</h3>
+							{step.body.map((text) => <p>{text}</p>)}
+						</article>
+					))}
+				</div>
+			</div>
+			<footer class="lm-outro">
+				<p>{outro.text}</p>
+				<a class="more" href={outro.link.href}>{outro.link.label}</a>
+			</footer>
+		</div>
+	</section>
+</div>
+
+<script>
+	import '../scripts/logicModel.ts';
+</script>

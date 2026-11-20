@@ -1,0 +1,24 @@
+/* The pinned walkthrough layout: steps scroll past while a stage stays put.
+   Shared by the logic model and the scroll scenes. */
+.walk { display: grid; grid-template-columns: 300px minmax(0,1fr); grid-template-areas: "steps stage"; gap: 0 48px; align-items: start; padding-block: 8px 24px; }
+.steps { grid-area: steps; display: flex; flex-direction: column; }
+.stagecol { grid-area: stage; position: sticky; top: max(calc(var(--stick,0px) + 20px),calc(50vh - 250px)); padding-block: 20px; }
+.step { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; gap: 10px; opacity: .5; transition: opacity .4s ease; }
+.step.on { opacity: 1; }
+.step .n { font-size: 13.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--tea); }
+.step h3 { font-size: 30px; line-height: 1.12; color: var(--ink); }
+.step.on h3 { color: var(--sc,var(--rasp)); }
+.step[data-step="2"], .step[data-step="3"] { --sc: var(--tea); }
+.step[data-step="4"], .step[data-step="5"] { --sc: var(--olive); }
+.step p { font-size: 19px; line-height: 1.55; }
+@media (max-width: 860px) {
+	.walk { grid-template-columns: minmax(0,1fr); grid-template-areas: "stage" "steps"; gap: 0; }
+	.stagecol { top: var(--stick,0px); z-index: 2; background: var(--paper); padding-block: 10px; border-bottom: 1px solid var(--line); }
+	.step { min-height: 62vh; justify-content: flex-start; padding-top: 28px; }
+	.step h3 { font-size: 26px; }
+	.step p { font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.step { transition: none; }
+	.step { opacity: 1; }
+}

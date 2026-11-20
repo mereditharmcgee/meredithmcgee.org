@@ -1,0 +1,31 @@
+---
+// One scroll scene: a stage that stays pinned while its steps scroll past.
+// Every scene on the site uses this wrapper and the one engine in
+// src/scripts/scenes.ts. Fill the "stage" slot with the picture and the
+// "steps" slot with <article class="step"> blocks. Inside the stage,
+// data-in="k" makes an element appear from step k, and
+// data-at="k:slot-id,..." moves it into that slot at step k.
+interface Props {
+	id: string;
+	// Describes the stage for screen readers, since the picture is one image to them.
+	label: string;
+	class?: string;
+}
+
+const { id, label, class: extra } = Astro.props;
+---
+
+<div class:list={['walk', 'scene', extra]} data-scene id={id}>
+	<div class="stagecol">
+		<div class="scn" role="img" aria-label={label}>
+			<slot name="stage" />
+		</div>
+	</div>
+	<div class="steps">
+		<slot name="steps" />
+	</div>
+</div>
+
+<script>
+	import '../scripts/scenes.ts';
+</script>

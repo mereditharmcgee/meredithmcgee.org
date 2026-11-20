@@ -119,9 +119,21 @@ button { font: inherit; color: inherit; }
 	.email { font-size: clamp(16px, 5.2vw, 21px); }
 }
 
+/* Reveal on scroll and the four pillar colors. Used on more than one page. */
+.rv { transition: opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1); }
+.rv.wait { opacity: 0; transform: translateY(22px); }
+@media (prefers-reduced-motion: reduce) {
+	.rv, .rv.wait { opacity: 1; transform: none; transition: none; }
+}
+.tk-1 { --tb: var(--tea-100); --tc: var(--tea-700); }
+.tk-2 { --tb: #e3edf3; --tc: var(--blue-700); }
+.tk-3 { --tb: #f6e7e9; --tc: var(--raspberry-700); }
+.tk-4 { --tb: var(--olive-100); --tc: var(--olive-700); }
+
 /* ------------------------------------------------------------------
    Legacy. Everything below belongs to pages that have not been rebuilt
-   yet. It is fenced off from the new header and footer, and it is
+   yet. It is fenced off from the new header, footer and every rebuilt page
+   (anything inside <main>), and it is
    deleted once the last old page is gone (SITE-REBUILD.md, section 3).
    ------------------------------------------------------------------ */
 :root {
@@ -147,19 +159,19 @@ button { font: inherit; color: inherit; }
 	--color-text-muted: rgba(43, 40, 34, 0.55);
 }
 
-:where(body > :not(.hd, .ft)),
-:where(body > :not(.hd, .ft)) * {
+:where(body > :not(.hd, .ft, main)),
+:where(body > :not(.hd, .ft, main)) * {
 	margin: 0;
 	padding: 0;
 }
 
-:where(body > :not(.hd, .ft)) h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
-:where(body > :not(.hd, .ft)) h2 { font-size: clamp(2rem, 4vw, 3rem); }
-:where(body > :not(.hd, .ft)) h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
-:where(body > :not(.hd, .ft)) h4 { font-size: 1.25rem; }
-:where(body > :not(.hd, .ft)) p { margin-bottom: 1em; }
-:where(body > :not(.hd, .ft)) a { text-decoration: none; }
-:where(body > :not(.hd, .ft)) img { display: inline; }
+:where(body > :not(.hd, .ft, main)) h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+:where(body > :not(.hd, .ft, main)) h2 { font-size: clamp(2rem, 4vw, 3rem); }
+:where(body > :not(.hd, .ft, main)) h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+:where(body > :not(.hd, .ft, main)) h4 { font-size: 1.25rem; }
+:where(body > :not(.hd, .ft, main)) p { margin-bottom: 1em; }
+:where(body > :not(.hd, .ft, main)) a { text-decoration: none; }
+:where(body > :not(.hd, .ft, main)) img { display: inline; }
 
 .btn-small {
 	padding: 0.5rem 1.5rem;
@@ -173,7 +185,8 @@ button { font: inherit; color: inherit; }
 	padding: 0 2rem;
 }
 
-section {
+:where(body > section),
+:where(body > :not(.hd, .ft, main)) section {
 	padding: 5rem 0;
 }
 
@@ -282,7 +295,8 @@ section {
 
 /* Responsive */
 @media (max-width: 768px) {
-	section {
+	:where(body > section),
+	:where(body > :not(.hd, .ft, main)) section {
 		padding: 3rem 0;
 	}
 

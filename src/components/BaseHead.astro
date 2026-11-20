@@ -57,6 +57,11 @@ const { title, description, image = '/og-image.png' } = Astro.props;
 <ViewTransitions />
 
 <script>
+  // Reveals, counting numbers and smooth jumps for the rebuilt pages.
+  import '../scripts/motion.ts';
+</script>
+
+<script>
   function initAnimations() {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

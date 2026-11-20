@@ -1,0 +1,18 @@
+/* Scroll scenes: the chips and slots that appear and move as steps go by.
+   Used with src/components/Scene.astro and src/scripts/scenes.ts. */
+.scene .scn { position: relative; background: var(--linen); border-radius: var(--radius-lg); padding: 18px; }
+.scene [data-in] { transition: opacity .45s ease,transform .7s cubic-bezier(.2,.8,.2,1),background-color .45s ease,border-color .45s ease; }
+.sc { display: block; font-size: 14px; line-height: 1.3; padding: 7px 10px; border-radius: 6px; background: var(--paper); border: 1px solid var(--line); color: var(--ink); transition: transform .7s cubic-bezier(.2,.8,.2,1),opacity .45s ease,background-color .45s ease,color .45s ease,border-color .45s ease; }
+.sc[data-in]:not(.on) { opacity: 0; }
+.sc.moving { z-index: 3; position: relative; box-shadow: 0 6px 18px rgba(34,16,19,.18); }
+.sc.out { background: var(--ob); border-color: var(--oc); border-left: 4px solid var(--oc); }
+.sc.fin.on { background: var(--oc); color: var(--paper); }
+@media (max-width: 860px) {
+	.sc { font-size: 11.5px; padding: 5px 6px; }
+	.scene .scn { padding: 10px; }
+}
+.sc.gap { background: transparent; color: var(--raspberry-700); border: 1.5px dashed var(--raspberry-700); }
+@media (max-width: 860px) {
+	.sc { overflow-wrap: anywhere; hyphens: auto; }
+	.scene .step { min-height: 72vh; }
+}
