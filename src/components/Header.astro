@@ -1,6 +1,7 @@
 ---
 // Styles for the header live in src/styles/global.css under "Header and footer".
 import Wordmark from './Wordmark.astro';
+import { PAGES_NOT_BUILT_YET } from '../consts';
 
 const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
 
@@ -11,7 +12,7 @@ const navLinks = [
 	{ href: '/writing', label: 'Writing' },
 	{ href: '/contact', label: 'Contact' },
 	{ href: '/work-with-me', label: 'Work with me', cta: true },
-];
+].filter((link) => !PAGES_NOT_BUILT_YET.includes(link.href));
 
 // A page under a section keeps that section lit, so the case studies
 // highlight Work and the package pages highlight Work with me.
