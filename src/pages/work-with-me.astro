@@ -1,0 +1,127 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import ConsultForm from '../components/ConsultForm.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import PackageBlocks from '../components/PackageBlocks.astro';
+import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
+import { kinds, MENU_CREDIT, menuGroups } from '../data/packages';
+import '../styles/work-with-me.css';
+
+// The page's own wording, ported exactly from the approved preview. Every
+// price is in src/data/packages.ts, and the form is in src/data/consultForm.ts.
+const HEAD = {
+	label: 'Work with me',
+	title: 'Four ways I can help',
+	lede: 'I work with nonprofits, small businesses, social enterprises, and research teams. Most of them are small, and most of them are stretched thin. If you want to see how a project runs before you look at prices, start with',
+	ledeLink: { label: 'how I work', href: '/how-i-work' },
+};
+const SEE_PRICES = 'See prices';
+// The olive banner. This is money raised, not a price.
+const BANNER = {
+	number: '$1M+',
+	text: 'raised with Bradbury-Sullivan LGBT Community Center since 2023.',
+	link: { label: 'Read the case study', href: '/work/bradbury-sullivan-grants' },
+};
+const PACKAGES = { label: 'Packages', heading: 'The Meredith Method for funding' };
+const MENU = { label: 'Single pieces', heading: 'Need just one thing?', intro: 'Every piece is also available on its own.' };
+const CONSULT = {
+	heading: 'Budget a concern? Let’s talk.',
+	text: 'Every project starts with a free 30-minute call. Tell me a little about you and what you’re working on, and I’ll write back with a few times that work.',
+	emailPrompt: 'Rather just email?',
+};
+// A spot for one short testimonial at the end of the packages section. It
+// stays hidden while the quote is empty. Fill it in once the person quoted
+// has said yes.
+const TESTIMONIAL = { quote: '', name: '', role: '' };
+
+// The line search engines and link previews show for this page.
+const DESCRIPTION = 'Funding packages, single pieces, research, writing, and speaking, with prices and a free 30-minute consultation.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${HEAD.label} | ${SITE_TITLE}`} description={DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main id="main">
+			<header class="phero p-plain">
+				<div class="wrap phero-in">
+					<div class="phero-text">
+						<p class="label">{HEAD.label}</p>
+						<h1 class="phero-h">{HEAD.title}</h1>
+						<p class="lede">{HEAD.lede} <a href={HEAD.ledeLink.href}>{HEAD.ledeLink.label}</a>.</p>
+					</div>
+				</div>
+			</header>
+
+			<section class="wrap sec">
+				<div class="ktiles">
+					{kinds.map((kind) => (
+						<div class={`ktile o-${kind.id} rv`}>
+							<h2 class="ktile-h">{kind.name}</h2>
+							<p>{kind.text}</p>
+							<p class="kind-price">{kind.priceLine}</p>
+							<a class="go" href={`#menu-${kind.id}`} data-jump={`menu-${kind.id}`}>{SEE_PRICES} <span aria-hidden="true">↓</span></a>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<section class="mbanner">
+				<div class="wrap mbanner-in">
+					<p class="mbanner-n">{BANNER.number}</p>
+					<p class="mbanner-t">{BANNER.text} <a href={BANNER.link.href}>{BANNER.link.label}</a></p>
+				</div>
+			</section>
+
+			<section class="band" id="packages">
+				<div class="wrap sec stack">
+					<p class="label">{PACKAGES.label}</p>
+					<h2 class="h2">{PACKAGES.heading}</h2>
+					<PackageBlocks />
+					{TESTIMONIAL.quote && (
+						<figure class="stack-s measure">
+							<blockquote class="body-lg">{TESTIMONIAL.quote}</blockquote>
+							<figcaption class="caption">{TESTIMONIAL.name}{TESTIMONIAL.role && `, ${TESTIMONIAL.role}`}</figcaption>
+						</figure>
+					)}
+				</div>
+			</section>
+
+			<section class="wrap sec stack" id="menu">
+				<p class="label">{MENU.label}</p>
+				<h2 class="h2">{MENU.heading}</h2>
+				<p class="body-lg measure">{MENU.intro}</p>
+				<div class="menu">
+					<div class="menu-grid">
+						{menuGroups.map((group) => (
+							<div class={`mgroup o-${group.id}`} id={`menu-${group.id}`}>
+								<h3 class="mgroup-h">{group.name}</h3>
+								<dl>
+									{group.rows.map((row) => (
+										<div class="mrow"><dt>{row.item}{row.note && <> <span class="caption">{row.note}</span></>}</dt><dd>{row.price}</dd></div>
+									))}
+								</dl>
+							</div>
+						))}
+					</div>
+					<p class="caption">{MENU_CREDIT}</p>
+				</div>
+			</section>
+
+			<section class="wrap sec split" id="consult">
+				<div class="stack">
+					<h2 class="h2">{CONSULT.heading}</h2>
+					<p class="body-lg">{CONSULT.text}</p>
+					<p class="body-lg">{CONSULT.emailPrompt}</p>
+					<p class="reach"><span class="email">{CONTACT_EMAIL}</span></p>
+				</div>
+				<div><ConsultForm /></div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -1,0 +1,124 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import PackageBlocks from '../../components/PackageBlocks.astro';
+import Scene from '../../components/Scene.astro';
+import AuditStage from '../../components/stages/AuditStage.astro';
+import FoundationStage from '../../components/stages/FoundationStage.astro';
+import PartnershipStage from '../../components/stages/PartnershipStage.astro';
+import { SITE_TITLE } from '../../consts';
+import { SUBMIT_LABEL } from '../../data/consultForm';
+import { packages, type Package } from '../../data/packages';
+import { packageScenes } from '../../data/packageScenes';
+import '../../styles/work-with-me.css';
+
+// One page per funding package: /work-with-me/audit, /foundation and
+// /partnership. Prices and scope come from src/data/packages.ts, and each
+// scroll piece from src/data/packageScenes.ts.
+export function getStaticPaths() {
+	return packages.map((pkg) => ({ params: { slug: pkg.slug }, props: { pkg } }));
+}
+
+interface Props {
+	pkg: Package;
+}
+
+const { pkg } = Astro.props;
+const scene = packageScenes[pkg.slug];
+const Stage = { audit: AuditStage, foundation: FoundationStage, partnership: PartnershipStage }[pkg.slug]!;
+
+// Wording these three pages share, ported exactly from the approved preview.
+const STRIP_LABEL = 'The three funding packages';
+const CALL_LINE = 'Every project starts with a free 30-minute call.';
+const CONSULT_HREF = '/work-with-me#consult';
+const FITS_HEADING = 'Where this fits';
+
+// The line search engines and link previews show for each page.
+const DESCRIPTIONS: Record<string, string> = {
+	audit: 'A funding assessment that shows what’s working, what isn’t, and what to fix first.',
+	foundation: 'A logic model, a case for support, and a ranked funder list, so every application starts from the same base.',
+	partnership: 'Grant writing and capacity building, month to month, until your team can run it without me.',
+};
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${pkg.name} | ${SITE_TITLE}`} description={DESCRIPTIONS[pkg.slug]} />
+		<!-- Without scripts the scene cannot step, so show every piece of it. -->
+		<noscript>
+			<style>
+				.step, .scene [data-in] { opacity: 1 !important; transform: none !important; }
+				.sc.rev { display: block !important; }
+				.fo-panel .fo-lm { display: grid !important; }
+				.fo-panel .fo-line { display: block !important; }
+				.fo-panel .fo-ring { display: flex !important; }
+			</style>
+		</noscript>
+	</head>
+	<body>
+		<Header />
+		<main id="main">
+			<header class="wrap page-head pk-head o-fund">
+				<nav class="pk-strip" aria-label={STRIP_LABEL}>
+					<ol>
+						{packages.map((p) => (
+							<li><a href={`/work-with-me/${p.slug}`} aria-current={p.slug === pkg.slug ? 'step' : undefined}><span class="pk-sn">{p.step}</span>{p.name}</a></li>
+						))}
+					</ol>
+				</nav>
+				<h1 class="page-h">{pkg.name}</h1>
+				<p class="lede measure">{pkg.pitch}</p>
+				<p class="pk-price">{pkg.price}</p>
+			</header>
+
+			<section class="lm pk-scene">
+				<div class="wrap wide">
+					<Scene id={`sc-${pkg.slug}`} label={scene.stageLabel} class={`pk-${pkg.slug}`}>
+						<Stage slot="stage" />
+						<Fragment slot="steps">
+							{scene.steps.map((step, i) => (
+								<article class="step" data-step={i}>
+									<p class="n">{step.kicker}</p>
+									<h3>{step.title}</h3>
+									{step.body.map((text) => <p>{text}</p>)}
+									{i === scene.steps.length - 1 && (
+										<p class="sc-next"><a class="btn solid" href={scene.cta.href}>{scene.cta.label}{scene.cta.arrow && <> <span aria-hidden="true">→</span></>}</a></p>
+									)}
+								</article>
+							))}
+						</Fragment>
+					</Scene>
+				</div>
+			</section>
+
+			<section class="wrap sec">
+				<div class="deal">
+					<div class="deal-l">
+						<h2 class="h2">{pkg.dealHeading}</h2>
+						<ul class="pk-list">{pkg.scope.map((item) => <li>{item}</li>)}</ul>
+						{pkg.note && <p class="caption">{pkg.note}</p>}
+					</div>
+					<div class="deal-r">
+						<p class="body-lg">{CALL_LINE}</p>
+						<p class="cta"><a class="btn solid" href={CONSULT_HREF}>{SUBMIT_LABEL}</a></p>
+					</div>
+				</div>
+			</section>
+
+			<section class="band">
+				<div class="wrap sec stack">
+					<h2 class="h2">{FITS_HEADING}</h2>
+					<PackageBlocks current={pkg.slug} />
+					<a class="nextcard" href={pkg.next.href}>
+						<span class="label">{pkg.next.label}</span>
+						<span class="nextcard-t">{pkg.next.title} <span aria-hidden="true">→</span></span>
+						<span>{pkg.next.text}</span>
+					</a>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -1,0 +1,86 @@
+---
+// The consultation request form. It sends to the Formspree form named in
+// CONSULT_FORM_ENDPOINT. While that is empty the button is switched off and
+// a note says the form is not connected, so it never pretends to send.
+// With scripts on, the reply shows in place: a thank-you replaces the form,
+// or an error appears under it. With scripts off it posts the ordinary way.
+import { CONSULT_FORM_ENDPOINT } from '../consts';
+import {
+	BUDGET, EMAIL, FAILED_MESSAGE, HEARD, HELP, MESSAGE, NAME, NOT_CONNECTED_MESSAGE, ORG_TYPE, ORGANIZATION,
+	SENT_MESSAGE, SUBJECT_PREFIX, SUBMIT_LABEL, TIMELINE,
+	type ConsultField,
+} from '../data/consultForm';
+
+const connected = CONSULT_FORM_ENDPOINT !== '';
+const rows: ConsultField[][] = [[NAME, EMAIL], [ORGANIZATION, ORG_TYPE], [BUDGET, TIMELINE]];
+---
+
+<form class="form cq" id="consult-form" method="POST" action={connected ? CONSULT_FORM_ENDPOINT : undefined} data-subject={SUBJECT_PREFIX} data-failed={FAILED_MESSAGE}>
+	{rows.map((row) => (
+		<div class="cq-two">
+			{row.map((f) => (
+				<div>
+					{(f.kind === 'text' || f.kind === 'email') && (<><label for={f.id}>{f.label}</label><input id={f.id} name={f.name} type={f.kind} autocomplete={f.autocomplete} required={f.required} /></>)}
+					{f.kind === 'select' && (<><label for={f.id}>{f.label}</label><select id={f.id} name={f.name}><option value="">{f.placeholder}</option>{f.options.map((o) => <option>{o}</option>)}</select></>)}
+				</div>
+			))}
+		</div>
+	))}
+	{HELP.kind === 'checks' && (
+		<fieldset><legend>{HELP.label}</legend><div class="cq-checks">{HELP.options.map((o) => <label><input type="checkbox" name={HELP.name} value={o} /> {o}</label>)}</div></fieldset>
+	)}
+	{MESSAGE.kind === 'textarea' && (<><label for={MESSAGE.id}>{MESSAGE.label}</label><textarea id={MESSAGE.id} name={MESSAGE.name} rows={MESSAGE.rows}></textarea></>)}
+	{HEARD.kind === 'text' && (<><label for={HEARD.id}>{HEARD.label}</label><input id={HEARD.id} name={HEARD.name} type="text" /></>)}
+	<div><button class="btn solid" type="submit" disabled={!connected}>{SUBMIT_LABEL}</button></div>
+	<p class="form-note" role="status" hidden={connected}>{connected ? '' : NOT_CONNECTED_MESSAGE}</p>
+	<!-- The subject line, and an empty field that only automated senders fill in. -->
+	<input type="hidden" name="_subject" value={SUBJECT_PREFIX} />
+	<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" hidden />
+</form>
+<div class="form cq-done" id="consult-done" tabindex="-1" hidden>
+	<p class="body-lg">{SENT_MESSAGE}</p>
+</div>
+
+<script>
+	import { onPage } from '../scripts/page';
+
+	onPage((signal) => {
+		const form = document.querySelector<HTMLFormElement>('#consult-form');
+		const done = document.querySelector<HTMLElement>('#consult-done');
+		if (!form || !done) return;
+		const note = form.querySelector<HTMLElement>('.form-note')!;
+		const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+		const endpoint = form.getAttribute('action');
+
+		form.addEventListener(
+			'submit',
+			async (e) => {
+				e.preventDefault();
+				// No address to send to: the form is switched off, so do nothing.
+				if (!endpoint) return;
+				if (!form.reportValidity()) return;
+
+				// The subject line carries the organization, or the person's name without one.
+				const data = new FormData(form);
+				const who = String(data.get('organization') || data.get('name') || '').trim();
+				data.set('_subject', who ? `${form.dataset.subject}: ${who}` : form.dataset.subject || '');
+
+				note.hidden = true;
+				button.disabled = true;
+				try {
+					const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+					if (!res.ok) throw new Error(`status ${res.status}`);
+					form.hidden = true;
+					done.hidden = false;
+					done.focus();
+				} catch {
+					note.textContent = form.dataset.failed || '';
+					note.setAttribute('role', 'alert');
+					note.hidden = false;
+					button.disabled = false;
+				}
+			},
+			{ signal },
+		);
+	});
+</script>

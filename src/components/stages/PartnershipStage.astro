@@ -1,0 +1,13 @@
+---
+// The partnership's stage: applications moving from Meredith's lane, to a
+// shared lane, to the team's lane, while the hours meter drops. The labels
+// are in src/data/packageScenes.ts.
+import { partnershipStage as s } from '../../data/packageScenes';
+---
+
+<div class="pa">
+	<div class="pa-lane"><p class="pa-h">{s.lanes.me}</p><div class="pa-box" id="pa-me">{s.apps.map((a) => <span class="sc app" data-at={a.path}>{a.text}</span>)}<span class="sc app rev" data-in="3">{s.review}</span></div></div>
+	<div class="pa-lane"><p class="pa-h">{s.lanes.together}</p><div class="pa-box" id="pa-tog"></div></div>
+	<div class="pa-lane"><p class="pa-h">{s.lanes.team}</p><div class="pa-box" id="pa-team"></div></div>
+	<div class="pa-meter"><p class="pa-h">{s.meter}</p><div class="pa-track"><div class="pa-fill"></div></div></div>
+</div>

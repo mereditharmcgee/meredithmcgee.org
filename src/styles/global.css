@@ -94,6 +94,14 @@ button { font: inherit; color: inherit; }
 .page-head { padding-block: var(--space-14) 0; display: flex; flex-direction: column; gap: 16px; }
 .narrow > * { max-width: 40em; }
 
+/* Shared by more than one rebuilt page */
+.reach { display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: baseline; }
+.reach .email { overflow-wrap: normal; white-space: nowrap; }
+.o-fund { --oc: var(--olive-700); --ob: var(--olive-100); }
+.o-study { --oc: var(--tea-700); --ob: var(--tea-100); }
+.o-write { --oc: var(--raspberry-700); --ob: #fde6ea; }
+.o-speak { --oc: var(--blue-700); --ob: var(--blue-100); }
+
 /* Screen reader only */
 .sr-only {
 	border: 0;

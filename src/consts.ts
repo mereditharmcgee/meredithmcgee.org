@@ -12,7 +12,9 @@ export const FOOTER_AVAILABILITY = 'Available for research, speaking, writing, a
 // Part of the brand family, so it is never redrawn, recolored or cropped.
 export const MM_AVATAR = '/img/brand/mm-avatar-160.png';
 
-// Pages that are in the design but not built yet. Their links stay out of
-// the header and footer until the page exists. Remove a path from this
-// list when its page ships.
-export const PAGES_NOT_BUILT_YET = ['/work-with-me'];
+// Where the consultation form on /work-with-me sends. This is a Formspree
+// form of its own, separate from the contact form, so requests arrive with
+// their own subject line. Paste the form's address here, for example
+// 'https://formspree.io/f/abcdwxyz'. While it is empty the form is switched
+// off and says so, and nothing is sent anywhere.
+export const CONSULT_FORM_ENDPOINT = '';
