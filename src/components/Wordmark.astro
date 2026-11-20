@@ -1,0 +1,17 @@
+---
+// The brand mark: the MM avatar beside the name. The header links it home,
+// the footer shows it as plain text. The image is decorative because the
+// name sits right beside it.
+import { MM_AVATAR, SITE_TITLE } from '../consts';
+
+interface Props {
+	size: number;
+	href?: string;
+	lazy?: boolean;
+}
+
+const { size, href, lazy = false } = Astro.props;
+const Tag = href ? 'a' : 'p';
+---
+
+<Tag class="wordmark" href={href}><img src={MM_AVATAR} alt="" width={size} height={size} loading={lazy ? 'lazy' : undefined} />{SITE_TITLE}</Tag>
