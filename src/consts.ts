@@ -1,5 +1,5 @@
 export const SITE_TITLE = 'Meredith McGee';
-export const SITE_DESCRIPTION = 'Public health writer, evaluator, and researcher. Connecting community needs and data through writing.';
+export const SITE_DESCRIPTION = 'Public health researcher and grant writer helping small nonprofits and research teams with funding, research, and writing.';
 export const SUBSTACK_URL = 'https://groundlevelmm.substack.com';
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/meredith-mcgee-mph/';
 export const CONTACT_EMAIL = 'meredith.ar.mcgee@gmail.com';

@@ -7,7 +7,7 @@ import StudyPeople from '../components/study/People.astro';
 import StudyPress from '../components/study/Press.astro';
 import StudyReport from '../components/study/Report.astro';
 import StudyTrio from '../components/study/Trio.astro';
-import { CONTACT_EMAIL, SITE_TITLE, SUBSTACK_URL } from '../consts';
+import { CONTACT_EMAIL, SITE_DESCRIPTION, SITE_TITLE, SUBSTACK_URL } from '../consts';
 import { pillars } from '../data/approach';
 import { build, chapterBar, closing, fund, hero, howIWork, study, write } from '../data/home';
 import { projects } from '../data/projects';
@@ -36,7 +36,7 @@ const inPrint = clips.find((c) => c.featured) ?? clips[0];
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description="Meredith McGee is a public health researcher, writer, and builder in Boston." />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
