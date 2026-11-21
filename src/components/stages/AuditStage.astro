@@ -1,0 +1,24 @@
+---
+// The audit's stage: a pile of materials and conversations that sorts into
+// four bins, shows its gaps, and ends as a short report. The labels are in
+// src/data/packageScenes.ts. The scene engine moves each piece by its
+// data-at plan, written as step:slot pairs.
+import { auditStage as s } from '../../data/packageScenes';
+---
+
+<div class="au">
+	<div class="au-pile" id="au-pile">{s.pile.map((d) => <span class="sc doc" data-at={`0:au-pile,2:${d.bin}`}>{d.text}</span>)}{s.voices.map((v) => <span class="sc voice" data-in="1" data-at={`1:au-pile,2:${v.bin}`}>{v.text}</span>)}</div>
+	<div class="au-bins">
+		{s.bins.map((bin) => (
+			<div class="au-bin" data-in="2">
+				<p class="au-h">{bin.heading}</p>
+				<div class="au-box" id={bin.id}>{bin.gap && <span class="sc gap" data-in="3" data-at={`3:${bin.id},4:au-rep`}>{bin.gap}</span>}</div>
+			</div>
+		))}
+	</div>
+	<div class="au-report" data-in="4">
+		<p class="au-rh">{s.report.title}</p>
+		<p class="au-rs">{s.report.subtitle}</p>
+		<div class="au-rep" id="au-rep"></div>
+	</div>
+</div>

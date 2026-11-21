@@ -3,24 +3,35 @@ export interface CaseStudySection {
   paragraphs: string[];
 }
 
+// The four verbs the whole site is organized around. Each owns a color.
+export type Verb = 'study' | 'write' | 'build' | 'fund';
+
 export interface WorkItem {
   title: string;
   description: string;
   category: string;
+  // Which of the four verbs this belongs to. RESEARCH, EVALUATION and POLICY
+  // are study; WRITING is write; PROJECTS and TOOLS are build; GRANTS is fund.
+  verb: Verb;
   featured: boolean;
+  // One-sentence version shown on the case study cards on the Work page
+  summary?: string;
+  // What sits beside the title on the case study page
+  hero?:
+    | { kind: 'image'; src: string; width: number; height: number; alt: string; href?: string }
+    | { kind: 'stat'; value: string; caption: string };
+  // What the case study card on the Work page shows above the title
+  card?:
+    | { kind: 'image'; src: string; width: number; height: number; cover?: boolean }
+    | { kind: 'stat'; value: string };
   // Present when the item has its own case-study page at /work/[slug]
   slug?: string;
   // Short line of context (organization, year) shown under the title
   role?: string;
   // External or internal link when the item points to a real artifact
   href?: string;
-  // Custom label for the link (defaults handled in WorkCard)
+  // Label for the link
   linkLabel?: string;
-  // Optional image shown on the case-study page
-  image?: string;
-  imageAlt?: string;
-  // Optional small thumbnail shown on the work card
-  thumb?: string;
   // Long-form content for flagship case-study pages
   caseStudy?: {
     lede: string;
@@ -31,21 +42,24 @@ export interface WorkItem {
 export const work: WorkItem[] = [
   {
     title: "RateMyPlace",
-    description: "A public, health-weighted record of rental housing that I designed and built solo. Renters search an address and see what people who actually lived there reported. Live in New Haven and Boston.",
+    description: "A public, health-weighted record of rental housing that I designed and built solo. Renters search an address and see what people who actually lived there reported. Live now, and it works everywhere.",
     category: "PROJECTS",
+    verb: "build",
     featured: true,
     slug: "rate-my-place",
     role: "Founder and builder · 2025 to present",
     href: "https://ratemyplace.org",
     linkLabel: "Visit RateMyPlace",
-    image: "/rate-my-place.png",
-    imageAlt: "The RateMyPlace homepage, with the tagline Know before you sign and a search bar",    caseStudy: {
+    summary: "A public, health-weighted record of rental housing that I designed and built solo.",
+    hero: { kind: "image", src: "/img/rate-my-place.jpg", width: 1000, height: 588, alt: "The RateMyPlace homepage, with the tagline Know before you sign and a search bar", href: "https://ratemyplace.org" },
+    card: { kind: "image", src: "/img/rate-my-place.jpg", width: 1000, height: 588 },
+    caseStudy: {
       lede: "Renters make one of the highest-stakes decisions of their lives with almost no reliable information. Landlords have data on tenants. Tenants have word of mouth. RateMyPlace is my attempt to even that out.",
       sections: [
         {
           heading: "What it is",
           paragraphs: [
-            "RateMyPlace is a tenant review platform I designed and built from scratch, live in New Haven and Boston. You search an address and see what people who actually lived there reported about conditions, management, and the problems research shows affect your health. Then you leave your own review for the next tenant.",
+            "RateMyPlace is a tenant review platform I designed and built from scratch. It’s live, and it works everywhere. You search an address and see what people who actually lived there reported about conditions, management, and the problems research shows affect your health. Then you leave your own review for the next tenant.",
           ],
         },
         {
@@ -74,30 +88,32 @@ export const work: WorkItem[] = [
     title: "Cannabis Legalization, From the Ground Up",
     description: "I co-lead a qualitative study at Parabola Center on how people in states with five or more years of legal cannabis actually experience it. Legalization gets argued about in the abstract. This is what it looks like from the inside.",
     category: "RESEARCH",
+    verb: "study",
     featured: true,
     slug: "cannabis-legalization-study",
-    role: "Parabola Center for Law and Policy · Junior Research Fellow",    image: "/boston-group.jpg",
-    imageAlt: "Meredith with the Parabola Center team and attendees",
+    role: "Parabola Center for Law and Policy · Public Health Researcher",
+    summary: "I co-lead a qualitative study at Parabola Center on how people in states with five or more years of legal cannabis actually experience it.",
+    card: { kind: "image", src: "/img/report-cover.jpg", width: 720, height: 731, cover: true },
     caseStudy: {
       lede: "Legalization gets argued about in the abstract constantly. I wanted to know what it looks like from the inside, in the states that have lived with it the longest.",
       sections: [
         {
           heading: "What it is",
           paragraphs: [
-            "I co-lead an IRB-approved qualitative study at Parabola Center with Faith English of Johns Hopkins, looking at how people in states with five or more years of legal adult-use cannabis actually experience it. I built the interview guides, run the interviews, and code the transcripts with a structured, theory-driven approach across more than twenty participants.",
+            "I co-lead an IRB-approved qualitative study at Parabola Center with Faith English of Johns Hopkins, looking at how people in states with five or more years of legal adult-use cannabis actually experience it. I built the interview guides, run the interviews, and code the transcripts with a structured, theory-driven approach across 37 participants in nine states.",
           ],
         },
         {
           heading: "What we're hearing",
           paragraphs: [
-            "The short version: most people living in these markets see legalization as a real improvement, and the stigma that shadowed cannabis for decades has dropped off sharply.",
+            "Most people living in these markets see legalization as a real improvement, and the stigma that shadowed cannabis for decades has dropped off sharply.",
             "The part that's come up shortest is repair. The expungement and reinvestment these laws promised to the people the drug war hit hardest is the piece that keeps falling through.",
           ],
         },
         {
           heading: "Where it's going",
           paragraphs: [
-            "I've shared early findings at the University of Illinois Chicago's Cannabis Research Institute and at Parabola's own research roundup, and the full findings are being released publicly in 2026.",
+            "I've shared early findings at the University of Illinois Chicago's Cannabis Research Institute and at Parabola's own research roundup, and the first report came out in August 2026. A second one, on dispensary visits, advertising, and buying habits, is on the way.",
             "The point isn't to relitigate whether legalization was a good idea. It's to show where market design falls short of what it promised, and what it would take to close that gap.",
           ],
         },
@@ -108,9 +124,13 @@ export const work: WorkItem[] = [
     title: "A Million Dollars, One Proposal at a Time",
     description: "I write and manage grants for Bradbury-Sullivan LGBT Community Center. That work has brought in more than a million dollars for health equity and community programming.",
     category: "GRANTS",
+    verb: "fund",
     featured: true,
     slug: "bradbury-sullivan-grants",
     role: "Bradbury-Sullivan LGBT Community Center · 2023 to present",
+    summary: "I write and manage grants for Bradbury-Sullivan LGBT Community Center.",
+    hero: { kind: "stat", value: "$1M+", caption: "raised for health equity and community programs" },
+    card: { kind: "stat", value: "$1M+" },
     caseStudy: {
       lede: "A grant proposal is a case for why a community deserves resources it shouldn't have to keep asking for. I've written enough of them to have brought in over a million dollars.",
       sections: [
@@ -139,6 +159,7 @@ export const work: WorkItem[] = [
     title: "Norwood Hospital Was Done In by Inadequate State Regulations",
     description: "An op-ed on hospital REITs, private-equity extraction, and the regulatory gap that let a Massachusetts hospital close for six years. A state that regulates utilities and transit has no equivalent tools for hospital infrastructure.",
     category: "WRITING",
+    verb: "write",
     featured: true,
     role: "CommonWealth Beacon · May 2026",
     href: "https://commonwealthbeacon.org/opinion/norwood-hospital-was-done-in-by-inadequate-state-regulations-here-is-the-fix/",
@@ -148,6 +169,7 @@ export const work: WorkItem[] = [
     title: "Ground Level",
     description: "My Substack about cannabis, public health, and the gap between policy and practice. It's where I work out the ideas that don't fit in a research paper, in plain language.",
     category: "WRITING",
+    verb: "write",
     featured: true,
     href: "https://groundlevelmm.substack.com",
     linkLabel: "Read on Substack",
@@ -156,6 +178,7 @@ export const work: WorkItem[] = [
     title: "A Reliability Tool for Qualitative Coders",
     description: "A free browser tool I built that calculates inter-rater reliability straight from Dedoose exports. Drop in two or three coders' files and it does the kappa math, no spreadsheet gymnastics. I made it because I needed it.",
     category: "TOOLS",
+    verb: "build",
     featured: true,
     href: "/tools/kappa",
     linkLabel: "Open the tool",
@@ -164,6 +187,7 @@ export const work: WorkItem[] = [
     title: "The Corporate Takeover of Cannabis Isn't Inevitable",
     description: "How alcohol and tobacco companies have tried to buy their way into legal cannabis, what the research says about how far they've actually gotten, and why the outcome depends on the regulatory structure we choose to build.",
     category: "WRITING",
+    verb: "write",
     featured: false,
     role: "The Parabola Papers · February 2026",
     href: "https://parabolacenter.substack.com/p/the-corporate-takeover-of-cannabis",
@@ -173,6 +197,7 @@ export const work: WorkItem[] = [
     title: "The Drug Policy U-Curve",
     description: "Parabola Center's foundational essay on why both prohibition and unregulated commercial markets cause harm, and why the best policy sits in the space between them. I also published a companion interview with Dr. John Marks.",
     category: "WRITING",
+    verb: "write",
     featured: false,
     role: "Parabola Center for Law and Policy · 2024",
     href: "https://parabolacenter.substack.com",
@@ -182,6 +207,7 @@ export const work: WorkItem[] = [
     title: "Joint Realities: Cannabis Use and Sexual Identity",
     description: "My MPH thesis, using multi-state BRFSS data to measure the prevalence, frequency, and modality of cannabis use by sexual identity, part of a broader look at health disparities in queer communities. Advised by John Pachankis.",
     category: "RESEARCH",
+    verb: "study",
     featured: false,
     role: "Yale School of Public Health · MPH thesis, 2025",
   },
@@ -189,6 +215,7 @@ export const work: WorkItem[] = [
     title: "Psychotherapy for Sexual Minority Women",
     description: "As a graduate research assistant in the Pachankis Lab, I helped run one of the largest psychotherapy studies of sexual minority women (N=450): recruitment, diagnostic interviews, REDCap databases, and analyses in R across five studies through R01 trials.",
     category: "RESEARCH",
+    verb: "study",
     featured: false,
     role: "Yale LGBTQ+ Mental Health Initiative",
   },
@@ -196,6 +223,7 @@ export const work: WorkItem[] = [
     title: "LGBTQ+ Community Capacity Needs Assessment",
     description: "A needs assessment of LGBTQ+ organizations across Connecticut, New York, and New Jersey. I conducted more than twenty semi-structured interviews and wrote the report to inform academic-community partnerships.",
     category: "EVALUATION",
+    verb: "study",
     featured: false,
     role: "Yale Center for Interdisciplinary Research on AIDS · 2024",
   },
@@ -203,6 +231,7 @@ export const work: WorkItem[] = [
     title: "Program Evaluation, Yale Public Health Practice",
     description: "I led a full-cycle evaluation of how students experienced their public health internships, from recruitment and consent through focus groups and analysis, and delivered concrete recommendations the program used with the next class.",
     category: "EVALUATION",
+    verb: "study",
     featured: false,
     role: "Yale Office of Public Health Practice",
   },
@@ -210,6 +239,8 @@ export const work: WorkItem[] = [
     title: "Hemp-Derived THC Marketing Under the 2018 Farm Bill",
     description: "Original research on how hemp-derived THC products are marketed in the regulatory gap the 2018 Farm Bill left open, presented at the American Public Health Association annual meeting.",
     category: "POLICY",
+    verb: "study",
     featured: false,
-    role: "APHA Annual Meeting · 2024",  },
+    role: "APHA Annual Meeting · 2024",
+  },
 ];

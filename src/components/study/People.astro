@@ -1,0 +1,29 @@
+---
+// One square per person interviewed, grouped by state, with the method note.
+import { methodNote, squaresLabel, states } from '../../data/study';
+
+interface Props {
+	// Adds the rise-in-on-scroll class where the page uses it
+	reveal?: boolean;
+}
+
+const { reveal = false } = Astro.props;
+
+// Numbered across states so the squares pop in one by one.
+let square = 0;
+const stateSquares = states.map((s) => ({ ...s, squares: Array.from({ length: s.count }, () => square++) }));
+const peopleLabel = `One square for each of the ${square} people interviewed. ${states.map((s) => `${s.name} ${s.count}`).join(', ')}.`;
+---
+
+<figure class:list={['peoplefig', { rv: reveal }]}>
+	<p class="label">{squaresLabel}</p>
+	<div class="people" role="img" aria-label={peopleLabel}>
+		{stateSquares.map((s) => (
+			<div class="st">
+				<div class="sqs">{s.squares.map((i) => <i class="sq" style={`--i:${i}`} />)}</div>
+				<p class="st-n">{s.name} <b>{s.count}</b></p>
+			</div>
+		))}
+	</div>
+	<figcaption class="caption">{methodNote}</figcaption>
+</figure>

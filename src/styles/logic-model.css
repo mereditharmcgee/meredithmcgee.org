@@ -1,0 +1,37 @@
+/* The RateMyPlace logic model. Used with src/components/LogicModel.astro. */
+.lm { border-top: 1px solid var(--line); padding-block: var(--space-14) var(--space-6); }
+.lm-intro { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+.skip { background: none; border: 0; padding: 0; cursor: pointer; color: var(--olive-700); font-size: 15px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.skip:hover { color: var(--brand); }
+[data-c="0"] { --solid: #5f0c27; --on: #fcf9f8; --tint: #fde6ea; --edge: #f0a6b5; --text: #5f0c27; }
+[data-c="1"] { --solid: #b18d70; --on: #221013; --tint: #f7ede2; --edge: #dec6b0; --text: #6b4a35; }
+[data-c="2"] { --solid: #6b4a35; --on: #fcf9f8; --tint: #f7ede2; --edge: #dec6b0; --text: #6b4a35; }
+[data-c="3"] { --solid: #969e68; --on: #221013; --tint: #e8ebd0; --edge: #c3c99d; --text: #464c20; }
+[data-c="4"] { --solid: #464c20; --on: #fcf9f8; --tint: #e8ebd0; --edge: #c3c99d; --text: #464c20; }
+.stage { position: relative; background: var(--linen); border-radius: var(--radius-lg); overflow: hidden; }
+.head { position: absolute; left: 0; top: 0; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; color: var(--ink); opacity: 0; transition: opacity .5s ease,color .4s ease,transform .7s cubic-bezier(.2,.8,.2,1); will-change: transform; }
+.head.future { opacity: .42; }
+.head.done, .head.active { opacity: 1; color: var(--text); }
+.rail, .railfill { position: absolute; left: 0; top: 0; border-radius: 2px; }
+.rail { background: var(--line); opacity: 0; transition: opacity .5s ease; }
+.rail.show { opacity: 1; }
+.railfill { background: var(--olive); transition: width .7s cubic-bezier(.2,.8,.2,1),height .7s cubic-bezier(.2,.8,.2,1); }
+.chip { position: absolute; left: 0; top: 0; display: flex; align-items: center; padding: 6px 10px; border-radius: 6px; font-size: 13.5px; line-height: 1.25; font-weight: 500; overflow: hidden; background: transparent; color: var(--muted); border: 1px dashed #c9bcb7; transition: transform .8s cubic-bezier(.2,.8,.2,1),width .6s cubic-bezier(.2,.8,.2,1),height .6s cubic-bezier(.2,.8,.2,1),background-color .45s ease,color .45s ease,border-color .45s ease,opacity .45s ease,padding .4s ease; will-change: transform; }
+.chip.placed { background: var(--tint); color: var(--ink); border: 1px solid var(--edge); border-left: 4px solid var(--solid); }
+.chip.active { background: var(--solid); color: var(--on); border: 1px solid var(--solid); }
+.chip.dot { background: var(--solid); border: 1px solid var(--text); color: transparent; padding: 0; border-radius: 2px; }
+.chip.tray { color: transparent; padding: 0; border: 1.5px dashed #b3a39d; border-radius: 2px; background: transparent; }
+.chip.sm { font-size: 11.5px; line-height: 1.2; padding: 3px 8px; }
+.chip.gap { background: transparent; color: var(--rasp); border: 1.5px dashed var(--rasp); opacity: 0; }
+.chip.gap.show { opacity: 1; }
+.count { margin-top: 8px; text-align: right; font-size: 13.5px; color: var(--muted); font-variant-numeric: lining-nums tabular-nums; }
+.lm-outro { padding-block: 24px 32px; display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: baseline; border-top: 1px solid var(--line); margin-top: 8px; font-size: 19px; }
+@media (max-width: 860px) {
+	.chip { font-size: 12.5px; padding: 5px 8px; }
+	.head { font-size: 12px; }
+}
+#logic-model { scroll-margin-top: 46px; }
+@media (prefers-reduced-motion: reduce) {
+	.chip, .head, .railfill, .rail { transition: none; }
+}
+#steps { scroll-margin-top: 30px; }

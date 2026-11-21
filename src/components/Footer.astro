@@ -1,7 +1,7 @@
 ---
 // Styles for the footer live in src/styles/global.css under "Header and footer".
 import Wordmark from './Wordmark.astro';
-import { CONTACT_EMAIL, FOOTER_AVAILABILITY, FOOTER_ROLE, LINKEDIN_URL, PAGES_NOT_BUILT_YET, SITE_TITLE, SUBSTACK_URL } from '../consts';
+import { CONTACT_EMAIL, FOOTER_AVAILABILITY, FOOTER_ROLE, LINKEDIN_URL, SITE_TITLE, SUBSTACK_URL } from '../consts';
 
 const currentYear = new Date().getFullYear();
 ---
@@ -15,7 +15,7 @@ const currentYear = new Date().getFullYear();
 		<p class="ft-links">
 			<span class="email small">{CONTACT_EMAIL}</span>
 			<a href="/Meredith-McGee-CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
-			{!PAGES_NOT_BUILT_YET.includes('/work-with-me') && <a href="/work-with-me">Work with me</a>}
+			<a href="/work-with-me">Work with me</a>
 			<a href="/tools/kappa" target="_blank" rel="noopener">Tools</a>
 			<a href={LINKEDIN_URL} target="_blank" rel="noopener">LinkedIn</a>
 			<a href={SUBSTACK_URL} target="_blank" rel="noopener">Substack</a>

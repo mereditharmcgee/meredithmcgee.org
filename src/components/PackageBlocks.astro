@@ -1,0 +1,33 @@
+---
+// The three funding packages as linked building blocks, with arrows between
+// them and the line about the whole system underneath. Work with me shows
+// all three plain. A package page passes its own slug as "current" and that
+// block is filled in. Every price comes from src/data/packages.ts.
+import { blockLabels, packages, SYSTEM_LINE } from '../data/packages';
+
+interface Props {
+	current?: string;
+}
+
+const { current } = Astro.props;
+---
+
+<ol class="blocks">
+	{packages.map((p, i) => (
+		<>
+			{i > 0 && <li class="blk-arrow" aria-hidden="true"><span>→</span></li>}
+			<li class:list={['blk', { cur: p.slug === current }]}>
+				<a class="blk-in" href={`/work-with-me/${p.slug}`}>
+					<span class="label">{p.stepLabel}</span>
+					<span class="blk-t">{p.name}</span>
+					<span class="blk-p">{p.price}</span>
+					<span class="blk-k">{blockLabels.youGet}</span>
+					<ul>{p.youGet.map((item) => <li>{item}</li>)}</ul>
+					<span class="blk-f">{p.feeds}{p.feedsNext && <> <span aria-hidden="true">→</span></>}</span>
+					<span class="blk-go">{blockLabels.fullScope}</span>
+				</a>
+			</li>
+		</>
+	))}
+</ol>
+<p class="body-lg measure sysline">{SYSTEM_LINE}</p>

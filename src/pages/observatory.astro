@@ -1,8 +1,11 @@
 ---
+// The AI Social Norms Observatory page. It is set aside, not deleted: the
+// address keeps working, but nothing on the site links to it and it is left
+// out of the sitemap (see astro.config.mjs).
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_TITLE } from '../consts';
+import { CONTACT_EMAIL, SITE_TITLE } from '../consts';
 ---
 
 <!doctype html>
@@ -12,33 +15,21 @@ import { SITE_TITLE } from '../consts';
 	</head>
 	<body>
 		<Header />
-
-		<section class="contact-hero bg-dark bg-pattern">
-			<div class="container animate-on-scroll">
-				<h1>AI Social Norms Observatory</h1>
-			</div>
-		</section>
-
-		<section class="contact-content bg-medium">
-			<div class="container animate-on-scroll">
-				<p class="intro-text">
+		<main id="main">
+			<header class="wrap page-head">
+				<h1 class="page-h">AI Social Norms Observatory</h1>
+			</header>
+			<section class="wrap sec stack narrow">
+				<p class="body-lg">
 					A study of how people judge specific uses of AI. You read ten short situations and rate each one on four questions. It takes about 8 to 12 minutes, every question can be skipped, and you see a summary of your own answers at the end.
 				</p>
-
-				<p class="intro-text">
+				<p class="body-lg">
 					It is independent, anonymous, and for adults. I run it myself; it is not affiliated with any institution, and the consent page says exactly what is collected and what is not.
 				</p>
-
-				<p class="email-display">
-					<a href="https://study.meredithmcgee.org/">Take part in the study</a>
-				</p>
-
-				<p class="social-links">
-					Questions: <a href="mailto:meredith.ar.mcgee@gmail.com">meredith.ar.mcgee@gmail.com</a>.
-				</p>
-			</div>
-		</section>
-
+				<p class="cta"><a class="btn solid" href="https://study.meredithmcgee.org/">Take part in the study</a></p>
+				<p>Questions: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+			</section>
+		</main>
 		<Footer />
 	</body>
 </html>

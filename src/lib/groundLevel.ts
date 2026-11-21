@@ -100,11 +100,16 @@ async function loadPosts(): Promise<GroundLevelPost[]> {
 	}
 }
 
-export async function getGroundLevelPosts(limit: number): Promise<{ posts: GroundLevelPost[]; stale: boolean }> {
+export async function getGroundLevelPosts(
+	limit: number,
+	// Rebuilt pages pass { covers: true } and choose which covers to show
+	// with src/lib/covers.ts. Old pages leave it off and get no covers.
+	options: { covers?: boolean } = {},
+): Promise<{ posts: GroundLevelPost[]; stale: boolean }> {
 	allPosts ??= loadPosts();
 	const posts = (await allPosts)
 		.slice(0, limit)
-		.map((p) => (SHOW_COVERS ? p : { ...p, cover: '' }));
+		.map((p) => (SHOW_COVERS || options.covers ? p : { ...p, cover: '' }));
 	const newest = posts[0]?.date.getTime() ?? 0;
 	const stale = Date.now() - newest > STALE_AFTER_DAYS * 24 * 60 * 60 * 1000;
 	return { posts, stale };

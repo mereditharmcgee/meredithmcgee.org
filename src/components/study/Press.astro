@@ -1,0 +1,17 @@
+---
+// The outlets that covered the study report.
+import { press, pressLabel } from '../../data/study';
+
+interface Props {
+	reveal?: boolean;
+}
+
+const { reveal = false } = Astro.props;
+---
+
+<p class:list={['press', { rv: reveal }]}>
+	<span class="label">{pressLabel}</span>
+	{press.map((p, i) => (
+		<Fragment>{' '}<a href={p.href} target="_blank" rel="noopener">{p.outlet} <span aria-hidden="true">↗</span></a>{i < press.length - 1 ? ',' : ''}</Fragment>
+	))}
+</p>

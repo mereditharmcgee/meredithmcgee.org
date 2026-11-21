@@ -1,0 +1,29 @@
+---
+// The foundation's stage: three priorities from the audit, each one moving
+// into the panel it builds (logic model, story, funder map). The labels are
+// in src/data/packageScenes.ts. The slots stay empty until a priority lands,
+// so they must not contain any whitespace.
+import { foundationStage as s } from '../../data/packageScenes';
+---
+
+<div class="fo">
+	<div class="fo-tray" id="fo-tray"><p class="fo-th">{s.trayLabel}</p>{s.priorities.map((p, i) => <span class="sc pri" data-at={`0:fo-tray,${i + 1}:fo-p${i + 1}`}>{p}</span>)}</div>
+	<div class="fo-panels">
+		<div class="fo-panel" data-in="1">
+			<p class="fo-h">{s.logicModel.heading}</p>
+			<div class="fo-slot" id="fo-p1"></div>
+			<div class="fo-lm">{s.logicModel.columns.map((c) => <div class="fo-col" data-in="1"><p class="fo-ch">{c.heading}</p><span class="sc fo-c">{c.chip}</span></div>)}</div>
+		</div>
+		<div class="fo-panel" data-in="2">
+			<p class="fo-h">{s.story.heading}</p>
+			<div class="fo-slot" id="fo-p2"></div>
+			{s.story.lines.map((line) => <p class="fo-line" data-in="2">{line}</p>)}
+		</div>
+		<div class="fo-panel" data-in="3">
+			<p class="fo-h">{s.funderMap.heading}</p>
+			<div class="fo-slot" id="fo-p3"></div>
+			{s.funderMap.rings.map((ring) => <div class="fo-ring" data-in="3"><p class="fo-ch">{ring.heading}</p>{ring.chips.map((c) => <span class="sc fo-c">{c}</span>)}</div>)}
+		</div>
+	</div>
+	<p class="fo-ready" data-in="4">{s.ready}</p>
+</div>

@@ -1,0 +1,196 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import LogicModel from '../components/LogicModel.astro';
+import Scene from '../components/Scene.astro';
+import { SITE_TITLE } from '../consts';
+import { pillarColor, pillars, slotLabels, tracks } from '../data/approach';
+import '../styles/how-i-work.css';
+
+// The page's own wording. The pillars and the three tracks are in
+// src/data/approach.ts, and the logic model is in src/data/logicModel.ts.
+const HEAD = {
+	label: 'How I work',
+	title: 'The Meredith Method',
+	lede: 'The way I work comes straight out of the life I’ve lived and the fields I’ve trained in, and each one changed how I look at a problem. I grew up with my own desk in the back of my dad’s office, learning what it actually takes to keep a small business going. I watched him pull ideas from one industry to fix problems in another, landing on answers nobody else had thought to try. I’ve been doing my own version of that ever since, with biology, history, public health, and years of grant writing as my toolbox.',
+	follow: 'It’s how I approach almost everything, whether it’s a funding plan, a study, or something I’m writing.',
+	photo: { src: '/img/yale-poster.jpg', alt: 'Meredith presenting cannabis research at Yale School of Public Health', width: 900, height: 639 },
+};
+const PILLARS_HEADING = 'What I bring to every project';
+const PROCESS = {
+	heading: 'Three steps, start to finish',
+	intro: 'Every project moves through the same three steps, and what comes out of one is what the next one starts with. Pick the kind of work, then scroll to watch it build.',
+	tabsLabel: 'Kind of work',
+};
+const SEE_IT = {
+	heading: 'See it in action',
+	intro: 'The second step usually starts with a logic model. Here’s the one I built for RateMyPlace, from scattered pieces to a plan.',
+	button: 'Show the RateMyPlace logic model',
+};
+const START = {
+	heading: 'Where to start',
+	text: 'Every project starts with a conversation about where you are. When you’re ready to talk about cost, the packages, prices, and smaller one-off pieces are all on one page.',
+	packages: { label: 'See packages and prices', href: '/work-with-me#packages' },
+	hello: { label: 'Or just say hello', href: '/contact' },
+};
+// The line search engines and link previews show for this page.
+const DESCRIPTION = 'How I approach funding, research, and writing, in three steps that build on each other.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${HEAD.label} | ${SITE_TITLE}`} description={DESCRIPTION} />
+		<!-- Without scripts nothing can be opened or scrolled into place, so show it all. -->
+		<noscript>
+			<style>
+				#lm-wrap[hidden], .hpanel[hidden] { display: block !important; }
+				.htabs, #lm-open { display: none !important; }
+				.step, .hw-card, .sc[data-in]:not(.on) { opacity: 1 !important; }
+			</style>
+		</noscript>
+	</head>
+	<body>
+		<Header />
+		<main id="main">
+			<header class="wrap page-head hiw-head">
+				<p class="label">{HEAD.label}</p>
+				<h1 class="page-h">{HEAD.title}</h1>
+				<div class="hiw-grid">
+					<div class="hiw-intro">
+						<p class="lede">{HEAD.lede}</p>
+						<p class="body-lg">{HEAD.follow}</p>
+					</div>
+					<figure class="hiw-photo"><img src={HEAD.photo.src} alt={HEAD.photo.alt} width={HEAD.photo.width} height={HEAD.photo.height} /></figure>
+				</div>
+			</header>
+
+			<section class="wrap sec stack">
+				<h2 class="h2">{PILLARS_HEADING}</h2>
+				<ul class="pills">
+					{pillars.map((p) => (
+						<li class={`pill ${p.color}`} id={p.id}>
+							<h3 class="pill-h">{p.name}</h3>
+							<p>{p.sentence}</p>
+						</li>
+					))}
+				</ul>
+			</section>
+
+			<section class="band">
+				<div class="wrap sec stack" id="process">
+					<h2 class="h2">{PROCESS.heading}</h2>
+					<p class="body-lg measure">{PROCESS.intro}</p>
+					<div class="htabs" role="tablist" aria-label={PROCESS.tabsLabel}>
+						{tracks.map((track, i) => (
+							<button type="button" role="tab" class={`ht-${track.id}`} id={`ht-${track.id}`} aria-controls={`hp-${track.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? undefined : -1}>{track.tab}</button>
+						))}
+					</div>
+					{tracks.map((track, i) => (
+						<div class={`hpanel o-${track.id}`} role="tabpanel" id={`hp-${track.id}`} aria-labelledby={`ht-${track.id}`} hidden={i !== 0}>
+							<Scene id={`hw-${track.id}`} label={track.stageLabel} class="hw-scene">
+								<div class="hw" slot="stage">
+									{track.steps.map((step, s) => {
+										const n = s + 1;
+										const last = n === track.steps.length;
+										return (
+											<div class="hw-card" data-in={n}>
+												<p class="hw-n">{n}</p>
+												<p class="hw-t">{step.title}</p>
+												<p class="tgs">{step.tags.map((tag) => <span class={`tg ${pillarColor(tag)}`}>{tag}</span>)}</p>
+												<div class="hw-slot">
+													<span class="hw-k">{slotLabels.startsWith}</span>
+													<div class="hw-box" id={`hw-${track.id}-in${n}`}>{step.startsWith && <span class="sc in" data-in={n}>{step.startsWith}</span>}</div>
+												</div>
+												<div class="hw-slot">
+													<span class="hw-k">{slotLabels.walkAway}</span>
+													<div class="hw-box" id={`hw-${track.id}-out${n}`}>
+														<span class:list={['sc', 'out', { fin: last }]} data-in={n} data-at={last ? undefined : `${n}:hw-${track.id}-out${n},${n + 1}:hw-${track.id}-in${n + 1}`}>{step.makes}</span>
+													</div>
+												</div>
+											</div>
+										);
+									})}
+								</div>
+								<Fragment slot="steps">
+									<article class="step" data-step="0">
+										<p class="n">{track.before.kicker}</p>
+										<h3>{track.before.title}</h3>
+										{track.before.body.map((text) => <p>{text}</p>)}
+									</article>
+									{track.steps.map((step, s) => (
+										<article class="step" data-step={s + 1}>
+											<p class="n">{step.kicker}</p>
+											<h3>{step.title}</h3>
+											{step.body.map((text) => <p>{text}</p>)}
+										</article>
+									))}
+								</Fragment>
+							</Scene>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<section class="wrap sec stack" id="see-it">
+				<h2 class="h2">{SEE_IT.heading}</h2>
+				<p class="body-lg measure">{SEE_IT.intro}</p>
+				<p><button type="button" class="btn" id="lm-open" aria-expanded="false" aria-controls="lm-wrap">{SEE_IT.button}</button></p>
+			</section>
+
+			<LogicModel collapsed />
+
+			<section class="wrap sec stack hiw-end">
+				<h2 class="h2">{START.heading}</h2>
+				<p class="body-lg measure">{START.text}</p>
+				<p class="cta">
+					<a class="btn solid" href={START.packages.href}>{START.packages.label}</a>
+					<a class="textlink" href={START.hello.href}>{START.hello.label}</a>
+				</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<script>
+	// The three tabs follow the ARIA tabs pattern: arrow keys, Home and End
+	// move between them, and only the selected tab is in the tab order.
+	import { onPage } from '../scripts/page';
+	import { pickScenes } from '../scripts/scenes';
+
+	onPage((signal) => {
+		const tabs = Array.from(document.querySelectorAll<HTMLElement>('.htabs [role=tab]'));
+		function select(tab: HTMLElement, focus?: boolean) {
+			tabs.forEach((t) => {
+				const on = t === tab;
+				t.setAttribute('aria-selected', on ? 'true' : 'false');
+				t.tabIndex = on ? 0 : -1;
+				const panel = document.getElementById(t.getAttribute('aria-controls') || '');
+				if (panel) panel.hidden = !on;
+			});
+			if (focus) tab.focus();
+			// The newly shown scene has to read the scroll position now that it has a size.
+			requestAnimationFrame(pickScenes);
+		}
+		tabs.forEach((tab, i) => {
+			tab.addEventListener('click', () => select(tab), { signal });
+			tab.addEventListener(
+				'keydown',
+				(e) => {
+					let j = -1;
+					if (e.key === 'ArrowRight') j = (i + 1) % tabs.length;
+					else if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
+					else if (e.key === 'Home') j = 0;
+					else if (e.key === 'End') j = tabs.length - 1;
+					if (j > -1) {
+						e.preventDefault();
+						select(tabs[j], true);
+					}
+				},
+				{ signal },
+			);
+		});
+	});
+</script>

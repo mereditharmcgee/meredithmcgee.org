@@ -1,11 +1,19 @@
+// Published pieces that are not on a Substack feed: op-eds, reports, podcast
+// appearances, pieces in other outlets. To add one, copy an entry and fill it
+// in. Ground Level and Parabola Papers posts add themselves from their feeds
+// (see src/lib/groundLevel.ts and src/lib/parabola.ts).
 export interface Clip {
   title: string;
   outlet: string;
   // e.g. "Op-ed", "Essay", "Interview"
   kind: string;
+  // Shown as written, and also used for ordering, so keep it to a month and
+  // year ("May 2026") or a year ("2024").
   date: string;
   href: string;
   blurb: string;
+  // Optional picture for the piece, a path under /img/
+  image?: { src: string; width: number; height: number; alt: string };
   // The lead piece gets larger treatment
   featured?: boolean;
 }

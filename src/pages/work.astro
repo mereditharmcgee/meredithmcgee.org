@@ -1,23 +1,32 @@
 ---
+// The Work page. The headline is the filter: pressing a verb shows only that
+// kind of work, pressing it again shows everything.
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import ProjectGallery from '../components/ProjectGallery.astro';
-import WorkCard from '../components/WorkCard.astro';
 import { SITE_TITLE } from '../consts';
+import { projects } from '../data/projects';
 import { work } from '../data/work';
+import '../styles/pages.css';
 
-const order = ['RESEARCH', 'PROJECTS', 'WRITING', 'GRANTS', 'EVALUATION', 'TOOLS', 'POLICY'];
-const labels: Record<string, string> = {
-	RESEARCH: 'Research',
-	PROJECTS: 'Building',
-	WRITING: 'Writing',
-	GRANTS: 'Grants',
-	EVALUATION: 'Evaluation',
-	TOOLS: 'Tools',
-	POLICY: 'Policy',
+// Wording for this page. Change it here.
+const FILTER_LABEL = 'Filter the work by what I do';
+const HEADLINE = { before: 'Show me what I', and: ' and ' };
+const SHOW_ALL = 'Or show everything';
+const CASES = { label: 'Case studies', heading: 'The long version', link: 'Read the case study' };
+const PROJECTS = {
+	label: 'The work itself',
+	heading: 'Selected work, up close',
+	intro: 'The actual decks, posters, and prospectuses behind the work. Each one opens as a full PDF you can page through.',
 };
-const cats = order.filter((c) => work.some((w) => w.category === c));
+const RECORD = { label: 'The full record', heading: 'Everything else' };
+
+const verbs = ['study', 'write', 'build', 'fund'] as const;
+const cases = work.filter((item) => item.slug);
+const others = work.filter((item) => !item.slug);
+
+// PROJECTS becomes Projects, and so on.
+const label = (category: string) => category.charAt(0) + category.slice(1).toLowerCase();
 ---
 
 <!doctype html>
@@ -27,166 +36,112 @@ const cats = order.filter((c) => work.some((w) => w.category === c));
 	</head>
 	<body>
 		<Header />
-
-		<section class="work-hero bg-dark bg-pattern">
-			<div class="container animate-on-scroll">
-				<h1>Work</h1>
-				<p class="hero-intro">
-					I study how systems fail the people they're supposed to serve, I write about it publicly, and I build tools to close the gap. Here's what that looks like in practice. Filter by the kind of work, or just scroll.
-				</p>
-			</div>
-		</section>
-
-		<ProjectGallery />
-
-		<section class="work-list bg-dark">
-			<div class="container">
-				<div class="work-list-head">
-					<p class="work-list-kicker">The full record</p>
-					<h2 class="work-list-title">Everything, filterable</h2>
+		<main id="main">
+			<header class="phero p-plain">
+				<div class="wrap phero-in">
+					<div class="phero-text">
+						<p class="label">Work</p>
+						<h1 class="phero-h vfilter" role="group" aria-label={FILTER_LABEL}>
+							{HEADLINE.before}{verbs.map((v, i) => (
+								<Fragment>{i === verbs.length - 1 ? HEADLINE.and : ' '}<span class="nw"><button type="button" class={`vf v-${v}`} data-vf={v} aria-pressed="false">{v}</button>{i === verbs.length - 1 ? '.' : ','}</span></Fragment>
+							))}
+						</h1>
+						<p class="vf-all-row"><button type="button" class="vf-all" data-vf="all" aria-pressed="true">{SHOW_ALL}</button></p>
+					</div>
 				</div>
+			</header>
 
-				<div class="work-filters" aria-label="Filter work by type">
-					<button class="work-filter is-active" data-filter="all" type="button">All</button>
-					{cats.map((c) => (
-						<button class="work-filter" data-filter={c} type="button">{labels[c] || c}</button>
+			<section class="wrap sec stack vsec">
+				<div>
+					<p class="label">{CASES.label}</p>
+					<h2 class="h2">{CASES.heading}</h2>
+				</div>
+				<div class="casecards">
+					{cases.map((item) => (
+						<article class={`casecard vb-${item.verb}`} data-verb={item.verb}>
+							<a class="casecard-vis" href={`/work/${item.slug}`} tabindex="-1" aria-hidden="true">
+								{item.card?.kind === 'image' && (
+									<span class:list={['pic', { cover: item.card.cover }]}><img src={item.card.src} alt="" width={item.card.width} height={item.card.height} loading="lazy" /></span>
+								)}
+								{item.card?.kind === 'stat' && (<span class="pic stattile"><span class="stat xl">{item.card.value}</span></span>)}
+							</a>
+							<p class="label vc">{label(item.category)}</p>
+							<h3 class="h3"><a href={`/work/${item.slug}`}>{item.title}</a></h3>
+							<p class="card-text">{item.summary}</p>
+							<a class="go" href={`/work/${item.slug}`}>{CASES.link} <span aria-hidden="true">→</span></a>
+						</article>
 					))}
 				</div>
+			</section>
 
-				<div class="work-items">
-					{work.map((item) => <WorkCard {...item} />)}
+			<section class="band vsec">
+				<div class="wrap sec stack">
+					<div>
+						<p class="label">{PROJECTS.label}</p>
+						<h2 class="h2">{PROJECTS.heading}</h2>
+					</div>
+					<p class="measure">{PROJECTS.intro}</p>
+					<div class="projs">
+						{projects.map((p) => (
+							<article class={`proj vb-${p.verb}`} data-verb={p.verb}>
+								<a class="proj-thumb" href={p.pdf} target="_blank" rel="noopener"><img src={p.thumb.src} alt={p.coverAlt} width={p.thumb.width} height={p.thumb.height} loading="lazy" /></a>
+								<p class="label vc">{p.tag} <span class="role">{p.format}</span></p>
+								<h3 class="h4">{p.title}</h3>
+								<p class="caption">{p.role}</p>
+								<p class="card-text">{p.desc}</p>
+								<a class="go" href={p.pdf} target="_blank" rel="noopener">{p.cta} <span aria-hidden="true">↗</span></a>
+								{p.also && (<a class="also" href={p.also.href} target="_blank" rel="noopener">{p.also.label} <span aria-hidden="true">→</span></a>)}
+							</article>
+						))}
+					</div>
 				</div>
+			</section>
 
-				<p class="work-empty" hidden>Nothing in that category yet.</p>
-			</div>
-		</section>
-
+			<section class="wrap sec stack vsec">
+				<div>
+					<p class="label">{RECORD.label}</p>
+					<h2 class="h2">{RECORD.heading}</h2>
+				</div>
+				<div class="cards two" id="work-items">
+					{others.map((item) => (
+						<article class={`card vb-${item.verb}`} data-verb={item.verb}>
+							<p class="label vc">{label(item.category)}{item.role && (<Fragment>{' '}<span class="role">{item.role}</span></Fragment>)}</p>
+							<h3 class="h3">{item.title}</h3>
+							<p class="card-text">{item.description}</p>
+							{item.href && (<a class="go" href={item.href} target="_blank" rel="noopener">{item.linkLabel} <span aria-hidden="true">↗</span></a>)}
+						</article>
+					))}
+				</div>
+			</section>
+		</main>
 		<Footer />
 	</body>
 </html>
 
-<style>
-	.work-hero {
-		padding-top: 5rem;
-		padding-bottom: 3.5rem;
-		text-align: center;
-	}
-
-	.work-hero .container {
-		max-width: 800px;
-		padding: 0 2rem;
-	}
-
-	.work-hero h1 {
-		font-size: clamp(2rem, 4vw, 3rem);
-		margin-bottom: 1rem;
-	}
-
-	.hero-intro {
-		font-size: clamp(0.95rem, 1.1vw, 1.1rem);
-		line-height: 1.8;
-		opacity: 0.95;
-	}
-
-	.work-list {
-		padding: 3rem 0 5rem;
-	}
-
-	.work-list .container {
-		max-width: 800px;
-		padding: 0 2rem;
-	}
-
-	.work-list-head {
-		text-align: center;
-		margin-bottom: 1.5rem;
-	}
-
-	.work-list-kicker {
-		font-size: 0.74rem;
-		letter-spacing: 0.16em;
-		text-transform: uppercase;
-		color: var(--color-gold);
-		font-weight: 600;
-		margin-bottom: 0.4rem;
-	}
-
-	.work-list-title {
-		font-size: clamp(1.6rem, 3vw, 2.1rem);
-	}
-
-	.work-filters {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		justify-content: center;
-		margin-bottom: 2.25rem;
-	}
-
-	.work-filter {
-		font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
-		font-size: 0.8rem;
-		letter-spacing: 0.03em;
-		color: var(--color-cream);
-		background: transparent;
-		border: 1px solid rgba(212, 201, 142, 0.25);
-		border-radius: 20px;
-		padding: 0.35rem 0.9rem;
-		cursor: pointer;
-		transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-	}
-
-	.work-filter:hover {
-		border-color: var(--color-gold);
-		color: var(--color-gold);
-	}
-
-	.work-filter.is-active {
-		background: var(--color-gold);
-		border-color: var(--color-gold);
-		color: var(--color-dark);
-		font-weight: 600;
-	}
-
-	:global(.work-card.is-hidden) {
-		display: none;
-	}
-
-	.work-empty {
-		text-align: center;
-		color: var(--color-text-muted);
-		font-size: 0.95rem;
-		padding: 2rem 0;
-	}
-
-	@media (max-width: 768px) {
-		.work-hero {
-			padding-top: 4rem;
-		}
-	}
-</style>
-
 <script>
-	document.addEventListener('astro:page-load', () => {
-		const filters = Array.from(document.querySelectorAll('.work-filter'));
-		const cards = Array.from(document.querySelectorAll('.work-items .work-card'));
-		const empty = document.querySelector('.work-empty') as HTMLElement | null;
-		if (filters.length === 0) return;
+	// The verb filter. A section with nothing left to show hides too.
+	import { onPage } from '../scripts/page';
 
-		filters.forEach((btn) => {
-			btn.addEventListener('click', () => {
-				filters.forEach((b) => b.classList.remove('is-active'));
-				btn.classList.add('is-active');
+	onPage((signal) => {
+		const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-vf]'));
+		const items = Array.from(document.querySelectorAll<HTMLElement>('main [data-verb]'));
+		const sections = Array.from(document.querySelectorAll<HTMLElement>('main .vsec'));
 
-				const f = btn.getAttribute('data-filter');
-				let shown = 0;
-				cards.forEach((card) => {
-					const match = f === 'all' || card.getAttribute('data-category') === f;
-					card.classList.toggle('is-hidden', !match);
-					if (match) shown++;
-				});
-				if (empty) empty.hidden = shown !== 0;
-			});
-		});
+		function show(verb: string) {
+			buttons.forEach((b) => b.setAttribute('aria-pressed', b.dataset.vf === verb ? 'true' : 'false'));
+			items.forEach((item) => (item.hidden = !(verb === 'all' || item.dataset.verb === verb)));
+			sections.forEach((s) => (s.hidden = !Array.from(s.querySelectorAll<HTMLElement>('[data-verb]')).some((item) => !item.hidden)));
+		}
+
+		buttons.forEach((b) =>
+			b.addEventListener(
+				'click',
+				() => {
+					const verb = b.dataset.vf || 'all';
+					show(b.getAttribute('aria-pressed') === 'true' && verb !== 'all' ? 'all' : verb);
+				},
+				{ signal },
+			),
+		);
 	});
 </script>
