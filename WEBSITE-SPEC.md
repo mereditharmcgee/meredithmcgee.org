@@ -29,7 +29,8 @@ A complete rebuild of meredithmcgee.org, Meredith McGee's personal website. The 
 - Clean, warm, grounded, but with moments of playfulness and surprise
 - More substance than Hank Green's site, but the same structural philosophy: person first, work second, trust the reader
 - "Fun of browsing the internet" energy. Curious and warm but scientific and grounded
-- NOT a consulting site, NOT a portfolio-first site, NOT corporate, NOT overly minimal/stark
+- The site now offers consulting through the Work with me pages. Keep it research-and-writing first.
+- NOT a portfolio-first site, NOT corporate, NOT overly minimal/stark
 - Should feel like: "this person is interesting, I want to keep reading"
 
 ### Aesthetic Guidelines
