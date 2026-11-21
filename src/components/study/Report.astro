@@ -1,0 +1,19 @@
+---
+// The report card for the cannabis legalization study: cover, title,
+// authors and the two links. Used on the homepage and the case study.
+import { report } from '../../data/study';
+---
+
+<article class="report">
+	<a class="report-cover" href={report.pdf} target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src={report.cover.src} alt="" width={report.cover.width} height={report.cover.height} loading="lazy" /></a>
+	<div class="report-text">
+		<p class="label olive">{report.kicker}</p>
+		<h3 class="report-h">{report.title}</h3>
+		<p class="report-sub">{report.subtitle}</p>
+		<p class="caption">{report.authors.join(' and ')} · {report.publisher}</p>
+		<p class="cta">
+			<a class="btn solid" href={report.pdf} target="_blank" rel="noopener">{report.readLabel} <span aria-hidden="true">↗</span></a>
+			<a class="textlink" href={report.studyPage} target="_blank" rel="noopener">{report.studyPageLabel} <span aria-hidden="true">↗</span></a>
+		</p>
+	</div>
+</article>

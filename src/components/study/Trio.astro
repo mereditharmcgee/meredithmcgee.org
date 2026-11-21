@@ -1,0 +1,13 @@
+---
+// The three counting numbers for the study: interviews, states, years.
+import { studyStats } from '../../data/study';
+---
+
+<div class="trio">
+	{studyStats.map((s) => (
+		<div>
+			<p class="stat lg" data-count={s.count} data-suffix={s.suffix || undefined}>{s.count}{s.suffix}</p>
+			<p class="caption">{s.caption}</p>
+		</div>
+	))}
+</div>

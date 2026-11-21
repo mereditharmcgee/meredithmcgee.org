@@ -1,21 +1,41 @@
 ---
+// A case study page. Each one opens in its verb's color. The text comes from
+// src/data/work.ts, and the legalization study adds its report block and
+// findings from src/data/study.ts.
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
+import StudyFindings from '../../components/study/Findings.astro';
+import StudyPeople from '../../components/study/People.astro';
+import StudyPress from '../../components/study/Press.astro';
+import StudyReport from '../../components/study/Report.astro';
+import StudyTrio from '../../components/study/Trio.astro';
 import { SITE_TITLE } from '../../consts';
 import { work } from '../../data/work';
+import '../../styles/pages.css';
 
 export function getStaticPaths() {
-  return work
-    .filter((item) => item.slug && item.caseStudy)
-    .map((item) => ({
-      params: { slug: item.slug },
-      props: { item },
-    }));
+	const cases = work.filter((item) => item.slug && item.caseStudy);
+	return cases.map((item, i) => ({
+		params: { slug: item.slug },
+		props: { item, next: cases[(i + 1) % cases.length] },
+	}));
 }
 
-const { item } = Astro.props;
-const { title, category, role, description, caseStudy, image, imageAlt } = item;
+// Wording shared by every case study. Change it here.
+const BACK = 'Work';
+const NEXT = 'Next';
+const ALL_WORK = 'All work';
+const WORK_WITH_ME = 'Work with me';
+const LOGIC_MODEL_LINK = { label: 'See it as a logic model', href: '/how-i-work#logic-model' };
+
+// The slug of the study that carries the report block and findings.
+const STUDY = 'cannabis-legalization-study';
+
+const { item, next } = Astro.props;
+const { title, category, role, description, caseStudy, hero, slug, verb } = item;
+const label = category.charAt(0) + category.slice(1).toLowerCase();
+const isStudy = slug === STUDY;
 ---
 
 <!doctype html>
@@ -25,180 +45,74 @@ const { title, category, role, description, caseStudy, image, imageAlt } = item;
 	</head>
 	<body>
 		<Header />
-
-		<article class="case bg-dark bg-pattern">
-			<div class="container animate-on-scroll">
-				<a href="/work" class="case__back">&larr; Work</a>
-				<div class="case__meta">
-					<span class="case__category">{category}</span>
-					{role && <span class="case__role">{role}</span>}
-				</div>
-				<h1 class="case__title">{title}</h1>
-				{caseStudy?.lede && <p class="case__lede">{caseStudy.lede}</p>}
-			</div>
-		</article>
-
-		<section class="case-body bg-dark">
-			<div class="container">
-				{image && (
-					<figure class="case-figure"><img src={image} alt={imageAlt || title} loading="lazy" /></figure>
-				)}
-				{caseStudy?.sections.map((section) => (
-					<div class="case-section">
-						<h2 class="case-section__heading">{section.heading}</h2>
-						{section.paragraphs.map((p) => (
-							<p class="case-section__paragraph">{p}</p>
-						))}
+		<main id="main">
+			<header class={`phero p-${verb}`}>
+				<div class="wrap phero-in">
+					<div class="phero-text">
+						<p><a class="more" href="/work"><span aria-hidden="true">←</span> {BACK}</a></p>
+						<p class="label">{label} {role && <span class="role">{role}</span>}</p>
+						<h1 class="phero-h sm">{title}</h1>
+						<p class="lede">{caseStudy.lede}</p>
 					</div>
+					{hero?.kind === 'image' && (
+						<div class="phero-side">
+							<a class="pic frame" href={hero.href} target="_blank" rel="noopener"><img src={hero.src} alt={hero.alt} width={hero.width} height={hero.height} /></a>
+						</div>
+					)}
+					{hero?.kind === 'stat' && (
+						<div class="phero-side">
+							<div class="bigstat">
+								<p class="stat xxl">{hero.value}</p>
+								<p class="caption">{hero.caption}</p>
+							</div>
+						</div>
+					)}
+				</div>
+			</header>
+
+			<article class="wrap case">
+				{isStudy && (
+					<div class="case-report">
+						<StudyReport />
+						<StudyTrio />
+						<StudyPeople />
+					</div>
+				)}
+
+				{caseStudy.sections.map((section) => (
+					<section class="stack-s">
+						<h2 class="h3">{section.heading}</h2>
+						{section.paragraphs.map((p) => <p>{p}</p>)}
+					</section>
 				))}
 
-				<div class="case__nav">
-					<a href="/work">&larr; Back to Work</a>
-				</div>
-			</div>
-		</section>
+				{isStudy && (
+					<Fragment>
+						<StudyFindings />
+						<StudyPress />
+					</Fragment>
+				)}
 
+				{verb === 'build' && item.href && (
+					<p class="cta">
+						<a class="btn" href={item.href} target="_blank" rel="noopener">{item.linkLabel} <span aria-hidden="true">↗</span></a>
+						<a class="textlink" href={LOGIC_MODEL_LINK.href}>{LOGIC_MODEL_LINK.label}</a>
+					</p>
+				)}
+				{verb === 'fund' && (
+					<p class="cta"><a class="btn" href="/work-with-me">{WORK_WITH_ME}</a></p>
+				)}
+
+				<nav class="case-next" aria-label="More work">
+					<a href={`/work/${next.slug}`}>
+						<span class="label">{NEXT}</span>
+						<span class="h4">{next.title}</span>
+					</a>
+					<a class="textlink" href="/work">{ALL_WORK}</a>
+					<a class="textlink" href="/work-with-me">{WORK_WITH_ME}</a>
+				</nav>
+			</article>
+		</main>
 		<Footer />
 	</body>
 </html>
-
-<style>
-	.case {
-		padding-top: 5rem;
-		padding-bottom: 3rem;
-	}
-
-	.case .container {
-		max-width: 720px;
-		padding: 0 2rem;
-	}
-
-	.case__back {
-		display: inline-block;
-		margin-bottom: 1.75rem;
-		font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
-		font-size: 0.9rem;
-		color: var(--color-gold);
-		text-decoration: none;
-		opacity: 0.85;
-		transition: opacity 0.2s ease;
-	}
-
-	.case__back:hover {
-		opacity: 1;
-	}
-
-	.case__meta {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		flex-wrap: wrap;
-		margin-bottom: 1rem;
-	}
-
-	.case__category {
-		font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
-		font-size: 0.7rem;
-		font-weight: 600;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: var(--color-gold);
-		padding: 0.2rem 0.6rem;
-		border: 1px solid var(--color-gold);
-		border-radius: 20px;
-		opacity: 0.85;
-	}
-
-	.case__role {
-		font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
-		font-size: 0.85rem;
-		color: var(--color-cream);
-		opacity: 0.65;
-	}
-
-	.case__title {
-		font-family: 'Playfair Display', Georgia, serif;
-		font-size: clamp(1.9rem, 4vw, 2.8rem);
-		font-weight: 600;
-		line-height: 1.2;
-		color: var(--color-gold);
-		margin: 0 0 1.25rem;
-	}
-
-	.case__lede {
-		font-family: 'Playfair Display', Georgia, serif;
-		font-size: clamp(1.1rem, 1.6vw, 1.35rem);
-		line-height: 1.6;
-		color: var(--color-cream);
-		opacity: 0.92;
-		margin: 0;
-	}
-
-	.case-figure {
-		margin: 0 0 2.75rem;
-	}
-
-	.case-figure img {
-		width: 100%;
-		height: auto;
-		border-radius: 12px;
-		border: 1px solid rgba(212, 185, 104, 0.22);
-		box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
-		display: block;
-	}
-
-	.case-body {
-		padding: 2rem 0 5rem;
-	}
-
-	.case-body .container {
-		max-width: 720px;
-		padding: 0 2rem;
-	}
-
-	.case-section {
-		margin-bottom: 2.5rem;
-	}
-
-	.case-section__heading {
-		font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
-		font-size: 0.8rem;
-		font-weight: 700;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
-		color: var(--color-light);
-		margin: 0 0 0.9rem;
-	}
-
-	.case-section__paragraph {
-		font-size: 1rem;
-		line-height: 1.8;
-		color: var(--color-cream);
-		opacity: 0.9;
-		margin: 0 0 1.1rem;
-	}
-
-	.case__nav {
-		margin-top: 3rem;
-		padding-top: 2rem;
-		border-top: 1px solid rgba(212, 201, 142, 0.15);
-	}
-
-	.case__nav a {
-		font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
-		font-size: 0.95rem;
-		color: var(--color-gold);
-		text-decoration: none;
-		transition: color 0.2s ease;
-	}
-
-	.case__nav a:hover {
-		color: var(--color-cream);
-	}
-
-	@media (max-width: 768px) {
-		.case {
-			padding-top: 4rem;
-		}
-	}
-</style>

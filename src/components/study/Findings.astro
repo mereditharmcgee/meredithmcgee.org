@@ -1,0 +1,15 @@
+---
+// The three findings lists. The caption always travels with them: the lists
+// describe what participants perceived, not measured results.
+import { findings, findingsCaption } from '../../data/study';
+---
+
+<p class="finds-cap caption">{findingsCaption}</p>
+<div class="finds">
+	{findings.map((f) => (
+		<div class="find">
+			<h4 class="find-h">{f.heading}</h4>
+			<ul>{f.items.map((item) => <li>{item}</li>)}</ul>
+		</div>
+	))}
+</div>

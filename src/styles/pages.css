@@ -1,0 +1,109 @@
+/* About, Work, the case studies, Writing and Contact. Ported from the
+   approved preview, in its original order. These pages also use pieces first
+   built for the homepage (the report block, post cards, verb colors) and for
+   Work with me (the page header, forms), so those stylesheets are imported
+   first and the rules below can override them, as they do in the preview. */
+@import './home.css';
+@import './work-with-me.css';
+
+.card .label .role, .case .label .role { display: block; margin: 3px 0 0; }
+.cards { display: flex; flex-wrap: wrap; gap: 36px 40px; }
+.cards > * { flex: 1 1 280px; min-width: 0; }
+.cards.two > * { flex: 1 1 400px; }
+.card { border-top: 2px solid var(--ink); padding-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+.card .go { margin-top: auto; padding-top: 6px; }
+.card[hidden] { display: none; }
+.essay { padding-block: var(--space-10) var(--space-14); display: flex; flex-direction: column; gap: var(--space-14); }
+.chapter { display: grid; grid-template-columns: minmax(0,34em) minmax(0,1fr); gap: 22px 56px; align-items: start; }
+.chapter > * { grid-column: 1; grid-row: var(--r); }
+.chapter > .photo { grid-column: 2; grid-row: var(--r) / span 2; max-width: 360px; justify-self: end; }
+.photo { max-width: min(100%,440px); display: flex; flex-direction: column; gap: 8px; }
+.photo img { width: 100%; border-radius: var(--radius-sm); }
+.photo figcaption { font-size: 15px; color: var(--tea-700); font-style: italic; }
+.fn { background: none; border: 0; padding: 0; cursor: pointer; border-bottom: 1.5px dotted var(--tea-500); color: inherit; }
+.fn:hover, .fn[aria-expanded="true"] { color: var(--brand); border-bottom-color: var(--brand); }
+.aside-note { display: block; margin-top: 10px; padding: 12px 16px; background: var(--tea-100); border-radius: var(--radius-sm); font-size: 16px; line-height: 1.5; color: var(--ink); }
+.projs { display: grid; grid-template-columns: repeat(auto-fill,minmax(250px,1fr)); gap: 40px 32px; }
+.proj { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.proj-thumb { display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; background: var(--paper); margin-bottom: 6px; }
+.proj-thumb img { width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: top; }
+.case { padding-block: var(--space-10) var(--space-14); display: flex; flex-direction: column; gap: 22px; }
+.case > * { max-width: 40em; }
+.case-next { margin-top: var(--space-6); border-top: 1px solid var(--line); padding-top: 22px; display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: baseline; max-width: none; }
+.case-next > a:first-child { display: flex; flex-direction: column; gap: 4px; text-decoration: none; margin-right: auto; }
+.case-next > a:first-child:hover .h4 { color: var(--brand); text-decoration: underline; }
+.clip { border-top: 2px solid var(--ink); padding-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+.clip.lead > * { max-width: 40em; }
+@media (max-width: 860px) {
+	.chapter { grid-template-columns: minmax(0,1fr); }
+	.chapter > * { grid-row: auto; }
+	.chapter > .photo { grid-column: 1; grid-row: auto; justify-self: start; max-width: min(100%,420px); }
+}
+.card, .clip { transition: border-color .2s ease; }
+.card:hover, .clip:hover { border-top-color: var(--brand); }
+.case-report { display: flex; flex-direction: column; gap: 28px; margin-block: 6px 10px; }
+.pic.frame img { aspect-ratio: auto; }
+.phero-side { flex: 0 1 380px; min-width: 0; }
+.phero-side:has(> img) { flex-basis: 300px; }
+.nw { white-space: nowrap; }
+.phero-side > img { width: min(100%,300px); aspect-ratio: 1/1; object-fit: cover; border-radius: var(--radius-sm); }
+.phero-h.sm { font-size: clamp(34px,4.6vw,58px); line-height: 1.06; }
+.phero .stat { color: var(--cc); }
+.p-study { --pb: var(--tea-100); --cc: var(--tea-700); --mid: var(--tea-500); }
+.p-write { --pb: #f6e7e9; --cc: var(--raspberry-700); --mid: var(--raspberry-300); }
+.p-build { --pb: #e3edf3; --cc: var(--blue-700); --mid: var(--blue-500); }
+.p-fund { --pb: var(--olive-700); --cc: var(--paper); color: var(--paper); }
+.p-fund .phero-h { color: var(--paper); }
+.p-fund .label, .p-fund .caption, .p-fund .label .role { color: var(--olive-100); }
+.p-fund a { color: var(--paper); }
+.p-fund a:hover { color: var(--olive-100); }
+.vb-study { --cc: var(--tea-700); }
+.vb-write { --cc: var(--raspberry-700); }
+.vb-build { --cc: var(--blue-700); }
+.vb-fund { --cc: var(--olive-700); }
+.label.vc { color: var(--cc); font-size: 13px; font-weight: 700; }
+.card[class*="vb-"] { border-top-color: var(--cc); }
+.vsec[hidden] { display: none; }
+.essay { padding: 0; gap: 0; }
+.chap-band { padding-block: var(--space-14); }
+.chap-band:nth-of-type(even) { background: var(--linen); }
+.chap-h { font-size: clamp(30px,4vw,48px); line-height: 1.05; font-weight: 750; margin-bottom: 6px; }
+.chap-h span { color: var(--brand); font-size: .5em; letter-spacing: .08em; vertical-align: .5em; margin-right: 8px; }
+.chapter > .photo { max-width: none; justify-self: stretch; }
+.pullband { background: var(--raspberry-700); padding-block: var(--space-16); }
+.pullband-q { font-family: var(--font-display); font-variation-settings: 'SOFT' 100; font-weight: 700; font-size: clamp(26px,3.6vw,46px); line-height: 1.12; color: var(--paper); max-width: 22em; text-wrap: balance; }
+.vfilter { font-size: clamp(34px,5.2vw,68px); }
+.vf { font: inherit; background: none; border: 0; padding: 0 .06em; cursor: pointer; text-decoration: underline; text-decoration-thickness: .085em; text-underline-offset: .1em; border-radius: .08em; }
+.vf.v-study[aria-pressed="true"] { background: var(--tea-300); }
+.vf.v-write[aria-pressed="true"] { background: var(--raspberry-100); }
+.vf.v-build[aria-pressed="true"] { background: var(--blue-300); }
+.vf.v-fund[aria-pressed="true"] { background: var(--olive-300); }
+.vf-all { font-family: var(--font-body); font-size: 16px; font-weight: 700; background: none; border: 1.5px solid var(--line); border-radius: var(--radius-sm); padding: 7px 14px; cursor: pointer; color: var(--ink); }
+.vf-all[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.casecards { display: grid; grid-template-columns: repeat(auto-fit,minmax(270px,1fr)); gap: 36px 32px; }
+.casecard { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
+.casecard .go { margin-top: auto; padding-top: 4px; }
+.casecard-vis { display: block; margin-bottom: 6px; text-decoration: none; }
+.casecard-vis .pic img { aspect-ratio: 4/3; object-position: top; }
+.casecard-vis .pic.cover img { object-position: 50% 0; }
+.stattile { display: flex; align-items: center; justify-content: center; aspect-ratio: 4/3; background: var(--olive-700); border-color: var(--olive-700); }
+.stattile .stat { color: var(--paper); font-size: clamp(56px,7vw,84px); }
+.clip-big { font-size: clamp(28px,3.7vw,46px); line-height: 1.07; }
+.clip-big a, .clip .h3 a { color: inherit; text-decoration: none; }
+.clip-big a:hover, .clip .h3 a:hover { color: var(--brand); text-decoration: underline; text-decoration-thickness: .06em; }
+.picgrid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 40px 32px; }
+.form-after { margin-top: 12px; }
+.phero-side .ember img { width: clamp(130px,16vw,200px); }
+.gl-h { display: flex; align-items: center; gap: 12px; }
+.gl-h img { border-radius: 50%; flex: none; }
+
+/* Not in the preview's stylesheet. The Work filter hides cards with the
+   hidden attribute, which the flex layouts above would otherwise override. */
+.casecard[hidden], .proj[hidden] { display: none; }
+/* The About asides are in the page from the start and stay hidden until
+   their phrase is pressed. Without scripts they all show (see about.astro). */
+.aside-note[hidden] { display: none; }
+/* In the preview this caption's own width rule comes after the case study
+   width rule, so it wins there. Here the caption's rule lives in home.css,
+   which loads first, so the order is restored by hand. */
+.case > .finds-cap { max-width: var(--measure); }

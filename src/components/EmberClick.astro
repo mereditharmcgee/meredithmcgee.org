@@ -1,12 +1,13 @@
 ---
 // EmberClick.astro
-// Self-contained Ember click Easter egg component.
+// Self-contained Ember click Easter egg component. It lives on the About
+// page: clicking "Ember" in the essay shows her photo.
 // Import once per page that contains "Ember" mentions.
 ---
 
 <div id="ember-overlay" aria-hidden="true">
   <div class="ember-popup">
-    <img src="" alt="Ember, Meredith's black lab" id="ember-photo" />
+    <img src="" alt="Ember, Meredith's black lab" id="ember-photo" width="900" height="754" />
     <p class="ember-caption" id="ember-caption"></p>
   </div>
 </div>
@@ -14,7 +15,7 @@
 <style>
   /* .ember-trigger styles use :global() since those spans live in page files */
   :global(.ember-trigger) {
-    border-bottom: 1.5px dotted var(--color-gold);
+    border-bottom: 1.5px dotted var(--tea-500);
     cursor: pointer;
     touch-action: manipulation;
     color: inherit;
@@ -23,11 +24,11 @@
   }
 
   :global(.ember-trigger:hover) {
-    border-bottom-color: var(--color-cream);
+    border-bottom-color: var(--brand);
   }
 
   :global(.ember-trigger:focus-visible) {
-    outline: 2px solid var(--color-gold);
+    outline: 2px solid var(--brand);
     outline-offset: 2px;
     border-radius: 2px;
   }
@@ -43,7 +44,7 @@
   #ember-overlay.active {
     display: block;
     pointer-events: auto;
-    background: rgba(45, 58, 30, 0.55);
+    background: color-mix(in srgb, var(--ink) 55%, transparent);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     animation: overlayFadeIn 0.25s ease forwards;
@@ -56,8 +57,8 @@
     border-radius: 16px;
     overflow: hidden;
     pointer-events: auto;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 185, 104, 0.3);
-    border: 2.5px solid var(--color-gold);
+    box-shadow: 0 15px 50px color-mix(in srgb, var(--ink) 50%, transparent);
+    border: 2.5px solid var(--paper);
     z-index: 1002;
     opacity: 0;
     transform: scale(0.8);
@@ -80,9 +81,10 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(transparent, rgba(45, 58, 30, 0.9));
-    color: var(--color-gold);
-    font-family: 'Playfair Display', Georgia, serif;
+    background: linear-gradient(transparent, color-mix(in srgb, var(--ink) 90%, transparent));
+    color: var(--paper);
+    font-family: var(--font-display);
+    font-variation-settings: 'SOFT' 100;
     font-size: 0.85rem;
     font-style: italic;
     padding: 1.5rem 0.75rem 0.5rem;
@@ -96,7 +98,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--color-gold);
+    background: var(--raspberry-300);
     pointer-events: none;
     z-index: 1002;
     animation: particleBurst 0.8s ease-out forwards;
@@ -221,9 +223,9 @@
       popup.classList.remove('dismissing', 'entering');
 
       // Set photo source
-      photo.src = isSilly ? '/ember-silly.png' : '/ember.png';
+      photo.src = isSilly ? '/img/ember-photo-silly.webp' : '/img/ember-photo.webp';
 
-      // Position with viewport clamping — center above click point
+      // Position with viewport clamping, centered above the click point
       const POPUP_SIZE = 240;
       const popupX = Math.min(
         Math.max(x - POPUP_SIZE / 2, 15),

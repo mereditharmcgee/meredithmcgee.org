@@ -1,29 +1,30 @@
 ---
+// One row in the work archive (/work/archive). The archive keeps its own
+// layout and takes only the site's fonts and color tokens.
+import type { Verb } from '../data/work';
+
 interface Props {
   title: string;
   description: string;
   category: string;
+  verb: Verb;
   slug?: string;
   role?: string;
   href?: string;
   linkLabel?: string;
-  thumb?: string;
-  index?: number;
 }
 
-const { title, description, category, slug, role, href, linkLabel, thumb } = Astro.props;
+const { title, description, category, verb, slug, role, href, linkLabel } = Astro.props;
 
-const categoryColors: Record<string, string> = {
-  RESEARCH: '#6f8250',
-  WRITING: '#b26a3c',
-  GRANTS: '#b0862f',
-  EVALUATION: '#5f7d85',
-  POLICY: '#8a6ea0',
-  TOOLS: '#a5673a',
-  PROJECTS: '#7d5280',
+// Each of the four verbs owns a color everywhere on the site.
+const verbColors: Record<Verb, string> = {
+  study: 'var(--tea-700)',
+  write: 'var(--raspberry-700)',
+  build: 'var(--blue-700)',
+  fund: 'var(--olive-700)',
 };
 
-const accentColor = categoryColors[category] || 'var(--color-gold)';
+const accentColor = verbColors[verb];
 
 let linkHref: string | null = null;
 let linkText = '';
@@ -31,7 +32,7 @@ let isExternal = false;
 
 if (slug) {
   linkHref = `/work/${slug}`;
-  linkText = linkLabel || 'Read the case study';
+  linkText = 'Read the case study';
 } else if (href) {
   linkHref = href;
   linkText = linkLabel || 'Take a look';
@@ -57,11 +58,6 @@ if (slug) {
       </a>
     )}
   </div>
-  {thumb && (
-    <div class="work-card__thumb">
-      <img src={thumb} alt="" loading="lazy" />
-    </div>
-  )}
 </article>
 
 <style>
@@ -70,7 +66,7 @@ if (slug) {
     gap: 1.75rem;
     align-items: flex-start;
     padding: 1.9rem 0;
-    border-bottom: 1px solid rgba(43, 40, 34, 0.12);
+    border-bottom: 1px solid var(--line);
     transition: transform 0.3s ease;
   }
 
@@ -87,21 +83,6 @@ if (slug) {
     min-width: 0;
   }
 
-  .work-card__thumb {
-    flex-shrink: 0;
-    width: 190px;
-  }
-
-  .work-card__thumb img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 1px solid rgba(43, 40, 34, 0.12);
-    box-shadow: 0 8px 20px rgba(43, 40, 34, 0.1);
-  }
-
   .work-card__meta {
     margin-bottom: 0.6rem;
     display: flex;
@@ -112,7 +93,7 @@ if (slug) {
 
   .work-card__category {
     display: inline-block;
-    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -125,27 +106,26 @@ if (slug) {
   }
 
   .work-card__role {
-    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.8rem;
     letter-spacing: 0.02em;
-    color: var(--color-cream);
-    opacity: 0.6;
+    color: var(--tea-700);
   }
 
   .work-card__title {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: var(--font-display);
+    font-variation-settings: 'SOFT' 100;
     font-size: clamp(1.2rem, 2vw, 1.5rem);
     font-weight: 600;
     line-height: 1.25;
-    color: var(--color-gold);
+    color: var(--ink);
     margin: 0 0 0.5rem;
   }
 
   .work-card__description {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: var(--color-cream);
-    opacity: 0.85;
+    color: var(--ink);
     margin: 0 0 0.75rem;
   }
 
@@ -156,7 +136,7 @@ if (slug) {
     font-size: 0.85rem;
     color: var(--accent);
     text-decoration: none;
-    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-family: var(--font-body);
     font-weight: 600;
     transition: color 0.3s ease, gap 0.3s ease;
   }
@@ -168,11 +148,8 @@ if (slug) {
 
   @media (max-width: 640px) {
     .work-card {
-      flex-direction: column-reverse;
+      flex-direction: column;
       gap: 1rem;
-    }
-    .work-card__thumb {
-      width: 100%;
     }
     .work-card:hover {
       transform: none;

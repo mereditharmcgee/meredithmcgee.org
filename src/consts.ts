@@ -18,3 +18,6 @@ export const MM_AVATAR = '/img/brand/mm-avatar-160.png';
 // 'https://formspree.io/f/abcdwxyz'. While it is empty the form is switched
 // off and says so, and nothing is sent anywhere.
 export const CONSULT_FORM_ENDPOINT = 'https://formspree.io/f/xaeodeqz';
+
+// Where the contact form on /contact sends. A Formspree form of its own.
+export const CONTACT_FORM_ENDPOINT = 'https://formspree.io/f/xgooeagz';

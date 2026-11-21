@@ -2,22 +2,16 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import StudyFindings from '../components/study/Findings.astro';
+import StudyPeople from '../components/study/People.astro';
+import StudyPress from '../components/study/Press.astro';
+import StudyReport from '../components/study/Report.astro';
+import StudyTrio from '../components/study/Trio.astro';
 import { CONTACT_EMAIL, SITE_TITLE, SUBSTACK_URL } from '../consts';
 import { pillars } from '../data/approach';
 import { build, chapterBar, closing, fund, hero, howIWork, study, write } from '../data/home';
 import { projects } from '../data/projects';
-import {
-	findings,
-	findingsCaption,
-	methodNote,
-	moreAboutStudy,
-	press,
-	pressLabel,
-	report,
-	squaresLabel,
-	states,
-	studyStats,
-} from '../data/study';
+import { moreAboutStudy } from '../data/study';
 import { clips } from '../data/writing';
 import { coverFor } from '../lib/covers';
 import { getGroundLevelPosts } from '../lib/groundLevel';
@@ -37,11 +31,6 @@ const posts = groundLevel.posts.map((p) => ({
 const [lead, ...morePosts] = posts;
 
 const inPrint = clips.find((c) => c.featured) ?? clips[0];
-
-// One square per person interviewed, numbered across states so they pop in one by one.
-let square = 0;
-const stateSquares = states.map((s) => ({ ...s, squares: Array.from({ length: s.count }, () => square++) }));
-const peopleLabel = `One square for each of the ${square} people interviewed. ${states.map((s) => `${s.name} ${s.count}`).join(', ')}.`;
 ---
 
 <!doctype html>
@@ -85,60 +74,11 @@ const peopleLabel = `One square for each of the ${square} people interviewed. ${
 						<p class="ch-where">{study.where}</p>
 					</div>
 					<div class="ch-body">
-						<div class="rv">
-							<article class="report">
-								<a class="report-cover" href={report.pdf} target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src={report.cover.src} alt="" width={report.cover.width} height={report.cover.height} loading="lazy" /></a>
-								<div class="report-text">
-									<p class="label olive">{report.kicker}</p>
-									<h3 class="report-h">{report.title}</h3>
-									<p class="report-sub">{report.subtitle}</p>
-									<p class="caption">{report.authors.join(' and ')} · {report.publisher}</p>
-									<p class="cta">
-										<a class="btn solid" href={report.pdf} target="_blank" rel="noopener">{report.readLabel} <span aria-hidden="true">↗</span></a>
-										<a class="textlink" href={report.studyPage} target="_blank" rel="noopener">{report.studyPageLabel} <span aria-hidden="true">↗</span></a>
-									</p>
-								</div>
-							</article>
-						</div>
-						<div class="rv">
-							<div class="trio">
-								{studyStats.map((s) => (
-									<div>
-										<p class="stat lg" data-count={s.count} data-suffix={s.suffix || undefined}>{s.count}{s.suffix}</p>
-										<p class="caption">{s.caption}</p>
-									</div>
-								))}
-							</div>
-						</div>
-						<figure class="peoplefig rv">
-							<p class="label">{squaresLabel}</p>
-							<div class="people" role="img" aria-label={peopleLabel}>
-								{stateSquares.map((s) => (
-									<div class="st">
-										<div class="sqs">{s.squares.map((i) => <i class="sq" style={`--i:${i}`} />)}</div>
-										<p class="st-n">{s.name} <b>{s.count}</b></p>
-									</div>
-								))}
-							</div>
-							<figcaption class="caption">{methodNote}</figcaption>
-						</figure>
-						<div class="rv">
-							<p class="finds-cap caption">{findingsCaption}</p>
-							<div class="finds">
-								{findings.map((f) => (
-									<div class="find">
-										<h4 class="find-h">{f.heading}</h4>
-										<ul>{f.items.map((item) => <li>{item}</li>)}</ul>
-									</div>
-								))}
-							</div>
-						</div>
-						<p class="press rv">
-							<span class="label">{pressLabel}</span>
-							{press.map((p, i) => (
-								<Fragment>{' '}<a href={p.href} target="_blank" rel="noopener">{p.outlet} <span aria-hidden="true">↗</span></a>{i < press.length - 1 ? ',' : ''}</Fragment>
-							))}
-						</p>
+						<div class="rv"><StudyReport /></div>
+						<div class="rv"><StudyTrio /></div>
+						<StudyPeople reveal />
+						<div class="rv"><StudyFindings /></div>
+						<StudyPress reveal />
 						<p class="rv"><a class="textlink" href={moreAboutStudy.href}>{moreAboutStudy.label} <span aria-hidden="true">→</span></a></p>
 					</div>
 				</div>
