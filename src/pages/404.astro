@@ -1,0 +1,37 @@
+---
+// The page people land on when a link is broken. GitHub Pages serves the
+// built 404.html for any address that doesn't exist. Change the wording here.
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { MM_AVATAR, SITE_TITLE } from '../consts';
+import '../styles/pages.css';
+
+const HEADLINE = 'This page doesn’t exist';
+const LINE = 'The link might be old, or it might have a typo. Here are a few places to pick up from.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Page not found | ${SITE_TITLE}`} description="This page doesn't exist on meredithmcgee.org." />
+		<meta name="robots" content="noindex" />
+	</head>
+	<body>
+		<Header />
+		<main id="main">
+			<header class="phero p-plain">
+				<div class="wrap phero-in">
+					<div class="phero-text">
+						<img src={MM_AVATAR} alt="" width="72" height="72" style="border-radius:50%;margin-bottom:18px" />
+						<p class="label">404</p>
+						<h1 class="phero-h">{HEADLINE}</h1>
+						<p class="lede">{LINE}</p>
+						<p class="cta" style="margin-top:28px"><a class="btn solid" href="/">Home</a> <a class="textlink" href="/writing">Writing</a> <a class="textlink" href="/work-with-me">Work with me</a></p>
+					</div>
+				</div>
+			</header>
+		</main>
+		<Footer />
+	</body>
+</html>
