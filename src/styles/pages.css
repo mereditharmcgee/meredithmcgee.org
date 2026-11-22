@@ -16,7 +16,7 @@
 .essay { padding-block: var(--space-10) var(--space-14); display: flex; flex-direction: column; gap: var(--space-14); }
 .chapter { display: grid; grid-template-columns: minmax(0,34em) minmax(0,1fr); gap: 22px 56px; align-items: start; }
 .chapter > * { grid-column: 1; grid-row: var(--r); }
-.chapter > .photo { grid-column: 2; grid-row: var(--r) / span 2; max-width: 360px; justify-self: end; }
+.chapter > .photo { grid-column: 2; grid-row: var(--r) / span var(--span, 2); max-width: 360px; justify-self: end; }
 .photo { max-width: min(100%,440px); display: flex; flex-direction: column; gap: 8px; }
 .photo img { width: 100%; border-radius: var(--radius-sm); }
 .photo figcaption { font-size: 15px; color: var(--tea-700); font-style: italic; }
