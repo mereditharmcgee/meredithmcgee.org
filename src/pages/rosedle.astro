@@ -1,0 +1,122 @@
+---
+// Rosedle, a five-letter word game where the answer is always the same.
+// The wording is in src/data/rosedle.ts, the game in src/scripts/rosedle.ts.
+// It swaps the site header for a compact bar of its own, so the board and
+// keyboard fit on a phone screen without scrolling. The footer stays.
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import { MM_AVATAR, SITE_TITLE } from '../consts';
+import { ROSEDLE } from '../data/rosedle';
+import '../styles/rosedle.css';
+
+const R = ROSEDLE;
+const KEY_ROWS = ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${R.name} | ${SITE_TITLE}`} description={R.description} />
+	</head>
+	<body class="rd-page">
+		<header class="wrap rd-top">
+			<a class="rd-home" href="/"><img src={MM_AVATAR} alt="" width="32" height="32" /><span class="rd-home-name">{SITE_TITLE}</span></a>
+			<h1 class="rd-title">{R.name}</h1>
+			<div class="rd-tools">
+				<button class="rd-icon" type="button" data-open="rd-help" aria-label={R.help.heading}>
+					<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><circle cx="12" cy="12" r="9.25" fill="none" stroke="currentColor" stroke-width="1.8" /><path d="M9.4 9.3a2.7 2.7 0 0 1 5.2 1c0 1.8-2.6 2.3-2.6 3.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /><circle cx="12" cy="17.2" r="1.15" fill="currentColor" /></svg>
+				</button>
+				<button class="rd-icon" type="button" data-open="rd-stats" aria-label={R.stats.heading}>
+					<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M5 20V13M12 20V5M19 20v-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></svg>
+				</button>
+			</div>
+		</header>
+
+		<main id="main" class="rd" data-rosedle>
+			<p class="rd-num" data-num></p>
+			<noscript><p class="rd-noscript">{R.noscript}</p></noscript>
+
+			<div class="rd-play">
+				<p class="rd-toast" data-toast role="status" aria-live="polite"></p>
+				<p class="sr-only" data-announce aria-live="polite"></p>
+
+				<div class="rd-board" data-board tabindex="-1" aria-label="Your guesses">
+					{Array.from({ length: 6 }, (_, r) => (
+						<div class="rd-row" role="group" aria-label={`Guess ${r + 1}`}>
+							{Array.from({ length: 5 }, () => <div class="rd-tile"></div>)}
+						</div>
+					))}
+				</div>
+			</div>
+
+			<div class="rd-keys" role="group" aria-label="Keyboard">
+				{KEY_ROWS.map((row, i) => (
+					<div class="rd-krow">
+						{i === 1 && <span class="rd-kspace"></span>}
+						{i === 2 && <button class="rd-key wide" type="button" data-key="enter">Enter</button>}
+						{[...row].map((k) => <button class="rd-key" type="button" data-key={k}>{k}</button>)}
+						{i === 2 && (
+							<button class="rd-key wide" type="button" data-key="back" aria-label="Delete letter">
+								<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 5h10.5A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5H9l-6-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /><path d="M11.5 9.5l5 5M16.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
+							</button>
+						)}
+						{i === 1 && <span class="rd-kspace"></span>}
+					</div>
+				))}
+			</div>
+		</main>
+
+		<Footer />
+
+		<dialog class="rd-dialog" id="rd-help" aria-labelledby="rd-help-h">
+			<button class="rd-close" type="button" data-close aria-label="Close">&times;</button>
+			<h2 class="h3" id="rd-help-h" tabindex="-1" autofocus>{R.help.heading}</h2>
+			<p>{R.help.intro}</p>
+			<p>{R.help.lead}</p>
+			<ul class="rd-examples">
+				{R.help.examples.map((ex) => (
+					<li>
+						<div class="rd-mini" aria-hidden="true">
+							{[...ex.word].map((ch, i) => <span class="rd-tile" data-state={i === ex.index ? ex.mark : undefined}>{ch}</span>)}
+						</div>
+						<p class="card-text">{ex.text}</p>
+					</li>
+				))}
+			</ul>
+			<p class="caption">{R.help.outro}</p>
+		</dialog>
+
+		<dialog class="rd-dialog" id="rd-stats" aria-labelledby="rd-stats-h">
+			<button class="rd-close" type="button" data-close aria-label="Close">&times;</button>
+			<h2 class="h3" id="rd-stats-h" tabindex="-1" autofocus>{R.stats.heading}</h2>
+			<dl class="rd-stats">
+				<div><dt>{R.stats.played}</dt><dd data-stat="played">0</dd></div>
+				<div><dt>{R.stats.winPct}</dt><dd data-stat="winPct">0</dd></div>
+				<div><dt>{R.stats.streak}</dt><dd data-stat="streak">0</dd></div>
+				<div><dt>{R.stats.maxStreak}</dt><dd data-stat="maxStreak">0</dd></div>
+			</dl>
+			<h3 class="label">{R.stats.distribution}</h3>
+			<ol class="rd-dist" data-dist>
+				{Array.from({ length: 6 }, (_, i) => (
+					<li><span class="rd-dist-n">{i + 1}</span><span class="rd-dist-bar" style="--w: 0"><span>0</span></span></li>
+				))}
+			</ol>
+			<div class="rd-done" data-done hidden>
+				<div>
+					<p class="label">{R.stats.next}</p>
+					<p class="rd-clock" data-clock>00:00:00</p>
+					<p class="caption">{R.stats.tease}</p>
+				</div>
+				<div class="rd-share-box">
+					<button class="btn solid rd-share" type="button" data-share>{R.stats.share}</button>
+					<p class="caption" data-share-msg role="status" aria-live="polite"></p>
+				</div>
+				<textarea class="rd-share-text" data-share-text readonly rows="9" aria-label="Your results" hidden></textarea>
+			</div>
+		</dialog>
+
+		<script>
+			import '../scripts/rosedle.ts';
+		</script>
+	</body>
+</html>
