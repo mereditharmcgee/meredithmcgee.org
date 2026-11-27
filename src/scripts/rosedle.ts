@@ -20,14 +20,16 @@ const ANSWERS = DAILY_ANSWERS.map(rot13);
 WORDS.add(ANSWER);
 ANSWERS.forEach((w) => WORDS.add(w));
 
-// No. 1 is the home word, No. 2 onward come from the list, and after the
-// list runs out it's the home word again.
+// Each day takes the next word from the list, starting at No. 1. After the
+// list runs out, it's the home word.
 export function answerFor(day: number) {
-	return ANSWERS[day - 2] ?? ANSWER;
+	return ANSWERS[day - 1] ?? ANSWER;
 }
 
-const GAME_KEY = 'rosedle-game';
-const STATS_KEY = 'rosedle-stats';
+// The "-2" keys started with the daily answers, so boards and stats from
+// the AROSE-only tryout don't carry over.
+const GAME_KEY = 'rosedle-game-2';
+const STATS_KEY = 'rosedle-stats-2';
 
 type Status = 'playing' | 'won' | 'lost';
 interface Game { day: number; guesses: string[]; status: Status }
@@ -131,12 +133,14 @@ onPage((signal) => {
 	let busy = false;
 	let toastTimer = 0;
 	let clockTimer = 0;
+	let dayTimer = 0;
 	const timers: number[] = [];
 	const later = (fn: () => void, ms: number) => timers.push(window.setTimeout(fn, ms));
 	signal.addEventListener('abort', () => {
 		timers.forEach(clearTimeout);
 		clearTimeout(toastTimer);
 		clearInterval(clockTimer);
+		clearInterval(dayTimer);
 	});
 
 	function toast(text: string, ms = 1600) {
@@ -306,6 +310,7 @@ onPage((signal) => {
 	}
 
 	function press(key: string) {
+		if (rolledOver()) return;
 		if (key === 'enter') submit();
 		else if (key === 'back') erase();
 		else if (/^[a-z]$/.test(key)) type(key);
@@ -336,7 +341,7 @@ onPage((signal) => {
 		const now = new Date();
 		const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
 		statsBox.querySelector('[data-clock]')!.textContent = clock(midnight.getTime() - now.getTime());
-		if (dayNumber(now) !== game.day && !busy) newDay();
+		rolledOver();
 	}
 
 	function openStats() {
@@ -435,7 +440,15 @@ onPage((signal) => {
 	}
 	statsBox.addEventListener('close', () => clearInterval(clockTimer), { signal });
 	statsBox.querySelector('[data-share]')!.addEventListener('click', share, { signal });
-	document.addEventListener('visibilitychange', () => document.visibilityState === 'visible' && dayNumber() !== game.day && !busy && newDay(), { signal });
+	// A page left open past midnight moves on to the new puzzle: checked
+	// every minute, when the tab comes back into view, and on the next key press.
+	function rolledOver() {
+		if (busy || dayNumber() === game.day) return false;
+		newDay();
+		return true;
+	}
+	dayTimer = window.setInterval(rolledOver, 60000);
+	document.addEventListener('visibilitychange', () => document.visibilityState === 'visible' && rolledOver(), { signal });
 
 	startDay();
 	if (game.status !== 'playing') finish(false);

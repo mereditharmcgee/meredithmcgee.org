@@ -5,8 +5,8 @@
 // The guess list (rosedle-words.txt) is the five-letter words from the
 // word-list package by Sindre Sorhus, MIT license.
 
-// The home word. Puzzle No. 1 was AROSE, and once the daily answers run
-// out, every day is AROSE again.
+// The home word. Rosedle was AROSE every day while it was being tried out,
+// and once the daily answers run out, every day is AROSE again.
 export const ANSWER = 'arose';
 
 // Puzzle No. 1. The number on the page counts up one a day from here, at
