@@ -1,8 +1,9 @@
 // Rosedle, the game on /rosedle. One puzzle a day, counted from LAUNCH_DATE
-// in the player's own time zone. Today's board and the player's stats are
+// in the player's own time zone, with each day's answer from answerFor(). Today's board and the player's stats are
 // kept in their browser, and the game still works if that storage is off.
 import wordList from '../data/rosedle-words.txt?raw';
 import { ANSWER, LAUNCH_DATE, ROSEDLE, type Mark } from '../data/rosedle';
+import { DAILY_ANSWERS } from '../data/rosedle-answers';
 import { onPage, reducedMotion } from './page';
 
 const LENGTH = 5;
@@ -10,7 +11,20 @@ const TRIES = 6;
 const FLIP_STEP = 280; // ms between tiles turning over
 const FLIP_TIME = 480; // ms for one tile to turn over
 const WORDS = new Set(wordList.split(/\s+/).filter(Boolean));
+
+// The answers are stored in ROT13 so the page source doesn't spoil them.
+const rot13 = (w: string) => w.replace(/[a-z]/g, (c) => String.fromCharCode(((c.charCodeAt(0) - 84) % 26) + 97));
+const ANSWERS = DAILY_ANSWERS.map(rot13);
+
+// Every answer counts as a real word, even names like PHILS that aren't in the guess list.
 WORDS.add(ANSWER);
+ANSWERS.forEach((w) => WORDS.add(w));
+
+// No. 1 is the home word, No. 2 onward come from the list, and after the
+// list runs out it's the home word again.
+export function answerFor(day: number) {
+	return ANSWERS[day - 2] ?? ANSWER;
+}
 
 const GAME_KEY = 'rosedle-game';
 const STATS_KEY = 'rosedle-stats';
@@ -22,7 +36,7 @@ interface Stats { played: number; wins: number; streak: number; maxStreak: numbe
 // Marks each letter of a guess. Letters that are in the right spot claim
 // their match first, so a repeated letter only lights up as many times as
 // it appears in the answer.
-export function score(guess: string, answer = ANSWER): Mark[] {
+export function score(guess: string, answer: string): Mark[] {
 	const marks: Mark[] = Array(LENGTH).fill('absent');
 	const left: Record<string, number> = {};
 	for (let i = 0; i < LENGTH; i++) {
@@ -72,9 +86,10 @@ function loadGame(day: number): Game {
 		saved.guesses.length <= TRIES &&
 		saved.guesses.every((g) => typeof g === 'string' && g.length === LENGTH);
 	if (!valid) return { day, guesses: [], status: 'playing' };
-	const won = saved.guesses.includes(ANSWER);
+	const answer = answerFor(day);
+	const won = saved.guesses.includes(answer);
 	const status: Status = won ? 'won' : saved.guesses.length === TRIES ? 'lost' : 'playing';
-	return { day, guesses: saved.guesses.slice(0, won ? saved.guesses.indexOf(ANSWER) + 1 : TRIES), status };
+	return { day, guesses: saved.guesses.slice(0, won ? saved.guesses.indexOf(answer) + 1 : TRIES), status };
 }
 
 function loadStats(): Stats {
@@ -131,6 +146,9 @@ onPage((signal) => {
 		if (ms > 0) toastTimer = window.setTimeout(() => toastEl.classList.remove('on'), ms);
 	}
 
+	// Marks a guess against today's answer.
+	const mark = (g: string) => score(g, answerFor(game.day));
+
 	function tilesOf(r: number) {
 		return [...rows[r].querySelectorAll<HTMLElement>('.rd-tile')];
 	}
@@ -144,7 +162,7 @@ onPage((signal) => {
 
 	// What a screen reader hears for a row: its number, then each letter's result.
 	function spoken(guess: string) {
-		return score(guess).map((m, i) => `${guess[i].toUpperCase()} ${SPOKEN[m]}`).join(', ');
+		return mark(guess).map((m, i) => `${guess[i].toUpperCase()} ${SPOKEN[m]}`).join(', ');
 	}
 
 	function labelRow(r: number) {
@@ -155,7 +173,7 @@ onPage((signal) => {
 	function paintKeys() {
 		const best: Record<string, Mark> = {};
 		for (const g of game.guesses) {
-			score(g).forEach((m, i) => {
+			mark(g).forEach((m, i) => {
 				const l = g[i];
 				if (!best[l] || RANK[m] > RANK[best[l]]) best[l] = m;
 			});
@@ -176,7 +194,7 @@ onPage((signal) => {
 	function paintBoard() {
 		for (let r = 0; r < TRIES; r++) {
 			const guess = game.guesses[r];
-			const marks = guess ? score(guess) : null;
+			const marks = guess ? mark(guess) : null;
 			const letters = guess ?? (r === game.guesses.length ? current : '');
 			tilesOf(r).forEach((t, i) => {
 				t.classList.remove('pop', 'flip', 'hop');
@@ -214,7 +232,7 @@ onPage((signal) => {
 				write(STATS_KEY, s);
 			}
 		}
-		const msg = game.status === 'won' ? R.messages.wins[game.guesses.length - 1] : `${R.messages.lose} ${ANSWER.toUpperCase()}.`;
+		const msg = game.status === 'won' ? R.messages.wins[game.guesses.length - 1] : `${R.messages.lose} ${answerFor(game.day).toUpperCase()}.`;
 		toast(msg, game.status === 'won' ? 2200 : 5000);
 		later(() => openStats(), fresh ? 1900 : 500);
 	}
@@ -252,10 +270,10 @@ onPage((signal) => {
 
 		const guess = current;
 		const r = game.guesses.length;
-		const marks = score(guess);
+		const marks = mark(guess);
 		game.guesses.push(guess);
 		current = '';
-		if (guess === ANSWER) game.status = 'won';
+		if (guess === answerFor(game.day)) game.status = 'won';
 		else if (game.guesses.length === TRIES) game.status = 'lost';
 		write(GAME_KEY, game);
 
@@ -343,7 +361,7 @@ onPage((signal) => {
 
 	function shareText() {
 		const result = game.status === 'won' ? game.guesses.length : 'X';
-		const grid = game.guesses.map((g) => score(g).map((m) => R.share.emoji[m]).join('')).join('\n');
+		const grid = game.guesses.map((g) => mark(g).map((m) => R.share.emoji[m]).join('')).join('\n');
 		return `${R.name} No. ${game.day} ${result}/${TRIES}\n\n${grid}\n${R.share.url}`;
 	}
 
