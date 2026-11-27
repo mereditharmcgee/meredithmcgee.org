@@ -58,14 +58,18 @@
 /* Marked tiles and keys. These come after the plain rules so they win. */
 .rd-tile[data-state='correct'], .rd-key[data-state='correct'] { background: var(--rd-correct); border-color: var(--rd-correct); color: var(--paper); }
 .rd-tile[data-state='present'], .rd-key[data-state='present'] { background: var(--rd-present); border-color: var(--rd-present); color: var(--ink); }
-.rd-tile[data-state='absent'], .rd-key[data-state='absent'] { background: var(--rd-absent); border-color: var(--rd-absent); color: var(--muted); }
+.rd-tile[data-state='absent'] { background: var(--rd-absent); border-color: var(--rd-absent); color: var(--muted); }
+/* A ruled-out key empties out: no fill, a thin outline and a faded letter.
+   Solid versus empty reads the same with any color vision, including full
+   red-green colorblindness, where a grayer fill alone was too close to call. */
+.rd-key[data-state='absent'] { background: transparent; box-shadow: inset 0 0 0 1.5px var(--line); color: color-mix(in srgb, var(--muted) 55%, var(--paper)); }
 
 /* Hover only where there is a real pointer, so a tapped key on a phone does not stay lit */
 @media (hover: hover) {
 	.rd-key:hover { background: var(--tea-300); }
 	.rd-key[data-state='correct']:hover { background: var(--raspberry-600); }
 	.rd-key[data-state='present']:hover { background: var(--tea-300); }
-	.rd-key[data-state='absent']:hover { background: var(--tea-300); }
+	.rd-key[data-state='absent']:hover { background: var(--linen); }
 }
 
 /* Dialogs */
