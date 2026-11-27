@@ -9,12 +9,13 @@
 // alphabet), so a glance at this file or the page source doesn't give
 // tomorrow away. ROT13 undoes itself: run it again to read a word, or to
 // add one. A few dates are set on purpose: GRAVY on launch day, the day
-// after Thanksgiving, SANTA on Christmas, PARTY on New Year's Eve, STRUT
-// for the Mummers on New Year's Day, and ROSES on Valentine's Day.
+// after Thanksgiving, SANTA the week before Christmas, AROSE on Christmas
+// Day for Rose, PARTY on New Year's Eve, STRUT for the Mummers on New
+// Year's Day, and ROSES on Valentine's Day.
 export const DAILY_ANSWERS = [
 	'tenil', 'erryf', 'fhaal', 'dhvyy', 'oevpx', 'ohblf', 'pynzf', 'obbrq', 'bavba', 'xvgrf',
 	'cyhzr', 'ebpxl', 'fpber', 'oebnq', 'ornpu', 'ebyyf', 'genpr', 'qharf', 'rntyr', 'syhxr',
-	'ivfbe', 'syntf', 'nebfr', 'penar', 'sybng', 'gbjry', 'fuber', 'junyr', 'fnagn', 'pbarf',
+	'ivfbe', 'syntf', 'fnagn', 'penar', 'sybng', 'gbjry', 'fuber', 'junyr', 'nebfr', 'pbarf',
 	'vfyrf', 'cuvyf', 'faber', 'penpx', 'cnegl', 'fgehg', 'sybcf', 'fnvyf', 'terra', 'pubfr',
 	'bprna', 'zheny', 'lbhfr', 'nqvrh', 'thyyf', 'rterg', 'ureba', 'obneq', 'funex', 'pehzo',
 	'furyy', 'gbxra', 'wnjaf', 'gubfr', 'penof', 'onawb', 'fnygl', 'ovxrf', 'qevsg', 'gjvfg',
