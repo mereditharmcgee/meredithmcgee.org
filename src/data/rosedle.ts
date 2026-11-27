@@ -35,8 +35,16 @@ export const ROSEDLE = {
 		notEnough: 'Not enough letters',
 		notAWord: 'Not in the word list',
 		// One line per number of guesses, first try to sixth.
-		wins: ['First try. Lucky you.', 'Two guesses. Very nice.', 'Three. Solid.', 'Four. Getting there.', 'Five. That was close.', 'Six. Just made it.'],
-		lose: 'The word was',
+		wins: [
+			'First try?! Go Birds!',
+			'Two! Straight up the Rocky steps.',
+			'Three. Solid as a corner store hoagie.',
+			'Four. You got the jawn.',
+			'Five. Slower than the Schuylkill at rush hour.',
+			'Six. Walk-off win, Phillies style.',
+		],
+		// {word} becomes the day's answer.
+		lose: 'The word was {word}. Go Birds anyway.',
 	},
 
 	stats: {
@@ -56,7 +64,7 @@ export const ROSEDLE = {
 	// The shared result. Each guess becomes a row of these.
 	share: {
 		url: 'meredithmcgee.org/rosedle',
-		emoji: { correct: '🌹', present: '🌿', absent: '⬜' } as Record<Mark, string>,
+		emoji: { correct: '🌹', present: '🌼', absent: '⬜' } as Record<Mark, string>,
 	},
 
 	noscript: 'Rosedle needs JavaScript to run. Turn it on and reload the page to play.',

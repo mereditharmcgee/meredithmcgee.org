@@ -1,11 +1,12 @@
 /* Rosedle, the word game at /rosedle.
    Tile colors: a letter in the right spot is the rose (raspberry), a letter
-   in the word but in the wrong spot is the leaf (olive), and a letter that
-   is not in the word fades to the rule color. They also step from dark to
-   mid to light, so they read apart without relying on hue. */
+   in the word but in the wrong spot is tan, and a letter that is not in the
+   word fades to the rule color. Tan, not green, for the wrong spot, because
+   Wordle players read green as correct. They also step from dark to mid to
+   light, so they read apart without relying on hue. */
 .rd-page {
 	--rd-correct: var(--raspberry-700);
-	--rd-present: var(--olive-500);
+	--rd-present: var(--tea-500);
 	--rd-absent: var(--line);
 	--rd-key: var(--tea-100);
 	--rd-gap: 6px;
@@ -63,7 +64,7 @@
 @media (hover: hover) {
 	.rd-key:hover { background: var(--tea-300); }
 	.rd-key[data-state='correct']:hover { background: var(--raspberry-600); }
-	.rd-key[data-state='present']:hover { background: var(--olive-300); }
+	.rd-key[data-state='present']:hover { background: var(--tea-300); }
 	.rd-key[data-state='absent']:hover { background: var(--tea-300); }
 }
 
