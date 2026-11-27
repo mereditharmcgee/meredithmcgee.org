@@ -236,7 +236,7 @@ onPage((signal) => {
 				write(STATS_KEY, s);
 			}
 		}
-		const msg = game.status === 'won' ? R.messages.wins[game.guesses.length - 1] : `${R.messages.lose} ${answerFor(game.day).toUpperCase()}.`;
+		const msg = game.status === 'won' ? R.messages.wins[game.guesses.length - 1] : R.messages.lose.replace('{word}', answerFor(game.day).toUpperCase());
 		toast(msg, game.status === 'won' ? 2200 : 5000);
 		later(() => openStats(), fresh ? 1900 : 500);
 	}
