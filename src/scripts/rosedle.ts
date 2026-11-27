@@ -1,8 +1,9 @@
 // Rosedle, the game on /rosedle. One puzzle a day, counted from LAUNCH_DATE
-// in the player's own time zone. Today's board and the player's stats are
+// in the player's own time zone, with each day's answer from answerFor(). Today's board and the player's stats are
 // kept in their browser, and the game still works if that storage is off.
 import wordList from '../data/rosedle-words.txt?raw';
 import { ANSWER, LAUNCH_DATE, ROSEDLE, type Mark } from '../data/rosedle';
+import { DAILY_ANSWERS } from '../data/rosedle-answers';
 import { onPage, reducedMotion } from './page';
 
 const LENGTH = 5;
@@ -10,10 +11,25 @@ const TRIES = 6;
 const FLIP_STEP = 280; // ms between tiles turning over
 const FLIP_TIME = 480; // ms for one tile to turn over
 const WORDS = new Set(wordList.split(/\s+/).filter(Boolean));
-WORDS.add(ANSWER);
 
-const GAME_KEY = 'rosedle-game';
-const STATS_KEY = 'rosedle-stats';
+// The answers are stored in ROT13 so the page source doesn't spoil them.
+const rot13 = (w: string) => w.replace(/[a-z]/g, (c) => String.fromCharCode(((c.charCodeAt(0) - 84) % 26) + 97));
+const ANSWERS = DAILY_ANSWERS.map(rot13);
+
+// Every answer counts as a real word, even names like PHILS that aren't in the guess list.
+WORDS.add(ANSWER);
+ANSWERS.forEach((w) => WORDS.add(w));
+
+// Each day takes the next word from the list, starting at No. 1. After the
+// list runs out, it's the home word.
+export function answerFor(day: number) {
+	return ANSWERS[day - 1] ?? ANSWER;
+}
+
+// The "-2" keys started with the daily answers, so boards and stats from
+// the AROSE-only tryout don't carry over.
+const GAME_KEY = 'rosedle-game-2';
+const STATS_KEY = 'rosedle-stats-2';
 
 type Status = 'playing' | 'won' | 'lost';
 interface Game { day: number; guesses: string[]; status: Status }
@@ -22,7 +38,7 @@ interface Stats { played: number; wins: number; streak: number; maxStreak: numbe
 // Marks each letter of a guess. Letters that are in the right spot claim
 // their match first, so a repeated letter only lights up as many times as
 // it appears in the answer.
-export function score(guess: string, answer = ANSWER): Mark[] {
+export function score(guess: string, answer: string): Mark[] {
 	const marks: Mark[] = Array(LENGTH).fill('absent');
 	const left: Record<string, number> = {};
 	for (let i = 0; i < LENGTH; i++) {
@@ -72,9 +88,10 @@ function loadGame(day: number): Game {
 		saved.guesses.length <= TRIES &&
 		saved.guesses.every((g) => typeof g === 'string' && g.length === LENGTH);
 	if (!valid) return { day, guesses: [], status: 'playing' };
-	const won = saved.guesses.includes(ANSWER);
+	const answer = answerFor(day);
+	const won = saved.guesses.includes(answer);
 	const status: Status = won ? 'won' : saved.guesses.length === TRIES ? 'lost' : 'playing';
-	return { day, guesses: saved.guesses.slice(0, won ? saved.guesses.indexOf(ANSWER) + 1 : TRIES), status };
+	return { day, guesses: saved.guesses.slice(0, won ? saved.guesses.indexOf(answer) + 1 : TRIES), status };
 }
 
 function loadStats(): Stats {
@@ -116,12 +133,14 @@ onPage((signal) => {
 	let busy = false;
 	let toastTimer = 0;
 	let clockTimer = 0;
+	let dayTimer = 0;
 	const timers: number[] = [];
 	const later = (fn: () => void, ms: number) => timers.push(window.setTimeout(fn, ms));
 	signal.addEventListener('abort', () => {
 		timers.forEach(clearTimeout);
 		clearTimeout(toastTimer);
 		clearInterval(clockTimer);
+		clearInterval(dayTimer);
 	});
 
 	function toast(text: string, ms = 1600) {
@@ -130,6 +149,9 @@ onPage((signal) => {
 		clearTimeout(toastTimer);
 		if (ms > 0) toastTimer = window.setTimeout(() => toastEl.classList.remove('on'), ms);
 	}
+
+	// Marks a guess against today's answer.
+	const mark = (g: string) => score(g, answerFor(game.day));
 
 	function tilesOf(r: number) {
 		return [...rows[r].querySelectorAll<HTMLElement>('.rd-tile')];
@@ -144,7 +166,7 @@ onPage((signal) => {
 
 	// What a screen reader hears for a row: its number, then each letter's result.
 	function spoken(guess: string) {
-		return score(guess).map((m, i) => `${guess[i].toUpperCase()} ${SPOKEN[m]}`).join(', ');
+		return mark(guess).map((m, i) => `${guess[i].toUpperCase()} ${SPOKEN[m]}`).join(', ');
 	}
 
 	function labelRow(r: number) {
@@ -155,7 +177,7 @@ onPage((signal) => {
 	function paintKeys() {
 		const best: Record<string, Mark> = {};
 		for (const g of game.guesses) {
-			score(g).forEach((m, i) => {
+			mark(g).forEach((m, i) => {
 				const l = g[i];
 				if (!best[l] || RANK[m] > RANK[best[l]]) best[l] = m;
 			});
@@ -176,7 +198,7 @@ onPage((signal) => {
 	function paintBoard() {
 		for (let r = 0; r < TRIES; r++) {
 			const guess = game.guesses[r];
-			const marks = guess ? score(guess) : null;
+			const marks = guess ? mark(guess) : null;
 			const letters = guess ?? (r === game.guesses.length ? current : '');
 			tilesOf(r).forEach((t, i) => {
 				t.classList.remove('pop', 'flip', 'hop');
@@ -214,7 +236,7 @@ onPage((signal) => {
 				write(STATS_KEY, s);
 			}
 		}
-		const msg = game.status === 'won' ? R.messages.wins[game.guesses.length - 1] : `${R.messages.lose} ${ANSWER.toUpperCase()}.`;
+		const msg = game.status === 'won' ? R.messages.wins[game.guesses.length - 1] : `${R.messages.lose} ${answerFor(game.day).toUpperCase()}.`;
 		toast(msg, game.status === 'won' ? 2200 : 5000);
 		later(() => openStats(), fresh ? 1900 : 500);
 	}
@@ -252,10 +274,10 @@ onPage((signal) => {
 
 		const guess = current;
 		const r = game.guesses.length;
-		const marks = score(guess);
+		const marks = mark(guess);
 		game.guesses.push(guess);
 		current = '';
-		if (guess === ANSWER) game.status = 'won';
+		if (guess === answerFor(game.day)) game.status = 'won';
 		else if (game.guesses.length === TRIES) game.status = 'lost';
 		write(GAME_KEY, game);
 
@@ -288,6 +310,7 @@ onPage((signal) => {
 	}
 
 	function press(key: string) {
+		if (rolledOver()) return;
 		if (key === 'enter') submit();
 		else if (key === 'back') erase();
 		else if (/^[a-z]$/.test(key)) type(key);
@@ -318,7 +341,7 @@ onPage((signal) => {
 		const now = new Date();
 		const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
 		statsBox.querySelector('[data-clock]')!.textContent = clock(midnight.getTime() - now.getTime());
-		if (dayNumber(now) !== game.day && !busy) newDay();
+		rolledOver();
 	}
 
 	function openStats() {
@@ -343,7 +366,7 @@ onPage((signal) => {
 
 	function shareText() {
 		const result = game.status === 'won' ? game.guesses.length : 'X';
-		const grid = game.guesses.map((g) => score(g).map((m) => R.share.emoji[m]).join('')).join('\n');
+		const grid = game.guesses.map((g) => mark(g).map((m) => R.share.emoji[m]).join('')).join('\n');
 		return `${R.name} No. ${game.day} ${result}/${TRIES}\n\n${grid}\n${R.share.url}`;
 	}
 
@@ -417,7 +440,15 @@ onPage((signal) => {
 	}
 	statsBox.addEventListener('close', () => clearInterval(clockTimer), { signal });
 	statsBox.querySelector('[data-share]')!.addEventListener('click', share, { signal });
-	document.addEventListener('visibilitychange', () => document.visibilityState === 'visible' && dayNumber() !== game.day && !busy && newDay(), { signal });
+	// A page left open past midnight moves on to the new puzzle: checked
+	// every minute, when the tab comes back into view, and on the next key press.
+	function rolledOver() {
+		if (busy || dayNumber() === game.day) return false;
+		newDay();
+		return true;
+	}
+	dayTimer = window.setInterval(rolledOver, 60000);
+	document.addEventListener('visibilitychange', () => document.visibilityState === 'visible' && rolledOver(), { signal });
 
 	startDay();
 	if (game.status !== 'playing') finish(false);

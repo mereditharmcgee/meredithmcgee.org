@@ -1,13 +1,16 @@
-// Rosedle, the word game at /rosedle. It plays like any five-letter word
-// game, except the answer never changes. All of the page's wording lives
-// here, so it can be changed without touching the game code.
+// Rosedle, the word game at /rosedle. All of the page's wording lives
+// here, so it can be changed without touching the game code. The daily
+// answers are in rosedle-answers.ts.
 //
 // The guess list (rosedle-words.txt) is the five-letter words from the
 // word-list package by Sindre Sorhus, MIT license.
 
+// The home word. Rosedle was AROSE every day while it was being tried out,
+// and once the daily answers run out, every day is AROSE again.
 export const ANSWER = 'arose';
 
-// Puzzle No. 1. The number on the page counts up one a day from here.
+// Puzzle No. 1. The number on the page counts up one a day from here, at
+// midnight wherever the player is.
 export const LAUNCH_DATE = '2026-11-27';
 
 export type Mark = 'correct' | 'present' | 'absent';
