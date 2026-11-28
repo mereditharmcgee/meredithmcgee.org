@@ -21,3 +21,11 @@ export const CONSULT_FORM_ENDPOINT = 'https://formspree.io/f/xaeodeqz';
 
 // Where the contact form on /contact sends. A Formspree form of its own.
 export const CONTACT_FORM_ENDPOINT = 'https://formspree.io/f/xgooeagz';
+
+// Rosedle's family board and sync codes run on a free Supabase project. Paste
+// its Project URL (like 'https://abcdefgh.supabase.co') and its publishable
+// key here. Both are meant to be public. Never put the secret key here. While
+// either is empty, the family board is switched off and each phone keeps its
+// own stats. The database setup is in scripts/rosedle-supabase.sql.
+export const ROSEDLE_SYNC_URL = '';
+export const ROSEDLE_SYNC_KEY = '';

@@ -67,5 +67,36 @@ export const ROSEDLE = {
 		emoji: { correct: '🌹', present: '🌼', absent: '⬜' } as Record<Mark, string>,
 	},
 
+	// The Family board tab in the stats window. Only shows once the Supabase
+	// project in consts.ts is filled in.
+	family: {
+		tabYou: 'Your stats',
+		tabFamily: 'Family board',
+		heading: 'Family board',
+		intro: 'See how everyone did today, and keep your streak on every phone or computer you play on.',
+		nameLabel: 'Your name',
+		join: 'Join',
+		haveCode: 'Already joined on another phone or computer? Enter your code.',
+		codeLabel: 'Your code',
+		useCode: 'Use code',
+		columns: { name: 'Name', today: 'Today', streak: 'Streak', winPct: 'Win %' },
+		you: 'you',
+		notYet: 'Not yet',
+		empty: 'Nobody has joined yet.',
+		yourCode: 'Your code',
+		codeHelp: 'Enter this code in Rosedle on another phone or computer to keep the same streak there.',
+		copy: 'Copy',
+		copied: 'Copied',
+		leave: 'Sign out on this device',
+		nudge: 'See how the family did',
+		loading: 'Loading the family board',
+		joining: 'Joining',
+		joinFailed: 'Couldn’t join right now. Check your connection and try again.',
+		badCode: 'That code didn’t match anyone. Check it and try again.',
+		offline: 'Couldn’t load the family board right now. Your game still saves on this device.',
+		// {code} becomes the player's code.
+		signedOut: 'Signed out here. Your code {code} still works if you want back in.',
+	},
+
 	noscript: 'Rosedle needs JavaScript to run. Turn it on and reload the page to play.',
 };

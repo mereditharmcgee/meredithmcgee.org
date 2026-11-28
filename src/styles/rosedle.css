@@ -107,6 +107,41 @@
 .rd-share { min-width: 140px; font-size: 18px; }
 .rd-share-text { flex: 1 1 100%; width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--linen); color: var(--ink); font: 15px/1.4 var(--font-body); resize: none; }
 
+/* Stats window tabs: Your stats and Family board */
+.rd-dialog { overflow-y: auto; }
+.rd-tabs { display: flex; gap: 4px; margin-right: 40px; border-bottom: 1px solid var(--line); }
+.rd-tabs [role='tab'] { padding: 6px 10px 8px; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; background: transparent; font-family: var(--font-display); font-variation-settings: 'SOFT' 100; font-weight: 800; font-size: 19px; line-height: 1.2; color: var(--muted); cursor: pointer; }
+.rd-tabs [role='tab'][aria-selected='true'] { color: var(--brand); border-bottom-color: var(--brand); }
+.rd-tabs [role='tab']:hover { color: var(--brand); }
+.rd-panel { display: flex; flex-direction: column; gap: 16px; }
+.rd-panel[hidden] { display: none; }
+.rd-linkbtn { align-self: flex-start; padding: 4px 0; border: 0; background: none; color: var(--olive-700); font-weight: 700; font-size: 16px; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.rd-linkbtn:hover { color: var(--brand); }
+.rd-done .rd-linkbtn { flex-basis: 100%; }
+
+/* Family board: joining, the table, and the player's code */
+.rd-form { display: flex; flex-direction: column; gap: 6px; }
+.rd-form label { font-weight: 700; font-size: 16px; line-height: 1.35; }
+.rd-form-row { display: flex; gap: 8px; }
+.rd-form input { flex: 1 1 auto; min-width: 0; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: var(--radius-sm); background: var(--paper); color: var(--ink); font: 17px/1.3 var(--font-body); }
+.rd-form input:focus { border-color: var(--muted); }
+.rd-form .btn { flex: none; }
+.rd-table { width: 100%; border-collapse: collapse; font-size: 16px; line-height: 1.3; }
+.rd-table th, .rd-table td { padding: 9px 6px; border-bottom: 1px solid var(--line); text-align: right; }
+.rd-table th:first-child { text-align: left; padding-left: 8px; }
+.rd-table td:last-child, .rd-table th:last-child { padding-right: 8px; }
+.rd-table thead th { padding-block: 0 8px; font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--tea-700); }
+.rd-table tbody th { font-weight: 700; overflow-wrap: anywhere; }
+.rd-table td { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rd-table td[colspan] { text-align: left; white-space: normal; color: var(--muted); }
+.rd-table tr[data-me] { background: var(--raspberry-50); }
+.rd-you { font-weight: 400; font-size: 14px; color: var(--muted); }
+.rd-notyet { color: var(--muted); font-size: 14px; }
+.rd-code-box { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 14px 16px; border-radius: var(--radius-md); background: var(--linen); }
+.rd-code-box .caption { flex: 1 1 100%; }
+.rd-code { font-family: var(--font-display); font-variation-settings: 'SOFT' 100; font-weight: 800; font-size: 28px; line-height: 1.1; letter-spacing: .08em; color: var(--brand); user-select: all; }
+.rd-family-msg:empty { display: none; }
+
 /* Wider screens: the board and keyboard sit together in the middle */
 @media (min-width: 700px) and (min-height: 700px) {
 	.rd { justify-content: center; gap: 18px; }
