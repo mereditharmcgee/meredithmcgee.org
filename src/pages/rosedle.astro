@@ -7,9 +7,13 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import { MM_AVATAR, SITE_TITLE } from '../consts';
 import { ROSEDLE } from '../data/rosedle';
+import { syncOn } from '../scripts/rosedle-sync';
 import '../styles/rosedle.css';
 
 const R = ROSEDLE;
+const F = R.family;
+// The Family board tab only appears once the Supabase project is set in consts.ts.
+const familyOn = syncOn;
 const KEY_ROWS = ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'];
 ---
 
@@ -88,31 +92,81 @@ const KEY_ROWS = ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'];
 
 		<dialog class="rd-dialog" id="rd-stats" aria-labelledby="rd-stats-h">
 			<button class="rd-close" type="button" data-close aria-label="Close">&times;</button>
-			<h2 class="h3" id="rd-stats-h" tabindex="-1" autofocus>{R.stats.heading}</h2>
-			<dl class="rd-stats">
-				<div><dt>{R.stats.played}</dt><dd data-stat="played">0</dd></div>
-				<div><dt>{R.stats.winPct}</dt><dd data-stat="winPct">0</dd></div>
-				<div><dt>{R.stats.streak}</dt><dd data-stat="streak">0</dd></div>
-				<div><dt>{R.stats.maxStreak}</dt><dd data-stat="maxStreak">0</dd></div>
-			</dl>
-			<h3 class="label">{R.stats.distribution}</h3>
-			<ol class="rd-dist" data-dist>
-				{Array.from({ length: 6 }, (_, i) => (
-					<li><span class="rd-dist-n">{i + 1}</span><span class="rd-dist-bar" style="--w: 0"><span>0</span></span></li>
-				))}
-			</ol>
-			<div class="rd-done" data-done hidden>
-				<div>
-					<p class="label">{R.stats.next}</p>
-					<p class="rd-clock" data-clock>00:00:00</p>
-					<p class="caption">{R.stats.tease}</p>
+			{familyOn && (
+				<div class="rd-tabs" role="tablist" aria-label={R.stats.heading}>
+					<button type="button" role="tab" id="rd-tab-you" aria-controls="rd-panel-you" aria-selected="true" data-tab="you">{F.tabYou}</button>
+					<button type="button" role="tab" id="rd-tab-family" aria-controls="rd-panel-family" aria-selected="false" tabindex="-1" data-tab="family">{F.tabFamily}</button>
 				</div>
-				<div class="rd-share-box">
-					<button class="btn solid rd-share" type="button" data-share>{R.stats.share}</button>
-					<p class="caption" data-share-msg role="status" aria-live="polite"></p>
+			)}
+			<div class="rd-panel" id="rd-panel-you" role={familyOn ? 'tabpanel' : undefined} aria-labelledby={familyOn ? 'rd-tab-you' : undefined}>
+				<h2 class:list={['h3', { 'sr-only': familyOn }]} id="rd-stats-h" tabindex="-1" autofocus>{R.stats.heading}</h2>
+				<dl class="rd-stats">
+					<div><dt>{R.stats.played}</dt><dd data-stat="played">0</dd></div>
+					<div><dt>{R.stats.winPct}</dt><dd data-stat="winPct">0</dd></div>
+					<div><dt>{R.stats.streak}</dt><dd data-stat="streak">0</dd></div>
+					<div><dt>{R.stats.maxStreak}</dt><dd data-stat="maxStreak">0</dd></div>
+				</dl>
+				<h3 class="label">{R.stats.distribution}</h3>
+				<ol class="rd-dist" data-dist>
+					{Array.from({ length: 6 }, (_, i) => (
+						<li><span class="rd-dist-n">{i + 1}</span><span class="rd-dist-bar" style="--w: 0"><span>0</span></span></li>
+					))}
+				</ol>
+				<div class="rd-done" data-done hidden>
+					<div>
+						<p class="label">{R.stats.next}</p>
+						<p class="rd-clock" data-clock>00:00:00</p>
+						<p class="caption">{R.stats.tease}</p>
+					</div>
+					<div class="rd-share-box">
+						<button class="btn solid rd-share" type="button" data-share>{R.stats.share}</button>
+						<p class="caption" data-share-msg role="status" aria-live="polite"></p>
+					</div>
+					<textarea class="rd-share-text" data-share-text readonly rows="9" aria-label="Your results" hidden></textarea>
+					{familyOn && <button class="rd-linkbtn" type="button" data-to-family>{F.nudge}</button>}
 				</div>
-				<textarea class="rd-share-text" data-share-text readonly rows="9" aria-label="Your results" hidden></textarea>
 			</div>
+			{familyOn && (
+				<div class="rd-panel" id="rd-panel-family" role="tabpanel" aria-labelledby="rd-tab-family" data-family hidden>
+					<h2 class="sr-only">{F.heading}</h2>
+					<div class="rd-panel" data-family-join hidden>
+						<p>{F.intro}</p>
+						<form class="rd-form" data-join-form>
+							<label for="rd-name">{F.nameLabel}</label>
+							<div class="rd-form-row">
+								<input id="rd-name" name="name" type="text" maxlength="24" autocomplete="given-name" required />
+								<button class="btn solid" type="submit">{F.join}</button>
+							</div>
+						</form>
+						<form class="rd-form" data-code-form>
+							<label for="rd-code">{F.haveCode}</label>
+							<div class="rd-form-row">
+								<input id="rd-code" name="code" type="text" maxlength="8" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC-123" required />
+								<button class="btn" type="submit">{F.useCode}</button>
+							</div>
+						</form>
+					</div>
+					<div class="rd-panel" data-family-board hidden>
+						<table class="rd-table">
+							<caption class="sr-only">{F.heading}</caption>
+							<thead>
+								<tr><th scope="col">{F.columns.name}</th><th scope="col">{F.columns.today}</th><th scope="col">{F.columns.streak}</th><th scope="col">{F.columns.winPct}</th></tr>
+							</thead>
+							<tbody data-family-rows></tbody>
+						</table>
+						<div class="rd-code-box">
+							<div>
+								<p class="label">{F.yourCode}</p>
+								<p class="rd-code" data-my-code></p>
+							</div>
+							<button class="btn" type="button" data-copy-code>{F.copy}</button>
+							<p class="caption">{F.codeHelp}</p>
+						</div>
+						<button class="rd-linkbtn" type="button" data-leave>{F.leave}</button>
+					</div>
+					<p class="caption rd-family-msg" data-family-msg role="status" aria-live="polite"></p>
+				</div>
+			)}
 		</dialog>
 
 		<script>

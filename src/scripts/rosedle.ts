@@ -1,10 +1,14 @@
 // Rosedle, the game on /rosedle. One puzzle a day, counted from LAUNCH_DATE
-// in the player's own time zone, with each day's answer from answerFor(). Today's board and the player's stats are
-// kept in their browser, and the game still works if that storage is off.
+// in the player's own time zone, with each day's answer from answerFor().
+// Today's board and the player's stats are kept in their browser, and the
+// game still works if that storage is off. Players who join the family board
+// also keep a copy online (rosedle-sync.ts), so one code carries their streak
+// to every device they play on.
 import wordList from '../data/rosedle-words.txt?raw';
 import { ANSWER, LAUNCH_DATE, ROSEDLE, type Mark } from '../data/rosedle';
 import { DAILY_ANSWERS } from '../data/rosedle-answers';
 import { onPage, reducedMotion } from './page';
+import { cleanCode, sync, syncOn, type BoardRow, type Remote } from './rosedle-sync';
 
 const LENGTH = 5;
 const TRIES = 6;
@@ -30,10 +34,13 @@ export function answerFor(day: number) {
 // the AROSE-only tryout don't carry over.
 const GAME_KEY = 'rosedle-game-2';
 const STATS_KEY = 'rosedle-stats-2';
+// This device's place on the family board: the player's code and name.
+const SYNC_KEY = 'rosedle-sync-2';
 
 type Status = 'playing' | 'won' | 'lost';
 interface Game { day: number; guesses: string[]; status: Status }
 interface Stats { played: number; wins: number; streak: number; maxStreak: number; dist: number[]; lastWin: number; lastPlayed: number }
+interface Me { code: string; name: string }
 
 // Marks each letter of a guess. Letters that are in the right spot claim
 // their match first, so a repeated letter only lights up as many times as
@@ -79,28 +86,51 @@ function write(key: string, value: unknown) {
 	}
 }
 
-function loadGame(day: number): Game {
-	const saved = read<Game>(GAME_KEY);
-	const valid =
-		saved &&
-		saved.day === day &&
-		Array.isArray(saved.guesses) &&
-		saved.guesses.length <= TRIES &&
-		saved.guesses.every((g) => typeof g === 'string' && g.length === LENGTH);
-	if (!valid) return { day, guesses: [], status: 'playing' };
+// A saved board for the given day, checked and tidied, or null if it isn't one.
+function checkGame(saved: unknown, day: number): Game | null {
+	const g = saved as Partial<Game> | null;
+	if (!g || g.day !== day || !Array.isArray(g.guesses) || g.guesses.length > TRIES) return null;
+	if (!g.guesses.every((x) => typeof x === 'string' && /^[a-z]{5}$/.test(x))) return null;
 	const answer = answerFor(day);
-	const won = saved.guesses.includes(answer);
-	const status: Status = won ? 'won' : saved.guesses.length === TRIES ? 'lost' : 'playing';
-	return { day, guesses: saved.guesses.slice(0, won ? saved.guesses.indexOf(answer) + 1 : TRIES), status };
+	const won = g.guesses.includes(answer);
+	const status: Status = won ? 'won' : g.guesses.length === TRIES ? 'lost' : 'playing';
+	return { day, guesses: g.guesses.slice(0, won ? g.guesses.indexOf(answer) + 1 : TRIES), status };
+}
+
+function loadGame(day: number): Game {
+	return checkGame(read(GAME_KEY), day) ?? { day, guesses: [], status: 'playing' };
+}
+
+// Stats, checked and tidied, from this device or from the family board.
+function checkStats(saved: unknown): Stats {
+	const s: Stats = { played: 0, wins: 0, streak: 0, maxStreak: 0, dist: [0, 0, 0, 0, 0, 0], lastWin: 0, lastPlayed: 0 };
+	if (!saved || typeof saved !== 'object') return s;
+	const raw = saved as Record<string, unknown>;
+	for (const k of ['played', 'wins', 'streak', 'maxStreak', 'lastWin', 'lastPlayed'] as const) {
+		const v = raw[k];
+		if (typeof v === 'number' && Number.isInteger(v) && v >= 0) s[k] = v;
+	}
+	if (Array.isArray(raw.dist) && raw.dist.length === TRIES && raw.dist.every((v) => Number.isInteger(v) && v >= 0)) s.dist = [...(raw.dist as number[])];
+	return s;
 }
 
 function loadStats(): Stats {
-	const blank: Stats = { played: 0, wins: 0, streak: 0, maxStreak: 0, dist: [0, 0, 0, 0, 0, 0], lastWin: 0, lastPlayed: 0 };
-	const saved = read<Partial<Stats>>(STATS_KEY);
-	if (!saved) return blank;
-	const s = { ...blank, ...saved };
-	if (!Array.isArray(s.dist) || s.dist.length !== TRIES) s.dist = blank.dist;
-	return s;
+	return checkStats(read(STATS_KEY));
+}
+
+// Of two sets of stats for one player, the one with the most recent game,
+// or the most games if they last played the same day.
+function pickStats(mine: Stats, theirs: Stats) {
+	if (theirs.lastPlayed !== mine.lastPlayed) return theirs.lastPlayed > mine.lastPlayed ? theirs : mine;
+	return theirs.played > mine.played ? theirs : mine;
+}
+
+// Whether board a is further along than board b: finished beats unfinished,
+// then more guesses wins.
+function ahead(a: Game, b: Game) {
+	const done = (g: Game) => g.status !== 'playing';
+	if (done(a) !== done(b)) return done(a);
+	return a.guesses.length > b.guesses.length;
 }
 
 const RANK: Record<Mark, number> = { absent: 0, present: 1, correct: 2 };
@@ -127,8 +157,16 @@ onPage((signal) => {
 	const statsBox = document.getElementById('rd-stats') as HTMLDialogElement;
 	const shareMsg = statsBox.querySelector<HTMLElement>('[data-share-msg]')!;
 	const shareBox = statsBox.querySelector<HTMLTextAreaElement>('[data-share-text]')!;
+	// The Family board tab, when the site has a Supabase project set up.
+	const familyEl = syncOn ? statsBox.querySelector<HTMLElement>('[data-family]') : null;
+	const panelYou = statsBox.querySelector<HTMLElement>('#rd-panel-you')!;
+	const tabs = [...statsBox.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+	let me: Me | null = familyEl ? read<Me>(SYNC_KEY) : null;
+	if (me && (typeof me.code !== 'string' || typeof me.name !== 'string')) me = null;
+	let pushTimer = 0;
 
-	let game: Game;
+	// Set by startDay() before anything reads it.
+	let game!: Game;
 	let current = '';
 	let busy = false;
 	let toastTimer = 0;
@@ -141,6 +179,7 @@ onPage((signal) => {
 		clearTimeout(toastTimer);
 		clearInterval(clockTimer);
 		clearInterval(dayTimer);
+		clearTimeout(pushTimer);
 	});
 
 	function toast(text: string, ms = 1600) {
@@ -216,6 +255,7 @@ onPage((signal) => {
 		busy = false;
 		numEl.textContent = `No. ${day}`;
 		paintBoard();
+		void pull();
 	}
 
 	function finish(fresh: boolean) {
@@ -234,6 +274,7 @@ onPage((signal) => {
 					s.streak = 0;
 				}
 				write(STATS_KEY, s);
+				push();
 			}
 		}
 		const msg = game.status === 'won' ? R.messages.wins[game.guesses.length - 1] : R.messages.lose.replace('{word}', answerFor(game.day).toUpperCase());
@@ -280,6 +321,7 @@ onPage((signal) => {
 		if (guess === answerFor(game.day)) game.status = 'won';
 		else if (game.guesses.length === TRIES) game.status = 'lost';
 		write(GAME_KEY, game);
+		push();
 
 		busy = true;
 		const still = reducedMotion();
@@ -350,7 +392,10 @@ onPage((signal) => {
 		tickClock();
 		clearInterval(clockTimer);
 		clockTimer = window.setInterval(tickClock, 1000);
-		if (!statsBox.open) statsBox.showModal();
+		if (!statsBox.open) {
+			showTab('you');
+			statsBox.showModal();
+		}
 	}
 
 	function openHelp() {
@@ -448,7 +493,253 @@ onPage((signal) => {
 		return true;
 	}
 	dayTimer = window.setInterval(rolledOver, 60000);
-	document.addEventListener('visibilitychange', () => document.visibilityState === 'visible' && rolledOver(), { signal });
+	// Coming back to the tab also picks up anything played on another device.
+	document.addEventListener('visibilitychange', () => document.visibilityState === 'visible' && !rolledOver() && void pull(), { signal });
+
+	// Family board and sync codes. Everything here is skipped when the site
+	// has no Supabase project, and any call that fails leaves the game as is.
+
+	// Sends this device's stats and board up, a moment after the last change.
+	function push() {
+		if (!me) return;
+		const code = me.code;
+		clearTimeout(pushTimer);
+		pushTimer = window.setTimeout(() => void sync.save(code, loadStats(), game).catch(() => {}), 400);
+	}
+
+	// Brings in what this player did on their other devices, and sends up
+	// anything this device has that the copy online doesn't.
+	async function pull() {
+		if (!me) return;
+		const mine = me;
+		let remote: Remote | null;
+		try {
+			remote = await sync.get(mine.code);
+		} catch {
+			return;
+		}
+		if (signal.aborted || me !== mine) return;
+		if (!remote) return forget();
+		if (remote.name && remote.name !== mine.name) {
+			me = { ...mine, name: remote.name };
+			write(SYNC_KEY, me);
+		}
+		const local = loadStats();
+		const theirs = checkStats(remote.stats);
+		const stats = pickStats(local, theirs);
+		if (stats !== local) write(STATS_KEY, stats);
+		const theirGame = checkGame(remote.game, game.day);
+		let adopted = false;
+		if (theirGame && !busy && ahead(theirGame, game)) {
+			game = theirGame;
+			current = '';
+			write(GAME_KEY, game);
+			paintBoard();
+			adopted = true;
+		}
+		if (adopted && game.status !== 'playing') finish(false);
+		else if (statsBox.open) renderStats();
+		if (JSON.stringify(stats) !== JSON.stringify(theirs) || JSON.stringify(game) !== JSON.stringify(theirGame)) push();
+	}
+
+	function forget() {
+		me = null;
+		try {
+			localStorage.removeItem(SYNC_KEY);
+		} catch {
+			// Nothing saved to remove.
+		}
+		renderFamily();
+	}
+
+	function showTab(which: 'you' | 'family') {
+		if (!familyEl) return;
+		tabs.forEach((t) => {
+			const on = t.dataset.tab === which;
+			t.setAttribute('aria-selected', String(on));
+			t.tabIndex = on ? 0 : -1;
+		});
+		panelYou.hidden = which !== 'you';
+		familyEl.hidden = which !== 'family';
+		if (which === 'family') {
+			renderFamily();
+			void pull();
+			void loadBoard();
+		}
+	}
+
+	function familyMsg(text: string) {
+		if (familyEl) familyEl.querySelector('[data-family-msg]')!.textContent = text;
+	}
+
+	// Shows the join forms to someone new, or the board and their code to a member.
+	function renderFamily() {
+		if (!familyEl) return;
+		familyEl.querySelector<HTMLElement>('[data-family-join]')!.hidden = Boolean(me);
+		familyEl.querySelector<HTMLElement>('[data-family-board]')!.hidden = !me;
+		if (me) familyEl.querySelector('[data-my-code]')!.textContent = me.code;
+	}
+
+	async function loadBoard() {
+		if (!familyEl || !me) return;
+		familyMsg(R.family.loading);
+		try {
+			const list = await sync.board();
+			if (signal.aborted) return;
+			drawBoard(Array.isArray(list) ? list : []);
+			familyMsg('');
+		} catch {
+			familyMsg(R.family.offline);
+		}
+	}
+
+	// Today's finishers first, fewest guesses on top, then everyone else by streak.
+	function drawBoard(list: BoardRow[]) {
+		const body = familyEl!.querySelector('[data-family-rows]')!;
+		body.replaceChildren();
+		const day = game.day;
+		const today = (r: BoardRow) => (r.game_day !== day ? 8 : r.game_status === 'won' ? r.game_guesses : r.game_status === 'lost' ? 7 : 8);
+		const streakOf = (r: BoardRow) => (r.last_win >= day - 1 ? r.streak : 0);
+		const sorted = [...list].sort((a, b) => today(a) - today(b) || streakOf(b) - streakOf(a) || a.name.localeCompare(b.name));
+		if (!sorted.length) {
+			const tr = document.createElement('tr');
+			const td = document.createElement('td');
+			td.colSpan = 4;
+			td.textContent = R.family.empty;
+			tr.append(td);
+			body.append(tr);
+			return;
+		}
+		for (const r of sorted.slice(0, 60)) {
+			const tr = document.createElement('tr');
+			const isMe = Boolean(me) && r.name.toLowerCase() === me!.name.toLowerCase();
+			if (isMe) tr.dataset.me = '';
+			const t = today(r);
+			const name = document.createElement('th');
+			name.scope = 'row';
+			name.textContent = r.name;
+			if (isMe) {
+				const you = document.createElement('span');
+				you.className = 'rd-you';
+				you.textContent = ` (${R.family.you})`;
+				name.append(you);
+			}
+			const cells = [t <= TRIES ? `${t}/${TRIES}` : t === 7 ? `X/${TRIES}` : R.family.notYet, String(streakOf(r)), String(r.played ? Math.round((r.wins / r.played) * 100) : 0)];
+			tr.append(name, ...cells.map((text, i) => {
+				const td = document.createElement('td');
+				td.textContent = text;
+				if (i === 0 && t === 8) td.className = 'rd-notyet';
+				return td;
+			}));
+			body.append(tr);
+		}
+	}
+
+	if (familyEl) {
+		tabs.forEach((t) => t.addEventListener('click', () => showTab(t.dataset.tab === 'family' ? 'family' : 'you'), { signal }));
+		statsBox.querySelector('[role="tablist"]')!.addEventListener(
+			'keydown',
+			(e) => {
+				const k = (e as KeyboardEvent).key;
+				if (k !== 'ArrowLeft' && k !== 'ArrowRight') return;
+				const next = tabs.find((t) => t.getAttribute('aria-selected') !== 'true')!;
+				showTab(next.dataset.tab === 'family' ? 'family' : 'you');
+				next.focus();
+			},
+			{ signal },
+		);
+		statsBox.querySelector('[data-to-family]')?.addEventListener('click', () => showTab('family'), { signal });
+
+		familyEl.querySelector('[data-join-form]')!.addEventListener(
+			'submit',
+			async (e) => {
+				e.preventDefault();
+				const form = e.currentTarget as HTMLFormElement;
+				const input = form.querySelector('input')!;
+				const btn = form.querySelector('button')!;
+				const name = input.value.trim().replace(/\s+/g, ' ');
+				if (!name) return;
+				btn.disabled = true;
+				familyMsg(R.family.joining);
+				try {
+					const code = await sync.join(name);
+					me = { code, name };
+					write(SYNC_KEY, me);
+					await sync.save(code, loadStats(), game).catch(() => {});
+					input.value = '';
+					renderFamily();
+					await loadBoard();
+				} catch {
+					familyMsg(R.family.joinFailed);
+				} finally {
+					btn.disabled = false;
+				}
+			},
+			{ signal },
+		);
+
+		familyEl.querySelector('[data-code-form]')!.addEventListener(
+			'submit',
+			async (e) => {
+				e.preventDefault();
+				const form = e.currentTarget as HTMLFormElement;
+				const input = form.querySelector('input')!;
+				const btn = form.querySelector('button')!;
+				const code = cleanCode(input.value);
+				if (!/^[A-Z0-9]{3}-[A-Z0-9]{3}$/.test(code)) return familyMsg(R.family.badCode);
+				btn.disabled = true;
+				familyMsg(R.family.loading);
+				try {
+					const remote = await sync.get(code);
+					if (!remote) return familyMsg(R.family.badCode);
+					me = { code, name: remote.name };
+					write(SYNC_KEY, me);
+					input.value = '';
+					await pull();
+					renderFamily();
+					renderStats();
+					await loadBoard();
+				} catch {
+					familyMsg(R.family.offline);
+				} finally {
+					btn.disabled = false;
+				}
+			},
+			{ signal },
+		);
+
+		const copyBtn = familyEl.querySelector<HTMLButtonElement>('[data-copy-code]')!;
+		copyBtn.addEventListener(
+			'click',
+			async () => {
+				if (!me) return;
+				try {
+					await navigator.clipboard.writeText(me.code);
+					copyBtn.textContent = R.family.copied;
+					later(() => (copyBtn.textContent = R.family.copy), 2000);
+				} catch {
+					// Copying is blocked here, so select the code for a manual copy.
+					const range = document.createRange();
+					range.selectNodeContents(familyEl.querySelector('[data-my-code]')!);
+					const sel = window.getSelection();
+					sel?.removeAllRanges();
+					sel?.addRange(range);
+				}
+			},
+			{ signal },
+		);
+
+		familyEl.querySelector('[data-leave]')!.addEventListener(
+			'click',
+			() => {
+				const code = me?.code ?? '';
+				forget();
+				familyMsg(R.family.signedOut.replace('{code}', code));
+			},
+			{ signal },
+		);
+		renderFamily();
+	}
 
 	startDay();
 	if (game.status !== 'playing') finish(false);
